@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+
+<h2>Leerlijn Toevoegen</h2>
+<table>
+    <tr>
+    <td>Leerlijn naam</td>
+    <td>@Html.TextBox("name")</td>
+    </tr>
+</table>
+<div class="container">
+    <div class="panel-group" id="accordion2">
+        <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" data-target="#collapseOne2">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle btn btn-primary">
+                        Overzicht
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne2" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <img src='@Url.Content("http://i.imgur.com/GgExviL.png")' alt="Image" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.ActionLink("Blok Toevoegen", "Show Detail", null, new { @class = "btn btn-success" })
+
+    <p>
+        @Html.ActionLink("Opslaan", "", null, new { @class = "btn btn-primary" })
+
+        @Html.ActionLink("Terug naar Index", "Overzicht")
+    </p>
+
+
+
+</div>

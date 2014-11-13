@@ -1,0 +1,23 @@
+﻿
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--TODO: Avans logo adden-->
+            @Html.ActionLink("Project Waterval", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="container">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Module", "Index", "Module")</li>
+                <li>@Html.ActionLink("Leerlijn", "Overzicht", "Leerlijn")</li>
+                <li>@Html.ActionLink("Thema", "Index", "Thema")</li>
+                <li>@Html.ActionLink("Compententie", "Index", "Compententie")</li>
+               
+            </ul>
+        </div>
+    </div>
+</div>

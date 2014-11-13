@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+    <h2>Compententie Toevoegen</h2>
+
+    <table class="table-bordered table-striped">
+        <tr>
+            <td>Titel</td>
+            <td>@Html.TextBox("name")</td>
+        </tr>
+        <tr>
+            <td>Omschrijving</td>
+            <td>@Html.TextBox("oms")</td>
+        </tr>
+    </table>
+    <p>Aan modules gekoppeld:</p>
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <tr>
+                <th>Vakcode</th>
+                <th>Module</th>
+                <th>Omschrijving</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </tbody>
+      
+    </table>
+    <p>@Html.ActionLink("Toevoegen", "Index", null, new { @class = "btn btn-success" })</p>
+
+    <p>
+<p>
+        @Html.ActionLink("Opslaan", "", null, new { @class = "btn btn-success" })
+
+        @Html.ActionLink("Index", "", null, new { @class = "btn btn-primary" })
+    </p>
+</div>

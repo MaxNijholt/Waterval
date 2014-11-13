@@ -1,0 +1,26 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+    <h2>Thema Details: Progameren</h2>
+
+    <table class="table-bordered table-striped">
+        <tr>
+            <th>Naam</th>
+            <th>Omschrijving</th>
+         
+        </tr>
+        <tr>
+            <td>Programeren</td>
+            <td>Een Omschrijving</td>
+        </tr>
+    </table>
+    <p>
+        @Html.ActionLink("Terug naar Index", "Index")
+    </p>
+</div>

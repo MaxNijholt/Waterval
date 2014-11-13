@@ -1,0 +1,54 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+    <h2>Compententies Details: Communiceren</h2>
+
+    <table class="table-bordered table-striped">
+        <tr>
+            <th>Titel</th>
+            <th>Omschrijving</th>
+
+        </tr>
+        <tr>
+            <td>Communiceren</td>
+            <td>Een Omschrijving</td>
+        </tr>
+    </table>
+    <br/>
+    <p>Behoort toe aan modules:</p>
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <tr>
+                <th>Vakcode</th>
+                <th>Module</th>
+                <th>Omschrijving</th>
+            </tr>
+        </tbody>
+        <tr>
+            <td><a>Pr-01</a></td>
+            <td>Programeren 1</td>
+            <td>Het leren programeren</td>
+        </tr>
+        <tr>
+            <td><a>DB-01</a></td>
+            <td>Database 1</td>
+            <td>Het leren van een database opzetten.</td>
+        </tr>
+        <tr>
+            <td><a>SWEN-01</a></td>
+            <td>Software enginering 1</td>
+            <td>Methodieken voor software engineren leren</td>
+        </tr>
+    </table>
+    <p>
+        <input type="submit" class="btn btn-warning" name="Edit" value="Aanpassen" />
+        <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /></br>|
+        @Html.ActionLink("Terug naar Index", "Index")
+    </p>
+</div>
