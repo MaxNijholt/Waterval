@@ -29,5 +29,10 @@ namespace Waterval.Controllers
         {
             return View();
         }
+
+        public ActionResult Delete()
+        {
+            return View();
+        }
 	}
 }

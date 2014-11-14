@@ -1,0 +1,42 @@
+﻿@*model DomainModel.Blok*@
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Blok Verwijderen";
+}
+@Styles.Render("~/Content/css")
+
+<h2>Blok verwijderen: @*Model.BlokTitel TODO: Delete comments*@</h2>
+
+<h3>Weet je zeker dat de volgende gegevens verwijderd moeten worden?</h3>
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Blok</legend>
+        <div class="form-group">
+            <div class="col-sm-2">
+                @Html.Label("Blok Titel")
+            </div>
+            <div>
+                Blok Titel
+            </div>
+
+        </div>
+
+        @Html.Display("Titel", null, new { @class = "form-control" })
+
+
+        <input type="submit" value="Delete" class="btn btn-danger" />
+
+
+        @Html.Partial("~/Views/Shared/_Alert.cshtml")
+
+        | @Html.ActionLink("Terug naar index", "Index", null, new { @class = "btn btn-link" })
+
+    </fieldset>
+}
+@*TODO: , Model*@
+@* @Html.LabelFor(model => model.BlokTitel)*@
+@*   @Html.DisplayFor(model => model.BlokTitel)*@

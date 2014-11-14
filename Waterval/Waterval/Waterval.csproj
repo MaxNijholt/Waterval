@@ -256,6 +256,9 @@
     <Content Include="Views\Blok\Create.cshtml" />
     <Content Include="Views\Blok\Edit.cshtml" />
     <Content Include="Views\Compententie\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Blok\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Shared\_Alert.cshtml" />
+    <Content Include="Views\Blok\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
