@@ -43,9 +43,9 @@ namespace MvcApplication1.Controllers
         void FillList()
         {
             if (modules.mods.Count > 0) return;
-            modules.mods.Add(new Modules("Project 5", "Project 5 Groepswerk", "12-56", "4 EC", "Groeps Werk", "Project 1-2", "Avans", "Leren in team te werken en waterval methodiek", "Tentamenvorm"));
+            modules.mods.Add(new Modules("Project 5", "Project 5 Groepswerk", "12-56", "4 EC", "Groeps Werk", "Project 1-2", "Avans", "Leren in team te werken en waterval methodiek", "Tentamenvorm", "LANGE TEXT"));
 
-            modules.mods.Add(new Modules("SWEN3", "Project 5 Groepswerk 12", "12-56-12", "14 EC", "Groeps Werk-12", "Project 1-2-12", "Avans-12", "Leren in team te werken en waterval methodiek-12", "Tentamenvorm-12"));
+            modules.mods.Add(new Modules("SWEN3", "Project 5 Groepswerk 12", "12-56-12", "14 EC", "Groeps Werk-12", "Project 1-2-12", "Avans-12", "Leren in team te werken en waterval methodiek-12", "Tentamenvorm-12","LANGE TEXT"));
         }
 
         public ActionResult Create()

@@ -28,7 +28,7 @@
             @foreach (var c in Model.mods)
             {
                 <tr>
-                    <td>@Html.ActionLink(c.Titel, "ShowDetail", new { modelname = c.Titel })</td>
+                    <td>@Html.ActionLink(c.Titel, "Details", new { modelname = c.Titel })</td>
                     <td>@c.Beschrijving </td>
                     <td>@c.Vakcode </td>
                     <td>@c.Studiebelasting </td>

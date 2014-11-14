@@ -255,6 +255,7 @@
     <Content Include="Views\Blok\Details.cshtml" />
     <Content Include="Views\Blok\Create.cshtml" />
     <Content Include="Views\Blok\Edit.cshtml" />
+    <Content Include="Views\Compententie\_CreateOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

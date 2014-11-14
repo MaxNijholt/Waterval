@@ -9,7 +9,7 @@
 <div class="container">
     <h2>Proj 5</h2>
     <fieldset>
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered">
             <tr>
                 <td>
                     @Html.DisplayNameFor(model => model.Titel)
@@ -76,10 +76,10 @@
             </tr>
             <tr>
                 <td>
-                    @Html.DisplayNameFor(model => model.Beschrijving)
+                    @Html.DisplayNameFor(model => model.BeschrijvingLang)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => model.Beschrijving)
+                    @Html.DisplayFor(model => model.BeschrijvingLang)
                 </td>
             </tr>
             <tr>
@@ -90,11 +90,6 @@
                     @Html.DisplayFor(model => model.Beoordelingen)
                 </td>
             </tr>
-
-
-
-
-
         </table>
 
 
@@ -139,6 +134,8 @@
     </fieldset>
 
     <p>
+        <input type="submit" class="btn btn-warning" name="Edit" value="Aanpassen" />
+        <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /></br>|
         @Html.ActionLink("Terug naar Index", "Index")
     </p>
 </div>

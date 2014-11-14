@@ -23,10 +23,12 @@ namespace MvcApplication1.Models
         public string Leerdoelen { get; set; }
 
         public string Beoordelingen { get; set; }
+
+        public string BeschrijvingLang { get; set; }
         public Modules(string title, string beschrijving, string vakcode, string studiebelasting, string werkvorm, string ingangsniveau,
             string organisatie,
            string leerdoelen,
-            string beoordelingen)
+            string beoordelingen,string beschrijvinglang)
         {
 
             Titel = title;
@@ -38,7 +40,7 @@ namespace MvcApplication1.Models
             Organisatie = organisatie;
             Leerdoelen = leerdoelen;
             Beoordelingen = beoordelingen;
-
+            BeschrijvingLang = beschrijvinglang;
         }
     }
 }
