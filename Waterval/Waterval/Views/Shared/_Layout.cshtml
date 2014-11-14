@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/bootsrap.css")
-
+    @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
     <br />
     @Html.Partial("_Menu")
-
+  
     <div class="container body-content">
         @Html.Partial("_Search")
-        <br />
         @RenderBody()
         <hr />
         <footer>
@@ -22,8 +21,8 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/Scripts")
-
-    @RenderSection("Scripts", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

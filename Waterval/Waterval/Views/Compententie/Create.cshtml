@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -25,18 +24,20 @@
                 <th>Vakcode</th>
                 <th>Module</th>
                 <th>Omschrijving</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>Aanpassen</th>
+                <th>Verwijderen</th>
             </tr>
         </tbody>
-      
+
     </table>
-    <p>@Html.ActionLink("Toevoegen", "Index", null, new { @class = "btn btn-success" })</p>
+    <p>@Html.ActionLink("Module Toevoegen", "Index", null, new { @class = "btn btn-avans" })</p>
 
+   
+        <div class="container">
     <p>
-<p>
-        @Html.ActionLink("Opslaan", "", null, new { @class = "btn btn-success" })
-
-        @Html.ActionLink("Index", "", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Compententie Opslaan", "", null, new { @class = "btn btn-success" })
+        |
+        @Html.ActionLink("Index", "")
     </p>
+</div>
 </div>

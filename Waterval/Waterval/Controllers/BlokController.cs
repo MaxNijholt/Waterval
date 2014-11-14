@@ -4,13 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MvcApplication1.Controllers
+namespace Waterval.Controllers
 {
-    public class LeerlijnController : Controller
+    public class BlokController : Controller
     {
         //
-        // GET: /Leerlijn/
-
+        // GET: /Block/
         public ActionResult Index()
         {
             return View();
@@ -21,14 +20,14 @@ namespace MvcApplication1.Controllers
             return View();
         }
 
-        public ActionResult Edit()
-        {
-            return View();
-        }
-
         public ActionResult Create()
         {
             return View();
         }
-    }
+
+        public ActionResult Edit()
+        {
+            return View();
+        }
+	}
 }

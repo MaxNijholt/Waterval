@@ -21,7 +21,7 @@ namespace MvcApplication1.Controllers
             return View();
         }
 
-        public ActionResult Add()
+        public ActionResult Create()
         {
             return View();
         }

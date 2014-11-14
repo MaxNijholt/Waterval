@@ -1,4 +1,5 @@
 ﻿
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -7,18 +8,18 @@
 
 <div class="container">
     <h2>Thema Overzicht</h2>
-    <input type="text" class="form-control" placeholder="filter thema's...">
+    <input type="text" class="form-control" placeholder="filter blokken...">
 
     <table class="table-bordered table-striped">
         <tr>
-            <th>Naam</th>
-            <th>Omschrijving</th>
+            <th>Titel</th>
+            
             <th>Aanpassen</th>
             <th>Verwijderen</th>
         </tr>
         <tr>
-            <td>@Html.ActionLink("Programmeren", "Details")</td>
-            <td>Het leren van programeren</td>
+            <td>@Html.ActionLink("Blok 1", "Details")</td>
+           
 
             <td>@Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
             <td>
@@ -26,8 +27,8 @@
             </td>
         </tr>
         <tr>
-            <td>@Html.ActionLink("Onderzoek", "Details")</td>
-            <td>Het leren van een onderzoek doen</td>
+            <td>@Html.ActionLink("Blok 2", "Details")</td>
+            
 
             <td>@Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
             <td>
@@ -38,5 +39,5 @@
 
     </table>
 
-    @Html.ActionLink("Nieuwe Thema", "Index", null, new { @class = "btn btn-success" })
+    @Html.ActionLink("Nieuw Blok", "Index", null, new { @class = "btn btn-success" })
 </div>

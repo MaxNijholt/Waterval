@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BlokController.cs" />
     <Compile Include="Controllers\CompententieController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeerlijnController.cs" />
@@ -172,6 +173,11 @@
     <Compile Include="Models\ModuleList.cs" />
     <Compile Include="Models\Modules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +187,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <None Include="Resources\glyphicons_027_search.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -230,19 +237,24 @@
     <Content Include="Views\Compententie\Details.cshtml" />
     <Content Include="Views\Compententie\Edit.cshtml" />
     <Content Include="Views\Compententie\Index.cshtml" />
-    <Content Include="Views\Leerlijn\Aanpassen.cshtml" />
+    <Content Include="Views\Leerlijn\Edit.cshtml" />
+    <Content Include="Views\Leerlijn\Details.cshtml" />
     <Content Include="Views\Leerlijn\Index.cshtml" />
-    <Content Include="Views\Leerlijn\Overzicht.cshtml" />
-    <Content Include="Views\Leerlijn\Toevoegen.cshtml" />
+    <Content Include="Views\Leerlijn\Create.cshtml" />
     <Content Include="Views\Module\Create.cshtml" />
     <Content Include="Views\Module\Index.cshtml" />
-    <Content Include="Views\Module\ShowDetail.cshtml" />
-    <Content Include="Views\Thema\Add.cshtml" />
+    <Content Include="Views\Module\Details.cshtml" />
+    <Content Include="Views\Thema\Create.cshtml" />
     <Content Include="Views\Thema\Details.cshtml" />
     <Content Include="Views\Thema\Edit.cshtml" />
     <Content Include="Views\Thema\Index.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Module\Edit.cshtml" />
+    <Content Include="Views\Blok\Index.cshtml" />
+    <Content Include="Views\Blok\Details.cshtml" />
+    <Content Include="Views\Blok\Create.cshtml" />
+    <Content Include="Views\Blok\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -253,6 +265,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

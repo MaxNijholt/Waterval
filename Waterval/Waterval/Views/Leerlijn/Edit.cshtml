@@ -7,16 +7,20 @@
 
 <h2>Leerlijn Aanpassen: Software Ontwikkeling</h2>
 <div class="container">
+    @Html.ActionLink("Blok Toevoegen", "Show Detail", null, new { @class = "btn btn-success" })
+    <br />
     <div class="panel-group" id="accordion2">
         <div class="panel panel-default">
             <div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" data-target="#collapseOne2">
                 <h4 class="panel-title">
-                    <a class="accordion-toggle btn btn-primary">
-                        Overzicht
-                    </a>
+                    <a class="accordion-toggle"><span class="btn btn-avans">
+                    
+                            Overzicht
+                        </span>
+                    </span></a>
                 </h4>
             </div>
-            <div id="collapseOne2" class="panel-collapse collapse in">
+            <div id="collapseOne2" class="panel-collapse collapse open">
                 <div class="panel-body">
                     <img src='@Url.Content("http://i.imgur.com/GgExviL.png")' alt="Image" />
                 </div>
@@ -24,19 +28,19 @@
         </div>
     </div>
 
-    @Html.ActionLink("Blok Toevoegen", "Show Detail", null, new { @class = "btn btn-success" })
+
     @for (int i = 1; i <= 8; i++)
     {
         <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
                     <h4 class="panel-title">
-                        <a class="accordion-toggle btn btn-primary">
+                        <a class="accordion-toggle"><span class="btn btn-avans">
                             Blok @i aanpassen
-                        </a>
+                        </span></a>
                     </h4>
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
+                <div id="collapseOne" class="panel-collapse collapse open">
                     <div class="panel-body">
 
 
@@ -62,7 +66,7 @@
                                     <td>Java, Programeren, Basis</td>
                                     <td>Kennis</td>
                                     <td>4</td>
-                                    <td>@Html.ActionLink("Inzien", "Show Detail", null, new { @class = "btn btn-warning" })</td>
+                                    <td>@Html.ActionLink("Inzien", "Show Detail", null, new { @class = "btn btn-avans" })</td>
                                     <td>
                                         @Html.ActionLink("Verwijderen", "Show Detail", null, new { @class = "btn btn-danger" })
                                     </td>
@@ -73,7 +77,7 @@
                                     <td>Database, Basis</td>
                                     <td>Kennis</td>
                                     <td>2</td>
-                                    <td>@Html.ActionLink("Inzien", "Show Detail", null, new { @class = "btn btn-warning" })</td>
+                                    <td>@Html.ActionLink("Inzien", "Show Detail", null, new { @class = "btn btn-avans" })</td>
                                     <td>
                                         @Html.ActionLink("Verwijderen", "Show Detail", null, new { @class = "btn btn-danger" })
                                     </td>
@@ -83,7 +87,7 @@
 
                             </table>
 
-                            @Html.ActionLink("Modulen Toevoegen", "Show Detail", null, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Modulen Toevoegen", "Show Detail", null, new { @class = "btn btn-avans" })
                             @Html.ActionLink("Blok " + @i + " Verwijderen ", "Show Detail", null, new { @class = "btn btn-danger" })
                         }
 
@@ -97,12 +101,12 @@
         <div class="panel panel-default">
             <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
                 <h5 class="panel-title">
-                    <a class="accordion-toggle  btn btn-primary">
+                    <a class="accordion-toggle "><span class="btn btn-avans">
                         Minor: Everywhere
-                    </a>
+                    </span></a>
                 </h5>
             </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
+            <div id="collapseOne" class="panel-collapse collapse open">
                 <div class="panel-body">
 
                 </div>
@@ -114,12 +118,12 @@
         <div class="panel panel-default">
             <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
                 <h5 class="panel-title">
-                    <a class="accordion-toggle btn btn-primary">
+                    <a class="accordion-toggle"><span class="btn btn-avans">
                         Minor: Eigen keuze
-                    </a>
+                    </span></a>
                 </h5>
             </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
+            <div id="collapseOne" class="panel-collapse collapse open">
                 <div class="panel-body">
 
                 </div>
@@ -131,12 +135,12 @@
         <div class="panel panel-default">
             <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
                 <h5 class="panel-title">
-                    <a class="accordion-toggle btn btn-primary">
+                    <a class="accordion-toggle"><span class="btn btn-avans">
                         Stage
-                    </a>
+                    </span></a>
                 </h5>
             </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
+            <div id="collapseOne" class="panel-collapse collapse open">
                 <div class="panel-body">
 
                 </div>
@@ -149,12 +153,12 @@
         <div class="panel panel-default">
             <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
                 <h5 class="panel-title">
-                    <a class="accordion-toggle btn btn-primary">
+                    <a class="accordion-toggle"><span class="btn btn-avans">
                         Afstuderen
-                    </a>
+                    </span></a>
                 </h5>
             </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
+            <div id="collapseOne" class="panel-collapse collapse open">
                 <div class="panel-body">
 
                 </div>
@@ -162,8 +166,8 @@
         </div>
     </div>
     <p>
-        @Html.ActionLink("Opslaan", "", null, new { @class = "btn btn-primary" })
-
+        @Html.ActionLink("Leerlijn Aanpassen", "", null, new { @class = "btn btn-success" })
+        |
         @Html.ActionLink("Terug naar Index", "Overzicht")
     </p>
 

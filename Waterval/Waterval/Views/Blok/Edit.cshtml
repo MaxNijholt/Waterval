@@ -5,20 +5,17 @@
 @Styles.Render("~/Content/css")
 
 <div class="container">
-    <h2>Thema Aanpassen: Progameren</h2>
+    <h2>Blok Aanpassen: Blok 1</h2>
 
     <table class="table-bordered table-striped">
         <tr>
             <td>Naam</td>
-            <td>@Html.TextBox("name","Programeren")</td>
+            <td>@Html.TextBox("name", "Programeren")</td>
         </tr>
-        <tr>
-            <td>Omschrijving</td>
-            <td>@Html.TextBox("oms","Ongeldige Text")</td>
-        </tr>
+      
     </table>
     <p>
-        @Html.ActionLink("Thema aanpassen", "", null, new { @class = "btn btn-success" })
+        @Html.ActionLink("Blok aanpassen", "", null, new { @class = "btn btn-success" })
         |
         @Html.ActionLink("Terug naar Index", "Index")
     </p>

@@ -1,12 +1,12 @@
-﻿<!--Moet een accordion zijn.-->
-
-<div class="panel-group" id="accordionSearch">
+﻿<div class="panel-group" id="accordionSearch">
     <div class="panel panel-default">
-        <div class="panel-heading" data-toggle="collapse" data-parent="#accordionSearch" data-target=" #collapsSearch">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordionSearch" data-target="#collapsSearch">
             <h4 class="panel-title">
-                <a class="accordion-toggle btn-sm btn-default">
-                    Zoeken <!--Hier moet nog een teken voor naar beneden inkomen, and voor inklappen een naar boven. -->
-                </a>
+                <td>
+                    <a class="accordion-toggle btn btn-lg btn-avans">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </a>
+                </td><td>Zoekfilter instellen.</td>
             </h4>
         </div>
         <div id="collapsSearch" class="panel-collapse collapse open">
@@ -16,7 +16,6 @@
                         <td>
                             <select class="form-control">
                                 <option class="dropdown-header">Leerlijn</option>
-
                                 <option>BI</option>
                                 <option>SO</option>
                                 <option>CMD</option>
@@ -39,11 +38,13 @@
                                 <option>Vergaderen</option>
                                 <option>Programeren</option>
                                 <option>Business</option>
+
                             </select>
                         </td>
                         <td><input type="text" class="form-control" placeholder="Search..." width="75"></td>
-                        <!--Hier moet een icoontje komen-->
-                        <td><input type="submit" class="btn btn-success" name="searching" value="Zoeken" height="25" /></td>
+                  
+                        <td><a class="btn btn-avans" id="scriptid"><span class="glyphicon glyphicon-search"></span>
+                            </a>
                     </tr>
                 </table>
 

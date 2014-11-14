@@ -21,7 +21,7 @@ namespace MvcApplication1.Controllers
             return View(mCollection);
         }
 
-        public ActionResult ShowDetail(string modelname)
+        public ActionResult Details(string modelname)
         {
             if (modelname == null || modules == null)
                 return HttpNotFound();

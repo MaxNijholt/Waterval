@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+    <h2>Blok Toevoegen</h2>
+
+    <table class="table-bordered table-striped">
+        <tr>
+            <td>Titel</td>
+            <td>@Html.TextBox("name")</td>
+        </tr>
+       
+    </table>
+    <p>
+        @Html.ActionLink("Blok Opslaan", "", null, new { @class = "btn btn-success" })
+        |
+        @Html.ActionLink("Terug naar Index", "")
+    </p>
+</div>
