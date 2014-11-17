@@ -1,0 +1,50 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+<div class="container">
+    <h2>Compententies</h2>
+    <div class="container">
+        <input type="text" class="form-control" placeholder="filter compententies...">
+    
+        <table class="table table-striped table-bordered">
+            <caption></caption>
+            <thead>
+                <tr>
+                    <th>Titel</th>
+                    <th>Omschrijving</th>
+                    <th>Zie Modules</th>
+                    <th>Aanpassen</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+    
+                <tr>
+                    <td>@Html.ActionLink("Programeren", "Details")</td>
+                    <td>Het leren beheersen van syntax om programma's te schrijven.</td>
+                    <td><input type="submit" class="btn btn-avans" name="" value="Open Modules" /></td>
+                    <td><input type="submit" class="btn btn-warning" name="Edit" value="Aanpassen" /></td>
+                    <td><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /></td>
+                </tr>
+            <tr>
+                <td>@Html.ActionLink("Communicatie", "Details")</td>
+                <td>Het leren beheersen van comminuceren binnen een groep.</td>
+                <td><input type="submit" class="btn btn-avans" name="" value="Open Modules" /></td>
+                <td><input type="submit" class="btn btn-warning" name="Edit" value="Aanpassen" /></td>
+                <td><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /></td>
+            </tr>
+            <tr>
+                <td>@Html.ActionLink("Initiaf tonen", "Details")</td>
+                <td>Hoe tonen we dit.</td>
+                <td><input type="submit" class="btn btn-avans" name="" value="Open Modules" /></td>
+                <td><input type="submit" class="btn btn-warning" name="Edit" value="Aanpassen" /></td>
+                <td><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /></td>
+            </tr>
+            
+        </table>
+    </div>
+    @Html.ActionLink("Nieuwe Compententie", "Index", null, new { @class = "btn btn-success" })
+
+</div>

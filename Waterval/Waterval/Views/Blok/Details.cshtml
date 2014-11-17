@@ -1,0 +1,22 @@
+﻿@*model IEnumerable<domainmodel.blok>*@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+    <h2>Blok Details: Blok 1</h2>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Titel</th>
+        </tr>
+        <tr>
+            <td>Blok 1</td>
+        </tr>
+    </table>
+    @Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })| <!--TODO: new { id = item.BlokID } op locatie van null-->
+    @Html.ActionLink("Verwijderen", "Delete", null, new { @class = "btn btn-danger" })| <!--TODO: new { id = item.BlokID } op locatie van null-->
+    @Html.ActionLink("Terug naar Index", "Index")
+</div>

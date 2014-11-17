@@ -1,0 +1,29 @@
+﻿<!-- model DomainModel.Blok--->
+@{
+    ViewBag.Title = "Blok Aanmaken";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/css")
+<h2>Blok aanmaken</h2>
+
+@using (Html.BeginForm("Create", "Blok", new { ReturnUrl = ViewBag.ReturnUrl },
+            FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend></legend>
+        @Html.Partial("_CreateOrEdit", null)
+        <p>
+            <input type="submit" value="Blok opslaan" class="btn btn-success" /> |
+            @Html.ActionLink("Terug naar Index", "Index")
+        </p>
+
+    </fieldset>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

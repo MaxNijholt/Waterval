@@ -1,0 +1,115 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+    <h2>Compententie Aanpassen: Programeren</h2>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <td>Titel</td>
+            <td>@Html.TextBox("name", null, new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>Omschrijving</td>
+            <td>@Html.TextBox("oms", null, new { @class = "form-control" })</td>
+        </tr>
+    </table>
+
+    <hr /><div class="container">
+        <p>Aan doelen koppelen</p>
+
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <th>Doel </th>
+                    <th>Aanpassen</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </tbody>
+            <tr>
+                <td>@Html.ActionLink("Doel 1", "Edit")</td>
+                <td>@Html.ActionLink("Aanpassen", "Index", null, new { @class = "btn btn-warning" })</td>
+                <td>@Html.ActionLink("Verwijderen", "Index", null, new { @class = "btn btn-danger" })</td>
+            </tr>
+
+            <!-- foreach doel in doelen add een record. -->
+
+        </table>
+        @Html.ActionLink("Doelen Toevoegen", "Index", null, new { @class = "btn btn-avans" })
+    </div>
+    <hr />
+    <div class="container">
+        <p>Aan eisen koppelen</p>
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <th>Eis</th>
+                    <th>Aanpassen</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </tbody>
+            <tr>
+                <td>@Html.ActionLink("Eis 1", "Edit")</td>
+                <td>@Html.ActionLink("Aanpassen", "Index", null, new { @class = "btn btn-warning" })</td>
+                <td>@Html.ActionLink("Verwijderen", "Index", null, new { @class = "btn btn-danger" })</td>
+            </tr>
+        </table>
+        @Html.ActionLink("Eisen Toevoegen", "Index", null, new { @class = "btn btn-avans" })
+    </div>
+
+    <hr />
+    <div class="container">
+        <p>Behoort toe aan modules:</p>
+        <table class="table table-bordered table-striped" data-toggle="collapse" data-target="#demo1">
+            <thead>
+                <tr>
+                    <th>Vakcode</th>
+                    <th>Module</th>
+                    <th>Omschrijving</th>
+                    <th>Aanpassen</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+
+            <tbody class="accordian-body collapse in" id="demo1">
+                <tr>
+                    <td>@Html.ActionLink("Pr-01", "Index")</td>
+                    <td>Programeren 1</td>
+                    <td>Het leren programeren</td>
+                    <td>@Html.ActionLink("Aanpassen", "Index", null, new { @class = "btn btn-warning" })</td>
+                    <td>@Html.ActionLink("Verwijderen", "Index", null, new { @class = "btn btn-danger" })</td>
+                </tr>
+                <tr>
+                    <td>@Html.ActionLink("DB-01", "Index")</td>
+
+                    <td>Database 1</td>
+                    <td>Het leren van een database opzetten.</td>
+                    <td>@Html.ActionLink("Aanpassen", "Index", null, new { @class = "btn btn-warning" })</td>
+                    <td>@Html.ActionLink("Verwijderen", "Index", null, new { @class = "btn btn-danger" })</td>
+                </tr>
+                <tr>
+                    <td>@Html.ActionLink("SWEN-01", "Index")</td>
+
+                    <td>Software enginering 1</td>
+                    <td>Methodieken voor software engineren leren</td>
+                    <td>@Html.ActionLink("Aanpassen", "Index", null, new { @class = "btn btn-warning" })</td>
+                    <td>@Html.ActionLink("Verwijderen", "Index", null, new { @class = "btn btn-danger" })</td>
+                </tr>
+            </tbody>
+        </table>
+        @Html.ActionLink("Module Toevoegen", "Index", null, new { @class = "btn btn-avans" })
+    </div>
+    <hr />
+
+
+    <div class="container">
+        <p>
+            @Html.ActionLink("Compententie Opslaan", "", null, new { @class = "btn btn-success" })
+            |
+            @Html.ActionLink("Index", "")
+        </p>
+    </div>
+</div>

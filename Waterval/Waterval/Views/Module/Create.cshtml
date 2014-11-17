@@ -1,0 +1,142 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+    <h2>Modulen Toevoegen</h2>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <td>
+                Titel
+            </td>
+
+            <td>@Html.TextBox("name")</td>
+
+        </tr>
+        <tr>
+            <td>
+                Beschrijving
+            </td>
+
+            <td>@Html.TextBox("name")</td>
+
+        </tr>
+        <tr>
+            <td>
+                Vakcode
+            </td>
+
+            <td>@Html.TextBox("name")</td>
+
+        </tr>
+        <tr>
+            <td>
+                Organisatie
+            </td>
+
+            <td>@Html.TextBox("name")</td>
+
+        </tr>
+        <tr>
+            <td>
+                Studiebelasting
+            </td>
+
+            <td>@Html.TextBox("name")</td>
+
+        </tr>
+
+        <tr>
+            <td>
+                Werkvorm
+            </td>
+
+            <td>@Html.TextBox("name")</td>
+
+        </tr>
+        <tr>
+            <td>
+                Ingangsniveau
+            </td>
+
+            <td>@Html.TextBox("name")</td>
+
+        </tr>
+        <tr>
+            <td>
+                Leerdoelen
+            </td>
+
+            <td>@Html.TextBox("name")</td>
+
+        </tr>
+        <tr>
+            <td>
+                Beschrijving
+            </td>
+
+            <td>@Html.TextBox("name")</td>
+
+        </tr>
+        <tr>
+            <td>
+                Beoordelingen
+            </td>
+
+            <td>@Html.TextBox("name")</td>
+
+        </tr>
+        <tr>
+            <td>
+                Aantal EC
+            </td>
+
+            <td>@Html.TextBox("name")</td>
+
+        </tr>
+
+
+
+
+    </table>
+
+    <div class="container">
+        <p>Thema's</p>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Naam</th>
+                <th>Omschrijving</th>
+                <th>Verwijderen</th>
+            </tr>
+
+
+        </table>
+        @Html.ActionLink("Thema Toevoegen", "", null, new { @class = "btn btn-avans" })
+    </div>
+
+    <div class="container">
+        <p>Compententie's</p>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Titel</th>
+                <th>Omschrijving</th>
+                <th>Verwijderen</th>
+            </tr>
+
+        </table>
+        @Html.ActionLink("Compententie Toevoegen", "", null, new { @class = "btn btn-avans" })
+
+    </div>
+    <br />
+    <div class="container">
+        <p>
+            @Html.ActionLink("Module Opslaan", "", null, new { @class = "btn btn-success" })
+            |
+            @Html.ActionLink("Index", "")
+        </p>
+    </div>
+</div>
+
+

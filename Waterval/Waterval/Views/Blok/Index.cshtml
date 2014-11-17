@@ -1,0 +1,48 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+    <h2>Thema Overzicht</h2>
+    <input type="text" class="form-control" placeholder="filter blokken...">
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Titel</th>
+            
+            <th>Aanpassen</th>
+            <th>Verwijderen</th>
+        </tr>
+        @*TODO: Create a loop that itarate through the model records.
+            var item in model.
+            Details need item.BlokID.ToString as text
+            new {id = item.BlokID} for knowing what to delete
+            the null from Delete and Edit also needs this.*@
+        <tr>
+            <td>@Html.ActionLink("Blok 1", "Details")</td>
+           
+
+            <td>@Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
+            <td>
+                @Html.ActionLink("Verwijderen", null, null, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.ActionLink("Blok 2", "Details")</td>
+            
+
+            <td>@Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
+            <td>
+                @Html.ActionLink("Verwijderen", "Delete", null, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+
+
+    </table>
+
+    @Html.ActionLink("Nieuw Blok", "Create", null, new { @class = "btn btn-success" })
+</div>

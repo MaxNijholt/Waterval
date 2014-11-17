@@ -2177,6 +2177,12 @@ fieldset[disabled] .btn-warning.active {
   border-color: #d43f3a;
 }
 
+.btn-avans {
+  color: #410735;
+  background-color: #410735;
+  border-color: #d43f3a;
+}
+
 .btn-danger:hover,
 .btn-danger:focus,
 .btn-danger:active,

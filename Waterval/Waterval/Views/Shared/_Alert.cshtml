@@ -1,0 +1,8 @@
+﻿@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <br />
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>Error!</strong> @ViewBag.Error
+    </div>
+}

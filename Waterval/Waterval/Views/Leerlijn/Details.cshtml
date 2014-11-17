@@ -1,0 +1,166 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/css")
+
+<h2>Leerlijn: Software Ontwikkeling</h2>
+<div class="container">
+
+    <div class="panel-group" id="accordion2">
+        <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" data-target="#collapseOne2">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle">
+                        <span class="btn btn-avans">
+                            Overzicht
+                        </span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne2" class="panel-collapse collapse open">
+                <div class="panel-body">
+                    <img src='@Url.Content("http://i.imgur.com/GgExviL.png")' alt="Image" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    @for (int i = 1; i <= 8; i++)
+    {
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle">
+                            <span class="btn btn-avans">Blok @i</span>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse open">
+                    <div class="panel-body">
+                        @if (i == 1)
+                        {
+                            <img src='@Url.Content("http://i.imgur.com/afoOmKF.png")' height="30" alt="Image" />
+                            <table class="table-bordered table-striped">
+                                <tr>
+                                    <th>Vakcode</th>
+                                    <th>Module Omschrijving</th>
+                                    <th>Thema's</th>
+                                    <th>Compententies</th>
+                                    <th>EC</th>
+                                    <th>Inzien</th>
+                                </tr>
+                                <tr>
+                                    <td>12-Prog1</td>
+                                    <td>Basis Programeren</td>
+                                    <td>Java, Programeren, Basis</td>
+                                    <td>Kennis</td>
+                                    <td>4</td>
+                                    <td>@Html.ActionLink("Inzien", "Show Detail", null, new { @class = "btn btn-avans" })</td>
+
+                                </tr>
+                                <tr>
+                                    <td>12-DB1</td>
+                                    <td>Basis Databse maken</td>
+                                    <td>Database, Basis</td>
+                                    <td>Kennis</td>
+                                    <td>2</td>
+                                    <td>@Html.ActionLink("Inzien", "Show Detail", null, new { @class = "btn btn-avans" })</td>
+                                </tr>
+
+
+
+                            </table>}
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+                <h5 class="panel-title">
+                    <a class="accordion-toggle">
+                        <span class="btn btn-avans">
+                            Minor: Everywhere
+                        </span>
+                    </a>
+                </h5>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+                <h5 class="panel-title">
+                    <a class="accordion-toggle">
+                        <span class="btn btn-avans">
+                            Minor: Eigen keuze
+                        </span>
+                    </a>
+                </h5>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+                <h5 class="panel-title">
+                    <a class="accordion-toggle">
+                        <span class="btn btn-avans">
+                            Stage
+                        </span>
+                    </a>
+                </h5>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+                <h5 class="panel-title">
+                    <a class="accordion-toggle">
+                        <span class="btn btn-avans">
+                            Afstuderen
+                        </span>
+                    </a>
+                </h5>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p>
+        @Html.ActionLink("Terug naar Index", "Overzicht")
+    </p>
+
+</div>
+
+

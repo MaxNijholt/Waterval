@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+
+<h2>Leerlijn Toevoegen</h2>
+<table>
+    <tr>
+        <td>Leerlijn naam</td>
+        <td>@Html.TextBox("name")</td>
+    </tr>
+    <tr>
+        <td>Code</td>
+        <td>@Html.TextBox("name")</td>
+    </tr>
+    <tr>
+        <td>Omschrijving Kort</td>
+        <td>@Html.TextBox("name")</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>@Html.ActionLink("Blok Toevoegen", "Show Detail", null, new { @class = "btn btn-avans" })</td>
+    </tr>
+</table>
+<br />
+<div class="container">
+   
+    <div class="panel-group" id="accordion2">
+        <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" data-target="#collapseOne2">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle">
+                        <span class="btn btn-avans">
+                            Overzicht
+                        </span>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne2" class="panel-collapse collapse open">
+                <div class="panel-body">
+                    <img src='@Url.Content("http://i.imgur.com/GgExviL.png")' alt="Image" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <p>
+        @Html.ActionLink("Opslaan", "", null, new { @class = "btn btn-success" })
+        |
+        @Html.ActionLink("Terug naar Index", "Overzicht")
+    </p>
+
+
+
+</div>
