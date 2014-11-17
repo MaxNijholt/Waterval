@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Waterval", "Waterval\Waterval.csproj", "{2A41A11A-A34B-4BD5-BD08-1508FFD9181E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModel", "DomainModel\DomainModel.csproj", "{5D0D140B-BE32-41DD-9720-F830B43CDEBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2A41A11A-A34B-4BD5-BD08-1508FFD9181E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A41A11A-A34B-4BD5-BD08-1508FFD9181E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A41A11A-A34B-4BD5-BD08-1508FFD9181E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D0D140B-BE32-41DD-9720-F830B43CDEBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D0D140B-BE32-41DD-9720-F830B43CDEBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D0D140B-BE32-41DD-9720-F830B43CDEBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D0D140B-BE32-41DD-9720-F830B43CDEBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

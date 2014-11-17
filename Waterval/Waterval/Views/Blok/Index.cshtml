@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Waterval.Models.Block>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,30 +17,25 @@
             <th>Aanpassen</th>
             <th>Verwijderen</th>
         </tr>
-        @*TODO: Create a loop that itarate through the model records.
-            var item in model.
-            Details need item.BlokID.ToString as text
-            new {id = item.BlokID} for knowing what to delete
-            the null from Delete and Edit also needs this.*@
-        <tr>
-            <td>@Html.ActionLink("Blok 1", "Details")</td>
+         <tr>
+
+@foreach (var item in Model)
+{
+     <tr>
+      
+            <td>
+               @Html.ActionLink(item.Title, "Details", new { id = item.Block_ID })
+            </td>
            
-
-            <td>@Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
             <td>
-                @Html.ActionLink("Verwijderen", null, null, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Aanpassen", "Edit", new { id = item.Block_ID }, new { @class = "btn btn-warning" })
+            </td>
+            <td>
+                @Html.ActionLink("Verwijderen", "Delete", new { id = item.Block_ID }, new { @class = "btn btn-danger" })
             </td>
         </tr>
-        <tr>
-            <td>@Html.ActionLink("Blok 2", "Details")</td>
-            
-
-            <td>@Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
-            <td>
-                @Html.ActionLink("Verwijderen", "Delete", null, new { @class = "btn btn-danger" })
-            </td>
-        </tr>
-
+}
+        
 
     </table>
 
