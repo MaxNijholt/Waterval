@@ -16,12 +16,12 @@ namespace Waterval.Controllers
 
         public BlokController()
         {
-              BlockRepository = new BlockRepository();
+            BlockRepository = new BlockRepository();
         }
         public ActionResult Index()
         {
-          
-            return View(BlockRepository.GetAll());
+
+            return View(BlockRepository.GetAll().Where(b => b.isDeleted == false));
         }
 
         public ActionResult Details(int id)
@@ -32,25 +32,51 @@ namespace Waterval.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            Block block = new Block();
+            return View(block);
         }
-
+        [HttpPost]
+        public ActionResult Create(Block block)
+        {
+            try
+            {
+                BlockRepository.Create(block);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View(block);
+            }
+        }
         public ActionResult Edit(int id)
         {
             var model = BlockRepository.Get(id);
             return View(model);
         }
 
-           [HttpPost]
+        [HttpPost]
         public ActionResult Edit(int id, Block block)
         {
-            return View();
+         try
+         {
+             if(BlockRepository.Update(block) == null)
+             {
+                 return View(block).ViewBag.Error = "Er is iets fout gegaan.";
+             }
+             return RedirectToAction("Index");
+         }
+            catch
+         {
+             return View(block);
+         }
         }
 
-
-        public ActionResult Delete()
+            [HttpPost]
+        public ActionResult Delete(Block blok)
         {
+
+            BlockRepository.Delete(blok.Block_ID);
             return View();
         }
-	}
+    }
 }

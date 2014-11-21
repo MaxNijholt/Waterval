@@ -29,17 +29,30 @@ namespace Waterval.EntityRepos
 
         public Block Create(Block block)
         {
-            throw new NotImplementedException();
+            if (dbContext.Block.Any(o => o.Block_ID == block.Block_ID && !o.isDeleted))
+                return null;
+            dbContext.Block.Add(block);
+            dbContext.SaveChanges();
+            return block;
         }
 
-        public Block Update(Block block)
+        public Block Update(Block update)
         {
-            throw new NotImplementedException();
+       
+            Block blok = dbContext.Block.SingleOrDefault(b => b.Block_ID == update.Block_ID);
+            if (blok == null) return null;
+            blok.Title = update.Title;
+            dbContext.SaveChanges();
+            return blok;
         }
 
-        public void Delete(Block block)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            Block blok = dbContext.Block.SingleOrDefault(b => b.Block_ID == id);
+         
+            blok.isDeleted = true;
+            dbContext.SaveChanges();
+      
         }
     }
 }

@@ -11,10 +11,13 @@ namespace Waterval.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Block
     {
+        [Key]
         public int Block_ID { get; set; }
+        [Required]
         public string Title { get; set; }
         public bool isDeleted { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
