@@ -23,22 +23,22 @@
             <tr>
                 <td>@Html.ActionLink("Procesanalyse uitvoeren", "Details")</td>
                 <td>De student is in staat om een procesanalyse uit te voeren.</td>
-                <td><input type="submit" class="btn btn-avans" name="" value="Open Modules" /></td>
-                <td><input type="submit" class="btn btn-warning" name="Edit" value="Aanpassen" /></td>
+                <td>@Html.ActionLink("Open Modules", "Index", "Module", new { id = 1 }, new { @class = "btn btn-avans" })</td>
+                <td>@Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
                 <td><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /></td>
             </tr>
             <tr>
-                <td>@Html.ActionLink("Informatieanalyse uitvoeren ", "Details")</td>
+                <td>@Html.ActionLink("Informatieanalyse uitvoeren", "Details")</td>
                 <td>De student kan op basis van een procesanalyse onderzoeken welke informatiestromen er zijn in relatie tot die processen</td>
-                <td><input type="submit" class="btn btn-avans" name="" value="Open Modules" /></td>
-                <td><input type="submit" class="btn btn-warning" name="Edit" value="Aanpassen" /></td>
+                <td>@Html.ActionLink("Open Modules", "Index", "Module", new { id = 2 }, new { @class = "btn btn-avans" })</td>
+                <td>@Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
                 <td><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /></td>
             </tr>
             <tr>
                 <td>@Html.ActionLink("Over inzet van ICT adviseren", "Details")</td>
                 <td>De student kan vanuit een proces en informatieanalyse aangeven welke verbeteringen nodig zijn.</td>
-                <td><input type="submit" class="btn btn-avans" name="" value="Open Modules" /></td>
-                <td><input type="submit" class="btn btn-warning" name="Edit" value="Aanpassen" /></td>
+                <td>@Html.ActionLink("Open Modules", "Index", "Module", new { id = 0 }, new { @class = "btn btn-avans" })</td>
+                <td>@Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
                 <td><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /></td>
             </tr>
 

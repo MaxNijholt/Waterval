@@ -3,6 +3,17 @@
 }
 
 @Styles.Render("~/Content/css")
+@section Scripts {
+
+
+    <script>
+        $('input[name="ComAd"] ').click(function () {
+
+        });
+    </script>
+}
+
+
 
 <div class="container">
     <h2>Compententie Toevoegen</h2>
@@ -19,7 +30,7 @@
     </table>
 
     <hr /><div class="container">
-        <p>Aan doelen koppelen</p>
+        <p>Doelen geven</p>
 
         <table class="table table-bordered table-striped">
             <tbody>
@@ -27,28 +38,32 @@
                     <th>Doel </th>
                 </tr>
             </tbody>
-            <!-- foreach doel in doelen add een record. -->
+    
             <tr></tr>
         </table>
-        @Html.ActionLink("Doelen Toevoegen", "Index", null, new { @class = "btn btn-avans" })
+        <input type="button" value="Doelen Toevoegen" name="ComAd" class="btn btn-avans" data-toggle="collapse" data-parent="#accordion2" data-target="#collapseDoel">
+
+        <br />
+        <br />
+        <div id="collapseDoel" class="panel-collapse collapse open">
+            <form action="" class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Geef hier een beschrijving" />
+                </div>
+                <div class="form-group">
+                    <input type="button" value="Toevoegen" name="Geen" class="btn btn-avans">
+                </div>
+            </form>
+
+       
+
+        </div>
+
     </div>
+
     <hr />
     <div class="container">
-        <p>Aan eisen koppelen</p>
-        <table class="table table-bordered table-striped">
-            <tbody>
-                <tr>
-                    <th>Eis</th>
-                </tr>
-            </tbody>
 
-        </table>
-       @Html.ActionLink("Eisen Toevoegen", "Index", null, new { @class = "btn btn-avans" })
-       </div>
-
-        <hr />
-    <div class="container">
-   
         <p>Aan modules Koppelen:</p>
         <table class="table table-bordered table-striped">
             <tbody>
@@ -62,15 +77,31 @@
             </tbody>
 
         </table>
-        @Html.ActionLink("Module Toevoegen", "Index", null, new { @class = "btn btn-avans" })
+        <input type="button" value="Module Toevoegen" name="ModAd" class="btn btn-avans" data-toggle="collapse" data-parent="#accordion2" data-target="#collapseModule">
+
+        <br /><br />
+        <div id="collapseModule" class="panel-collapse collapse open">
+            <div class="container">
+                <input type="text" class="form-control" placeholder="search..."/>
+                <table class="table table-bordered table-striped"  >
+                    <thead>
+                    <tr><th>Vakcode</th><th>Omschrijving</th><th>Toevoegen</th></tr>   
+                    </thead>
+                    <tbody>
+                        <tr><td>PR-01</td><td>Programeren 1</td><td><input type="button" value="Toevoegen" name="Geen" class="btn btn-avans"></td></tr>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
 
     </div>
     <hr />
-        <div class="container">
-            <p>
-                @Html.ActionLink("Compententie Opslaan", "", null, new { @class = "btn btn-success" })
-                |
-                @Html.ActionLink("Index", "")
-            </p>
-        </div>
+    <div class="container">
+        <p>
+            @Html.ActionLink("Compententie Opslaan", "", null, new { @class = "btn btn-success" })
+            |
+            @Html.ActionLink("Index", "")
+        </p>
     </div>
+</div>

@@ -1,5 +1,5 @@
 ﻿
-@model MvcApplication1.Models.Modules
+@model Waterval.Models.Modules
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -101,11 +101,11 @@
                     <th>Omschrijving</th>
                 </tr>
                 <tr>
-                    <td>Programeren</td>
+                    <td>@Html.ActionLink("Programeren", "Details", "Thema")</td>
                     <td>Het leren van programeren</td>
                 </tr>
                 <tr>
-                    <td>Onderzoek</td>
+                    <td>@Html.ActionLink("Onderzoek", "Details", "Thema")</td>
                     <td>Het leren van Onderzoeken</td>
                 </tr>
             </table>
@@ -120,12 +120,8 @@
                     <th>Omschrijving</th>
                 </tr>
                 <tr>
-                    <td>Programeren</td>
-                    <td>Het leren van programeren</td>
-                </tr>
-                <tr>
-                    <td>Communiceren</td>
-                    <td>Het leren van Communiceren in een groep</td>
+                    <td>@Html.ActionLink("Procesanalyse uitvoeren", "Details", "Compententie")</td>
+                    <td>De student is in staat om een procesanalyse uit te voeren.</td>
                 </tr>
             </table>
 
@@ -134,8 +130,8 @@
     </fieldset>
 
     <p>
-        <input type="submit" class="btn btn-warning" name="Edit" value="Aanpassen" />
-        <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /></br>|
+      @Html.ActionLink("Aanpassen", "Edit", new { modelname = Model.Vakcode }, new { @class = "btn btn-warning" })
+        <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />|
         @Html.ActionLink("Terug naar Index", "Index")
     </p>
 </div>

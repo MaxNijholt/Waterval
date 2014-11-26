@@ -1,4 +1,4 @@
-﻿using MvcApplication1.Models;
+﻿using Waterval.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +13,9 @@ namespace MvcApplication1.Controllers
         //
         // GET: /Module/
         static ModuleList modules = new ModuleList();
-        public ActionResult Index()
+        public ActionResult Index(int id = 0)
         {
-            FillList();
+            FillList(id);
             var mCollection = modules;
 
             return View(mCollection);
@@ -30,7 +30,7 @@ namespace MvcApplication1.Controllers
 
             foreach (Modules c in modules.mods)
             {
-                if (c.Titel == modelname)
+                if (c.Vakcode == modelname)
                 {
                     model = c;
                     break;
@@ -40,27 +40,42 @@ namespace MvcApplication1.Controllers
             return View(model);
         }
 
-        void FillList()
+        void FillList(int id)
         {
+            modules.mods.Clear();
             if (modules.mods.Count > 0) return;
-            modules.mods.Add(new Modules("Project 5", "Project 5 Groepswerk", "12-56", "4 EC", "Groeps Werk", "Project 1-2", "Avans", "Leren in team te werken en waterval methodiek", "Tentamenvorm", "LANGE TEXT"));
-
-            modules.mods.Add(new Modules("SWEN3", "Project 5 Groepswerk 12", "12-56-12", "14 EC", "Groeps Werk-12", "Project 1-2-12", "Avans-12", "Leren in team te werken en waterval methodiek-12", "Tentamenvorm-12","LANGE TEXT"));
+            if (id != 1)
+                modules.mods.Add(new Modules("Programeren 1", "Programen 1 voor beginners", "PR-01", "4 EC", "Huiswerk+Workshop", "1", "Workshop+Hoorcollege", "Basis java programeren", "Assigment", "Procesanalyse uitvoeren"));
+            if (id != 2)
+                modules.mods.Add(new Modules("Database 1", "Database start", "DB-01", "2 EC", "Huiswerk+Workshop", "1", "Workshop+Hoorcollege", "Basis Databse", "Opdracht", "Informatieanalyse uitvoeren"));
         }
 
         public ActionResult Create()
         {
-     
+
 
             return View();
         }
 
 
-        public ActionResult Edit()
+        public ActionResult Edit(string modelname)
         {
-       
-            return View();
-        }
+            if (modelname == null || modules == null)
+                return HttpNotFound();
 
+            Modules model = null;
+
+            foreach (Modules c in modules.mods)
+            {
+                if (c.Vakcode == modelname)
+                {
+                    model = c;
+                    break;
+                }
+            }
+
+            return View(model);
+
+        }
     }
 }
