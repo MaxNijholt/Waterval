@@ -9,11 +9,11 @@ namespace DomainModel.Repository
 {
     public interface IBlockRepository
     {
-        IEnumerable<Block> GetAll();
+     /*   IEnumerable<Block> GetAll();
         Block Get(int block_id);
         Block Create(Block block);
         void Delete(Block block);
-        Block Update(Block block);
+        Block Update(Block block);*/
  
     }
 }

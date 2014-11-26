@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Waterval.Models.Block>
+﻿@model IEnumerable<DomainModel.Models.Block>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,16 +12,15 @@
         $('input[type="button"]').click(function (e) {
             var title = $(this).attr('data-name');
             var id = $(this).attr('data-id');
-
+     
             if (confirm('Gegevens van ' + title + ' verwijderen?')) {
                 var url = "/Blok/Delete";
 
-                $.post(url, { Block_ID: id ,Title: title, isDeleted:false, DeleteDate:0}, function (data) {
+                $.post(url, { Block_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
                     $("#msg").html(data);
                 });
                 $(this).closest('tr').remove()
             }
-
         })
     </script>
 }

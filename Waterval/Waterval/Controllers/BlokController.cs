@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using DomainModel.Models;
 using Waterval.EntityRepos;
-using Waterval.Models;
+//using Waterval.Models;
 namespace Waterval.Controllers
 {
     public class BlokController : Controller
@@ -21,7 +21,7 @@ namespace Waterval.Controllers
         public ActionResult Index()
         {
 
-            return View(BlockRepository.GetAll().Where(b => b.isDeleted == false));
+            return View(BlockRepository.GetAll());
         }
 
         public ActionResult Details(int id)

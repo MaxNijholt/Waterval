@@ -10,7 +10,7 @@
             <PropertyRef Name="Block_ID" />
           </Key>
           <Property Name="Block_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="datetime" />
         </EntityType>
@@ -27,11 +27,11 @@
             <PropertyRef Name="Block_ID" />
           </Key>
           <Property Name="Block_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityContainer Name="Project_WatervalEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Project_WatervalEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Block" EntityType="Self.Block" />
         </EntityContainer>
       </Schema>
@@ -39,7 +39,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Project_WatervalModelStoreContainer" CdmEntityContainer="Project_WatervalEntities1">
+        <EntityContainerMapping StorageEntityContainer="Project_WatervalModelStoreContainer" CdmEntityContainer="Project_WatervalEntities">
           <EntitySetMapping Name="Block">
             <EntityTypeMapping TypeName="Project_WatervalModel.Block">
               <MappingFragment StoreEntitySet="Block">

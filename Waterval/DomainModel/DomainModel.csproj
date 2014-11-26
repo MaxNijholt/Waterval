@@ -49,47 +49,44 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Block.cs">
-      <DependentUpon>Main_Model.tt</DependentUpon>
+      <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Main_Model.Context.cs">
+    <Compile Include="Models\MainModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Main_Model.Context.tt</DependentUpon>
+      <DependentUpon>MainModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Main_Model.cs">
+    <Compile Include="Models\MainModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Main_Model.tt</DependentUpon>
+      <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Main_Model.Designer.cs">
+    <Compile Include="Models\MainModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Main_Model.edmx</DependentUpon>
+      <DependentUpon>MainModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IBlockRepository.cs" />
-    <Compile Include="Repository\WatervalContext.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Models\Main_Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Main_Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="Models\Main_Model.Context.tt">
+    <EntityDeploy Include="Models\MainModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MainModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\MainModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Main_Model.edmx</DependentUpon>
-      <LastGenOutput>Main_Model.Context.cs</LastGenOutput>
+      <DependentUpon>MainModel.edmx</DependentUpon>
+      <LastGenOutput>MainModel.Context.cs</LastGenOutput>
     </None>
-    <None Include="Models\Main_Model.edmx.diagram">
-      <DependentUpon>Main_Model.edmx</DependentUpon>
+    <None Include="Models\MainModel.edmx.diagram">
+      <DependentUpon>MainModel.edmx</DependentUpon>
     </None>
-    <None Include="Models\Main_Model.tt">
+    <None Include="Models\MainModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Main_Model.edmx</DependentUpon>
-      <LastGenOutput>Main_Model.cs</LastGenOutput>
+      <DependentUpon>MainModel.edmx</DependentUpon>
+      <LastGenOutput>MainModel.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

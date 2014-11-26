@@ -172,25 +172,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Block.cs">
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\MainModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MainModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MainModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MainModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MainModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\ModuleList.cs" />
     <Compile Include="Models\Modules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -208,23 +190,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <EntityDeploy Include="Models\MainModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MainModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\MainModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MainModel.edmx</DependentUpon>
-      <LastGenOutput>MainModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\MainModel.edmx.diagram">
-      <DependentUpon>MainModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\MainModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MainModel.edmx</DependentUpon>
-      <LastGenOutput>MainModel.cs</LastGenOutput>
-    </Content>
     <None Include="Resources\glyphicons_027_search.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -271,7 +236,6 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Compententie\Create.cshtml" />
-    <Content Include="Views\Compententie\Delete.cshtml" />
     <Content Include="Views\Compententie\Details.cshtml" />
     <Content Include="Views\Compententie\Edit.cshtml" />
     <Content Include="Views\Compententie\Index.cshtml" />
