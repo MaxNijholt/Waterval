@@ -4,8 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DomainModel.Models;
-using Waterval.EntityRepos;
-//using Waterval.Models;
+using RepositoryModel;
+
+
 namespace Waterval.Controllers
 {
     public class BlokController : Controller

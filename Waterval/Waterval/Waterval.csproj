@@ -167,7 +167,6 @@
     <Compile Include="Controllers\LeerlijnController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\ThemaController.cs" />
-    <Compile Include="EntityRepos\BlockRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,7 +189,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <None Include="Resources\glyphicons_027_search.png" />
+    <None Include="Resources\av-logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -274,7 +273,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
@@ -285,6 +284,10 @@
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
       <Project>{5d0d140b-be32-41dd-9720-f830b43cdebd}</Project>
       <Name>DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryModel\RepositoryModel.csproj">
+      <Project>{14a5c760-fc5f-42dc-9bfe-b5b7f29dc5dc}</Project>
+      <Name>RepositoryModel</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

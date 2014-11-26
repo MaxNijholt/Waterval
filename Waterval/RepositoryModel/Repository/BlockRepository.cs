@@ -5,29 +5,24 @@ using System.Web;
 using DomainModel.Repository;
 using DomainModel.Models;
 using System.Collections;
-namespace Waterval.EntityRepos
+
+namespace RepositoryModel
 {
-    public class BlockRepository //: IBlockRepository
+    public class BlockRepository : IBlockRepository
     {
         Project_WatervalEntities dbContext;
-        
+
 
         public BlockRepository()
         {
             dbContext = new DomainModel.Models.Project_WatervalEntities();
-         dbContext.Database.Initialize(true);
+            dbContext.Database.Initialize(true);
         }
 
         public List<Block> GetAll()
         {
-          /*  IQueryable<Block> productsQuery =
-      from p in dbContext.Block
-      select p;*/
-
-          //  return productsQuery.ToList();
             return dbContext.Block.Where(b => b.isDeleted == false).ToList();
-         //   return block;
-       
+
         }
 
         public Block Get(int id)
@@ -46,7 +41,7 @@ namespace Waterval.EntityRepos
 
         public Block Update(Block update)
         {
-       
+
             Block blok = dbContext.Block.SingleOrDefault(b => b.Block_ID == update.Block_ID);
             if (blok == null) return null;
             blok.Title = update.Title;
@@ -57,11 +52,12 @@ namespace Waterval.EntityRepos
         public void Delete(int id)
         {
             Block blok = dbContext.Block.SingleOrDefault(b => b.Block_ID == id);
-         
+
             blok.isDeleted = true;
             blok.DeleteDate = DateTime.UtcNow;
             dbContext.SaveChanges();
-      
+
         }
+
     }
 }
