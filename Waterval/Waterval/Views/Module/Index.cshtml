@@ -1,5 +1,5 @@
 ﻿
-@model MvcApplication1.Models.ModuleList
+@model Waterval.Models.ModuleList
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,8 +8,7 @@
 <div class="container">
     <h2>Module</h2>
     <div class="container">
-        <table class="table table-striped table-bordered">
-            <caption></caption>
+        <table class="table table-striped table-bordered table-responsive">
             <thead>
                 <tr>
                     <th>Titel</th>
@@ -21,6 +20,7 @@
                     <th>Organisatie</th>
                     <th>Leerdoelen</th>
                     <th>Beoordelingen</th>
+                    <th>Compententie</th>
                     <th>Aanpassen</th>
                     <th>Verwijderen</th>
                 </tr>
@@ -28,7 +28,7 @@
             @foreach (var c in Model.mods)
             {
                 <tr>
-                    <td>@Html.ActionLink(c.Titel, "Details", new { modelname = c.Titel })</td>
+                    <td>@Html.ActionLink(c.Titel, "Details", new { modelname = c.Vakcode })</td>
                     <td>@c.Beschrijving </td>
                     <td>@c.Vakcode </td>
                     <td>@c.Studiebelasting </td>
@@ -37,12 +37,13 @@
                     <td>@c.Organisatie </td>
                     <td>@c.Leerdoelen </td>
                     <td>@c.Beoordelingen</td>
-                    <td><input type="submit" class="btn btn-warning" name="Edit" value="Aanpassen" /></td>
+                    <td>@c.BeschrijvingLang</td>
+                    <td>@Html.ActionLink("Aanpassen", "Edit", new { modelname = c.Vakcode }, new { @class = "btn btn-warning" })</td>
                     <td><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /></td>
                 </tr>
             }
             </table>
     </div>
-    @Html.ActionLink("Nieuwe Module", "Index", null, new { @class = "btn btn-success" })
+    @Html.ActionLink("Nieuwe Module", "Create", null, new { @class = "btn btn-success" })
    
 </div>

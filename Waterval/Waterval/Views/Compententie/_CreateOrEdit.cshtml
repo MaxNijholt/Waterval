@@ -1,1 +1,61 @@
-﻿
+﻿@model Waterval.Models.Block
+@using Waterval.Models;
+<!--
+    Titel
+-->
+<div class="form-group">
+    @Html.LabelFor(model => model.Title, new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.EditorFor(model => model.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Title)
+    </div>
+</div>
+
+
+<!--
+    Omschrijving kort
+-->
+<div class="form-group">
+    @Html.LabelFor(model => model.Title, new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.EditorFor(model => model.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Title)
+    </div>
+</div>
+
+<!-- 
+    Omschrijving Lang
+
+    Add/Delete/Edit buttons. Iedere stap een regel
+-->
+<div class="form-group">
+    @Html.LabelFor(model => model.Title, new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.EditorFor(model => model.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Title)
+    </div>
+</div>
+
+<!--
+    Bij welke vakken hoort het met wel nivo
+-->
+<div class="form-group">
+    @Html.LabelFor(model => model.Title, new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.EditorFor(model => model.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Title)
+    </div>
+</div>
+
+
+
+
+
+<hr />
+@Html.Partial("~/Views/Shared/_Alert.cshtml")
+
+

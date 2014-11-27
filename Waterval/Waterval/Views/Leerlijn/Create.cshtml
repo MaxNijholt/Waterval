@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <td></td>
-        <td>@Html.ActionLink("Blok Toevoegen", "Show Detail", null, new { @class = "btn btn-avans" })</td>
+        <td>@Html.ActionLink("Blok Toevoegen", "", null, new { @class = "btn btn-avans" })</td>
     </tr>
 </table>
 <br />
@@ -49,9 +49,9 @@
     <br />
 
     <p>
-        @Html.ActionLink("Opslaan", "", null, new { @class = "btn btn-success" })
+        @Html.ActionLink("Opslaan", "Index", null, new { @class = "btn btn-success" })
         |
-        @Html.ActionLink("Terug naar Index", "Overzicht")
+        @Html.ActionLink("Terug naar Index", "Index")
     </p>
 
 

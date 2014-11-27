@@ -9,7 +9,7 @@
     <h2>Thema Overzicht</h2>
     <input type="text" class="form-control" placeholder="filter thema's...">
 
-    <table class="table-bordered table-striped">
+    <table class="table table-bordered table-striped">
         <tr>
             <th>Naam</th>
             <th>Omschrijving</th>
@@ -34,9 +34,7 @@
                 @Html.ActionLink("Verwijderen", null, null, new { @class = "btn btn-danger" })
             </td>
         </tr>
-
-
     </table>
 
-    @Html.ActionLink("Nieuwe Thema", "Index", null, new { @class = "btn btn-success" })
+    @Html.ActionLink("Nieuwe Thema", "Create", null, new { @class = "btn btn-success" })
 </div>

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DomainModel.Models;
+using RepositoryModel;
+
 
 namespace Waterval.Controllers
 {
@@ -10,29 +13,71 @@ namespace Waterval.Controllers
     {
         //
         // GET: /Block/
+        private BlockRepository BlockRepository;
+
+        public BlokController()
+        {
+            BlockRepository = new BlockRepository();
+        }
         public ActionResult Index()
         {
-            return View();
+
+            return View(BlockRepository.GetAll());
         }
 
-        public ActionResult Details()
+        public ActionResult Details(int id)
         {
-            return View();
+            Block model = BlockRepository.Get(id);
+            return View(model);
         }
 
         public ActionResult Create()
         {
-            return View();
+            Block block = new Block();
+            return View(block);
+        }
+        [HttpPost]
+        public ActionResult Create(Block block)
+        {
+            try
+            {
+                BlockRepository.Create(block);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View(block);
+            }
+        }
+        public ActionResult Edit(int id)
+        {
+            var model = BlockRepository.Get(id);
+            return View(model);
         }
 
-        public ActionResult Edit()
+        [HttpPost]
+        public ActionResult Edit(int id, Block block)
         {
-            return View();
+         try
+         {
+             if(BlockRepository.Update(block) == null)
+             {
+                 return View(block).ViewBag.Error = "Er is iets fout gegaan.";
+             }
+             return RedirectToAction("Index");
+         }
+            catch
+         {
+             return View(block);
+         }
         }
 
-        public ActionResult Delete()
+            [HttpPost]
+        public ActionResult Delete(Block blok)
         {
+
+            BlockRepository.Delete(blok.Block_ID);
             return View();
         }
-	}
+    }
 }

@@ -1,4 +1,4 @@
-﻿@*model DomainModel.Blok*@
+﻿@model DomainModel.Models.Block
 @{
     ViewBag.Title = "Blok Aanpassen";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,8 +12,8 @@
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>@*Hier het Bloknummer*@</legend>
-        @*Html.HiddenFor(model => model.BlokID)*@
-        @Html.Partial("_CreateOrEdit", null)@*null moet Model worden*@
+        @Html.HiddenFor(model => model.Block_ID)
+        @Html.Partial("_CreateOrEdit", Model)@*null moet Model worden*@
 
         <p>
             <input type="submit" value="Blok aanpassen" class="btn btn-success" /> |

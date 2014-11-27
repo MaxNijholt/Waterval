@@ -1,25 +1,19 @@
 ﻿
+@model DomainModel.Models.Block
+@using DomainModel.Models;
 
-    <div class="form-group">
-        @Html.Label("Blok Titel",null, new { @class = "col-sm-2 control-label" })
-
-        <div class="col-sm-10">
-            @Html.TextBox("Titel",null, new { @class = "form-control" })
-            @*Html.ValidationMessageFor(model => model.BlokTitel)*@
-        </div>
-    </div>
 
 @* TODO"Wat er daadwerkelijk komt te staan
-     This is a test for data This partial view defines form fields that will appear when creating and editing entities
+     This is a test for data This partial view defines form fields that will appear when creating and editing entities*@
     <div class="form-group">
-        @Html.LabelFor(model => model.BlokTitel, new { @class = "col-sm-2 control-label" })
+        @Html.LabelFor(model => model.Title, new { @class = "col-sm-2 control-label" })
 
         <div class="col-sm-10">
-            @Html.EditorFor(model => model.BlokTitel, new { @class = "form-control" }, true)
-            @Html.ValidationMessageFor(model => model.BlokTitel)
+            @Html.EditorFor(model => model.Title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Title)
         </div>
     </div>
-*@
+
 
 <hr />
 @Html.Partial("~/Views/Shared/_Alert.cshtml")

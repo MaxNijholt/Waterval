@@ -1,10 +1,32 @@
-﻿
+﻿@model IEnumerable<DomainModel.Models.Block>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @Styles.Render("~/Content/css")
+
+
+@section Scripts {
+    <script>
+        $('input[type="button"]').click(function (e) {
+            var title = $(this).attr('data-name');
+            var id = $(this).attr('data-id');
+     
+            if (confirm('Gegevens van ' + title + ' verwijderen?')) {
+                var url = "/Blok/Delete";
+
+                $.post(url, { Block_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
+                    $("#msg").html(data);
+                });
+                $(this).closest('tr').remove()
+            }
+        })
+    </script>
+}
+
+
+
 
 <div class="container">
     <h2>Thema Overzicht</h2>
@@ -13,36 +35,31 @@
     <table class="table table-bordered table-striped">
         <tr>
             <th>Titel</th>
-            
+
             <th>Aanpassen</th>
             <th>Verwijderen</th>
         </tr>
-        @*TODO: Create a loop that itarate through the model records.
-            var item in model.
-            Details need item.BlokID.ToString as text
-            new {id = item.BlokID} for knowing what to delete
-            the null from Delete and Edit also needs this.*@
         <tr>
-            <td>@Html.ActionLink("Blok 1", "Details")</td>
-           
 
-            <td>@Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
-            <td>
-                @Html.ActionLink("Verwijderen", null, null, new { @class = "btn btn-danger" })
-            </td>
-        </tr>
-        <tr>
-            <td>@Html.ActionLink("Blok 2", "Details")</td>
-            
+            @foreach (var item in Model)
+            {
+            <tr>
 
-            <td>@Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
-            <td>
-                @Html.ActionLink("Verwijderen", "Delete", null, new { @class = "btn btn-danger" })
-            </td>
-        </tr>
+                <td>
+                    @Html.ActionLink(item.Title, "Details", new { id = item.Block_ID })
+                </td>
+
+                <td>
+                    @Html.ActionLink("Aanpassen", "Edit", new { id = item.Block_ID }, new { @class = "btn btn-warning" })
+                </td>
+                <td>
+                    <input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Block_ID" class="btn btn-avans">
+                </td>
+            </tr>
+            }
 
 
-    </table>
+        </table>
 
-    @Html.ActionLink("Nieuw Blok", "Create", null, new { @class = "btn btn-success" })
-</div>
+        @Html.ActionLink("Nieuw Blok", "Create", null, new { @class = "btn btn-success" })
+    </div>
