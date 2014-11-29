@@ -12,18 +12,12 @@ namespace DomainModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Block
+    public partial class Account
     {
-        public Block()
-        {
-            this.Phasing = new HashSet<Phasing>();
-        }
-    
-        public int Block_ID { get; set; }
-        public string Title { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public bool isSuperUser { get; set; }
         public bool isDeleted { get; set; }
-        public Nullable<System.DateTime> DeleteDate { get; set; }
-    
-        public virtual ICollection<Phasing> Phasing { get; set; }
+        public string Salt { get; set; }
     }
 }

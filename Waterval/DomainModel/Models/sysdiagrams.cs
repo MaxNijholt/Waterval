@@ -12,18 +12,12 @@ namespace DomainModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Block
+    public partial class sysdiagrams
     {
-        public Block()
-        {
-            this.Phasing = new HashSet<Phasing>();
-        }
-    
-        public int Block_ID { get; set; }
-        public string Title { get; set; }
-        public bool isDeleted { get; set; }
-        public Nullable<System.DateTime> DeleteDate { get; set; }
-    
-        public virtual ICollection<Phasing> Phasing { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

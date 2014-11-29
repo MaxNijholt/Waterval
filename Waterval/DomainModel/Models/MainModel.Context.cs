@@ -25,6 +25,23 @@ namespace DomainModel.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Account> Account { get; set; }
+        public virtual DbSet<Activity> Activity { get; set; }
         public virtual DbSet<Block> Block { get; set; }
+        public virtual DbSet<Competence> Competence { get; set; }
+        public virtual DbSet<ExamCode> ExamCode { get; set; }
+        public virtual DbSet<GradeType> GradeType { get; set; }
+        public virtual DbSet<LearnCourse> LearnCourse { get; set; }
+        public virtual DbSet<LearnGoal> LearnGoal { get; set; }
+        public virtual DbSet<LearningTool> LearningTool { get; set; }
+        public virtual DbSet<Level> Level { get; set; }
+        public virtual DbSet<ModelActivity> ModelActivity { get; set; }
+        public virtual DbSet<Module> Module { get; set; }
+        public virtual DbSet<ModuleHistory> ModuleHistory { get; set; }
+        public virtual DbSet<Phasing> Phasing { get; set; }
+        public virtual DbSet<Program> Program { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Theme> Theme { get; set; }
+        public virtual DbSet<WeekSchedule> WeekSchedule { get; set; }
     }
 }

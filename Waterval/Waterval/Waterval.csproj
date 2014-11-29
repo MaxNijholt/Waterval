@@ -190,6 +190,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <None Include="Resources\av-logo.png" />
+    <None Include="Resources\Avans_logo [Omgezet].png" />
+    <None Include="Resources\logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

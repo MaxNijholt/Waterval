@@ -13,14 +13,14 @@ namespace RepositoryModel.DummyRepository
         {
             List<Block> fakeblocks = new List<Block>()
             {
-                new Block{ Block_ID = 1, Title = "Dummy Blok 1",isDeleted = false, DeleteDate=null},
-                new Block{ Block_ID = 2, Title = "Dummy Blok 2",isDeleted = false, DeleteDate=null},
-                new Block{ Block_ID = 3, Title = "Dummy Blok 3",isDeleted = false, DeleteDate=null},
-                new Block{ Block_ID = 4, Title = "Dummy Blok 4",isDeleted = false, DeleteDate=null},
-                new Block{ Block_ID = 5, Title = "Dummy Blok 5",isDeleted = false, DeleteDate=null},
-                new Block{ Block_ID = 6, Title = "Dummy Blok 6",isDeleted = false, DeleteDate=null},
-                new Block{ Block_ID = 7, Title = "Dummy Blok 7",isDeleted = false, DeleteDate=null},
-                new Block{ Block_ID = 8, Title = "Dummy Blok 8",isDeleted = false, DeleteDate=null}
+                new Block{ Block_ID = 1, Title = "Dummy Blok 1",isDeleted = false, DeleteDate=DateTime.Now},
+                new Block{ Block_ID = 2, Title = "Dummy Blok 2",isDeleted = false, DeleteDate=DateTime.Now},
+                new Block{ Block_ID = 3, Title = "Dummy Blok 3",isDeleted = false, DeleteDate=DateTime.Now},
+                new Block{ Block_ID = 4, Title = "Dummy Blok 4",isDeleted = false, DeleteDate=DateTime.Now},
+                new Block{ Block_ID = 5, Title = "Dummy Blok 5",isDeleted = false, DeleteDate=DateTime.Now},
+                new Block{ Block_ID = 6, Title = "Dummy Blok 6",isDeleted = false, DeleteDate=DateTime.Now},
+                new Block{ Block_ID = 7, Title = "Dummy Blok 7",isDeleted = false, DeleteDate=DateTime.Now},
+                new Block{ Block_ID = 8, Title = "Dummy Blok 8",isDeleted = false, DeleteDate=DateTime.Now}
             };
             return fakeblocks;
 

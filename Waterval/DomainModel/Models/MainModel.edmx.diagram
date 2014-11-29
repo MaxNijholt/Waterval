@@ -5,7 +5,41 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8608f380f16f4f208e7bf33dd8295cd7" Name="Diagram1">
-        <EntityTypeShape EntityType="Project_WatervalModel.Block" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_WatervalModel.Account" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Project_WatervalModel.Activity" Width="1.5" PointX="6" PointY="1.75" />
+        <EntityTypeShape EntityType="Project_WatervalModel.Block" Width="1.5" PointX="1.5" PointY="23.625" />
+        <EntityTypeShape EntityType="Project_WatervalModel.Competence" Width="1.5" PointX="0.75" PointY="12.25" />
+        <EntityTypeShape EntityType="Project_WatervalModel.ExamCode" Width="1.5" PointX="5.25" PointY="7.25" />
+        <EntityTypeShape EntityType="Project_WatervalModel.GradeType" Width="1.5" PointX="5.25" PointY="15.25" />
+        <EntityTypeShape EntityType="Project_WatervalModel.LearnCourse" Width="1.5" PointX="0.75" PointY="16.125" />
+        <EntityTypeShape EntityType="Project_WatervalModel.LearnGoal" Width="1.5" PointX="5.25" PointY="4.875" />
+        <EntityTypeShape EntityType="Project_WatervalModel.LearningTool" Width="1.5" PointX="5.25" PointY="20.5" />
+        <EntityTypeShape EntityType="Project_WatervalModel.Level" Width="1.5" PointX="5.25" PointY="12.5" />
+        <EntityTypeShape EntityType="Project_WatervalModel.ModelActivity" Width="1.5" PointX="8.25" PointY="12.375" />
+        <EntityTypeShape EntityType="Project_WatervalModel.Module" Width="1.5" PointX="3" PointY="10" />
+        <EntityTypeShape EntityType="Project_WatervalModel.ModuleHistory" Width="1.5" PointX="0.75" PointY="10" />
+        <EntityTypeShape EntityType="Project_WatervalModel.Phasing" Width="1.5" PointX="1.5" PointY="20.375" />
+        <EntityTypeShape EntityType="Project_WatervalModel.Program" Width="1.5" PointX="5.25" PointY="17.625" />
+        <EntityTypeShape EntityType="Project_WatervalModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Project_WatervalModel.Theme" Width="1.5" PointX="5.25" PointY="22.875" />
+        <EntityTypeShape EntityType="Project_WatervalModel.WeekSchedule" Width="1.5" PointX="5.25" PointY="9.625" />
+        <AssociationConnector Association="Project_WatervalModel.FK__ModelActi__Activ__46B27FE2" />
+        <AssociationConnector Association="Project_WatervalModel.Block_ID" />
+        <AssociationConnector Association="Project_WatervalModel.FK__Level__Competenc__3D2915A8" />
+        <AssociationConnector Association="Project_WatervalModel.FK_dbo_Module_dbo_Competence_Competence_ID" />
+        <AssociationConnector Association="Project_WatervalModel.FK__ExamCode__Module__40F9A68C" />
+        <AssociationConnector Association="Project_WatervalModel.FK__GradeType__Modul__43D61337" />
+        <AssociationConnector Association="Project_WatervalModel.LearnCourse_ID" />
+        <AssociationConnector Association="Project_WatervalModel.Phasing_ID" />
+        <AssociationConnector Association="Project_WatervalModel.FK__LearnGoal__Modul__4D5F7D71" />
+        <AssociationConnector Association="Project_WatervalModel.FK__LearningT__Modul__503BEA1C" />
+        <AssociationConnector Association="Project_WatervalModel.FK__Level__Module_ID__3E1D39E1" />
+        <AssociationConnector Association="Project_WatervalModel.FK__ModelActi__Modul__47A6A41B" />
+        <AssociationConnector Association="Project_WatervalModel.FK__WeekSched__Modul__4A8310C6" />
+        <AssociationConnector Association="Project_WatervalModel.FK_dbo_Module_dbo_ModuleHistory_ModuleYear_ID" />
+        <AssociationConnector Association="Project_WatervalModel.FK_dbo_Module_dbo_Theme_Theme_ID" />
+        <AssociationConnector Association="Project_WatervalModel.FK_dbo_Program_dbo_Module_Module_ID" />
+        <AssociationConnector Association="Project_WatervalModel.ModuleWithTheme" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
