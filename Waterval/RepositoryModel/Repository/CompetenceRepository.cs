@@ -36,7 +36,6 @@ namespace RepositoryModel.Repository
         public void Delete(int compentence_id)
         {
             Competence compentence = dbContext.Competence.SingleOrDefault(c => c.Competence_ID == compentence_id);
-
             compentence.isDeleted = true;
             compentence.DeleteDate = DateTime.UtcNow;
             dbContext.SaveChanges();
@@ -47,12 +46,11 @@ namespace RepositoryModel.Repository
             Competence competence = dbContext.Competence.SingleOrDefault(b => b.Competence_ID == update.Competence_ID);
             if (competence == null) return null;
 
-            competence.Definition_Short = update.Definition_Long;
+            competence.Definition_Long = update.Definition_Long;
             competence.Definition_Short = update.Definition_Short;
             competence.Title = update.Title;
             dbContext.SaveChanges();
             return competence;
-
         }
     }
 }
