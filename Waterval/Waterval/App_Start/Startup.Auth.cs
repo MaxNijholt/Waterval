@@ -46,15 +46,14 @@ namespace Waterval
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+			app.UseFacebookAuthentication(
+			   appId: "1535947766622689",
+			   appSecret: "0202b6600f9247bb54e0d4804a2e6cfc");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+			app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions() {
+				ClientId = "737182459969-rmsemmocdt35h9c85pq61cttrp1em5i9.apps.googleusercontent.com",
+				ClientSecret = "elGBNiy7j8YoK02MPDv9Q2su"
+			});
         }
     }
 }
