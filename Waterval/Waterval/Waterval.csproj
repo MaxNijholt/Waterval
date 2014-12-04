@@ -161,8 +161,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BlokController.cs" />
-    <Compile Include="Controllers\CompententieController.cs" />
+    <Compile Include="Controllers\BlockController.cs" />
+    <Compile Include="Controllers\CompetenceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeerlijnController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
@@ -236,10 +236,6 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Compententie\Create.cshtml" />
-    <Content Include="Views\Compententie\Details.cshtml" />
-    <Content Include="Views\Compententie\Edit.cshtml" />
-    <Content Include="Views\Compententie\Index.cshtml" />
     <Content Include="Views\Leerlijn\Edit.cshtml" />
     <Content Include="Views\Leerlijn\Details.cshtml" />
     <Content Include="Views\Leerlijn\Index.cshtml" />
@@ -254,14 +250,21 @@
     <Content Include="Views\Shared\_Search.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Module\Edit.cshtml" />
-    <Content Include="Views\Blok\Index.cshtml" />
-    <Content Include="Views\Blok\Details.cshtml" />
-    <Content Include="Views\Blok\Create.cshtml" />
-    <Content Include="Views\Blok\Edit.cshtml" />
-    <Content Include="Views\Compententie\_CreateOrEdit.cshtml" />
-    <Content Include="Views\Blok\_CreateOrEdit.cshtml" />
     <Content Include="Views\Shared\_Alert.cshtml" />
-    <Content Include="Views\Blok\Delete.cshtml" />
+    <Content Include="Views\Block\0v1hm3op.viq" />
+    <Content Include="Views\Block\chnz3qth.lsn" />
+    <Content Include="Views\Block\Create.cshtml" />
+    <Content Include="Views\Block\Delete.cshtml" />
+    <Content Include="Views\Block\Details.cshtml" />
+    <Content Include="Views\Block\Edit.cshtml" />
+    <Content Include="Views\Block\Index.cshtml" />
+    <Content Include="Views\Block\p0hd5fkv.ioa" />
+    <Content Include="Views\Block\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Competence\Create.cshtml" />
+    <Content Include="Views\Competence\Details.cshtml" />
+    <Content Include="Views\Competence\Edit.cshtml" />
+    <Content Include="Views\Competence\Index.cshtml" />
+    <Content Include="Views\Competence\_CreateOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

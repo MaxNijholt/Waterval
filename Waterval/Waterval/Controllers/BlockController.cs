@@ -43,7 +43,7 @@ namespace Waterval.Controllers
             {
                 block.DeleteDate = DateTime.Now;
                 BlockRepository.Create(block);
-                
+
                 return RedirectToAction("Index");
             }
             catch
@@ -60,21 +60,21 @@ namespace Waterval.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Block block)
         {
-         try
-         {
-             if(BlockRepository.Update(block) == null)
-             {
-                 return View(block).ViewBag.Error = "Er is iets fout gegaan.";
-             }
-             return RedirectToAction("Index");
-         }
+            try
+            {
+                if (BlockRepository.Update(block) == null)
+                {
+                    return View(block).ViewBag.Error = "Er is iets fout gegaan.";
+                }
+                return RedirectToAction("Index");
+            }
             catch
-         {
-             return View(block);
-         }
+            {
+                return View(block);
+            }
         }
 
-            [HttpPost]
+        [HttpPost]
         public ActionResult Delete(Block blok)
         {
 
