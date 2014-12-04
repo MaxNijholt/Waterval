@@ -36,7 +36,7 @@ namespace MvcApplication1.Controllers
         {
             try
             {
-       
+
                 compenteceRepository.Create(competence);
                 return RedirectToAction("Index");
             }
@@ -60,18 +60,18 @@ namespace MvcApplication1.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Competence compentence)
         {
-         try
-         {
-             if(compenteceRepository.Update(compentence) == null)
-             {
-                 return View(compentence).ViewBag.Error = "Er is iets fout gegaan.";
-             }
-             return RedirectToAction("Index");
-         }
+            try
+            {
+                if (compenteceRepository.Update(compentence) == null)
+                {
+                    return View(compentence).ViewBag.Error = "Er is iets fout gegaan.";
+                }
+                return RedirectToAction("Index");
+            }
             catch
-         {
-             return View(compentence);
-         }
+            {
+                return View(compentence);
+            }
         }
 
 
