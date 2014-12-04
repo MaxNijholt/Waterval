@@ -16,10 +16,10 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressSSLPort>44301</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -161,8 +161,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BlockController.cs" />
-    <Compile Include="Controllers\CompetenceController.cs" />
+    <Compile Include="Controllers\BlokController.cs" />
+    <Compile Include="Controllers\CompententieController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeerlijnController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
@@ -195,7 +195,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\Filter.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -206,7 +205,6 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\competentieScripts.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -238,10 +236,10 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Competence\Create.cshtml" />
-    <Content Include="Views\Competence\Details.cshtml" />
-    <Content Include="Views\Competence\Edit.cshtml" />
-    <Content Include="Views\Competence\Index.cshtml" />
+    <Content Include="Views\Compententie\Create.cshtml" />
+    <Content Include="Views\Compententie\Details.cshtml" />
+    <Content Include="Views\Compententie\Edit.cshtml" />
+    <Content Include="Views\Compententie\Index.cshtml" />
     <Content Include="Views\Leerlijn\Edit.cshtml" />
     <Content Include="Views\Leerlijn\Details.cshtml" />
     <Content Include="Views\Leerlijn\Index.cshtml" />
@@ -256,14 +254,14 @@
     <Content Include="Views\Shared\_Search.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Module\Edit.cshtml" />
-    <Content Include="Views\Block\Index.cshtml" />
-    <Content Include="Views\Block\Details.cshtml" />
-    <Content Include="Views\Block\Create.cshtml" />
-    <Content Include="Views\Block\Edit.cshtml" />
-    <Content Include="Views\Competence\_CreateOrEdit.cshtml" />
-    <Content Include="Views\Block\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Blok\Index.cshtml" />
+    <Content Include="Views\Blok\Details.cshtml" />
+    <Content Include="Views\Blok\Create.cshtml" />
+    <Content Include="Views\Blok\Edit.cshtml" />
+    <Content Include="Views\Compententie\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Blok\_CreateOrEdit.cshtml" />
     <Content Include="Views\Shared\_Alert.cshtml" />
-    <Content Include="Views\Block\Delete.cshtml" />
+    <Content Include="Views\Blok\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
