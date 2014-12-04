@@ -43,6 +43,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -159,13 +161,25 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BlockController.cs" />
+    <Compile Include="Controllers\CompetenceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LeerlijnController.cs" />
+    <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="Controllers\ThemaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ModuleList.cs" />
+    <Compile Include="Models\Modules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -175,9 +189,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <None Include="Resources\av-logo.png" />
+    <None Include="Resources\Avans_logo [Omgezet].png" />
+    <None Include="Resources\logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Filter.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -188,6 +206,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\competentieScripts.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -219,6 +238,32 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Competence\Create.cshtml" />
+    <Content Include="Views\Competence\Details.cshtml" />
+    <Content Include="Views\Competence\Edit.cshtml" />
+    <Content Include="Views\Competence\Index.cshtml" />
+    <Content Include="Views\Leerlijn\Edit.cshtml" />
+    <Content Include="Views\Leerlijn\Details.cshtml" />
+    <Content Include="Views\Leerlijn\Index.cshtml" />
+    <Content Include="Views\Leerlijn\Create.cshtml" />
+    <Content Include="Views\Module\Create.cshtml" />
+    <Content Include="Views\Module\Index.cshtml" />
+    <Content Include="Views\Module\Details.cshtml" />
+    <Content Include="Views\Thema\Create.cshtml" />
+    <Content Include="Views\Thema\Details.cshtml" />
+    <Content Include="Views\Thema\Edit.cshtml" />
+    <Content Include="Views\Thema\Index.cshtml" />
+    <Content Include="Views\Shared\_Search.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Module\Edit.cshtml" />
+    <Content Include="Views\Block\Index.cshtml" />
+    <Content Include="Views\Block\Details.cshtml" />
+    <Content Include="Views\Block\Create.cshtml" />
+    <Content Include="Views\Block\Edit.cshtml" />
+    <Content Include="Views\Competence\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Block\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Shared\_Alert.cshtml" />
+    <Content Include="Views\Block\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -229,6 +274,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DomainModel\DomainModel.csproj">
+      <Project>{5d0d140b-be32-41dd-9720-f830b43cdebd}</Project>
+      <Name>DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryModel\RepositoryModel.csproj">
+      <Project>{14a5c760-fc5f-42dc-9bfe-b5b7f29dc5dc}</Project>
+      <Name>RepositoryModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

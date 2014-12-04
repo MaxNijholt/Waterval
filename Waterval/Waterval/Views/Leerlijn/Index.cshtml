@@ -1,0 +1,59 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+@section Scripts {
+    <script>
+        $('input[name="delete"]').click(function (e) {
+            var title = $(this).attr('data-name');
+            var id = $(this).attr('data-id');
+
+            if (confirm('Gegevens van ' + title + ' verwijderen?')) {
+            /*    var url = "/Blok/Delete";
+
+                $.post(url, { Block_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
+                    $("#msg").html(data);
+                });*/
+                $(this).closest('tr').remove()
+            }
+        })
+    </script>
+}
+
+
+<div class="container">
+    <h1>Leerlijnen Overzicht</h1>
+    <input type="text" class="form-control" placeholder="filter leerlijnen...">
+    <table class="table table-striped table-bordered">
+       
+        <tr>
+            <th>
+                Leerlijnen
+            </th>
+            <th>Aanpassen</th>
+            <th>Verwijderen</th>
+        </tr>
+        <tr>
+            <td>@Html.ActionLink("Software Ontwikkelaar", "Details")</td>
+            <td>@Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
+            <td><input type="button" value="Verwijderen" name="delete" data-name="Software Ontwikkelaar" data-id="" class="btn btn-avans"></td>
+        </tr>
+        <tr>
+            <td>@Html.ActionLink("Bedrijfs Informatica", "Details")</td>
+            <td>@Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
+            <td><input type="button" value="Verwijderen" name="delete" data-name="Bedrijfs Informatica" data-id="" class="btn btn-avans"></td>
+        </tr>
+        <tr>
+            <td>@Html.ActionLink("Communicatie Media Design", "Details")</td>
+            <td>@Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
+            <td><input type="button" value="Verwijderen" name="delete" data-name="Communicatie Media Design" data-id="" class="btn btn-avans"></td>
+        </tr>
+    </table>
+
+    @Html.ActionLink("Nieuwe Leerlijn", "Create", null, new { @class = "btn btn-success" })
+
+</div>

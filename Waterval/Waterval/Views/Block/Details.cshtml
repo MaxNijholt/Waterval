@@ -1,0 +1,22 @@
+﻿@model DomainModel.Models.Block
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+    <h2>Blok Details: @Html.DisplayFor(model => model.Title)</h2>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Titel</th>
+        </tr>
+        <tr>
+            <td>@Html.DisplayFor(model => model.Title)</td>
+        </tr>
+    </table>
+    @Html.ActionLink("Aanpassen", "Edit", new { id = Model.Block_ID }, new { @class = "btn btn-warning" })| <!--TODO: new { id = item.BlokID } op locatie van null-->
+    @Html.ActionLink("Verwijderen", "Delete", new { id = Model.Block_ID }, new { @class = "btn btn-danger" })| <!--TODO: new { id = item.BlokID } op locatie van null-->
+    @Html.ActionLink("Terug naar Index", "Index")
+</div>

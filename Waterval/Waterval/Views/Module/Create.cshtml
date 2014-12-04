@@ -1,0 +1,208 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+    <h2>Modulen Toevoegen</h2>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <td>
+                Titel
+            </td>
+
+            <td>@Html.TextBox("name", null, new { @class = "form-control" })</td>
+
+        </tr>
+        <tr>
+            <td>
+                Beschrijving
+            </td>
+
+            <td>@Html.TextBox("name", null, new { @class = "form-control" })</td>
+
+        </tr>
+        <tr>
+            <td>
+                Vakcode
+            </td>
+            <td>@Html.TextBox("name", null, new { @class = "form-control" })</td>
+
+        </tr>
+        <tr>
+            <td>
+                Organisatie
+            </td>
+
+            <td>@Html.TextBox("name", null, new { @class = "form-control" })</td>
+
+        </tr>
+        <tr>
+            <td>
+                Studiebelasting
+            </td>
+
+            <td>@Html.TextBox("name", null, new { @class = "form-control" })</td>
+        </tr>
+
+        <tr>
+            <td>
+                Werkvorm
+            </td>
+
+            <td>@Html.TextBox("name", null, new { @class = "form-control" })</td>
+
+        </tr>
+        <tr>
+            <td>
+                Ingangsniveau
+            </td>
+
+            <td>@Html.TextBox("name", null, new { @class = "form-control" })</td>
+
+        </tr>
+        <tr>
+            <td>
+                Leerdoelen
+            </td>
+
+            <td>@Html.TextBox("name", null, new { @class = "form-control" })</td>
+
+        </tr>
+        <tr>
+            <td>
+                Beschrijving
+            </td>
+
+            <td>@Html.TextBox("name", null, new { @class = "form-control" })</td>
+
+        </tr>
+        <tr>
+            <td>
+                Beoordelingen
+            </td>
+
+            <td>@Html.TextBox("name", null, new { @class = "form-control" })</td>
+
+        </tr>
+        <tr>
+            <td>
+                Aantal EC
+            </td>
+
+            <td>@Html.TextBox("name", null, new { @class = "form-control" })</td>
+
+        </tr>
+
+
+
+
+    </table>
+
+    <div class="container">
+        <p>Thema's</p>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Naam</th>
+                <th>Toevoegen</th>
+            </tr>
+
+
+        </table>
+        <input type="button" value="Thema Toevoegen" name="ComAd" class="btn btn-avans" data-toggle="collapse" data-parent="#accordion2" data-target="#collapseThema">
+
+        <br />
+        <br />
+        <div id="collapseThema" class="panel-collapse collapse open">
+            <form action="" class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Geef hier een beschrijving" />
+                </div>
+
+            </form>
+
+            <table class="table table-striped table-bordered">
+                <caption></caption>
+                <thead>
+                    <tr>
+                        <th>Titel</th>
+                        <th>Toevoegen</th>
+                    </tr>
+                </thead>
+
+                <tr>
+                    <td>@Html.ActionLink("Programeren", "Details", "Thema")</td>
+                    <td><input type="submit" class="btn btn-success" name="Delete" value="Toevoegen" /></td>
+                </tr>
+                <tr>
+                    <td>@Html.ActionLink("Onderzoek", "Details", "Thema")</td>
+                    <td><input type="submit" class="btn btn-success" name="Delete" value="Toevoegen" /></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <p>Compententie's</p>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Titel</th>
+                <th>Omschrijving</th>
+                <th>Verwijderen</th>
+            </tr>
+
+        </table>
+
+
+
+        <input type="button" value="Compententie Toevoegen" name="ComAd" class="btn btn-avans" data-toggle="collapse" data-parent="#accordion2" data-target="#collapseDoel">
+
+        <br />
+        <br />
+        <div id="collapseDoel" class="panel-collapse collapse open">
+            <form action="" class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Geef hier een beschrijving" />
+                </div>
+             
+            </form>
+
+            <table class="table table-striped table-bordered">
+                <caption></caption>
+                <thead>
+                    <tr>
+                        <th>Titel</th>
+                        <th>Toevoegen</th>
+                    </tr>
+                </thead>
+
+                <tr>
+                    <td>@Html.ActionLink("Procesanalyse uitvoeren", "Details", "Compententie")</td>
+                    <td><input type="submit" class="btn btn-success" name="Delete" value="Toevoegen" /></td>
+                </tr>
+                <tr>
+                    <td>@Html.ActionLink("Informatieanalyse uitvoeren", "Details", "Compententie")</td>
+                    <td><input type="submit" class="btn btn-success" name="Delete" value="Toevoegen" /></td>
+                </tr>
+                <tr>
+                    <td>@Html.ActionLink("Over inzet van ICT adviseren", "Details", "Compententie")</td>
+                    <td><input type="submit" class="btn btn-success" name="Delete" value="Toevoegen" /></td>
+                </tr>
+
+            </table>
+
+        </div>
+    </div>
+    <br />
+    <div class="container">
+        <p>
+            @Html.ActionLink("Module Opslaan", "", null, new { @class = "btn btn-success" })
+            |
+            @Html.ActionLink("Terug naar Index", "Index")
+        </p>
+    </div>
+</div>
+
+

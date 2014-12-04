@@ -1,0 +1,25 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+    <h2>Thema Toevoegen</h2>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <td>Naam</td>
+            <td>@Html.TextBox("name")</td>
+        </tr>
+        <tr>
+            <td>Omschrijving</td>
+            <td>@Html.TextBox("oms")</td>
+        </tr>
+    </table>
+    <p>
+    @Html.ActionLink("Thema Opslaan", "Index", null, new { @class = "btn btn-success" })
+    |
+    @Html.ActionLink("Terug naar Index", "Index")</p>
+</div>

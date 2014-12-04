@@ -1,0 +1,97 @@
+﻿@model DomainModel.Models.Competence
+@using DomainModel.Models;
+
+<div class="form-group">
+    @Html.Label("Titel", new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.Title, new { @class = "form-control", id = "title" })
+        @Html.ValidationMessageFor(model => model.Title)
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.Label("Omschrijving Kort", new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.Definition_Short, new { @class = "form-control", id = "short" })
+        @Html.ValidationMessageFor(model => model.Definition_Short)
+    </div>
+</div>
+
+<div class="form-group hidden">
+    @Html.LabelFor(model => model.Definition_Long, new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.TextAreaFor(model => model.Definition_Long, new { @class = "form-control hidden", id = "long", @style = "height:250px" })
+        @Html.ValidationMessageFor(model => model.Definition_Long);
+    </div>
+</div>
+
+
+<div class="form-group">
+    <div class="container">
+        <p>
+
+            @Html.Label("Doelen Toevoegen", new { @class = "col-sm-2 control-label" })
+        </p>
+        <div id="ValidationMes" class="alert alert-danger">
+            Minstens een doel verplicht
+
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="LongTable">
+            <thead>
+                <tr>
+                    <th width="85%">Omschrijving</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+            @if (Model.Competence_ID > 0)
+            {
+                foreach (string _string in Model.Definition_Long.Split('\n'))
+                {
+                    <tr>
+                        <td><input type="text" class="form-control" id="field_description" value="@_string" /></td>
+                        <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+                    </tr>
+                }
+            }
+
+
+        </table>
+        <input type="button" value="Doel Toevoegen" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseMod">
+
+
+        <br />
+        <br />
+        <div id="collapseMod" class="panel-collapse collapse open">
+            <form action="" class="form-inline">
+                <table class="table">
+                    <tr>
+                        <td width="60%">
+                            <input type="text" class="form-control" placeholder="doel..." name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="button" value="Toevoegen" name="addGoal" class="btn btn-avans">
+                        </td>
+
+                        <td width="10%">
+                            <input type="button" value="Toevoegen Na" name="addGoalBetween" class="btn btn-avans">
+                        </td>
+                        <td width="20%">
+                            <select id="selecteer" class="form-control"><option value="-1" disabled selected>Maak een keuze</option></select>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+
+<hr />
+@Html.Partial("~/Views/Shared/_Alert.cshtml")

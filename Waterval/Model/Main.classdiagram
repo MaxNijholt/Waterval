@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="59fb97eb-0866-4795-a6da-18730bcd3b56" name="Main" linkedPackageId="e65cb61a-a7d0-42ac-bd88-eceb42b7abb7" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="f9226d0f-0c1c-4bb8-aed4-a78b6948b1fb">
+      <profileInstance Id="6ddd5e1f-2ee2-434b-9253-a927a3e2e964" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="2650ae07-42a7-4226-931b-02cf2c8a8a77">
+      <profileInstance Id="cc40062c-de7e-41c0-8cb6-1ab296c67668" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="67e70cea-9c64-40dd-a8e1-2c711fd053ed" name="Waterval">
+        <elementDefinition Id="42809674-30c5-4079-be8a-e7f52cc228d0" />
+        <importedPackagesInternal>
+          <packageImport Id="480d6226-be9d-4c72-b6d4-2a96351c19c9" visibility="Public">
+            <packageMoniker Id="86c0fe68-3bcc-4ab8-beb4-c36d5a878004" LastKnownName="Repository" />
+            <elementDefinition Id="bcebc899-3d68-4a03-a750-6419ec99c57b" />
+          </packageImport>
+          <packageImport Id="d0c8e142-5671-4023-9c87-21c5a9404af2" visibility="Public">
+            <packageMoniker Id="f740f98b-00da-4142-b0fb-c295fd9b09c9" LastKnownName="DomainModel" />
+            <elementDefinition Id="cb135c0a-ea56-41fd-aea1-b13d0846f44b" />
+          </packageImport>
+          <packageImport Id="181b1e3f-44d1-40a1-be49-609e2ea27db0" visibility="Public">
+            <packageMoniker Id="57bf556f-6329-4004-9223-5ea084f304ea" LastKnownName="Entity Framework" />
+            <elementDefinition Id="4d281f6c-ec24-424b-b1c0-72e373620901" />
+          </packageImport>
+          <packageImport Id="25bd2d48-987b-4f8c-a667-fbf6707fc48a" visibility="Public">
+            <packageMoniker Id="24f71d42-8284-44a7-9d09-0f7d48f9765d" LastKnownName="JQuery" />
+            <elementDefinition Id="6af07ba6-c4e6-49ee-b1fe-6862cfa9bc80" />
+          </packageImport>
+          <packageImport Id="b9d5888c-f6d5-4aed-8d1c-208f66b8f765" visibility="Public">
+            <packageMoniker Id="6e41cd6c-3847-4660-9454-b1a922823ba1" LastKnownName="Bootstrap" />
+            <elementDefinition Id="5d833d96-6081-4f2d-b701-034b0d8fbf0d" />
+          </packageImport>
+        </importedPackagesInternal>
+        <packagedElements>
+          <packageHasNamedElement>
+            <package Id="1ed72057-31a4-434c-808b-0df7acc60564" name="Controllers">
+              <elementDefinition Id="d64571bc-abe5-40b4-bbc5-1c5fe9af1423" />
+              <packagedElements>
+                <packageHasNamedElement>
+                  <class Id="24119912-ef8a-4bf7-b77b-fbae5d0e66fa" name="Controllers" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="ef75f857-2eea-45f0-8d18-56d52d1e927b" />
+                  </class>
+                </packageHasNamedElement>
+              </packagedElements>
+            </package>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <package Id="b4cab3ad-0630-49b4-98d0-6d00f902c29f" name="Views">
+              <elementDefinition Id="c317c901-007f-4a23-9d86-04245c5cafce" />
+              <packagedElements>
+                <packageHasNamedElement>
+                  <class Id="c8a8f4b0-f4d0-4896-8aa7-adcdcfc32a31" name="Views" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="8f38f1ba-8ac9-442a-afda-96be44505065" />
+                    <targetEnds>
+                      <association Id="37e0b20e-9547-4c8c-bf02-916bdc4a979c" isDerived="false" sourceEndRoleName="-" targetEndRoleName="-" isLeaf="false" isAbstract="false">
+                        <classMoniker Id="24119912-ef8a-4bf7-b77b-fbae5d0e66fa" LastKnownName="Controllers" />
+                        <relationshipOwnedElementsInternal>
+                          <associationHasOwnedEnds>
+                            <memberEnd Id="d17b0e30-d35b-4244-a317-ed8a66bd06e1" name="-" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                              <lowerValueInternal>
+                                <literalString Id="dcfd5841-4cc9-4d6e-a989-6da1ed31ec82" name="Lower" value="-">
+                                  <elementDefinition Id="8f5e4034-90a2-44da-88f8-7161da39f6b6" />
+                                </literalString>
+                              </lowerValueInternal>
+                              <upperValueInternal>
+                                <literalString Id="a43483a8-a499-49b2-94cf-efa382f9d095" name="Upper" value="-">
+                                  <elementDefinition Id="0b6a6d74-79ce-4307-b336-90ec2fbd7ea3" />
+                                </literalString>
+                              </upperValueInternal>
+                              <elementDefinition Id="3a79c8ae-81d7-4cac-94a0-475901db9bc3" />
+                            </memberEnd>
+                          </associationHasOwnedEnds>
+                          <associationHasOwnedEnds>
+                            <memberEnd Id="574bf143-d660-4371-a7e0-5d11d1701fb0" name="-" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                              <lowerValueInternal>
+                                <literalString Id="c7c492dc-e9e3-4930-b9e7-ad287824b4cd" name="Lower" value="-">
+                                  <elementDefinition Id="29930c5a-1f08-400a-9bdd-5c36340be341" />
+                                </literalString>
+                              </lowerValueInternal>
+                              <upperValueInternal>
+                                <literalString Id="85540cf9-c52f-4d94-af0c-530d3b022048" name="Upper" value="-">
+                                  <elementDefinition Id="48698f86-b664-404d-999f-2a1452dc8c15" />
+                                </literalString>
+                              </upperValueInternal>
+                              <elementDefinition Id="f87b6d12-5870-46f3-9ce1-15ac3bc55b5c" />
+                            </memberEnd>
+                          </associationHasOwnedEnds>
+                        </relationshipOwnedElementsInternal>
+                        <elementDefinition Id="2e6e8bc0-a5c7-44cf-af60-c1eedbf66243" />
+                      </association>
+                    </targetEnds>
+                  </class>
+                </packageHasNamedElement>
+              </packagedElements>
+            </package>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <package Id="8ec43778-a116-497d-a2f0-2f0dea16ce6a" name="Scripts">
+              <elementDefinition Id="2092613f-cfc3-4cc5-9b27-4703cf04cadd" />
+            </package>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <package Id="a464b84d-9997-498f-aa76-00f5c62b8a31" name="Resources">
+              <elementDefinition Id="ab28057c-46bf-4a43-9e58-e5ac3b621a3f" />
+            </package>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="92825023-5ef6-442e-8948-f562b3fc7507" name="UnitTest">
+        <elementDefinition Id="aa2afb07-6739-4da2-88b1-360515e06e4c" />
+        <importedPackagesInternal>
+          <packageImport Id="39eae1e9-a87c-4fe3-95ef-7be175974e1e" visibility="Public">
+            <packageMoniker Id="86c0fe68-3bcc-4ab8-beb4-c36d5a878004" LastKnownName="Repository" />
+            <elementDefinition Id="dbaf2b69-1224-4149-b2e2-522bbdd4104f" />
+          </packageImport>
+          <packageImport Id="cb924cbd-7ed2-41cc-b7e5-22069478b0a3" visibility="Public">
+            <packageMoniker Id="f740f98b-00da-4142-b0fb-c295fd9b09c9" LastKnownName="DomainModel" />
+            <elementDefinition Id="d75d626d-3c9b-4f89-909e-95b9f9639a12" />
+          </packageImport>
+        </importedPackagesInternal>
+        <packagedElements>
+          <packageHasNamedElement>
+            <package Id="bb2e21f3-fb88-4db8-8aa8-469a2becd09b" name="Test">
+              <elementDefinition Id="2939f295-4909-447e-bfcb-d6d0e0cefc8d" />
+              <suppliersInternal>
+                <dependency Id="4bbbe9aa-fb29-4636-b33e-e057edb4992f">
+                  <packageMoniker Id="b11b990a-f3f8-4753-b4b7-c2d4152b0a22" LastKnownName="Processor" />
+                  <elementDefinition Id="85691233-f4d3-4570-ab7d-40ce83901487" />
+                </dependency>
+              </suppliersInternal>
+            </package>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <package Id="b11b990a-f3f8-4753-b4b7-c2d4152b0a22" name="Processor">
+              <elementDefinition Id="49f5cf3e-134d-45c9-b7d3-421428a2413c" />
+            </package>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="f740f98b-00da-4142-b0fb-c295fd9b09c9" name="DomainModel">
+        <elementDefinition Id="88f6d234-cb92-4733-984b-3e199722267c" />
+        <suppliersInternal>
+          <dependency Id="4dc1e87b-80fa-4010-8b37-68d8b0dcdbf1">
+            <packageMoniker Id="7c99228e-cfa5-47a9-9c4b-2dccdb42e018" LastKnownName="Database" />
+            <elementDefinition Id="1ba87b60-5925-4f9d-9b86-533fd14aa65b" />
+          </dependency>
+        </suppliersInternal>
+        <importedPackagesInternal>
+          <packageImport Id="e30d5631-8e3e-4472-9ae4-38a4a8aacbd7" visibility="Public">
+            <packageMoniker Id="86c0fe68-3bcc-4ab8-beb4-c36d5a878004" LastKnownName="Repository" />
+            <elementDefinition Id="a4e1ab11-64b7-478e-8b5a-a80b83b1af5d" />
+          </packageImport>
+          <packageImport Id="eecfc138-99ae-443b-a5b3-f074cdf3945c" visibility="Public">
+            <packageMoniker Id="57bf556f-6329-4004-9223-5ea084f304ea" LastKnownName="Entity Framework" />
+            <elementDefinition Id="de459b06-7647-4db0-828b-4e4a3464af43" />
+          </packageImport>
+        </importedPackagesInternal>
+        <packagedElements>
+          <packageHasNamedElement>
+            <class Id="d04e431e-bf85-449a-8536-fd54a969116f" name="MainModel" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="d1289a96-ed1a-4442-9914-648c6a9b974c" />
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="86c0fe68-3bcc-4ab8-beb4-c36d5a878004" name="Repository">
+        <elementDefinition Id="3841350e-e0bf-410b-95e0-5463901de314" />
+        <importedPackagesInternal>
+          <packageImport Id="82822981-0a43-4fb1-84c9-6659fa8b0de6" visibility="Public">
+            <packageMoniker Id="57bf556f-6329-4004-9223-5ea084f304ea" LastKnownName="Entity Framework" />
+            <elementDefinition Id="abaf151e-65bb-47f3-89a8-4558d276b1a7" />
+          </packageImport>
+          <packageImport Id="5ed37031-5b01-4e6c-8e3c-f050ed9070eb" visibility="Public">
+            <packageMoniker Id="83f5079b-ff72-48ef-b408-9c9ec5314cde" LastKnownName="Avans Auth" />
+            <elementDefinition Id="da5b3f77-c3d8-4b10-9792-1ee2516fc7e7" />
+          </packageImport>
+        </importedPackagesInternal>
+        <packagedElements>
+          <packageHasNamedElement>
+            <package Id="ce7d3220-3658-4c66-a862-5bd846e456e6" name="Interface">
+              <elementDefinition Id="a10d83df-4aaa-42e4-b212-80c3a41175e4" />
+            </package>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <package Id="a350eb99-6a4c-4f8f-b0ca-7a0651f84514" name="Repositories">
+              <elementDefinition Id="97cb00f7-e431-44fb-ba3f-eced0f760e72" />
+              <suppliersInternal>
+                <dependency Id="2936a214-563b-495f-8369-0f4ec7411096">
+                  <packageMoniker Id="ce7d3220-3658-4c66-a862-5bd846e456e6" LastKnownName="Interface" />
+                  <elementDefinition Id="b0296189-ac54-44d1-9c57-e2be43414c25" />
+                </dependency>
+              </suppliersInternal>
+            </package>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <package Id="34069819-948a-42f8-9bfa-14e9d7a33a55" name="DummyRepositories">
+              <elementDefinition Id="17956694-b8dd-4bfe-a28e-e85fb6c74109" />
+              <suppliersInternal>
+                <dependency Id="7c200bb7-e222-4dc4-a5bd-1cee436fc0c4">
+                  <packageMoniker Id="ce7d3220-3658-4c66-a862-5bd846e456e6" LastKnownName="Interface" />
+                  <elementDefinition Id="1e1f77d1-896e-414e-bde0-bc4f79c1e98e" />
+                </dependency>
+              </suppliersInternal>
+            </package>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="7c99228e-cfa5-47a9-9c4b-2dccdb42e018" name="Database">
+        <elementDefinition Id="a2b72ae9-2907-4b7c-b58b-346af7117d20" />
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="6e41cd6c-3847-4660-9454-b1a922823ba1" name="Bootstrap">
+        <elementDefinition Id="a958a1bc-bddd-413d-805f-04e4b57e29fa" />
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="24f71d42-8284-44a7-9d09-0f7d48f9765d" name="JQuery">
+        <elementDefinition Id="5f925484-b9e8-4aa8-bc4e-eacfde3a0e1e" />
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="57bf556f-6329-4004-9223-5ea084f304ea" name="Entity Framework">
+        <elementDefinition Id="f47d4f3a-44fe-4216-946f-f5dc1b97be00" />
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="83f5079b-ff72-48ef-b408-9c9ec5314cde" name="Avans Auth">
+        <elementDefinition Id="a4283f26-96e1-4cea-8eab-3612fa33db85" />
+      </package>
+    </logicalClassDesignerModelHasPackages>
+  </packagedElements>
+  <package Id="e65cb61a-a7d0-42ac-bd88-eceb42b7abb7" name="Model">
+    <elementDefinition Id="bad970e7-2ab2-44ba-b783-4060a83de8af" />
+  </package>
+</logicalClassDesignerModel>
