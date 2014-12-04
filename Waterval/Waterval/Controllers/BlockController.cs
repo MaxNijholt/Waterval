@@ -9,13 +9,13 @@ using RepositoryModel;
 
 namespace Waterval.Controllers
 {
-    public class BlokController : Controller
+    public class BlockController : Controller
     {
         //
         // GET: /Block/
         private BlockRepository BlockRepository;
 
-        public BlokController()
+        public BlockController()
         {
             BlockRepository = new BlockRepository();
         }

@@ -47,9 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DummyRepository\DBlockRepository.cs" />
+    <Compile Include="IRepository\ICompetenceRepository.cs" />
     <Compile Include="Repository\BlockRepository.cs" />
     <Compile Include="IRepository\IBlockRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\CompetenceRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">

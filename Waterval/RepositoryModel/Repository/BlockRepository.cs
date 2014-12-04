@@ -15,7 +15,6 @@ namespace RepositoryModel
         public BlockRepository()
         {
             dbContext = new DomainModel.Models.Project_WatervalEntities();
-            dbContext.Database.Initialize(true);
         }
 
         public List<Block> GetAll()

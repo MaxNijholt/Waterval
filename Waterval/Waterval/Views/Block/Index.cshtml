@@ -7,29 +7,10 @@
 @Styles.Render("~/Content/css")
 
 
-@section Scripts {
-    <script>
-        $('input[type="button"]').click(function (e) {
-            var title = $(this).attr('data-name');
-            var id = $(this).attr('data-id');
-     
-            if (confirm('Gegevens van ' + title + ' verwijderen?')) {
-                var url = "/Blok/Delete";
-
-                $.post(url, { Block_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
-                    $("#msg").html(data);
-                });
-                $(this).closest('tr').remove()
-            }
-        })
-    </script>
-}
-
-
 
 
 <div class="container">
-    <h2>Thema Overzicht</h2>
+    <h2>Blok Overzicht</h2>
     <input type="text" class="form-control" placeholder="filter blokken...">
 
     <table class="table table-bordered table-striped">
@@ -63,3 +44,21 @@
 
         @Html.ActionLink("Nieuw Blok", "Create", null, new { @class = "btn btn-success" })
     </div>
+
+@section Scripts {
+    <script>
+        $('input[type="button"]').click(function (e) {
+            var title = $(this).attr('data-name');
+            var id = $(this).attr('data-id');
+
+            if (confirm('Gegevens van ' + title + ' verwijderen?')) {
+                var url = "/Blok/Delete";
+
+                $.post(url, { Block_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
+                    $("#msg").html(data);
+                });
+                $(this).closest('tr').remove()
+            }
+        })
+    </script>
+}
