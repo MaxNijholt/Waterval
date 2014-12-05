@@ -1,59 +1,87 @@
-﻿@{
+﻿
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @Styles.Render("~/Content/css")
 
-
-<h2>Leerlijn Toevoegen</h2>
-<table>
-    <tr>
-        <td>Leerlijn naam</td>
-        <td>@Html.TextBox("name")</td>
-    </tr>
-    <tr>
-        <td>Code</td>
-        <td>@Html.TextBox("name")</td>
-    </tr>
-    <tr>
-        <td>Omschrijving Kort</td>
-        <td>@Html.TextBox("name")</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>@Html.ActionLink("Blok Toevoegen", "", null, new { @class = "btn btn-avans" })</td>
-    </tr>
-</table>
-<br />
 <div class="container">
-   
-    <div class="panel-group" id="accordion2">
-        <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" data-target="#collapseOne2">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle">
-                        <span class="btn btn-avans">
-                            Overzicht
-                        </span>
-                    </a>
-                </h4>
+    <h2>Leerlijn Toevoegen</h2>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <td>Naam</td>
+            <td>@Html.TextBox("name")</td>
+        </tr>
+        <tr>
+            <td>Omschrijving</td>
+            <td>@Html.TextBox("oms")</td>
+        </tr>
+    </table>
+
+    <div class="form-group">
+        <div class="container">
+            <p>
+
+                @Html.Label("Modulen Toevoegen", new { @class = "control-label" })
+            </p>
+            <div id="ValidationMesMod" class="alert alert-danger hidden">
+                Minstens een Module verplicht
             </div>
-            <div id="collapseOne2" class="panel-collapse collapse open">
-                <div class="panel-body">
-                    <img src='@Url.Content("http://i.imgur.com/GgExviL.png")' alt="Image" />
-                </div>
+            <br /><br />
+            <table class="table table-bordered table-striped table-responsive" id="ModTable">
+                <thead>
+                    <tr>
+                        <th width="20%">Vakcode</th>
+                        <th width="50%">Omschrijving</th>
+                        <th>Verwijderen</th>
+                    </tr>
+                </thead>
+
+                <tr>
+                 
+                </tr>
+
+            </table>
+            <input type="button" value="Module Toevoegen" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseMod">
+
+            <br />
+            <br />
+            <div id="collapseMod" class="panel-collapse collapse open">
+
+                <input type="text" class="form-control" placeholder="Module..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTable')" style:size="10" />
+
+
+                <table class="table table-bordered table-striped" id="ModTable">
+                    <thead>
+                        <tr>
+                            <th>Vakcode</th>
+                            <th>Omschrijving</th>
+                            <th>Toevoegen</th>
+                        </tr>
+
+                    </thead>
+
+                    <tr>
+                        <td id="1">Pr-01</td>
+                        <td id="2">Programeren 1</td>
+                        <td><input type="button" value="Toevoegen" name="addMod" class="btn btn-avans" id="1"></td>
+                    </tr>
+                    <tr>
+                        <td>DB-01</td>
+                        <td>Database 1</td>
+                        <td><input type="button" value="Toevoegen" name="addMod" class="btn btn-avans"></td>
+                    </tr>
+
+                </table>
             </div>
         </div>
+
+        <p>
+
+
+            @Html.ActionLink("Leerlijn Opslaan", "Index", null, new { @class = "btn btn-success" })
+            |
+            @Html.ActionLink("Terug naar Index", "Index")
+        </p>
     </div>
-
-    <br />
-
-    <p>
-        @Html.ActionLink("Opslaan", "Index", null, new { @class = "btn btn-success" })
-        |
-        @Html.ActionLink("Terug naar Index", "Index")
-    </p>
-
-
-
-</div>

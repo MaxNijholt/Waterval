@@ -4,173 +4,84 @@
 
 @Styles.Render("~/Content/css")
 
-
-<h2>Leerlijn Aanpassen: Software Ontwikkeling</h2>
 <div class="container">
-    @Html.ActionLink("Blok Toevoegen", "Show Detail", null, new { @class = "btn btn-success" })
-    <br />
-    <div class="panel-group" id="accordion2">
-        <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion2" data-target="#collapseOne2">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle"><span class="btn btn-avans">
-                    
-                            Overzicht
-                        </span>
-                    </span></a>
-                </h4>
+    <h2>Leerlijn Aanpassen: Progameren</h2>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <td>Naam</td>
+            <td>@Html.TextBox("name", "Programeren", new { @class = "form-control" })</td>
+        </tr>
+        <tr>
+            <td>Omschrijving</td>
+            <td>@Html.TextBox("oms", "Ongeldige Text", new { @class = "form-control" })</td>
+        </tr>
+    </table>
+
+    <div class="form-group">
+        <div class="container">
+            <p>
+
+                @Html.Label("Modulen Toevoegen", new { @class = "control-label" })
+            </p>
+            <div id="ValidationMesMod" class="alert alert-danger hidden">
+                Minstens een Module verplicht
             </div>
-            <div id="collapseOne2" class="panel-collapse collapse open">
-                <div class="panel-body">
-                    <img src='@Url.Content("http://i.imgur.com/GgExviL.png")' alt="Image" />
-                </div>
+            <br /><br />
+            <table class="table table-bordered table-striped table-responsive" id="ModTable">
+                <thead>
+                    <tr>
+                        <th width="20%">Vakcode</th>
+                        <th width="50%">Omschrijving</th>
+                        <th>Verwijderen</th>
+                    </tr>
+                </thead>
+
+                <tr>
+                    <td>Project-05</td>
+                    <td>Project Waterval</td>
+
+                    <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+                </tr>
+
+            </table>
+            <input type="button" value="Module Toevoegen" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseMod">
+
+            <br />
+            <br />
+            <div id="collapseMod" class="panel-collapse collapse open">
+
+                <input type="text" class="form-control" placeholder="Module..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTable')" style:size="10" />
+
+
+                <table class="table table-bordered table-striped" id="ModTable">
+                    <thead>
+                        <tr>
+                            <th>Vakcode</th>
+                            <th>Omschrijving</th>
+                            <th>Toevoegen</th>
+                        </tr>
+
+                    </thead>
+
+                    <tr>
+                        <td id="1">Pr-01</td>
+                        <td id="2">Programeren 1</td>
+                        <td><input type="button" value="Toevoegen" name="addMod" class="btn btn-avans" id="1"></td>
+                    </tr>
+                    <tr>
+                        <td>DB-01</td>
+                        <td>Database 1</td>
+                        <td><input type="button" value="Toevoegen" name="addMod" class="btn btn-avans"></td>
+                    </tr>
+
+                </table>
             </div>
-        </div>
+        
+
+        <p>
+            @Html.ActionLink("Leerlijn aanpassen", "Index", null, new { @class = "btn btn-success" })
+            |
+            @Html.ActionLink("Terug naar Index", "Index")
+        </p>
     </div>
-
-
-    @for (int i = 1; i <= 8; i++)
-    {
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle"><span class="btn btn-avans">
-                            Blok @i aanpassen
-                        </span></a>
-                    </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse open">
-                    <div class="panel-body">
-
-
-                        @if (i == 1)
-                        {
-
-                            <img src='@Url.Content("http://i.imgur.com/afoOmKF.png")' height="30" alt="Image" />
-
-                            <table class="table-bordered table-striped">
-                                <tr>
-                                    <th>Vakcode</th>
-                                    <th>Module Omschrijving</th>
-                                    <th>Thema's</th>
-                                    <th>Compententies</th>
-                                    <th>EC</th>
-                                    <th>Inzien</th>
-                                    <th>Verwijderen</th>
-                                </tr>
-
-                                <tr>
-                                    <td>12-Prog1</td>
-                                    <td>Basis Programeren</td>
-                                    <td>Java, Programeren, Basis</td>
-                                    <td>Kennis</td>
-                                    <td>4</td>
-                                    <td>@Html.ActionLink("Inzien", "Show Detail", null, new { @class = "btn btn-avans" })</td>
-                                    <td>
-                                        @Html.ActionLink("Verwijderen", "Show Detail", null, new { @class = "btn btn-danger" })
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>12-DB1</td>
-                                    <td>Basis Databse maken</td>
-                                    <td>Database, Basis</td>
-                                    <td>Kennis</td>
-                                    <td>2</td>
-                                    <td>@Html.ActionLink("Inzien", "Show Detail", null, new { @class = "btn btn-avans" })</td>
-                                    <td>
-                                        @Html.ActionLink("Verwijderen", "Show Detail", null, new { @class = "btn btn-danger" })
-                                    </td>
-                                </tr>
-
-
-
-                            </table>
-
-                            @Html.ActionLink("Modulen Toevoegen", "Show Detail", null, new { @class = "btn btn-avans" })
-                            @Html.ActionLink("Blok " + @i + " Verwijderen ", "Show Detail", null, new { @class = "btn btn-danger" })
-                        }
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-
-    <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
-                <h5 class="panel-title">
-                    <a class="accordion-toggle "><span class="btn btn-avans">
-                        Minor: Everywhere
-                    </span></a>
-                </h5>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse open">
-                <div class="panel-body">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
-                <h5 class="panel-title">
-                    <a class="accordion-toggle"><span class="btn btn-avans">
-                        Minor: Eigen keuze
-                    </span></a>
-                </h5>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse open">
-                <div class="panel-body">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
-                <h5 class="panel-title">
-                    <a class="accordion-toggle"><span class="btn btn-avans">
-                        Stage
-                    </span></a>
-                </h5>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse open">
-                <div class="panel-body">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
-                <h5 class="panel-title">
-                    <a class="accordion-toggle"><span class="btn btn-avans">
-                        Afstuderen
-                    </span></a>
-                </h5>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse open">
-                <div class="panel-body">
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <p>
-        @Html.ActionLink("Leerlijn Aanpassen", "Index", null, new { @class = "btn btn-success" })
-        |
-        @Html.ActionLink("Terug naar Index", "Index")
-    </p>
-
-
-
-</div>
