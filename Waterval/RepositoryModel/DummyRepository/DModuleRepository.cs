@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DomainModel.Models;
+using RepositoryModel.IRepository;
 
 
 namespace RepositoryModel.DummyRepository
@@ -14,7 +15,7 @@ namespace RepositoryModel.DummyRepository
         {
             List<Module> fakeModule = new List<Module>()
             {
-                new Module{ Module_ID = 1, Title = "Dummy Module 1", Course_Code = "ef", EC = 2, Method = "ef", Entry_Level = "ef", Workload = 2, GradeType = "ef"
+                new Module{ Module_ID = 1, Title = "Dummy Module 1", Course_Code = "ef", EC = ""+2, Method = "ef", Entry_Level = "ef", Workload = 2, GradeType = "ef"
                     , Organization = "avans", Definition_Short = "w", Definition_Long = "wfewfe", Foreknowledge = "esf", ModuleYear_ID = 2,
                     isDeleted = false, DeleteDate=DateTime.Now},
      
