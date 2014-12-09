@@ -1,4 +1,5 @@
-﻿<div class="panel-group" id="accordionSearch">
+﻿@model Tuple<DomainModel.Models.LearnLine, DomainModel.Models.Theme, DomainModel.Models.Competence>
+<div class="panel-group" id="accordionSearch">
     <div class="panel panel-default">
         <div class="panel-heading" data-toggle="collapse" data-parent="#accordionSearch" data-target="#collapsSearch">
             <h4 class="panel-title">
@@ -16,12 +17,11 @@
                         <td>
                             <select class="form-control">
                                 <option class="dropdown-header">Leerlijn</option>
-                                <option>BI</option>
-                                <option>SO</option>
-                                <option>CMD</option>
+                                @foreach (DomainModel.Models.LearnLine item in @Model.Item1) {
+                                    <option>@item.Title</option>
+                                }
 
                             </select>
-
                         </td>
                         <td>
                             <select class="form-control">
@@ -29,7 +29,6 @@
                                 <option>Big Data</option>
                                 <option>Onderzoek</option>
                                 <option>Programeren</option>
-
                             </select>
                         </td>
                         <td>
@@ -38,16 +37,13 @@
                                 <option>Vergaderen</option>
                                 <option>Programeren</option>
                                 <option>Business</option>
-
                             </select>
                         </td>
                         <td><input type="text" class="form-control" placeholder="Search..." width="75"></td>
-                  
                         <td><a class="btn btn-avans" id="scriptid"><span class="glyphicon glyphicon-search"></span>
                             </a>
                     </tr>
                 </table>
-
             </div>
         </div>
     </div>
