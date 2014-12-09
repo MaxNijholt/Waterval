@@ -6,7 +6,7 @@
 @Styles.Render("~/Content/css")
 <h2>Blok aanmaken</h2>
 
-@using (Html.BeginForm("Create", "Blok", new { ReturnUrl = ViewBag.ReturnUrl },
+@using (Html.BeginForm("Create", "Block", new { ReturnUrl = ViewBag.ReturnUrl },
             FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
 {
     @Html.ValidationSummary(true)

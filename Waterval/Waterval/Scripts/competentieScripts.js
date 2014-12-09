@@ -21,6 +21,26 @@ $('input[name="addGoal"] ').click(function () {
         fillDefinition();
     }
 });
+
+$('input[name="addMod"] ').click(function () {
+ //   var fieldvalue = $('[id=TempValue]').val();
+    var id = $(this).attr('id');
+    alert(id);
+   alert($("#TableMod #" + id))
+//    var r = $("#TableMod #"+id)();
+  //  alert(r);
+
+
+ /*   if (fieldvalue) {
+        var inputfield = '<tr><td><input type="text" class="form-control" id="field_description" value="' + fieldvalue + '"/></td>';
+        var buttonDelete = '<td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger"/></td></tr>';
+        $('#ModTable').append(inputfield + buttonDelete);
+        $('[name=TempValue]').val(null);*/
+    
+//    }
+});
+
+
 //This function will add data to the table at a selected place
 //if the value from the data is empty or the index of the select is 0 then it will not be done.
 //Else we will make a variabele filled with the information of the input field,

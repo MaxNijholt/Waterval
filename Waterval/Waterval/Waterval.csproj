@@ -195,6 +195,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\competentieScripts.js" />
+    <Content Include="Scripts\Filter.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -236,10 +238,10 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Leerlijn\Edit.cshtml" />
-    <Content Include="Views\Leerlijn\Details.cshtml" />
-    <Content Include="Views\Leerlijn\Index.cshtml" />
-    <Content Include="Views\Leerlijn\Create.cshtml" />
+    <Content Include="Views\Leerlijn\OLD\Edit.cshtml" />
+    <Content Include="Views\Leerlijn\OLD\Details.cshtml" />
+    <Content Include="Views\Leerlijn\OLD\Index.cshtml" />
+    <Content Include="Views\Leerlijn\OLD\Create.cshtml" />
     <Content Include="Views\Module\Create.cshtml" />
     <Content Include="Views\Module\Index.cshtml" />
     <Content Include="Views\Module\Details.cshtml" />
@@ -251,20 +253,21 @@
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Module\Edit.cshtml" />
     <Content Include="Views\Shared\_Alert.cshtml" />
-    <Content Include="Views\Block\0v1hm3op.viq" />
-    <Content Include="Views\Block\chnz3qth.lsn" />
     <Content Include="Views\Block\Create.cshtml" />
     <Content Include="Views\Block\Delete.cshtml" />
     <Content Include="Views\Block\Details.cshtml" />
     <Content Include="Views\Block\Edit.cshtml" />
     <Content Include="Views\Block\Index.cshtml" />
-    <Content Include="Views\Block\p0hd5fkv.ioa" />
     <Content Include="Views\Block\_CreateOrEdit.cshtml" />
     <Content Include="Views\Competence\Create.cshtml" />
     <Content Include="Views\Competence\Details.cshtml" />
     <Content Include="Views\Competence\Edit.cshtml" />
     <Content Include="Views\Competence\Index.cshtml" />
     <Content Include="Views\Competence\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Leerlijn\Create.cshtml" />
+    <Content Include="Views\Leerlijn\Details.cshtml" />
+    <Content Include="Views\Leerlijn\Edit.cshtml" />
+    <Content Include="Views\Leerlijn\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
