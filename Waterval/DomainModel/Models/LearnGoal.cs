@@ -14,9 +14,15 @@ namespace DomainModel.Models
     
     public partial class LearnGoal
     {
-        public int Module_ID { get; set; }
+        public LearnGoal()
+        {
+            this.Module = new HashSet<Module>();
+        }
+    
+        public int LearnGoal_ID { get; set; }
+        public Nullable<int> PrevLearnGoal_ID { get; set; }
         public string Description { get; set; }
     
-        public virtual Module Module { get; set; }
+        public virtual ICollection<Module> Module { get; set; }
     }
 }

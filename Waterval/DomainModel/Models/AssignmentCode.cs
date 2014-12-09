@@ -12,10 +12,13 @@ namespace DomainModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ExamCode
+    public partial class AssignmentCode
     {
+        public int AssignmentCode_ID { get; set; }
+        public int EC { get; set; }
+        public string Description { get; set; }
         public int Module_ID { get; set; }
-        public string Exam_Code { get; set; }
+        public Nullable<int> PrevModule_ID { get; set; }
     
         public virtual Module Module { get; set; }
     }

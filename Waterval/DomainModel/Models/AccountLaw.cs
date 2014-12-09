@@ -12,18 +12,16 @@ namespace DomainModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Program
+    public partial class AccountLaw
     {
-        public Program()
+        public AccountLaw()
         {
-            this.Module = new HashSet<Module>();
+            this.AccountRole = new HashSet<AccountRole>();
         }
     
-        public int Program_ID { get; set; }
-        public string Cohort { get; set; }
-        public bool isDeleted { get; set; }
-        public Nullable<System.DateTime> DeleteDate { get; set; }
+        public int Law_ID { get; set; }
+        public string LawName { get; set; }
     
-        public virtual ICollection<Module> Module { get; set; }
+        public virtual ICollection<AccountRole> AccountRole { get; set; }
     }
 }

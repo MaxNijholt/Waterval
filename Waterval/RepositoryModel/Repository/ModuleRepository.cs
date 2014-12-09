@@ -39,14 +39,14 @@ namespace RepositoryModel.Repository
         {
             Module module = dbContext.Module.SingleOrDefault(b => b.Module_ID == update.Module_ID);
             if (module == null) return null;
-            module.Title = update.Title;
+            module.Title = update.Title;/*
             module.Course_Code = update.Course_Code;
             module.EC = update.EC;
             module.Method = update.Method;
             module.Entry_Level = update.Entry_Level;
             module.Workload = update.Workload;
             module.GradeType = update.GradeType;
-            module.Organization = update.Organization;
+            module.Organization = update.Organization;*/
             module.Definition_Short = update.Definition_Short;
             module.Definition_Long = update.Definition_Long;
             module.Foreknowledge = update.Foreknowledge;

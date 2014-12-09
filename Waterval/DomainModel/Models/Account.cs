@@ -14,10 +14,18 @@ namespace DomainModel.Models
     
     public partial class Account
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public Account()
+        {
+            this.Module = new HashSet<Module>();
+            this.AccountRole = new HashSet<AccountRole>();
+        }
+    
+        public int Account_ID { get; set; }
+        public string Email { get; set; }
         public bool isSuperUser { get; set; }
-        public bool isDeleted { get; set; }
-        public string Salt { get; set; }
+        public bool isActive { get; set; }
+    
+        public virtual ICollection<Module> Module { get; set; }
+        public virtual ICollection<AccountRole> AccountRole { get; set; }
     }
 }

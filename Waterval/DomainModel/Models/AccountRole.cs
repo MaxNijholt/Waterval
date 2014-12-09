@@ -12,16 +12,19 @@ namespace DomainModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Activity
+    public partial class AccountRole
     {
-        public Activity()
+        public AccountRole()
         {
-            this.ModelActivity = new HashSet<ModelActivity>();
+            this.Account = new HashSet<Account>();
         }
     
-        public int Activity_ID { get; set; }
-        public string Description { get; set; }
+        public int Role_ID { get; set; }
+        public string RoleName { get; set; }
+        public string RoleDescription { get; set; }
+        public int Law_ID { get; set; }
     
-        public virtual ICollection<ModelActivity> ModelActivity { get; set; }
+        public virtual AccountLaw AccountLaw { get; set; }
+        public virtual ICollection<Account> Account { get; set; }
     }
 }

@@ -11,29 +11,22 @@ namespace DomainModel.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Competence
     {
         public Competence()
         {
             this.Level = new HashSet<Level>();
-            this.Module = new HashSet<Module>();
         }
-
-        [Key]
+    
         public int Competence_ID { get; set; }
-        [Required(ErrorMessage = "Titel mag niet leeg zijn")]
-
+        public Nullable<int> PrevCompetence_ID { get; set; }
         public string Title { get; set; }
-        [Required(ErrorMessage = "Omschrijving Kort mag niet leeg zijn")]
         public string Definition_Short { get; set; }
-        [Required(ErrorMessage = "Omschrijving Lang heeft doelen nodig")]
         public string Definition_Long { get; set; }
         public bool isDeleted { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
-
+    
         public virtual ICollection<Level> Level { get; set; }
-        public virtual ICollection<Module> Module { get; set; }
     }
 }

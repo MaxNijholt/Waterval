@@ -12,18 +12,17 @@ namespace DomainModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Program
+    public partial class Workform
     {
-        public Program()
+        public Workform()
         {
-            this.Module = new HashSet<Module>();
+            this.ModelWithWorkform = new HashSet<ModelWithWorkform>();
         }
     
-        public int Program_ID { get; set; }
-        public string Cohort { get; set; }
-        public bool isDeleted { get; set; }
-        public Nullable<System.DateTime> DeleteDate { get; set; }
+        public int Workform_ID { get; set; }
+        public string Description { get; set; }
+        public Nullable<int> PrevWorkform_ID { get; set; }
     
-        public virtual ICollection<Module> Module { get; set; }
+        public virtual ICollection<ModelWithWorkform> ModelWithWorkform { get; set; }
     }
 }

@@ -16,16 +16,16 @@ namespace DomainModel.Models
     {
         public Phasing()
         {
-            this.LearnCourse = new HashSet<LearnCourse>();
+            this.Block = new HashSet<Block>();
+            this.Study = new HashSet<Study>();
         }
     
         public int Phasing_ID { get; set; }
         public string Title { get; set; }
         public bool isDeleted { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
-        public int Block_ID { get; set; }
     
-        public virtual Block Block { get; set; }
-        public virtual ICollection<LearnCourse> LearnCourse { get; set; }
+        public virtual ICollection<Block> Block { get; set; }
+        public virtual ICollection<Study> Study { get; set; }
     }
 }

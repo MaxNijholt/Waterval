@@ -15,6 +15,7 @@ namespace DomainModel.Models
     public partial class WeekSchedule
     {
         public int Module_ID { get; set; }
+        public Nullable<int> PrevModule_ID { get; set; }
         public int WeekNr { get; set; }
         public string Description { get; set; }
     

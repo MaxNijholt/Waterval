@@ -12,14 +12,19 @@ namespace DomainModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ModuleHistory
+    public partial class LearnLine
     {
-        public ModuleHistory()
+        public LearnLine()
         {
             this.Module = new HashSet<Module>();
         }
     
-        public int ModuleYear_ID { get; set; }
+        public int LearnLine_ID { get; set; }
+        public Nullable<int> PrevLearnLine_ID { get; set; }
+        public string Title { get; set; }
+        public string Definition { get; set; }
+        public bool isDeleted { get; set; }
+        public Nullable<System.DateTime> DeleteDate { get; set; }
     
         public virtual ICollection<Module> Module { get; set; }
     }

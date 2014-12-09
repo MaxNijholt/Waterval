@@ -16,43 +16,40 @@ namespace DomainModel.Models
     {
         public Module()
         {
+            this.AssignmentCode = new HashSet<AssignmentCode>();
             this.Level = new HashSet<Level>();
-            this.ModelActivity = new HashSet<ModelActivity>();
+            this.ModelWithWorkform = new HashSet<ModelWithWorkform>();
             this.Program = new HashSet<Program>();
-            this.Theme1 = new HashSet<Theme>();
+            this.Study = new HashSet<Study>();
+            this.LearnGoal = new HashSet<LearnGoal>();
+            this.LearningTool = new HashSet<LearningTool>();
+            this.LearnLine = new HashSet<LearnLine>();
+            this.Theme = new HashSet<Theme>();
         }
     
         public int Module_ID { get; set; }
+        public Nullable<int> PrevModule_ID { get; set; }
         public string Title { get; set; }
-        public string Course_Code { get; set; }
-        public string EC { get; set; }
-        public string Method { get; set; }
+        public int CourseCode { get; set; }
         public string Entry_Level { get; set; }
-        public int Workload { get; set; }
-        public string GradeType { get; set; }
-        public string Organization { get; set; }
         public string Definition_Short { get; set; }
         public string Definition_Long { get; set; }
         public string Foreknowledge { get; set; }
-        public int Competence_ID { get; set; }
-        public int Theme_ID { get; set; }
-        public int LearnCourse_ID { get; set; }
-        public int ModuleYear_ID { get; set; }
         public bool isDeleted { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
+        public int Account_ID { get; set; }
     
-        public virtual Competence Competence { get; set; }
-        public virtual ExamCode ExamCode { get; set; }
-        public virtual GradeType GradeType1 { get; set; }
-        public virtual LearnCourse LearnCourse { get; set; }
-        public virtual LearnGoal LearnGoal { get; set; }
-        public virtual LearningTool LearningTool { get; set; }
+        public virtual Account Account { get; set; }
+        public virtual ICollection<AssignmentCode> AssignmentCode { get; set; }
+        public virtual GradeType GradeType { get; set; }
         public virtual ICollection<Level> Level { get; set; }
-        public virtual ICollection<ModelActivity> ModelActivity { get; set; }
+        public virtual ICollection<ModelWithWorkform> ModelWithWorkform { get; set; }
         public virtual WeekSchedule WeekSchedule { get; set; }
-        public virtual ModuleHistory ModuleHistory { get; set; }
-        public virtual Theme Theme { get; set; }
         public virtual ICollection<Program> Program { get; set; }
-        public virtual ICollection<Theme> Theme1 { get; set; }
+        public virtual ICollection<Study> Study { get; set; }
+        public virtual ICollection<LearnGoal> LearnGoal { get; set; }
+        public virtual ICollection<LearningTool> LearningTool { get; set; }
+        public virtual ICollection<LearnLine> LearnLine { get; set; }
+        public virtual ICollection<Theme> Theme { get; set; }
     }
 }

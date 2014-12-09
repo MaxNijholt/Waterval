@@ -12,7 +12,7 @@ namespace RepositoryModel.DummyRepository
     public class DModuleRepository : IModuleRepository
     {
         public List<DomainModel.Models.Module> GetAll()
-        {
+        {/*
             List<Module> fakeModule = new List<Module>()
             {
                 new Module{ Module_ID = 1, Title = "Dummy Module 1", Course_Code = "ef", EC = ""+2, Method = "ef", Entry_Level = "ef", Workload = 2, GradeType = "ef"
@@ -20,7 +20,8 @@ namespace RepositoryModel.DummyRepository
                     isDeleted = false, DeleteDate=DateTime.Now},
      
             };
-            return fakeModule;
+            return fakeModule;*/
+            return null;
 
         }
 
