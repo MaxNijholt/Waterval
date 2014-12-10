@@ -1,4 +1,5 @@
-﻿<div class="panel-group" id="accordionSearch">
+﻿@model Tuple<IEnumerable<DomainModel.Models.LearnLine>, IEnumerable<DomainModel.Models.Theme>, IEnumerable<DomainModel.Models.Competence>>
+<div class="panel-group" id="accordionSearch">
     <div class="panel panel-default">
         <div class="panel-heading" data-toggle="collapse" data-parent="#accordionSearch" data-target="#collapsSearch">
             <h4 class="panel-title">
@@ -16,9 +17,7 @@
                         <td>
                             <select class="form-control">
                                 <option class="dropdown-header">Leerlijn</option>
-                                <option>BI</option>
-                                <option>SO</option>
-                                <option>CMD</option>
+                                
 
                             </select>
 
