@@ -29,7 +29,8 @@
                     <td>@item.Definition_Short</td>
                     <td>@Html.ActionLink("Open Modules", "Index", "Module", new { id = item.Competence_ID }, new { @class = "btn btn-avans" })</td>
                     <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Competence_ID }, new { @class = "btn btn-warning" })</td>
-                    <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Competence_ID" class="btn btn-avans"></td>
+                    <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Competence_ID" class="btn btn-danger"></td>
+                    <td>@Html.ActionLink("Nieuwe versie", "toNewCohort", new { id = item.Competence_ID }, new { @class = "btn btn-avans" })</td>
                 </tr>   }
 
 

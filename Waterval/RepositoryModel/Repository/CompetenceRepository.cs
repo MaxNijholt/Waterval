@@ -14,20 +14,21 @@ namespace RepositoryModel.Repository
 
         public CompetenceRepository()
         {
-            dbContext = new DomainModel.Models.Project_WatervalEntities();
+            dbContext = new Project_WatervalEntities();
         }
-        public List<DomainModel.Models.Competence> GetAll()
+        public List<Competence> GetAll()
         {
-            return dbContext.Competence.Where(b => b.isDeleted == false).ToList();
+            return dbContext.Competence.ToList();
         }
 
-        public DomainModel.Models.Competence Get(int compentence_id)
+        public Competence Get(int compentence_id)
         {
             return dbContext.Competence.Find(compentence_id);
         }
 
-        public DomainModel.Models.Competence Create(DomainModel.Models.Competence compentence)
+        public Competence Create(Competence compentence)
         {
+
             dbContext.Competence.Add(compentence);
             dbContext.SaveChanges();
             return compentence;
@@ -41,7 +42,7 @@ namespace RepositoryModel.Repository
             dbContext.SaveChanges();
         }
 
-        public DomainModel.Models.Competence Update(DomainModel.Models.Competence update)
+        public Competence Update(Competence update)
         {
             Competence competence = dbContext.Competence.SingleOrDefault(b => b.Competence_ID == update.Competence_ID);
             if (competence == null) return null;
@@ -51,6 +52,38 @@ namespace RepositoryModel.Repository
             competence.Title = update.Title;
             dbContext.SaveChanges();
             return competence;
+        }
+
+        public Competence GetNewVersion(int id)
+        {
+            Competence newComp = dbContext.Competence.Where(c => c.PrevCompetence_ID == id).SingleOrDefault();
+            return newComp;
+        }
+
+        public void CompentenceAndModules(int id, int modid, string level)
+        {
+
+            if (dbContext.Level.Any(l => l.Module_ID == modid && l.Competence_ID == id))
+                return;
+
+            Level model = new Level();
+            model.Competence_ID = id;
+            model.Module_ID = modid;
+            model.Level1 = level;
+            dbContext.Level.Add(model);
+            dbContext.SaveChanges();
+        }
+
+        public int GetLatest()
+        {
+            return dbContext.Competence.Last().Competence_ID;
+        }
+
+        public void CompentenceAndModulesDelete(int compid)
+        {
+            var itemsToDelete = dbContext.Level.Where(x => x.Competence_ID == compid);
+            dbContext.Level.RemoveRange(itemsToDelete);
+            dbContext.SaveChanges();
         }
     }
 }

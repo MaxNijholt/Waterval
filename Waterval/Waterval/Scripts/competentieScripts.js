@@ -3,6 +3,7 @@
 $(document).ready(function () {
     $("#ValidationMes").hide();
     fillDefinition();
+    fillMod();
 });
 
 //This function will add data to the table
@@ -22,22 +23,86 @@ $('input[name="addGoal"] ').click(function () {
     }
 });
 
-$('input[name="addMod"] ').click(function () {
- //   var fieldvalue = $('[id=TempValue]').val();
-    var id = $(this).attr('id');
-    alert(id);
-   alert($("#TableMod #" + id))
-//    var r = $("#TableMod #"+id)();
-  //  alert(r);
+$(document).on('click', '#btn_addMod', function () {
+    var id = $(this).attr('data-id');
 
 
- /*   if (fieldvalue) {
-        var inputfield = '<tr><td><input type="text" class="form-control" id="field_description" value="' + fieldvalue + '"/></td>';
-        var buttonDelete = '<td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger"/></td></tr>';
-        $('#ModTable').append(inputfield + buttonDelete);
-        $('[name=TempValue]').val(null);*/
-    
-//    }
+    var tablevalue = [];
+
+
+    $("#TableMod tr").each(function () {
+        if ($(this).closest('tr').attr('id') == id) {
+            var trdingm = $(this).closest('tr');
+
+            $(trdingm).children("td").each(function () {
+                tablevalue.push($(this).html());
+            })
+            return false;
+        }
+    })
+    var coursecode = '<tr id="' + id + '"><td>' + tablevalue[0] + '</td>';
+    var coursetitle = '<td>' + tablevalue[1] + '</td>';
+    var coursedefi = '<td>' + tablevalue[2] + '</td>';
+    var inputfield = '<td><input type="number" class="form-control" id="level" name="Level' + id + '" value="0" /></td>'
+    var buttonDelete = '<td><input type="button" value="Verwijderen" id="btn_deleteMod" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
+
+    $('#ModTable').append(coursecode + coursetitle + coursedefi + inputfield + buttonDelete);
+    $(this).closest('tr').remove();
+
+    fillMod();
+});
+
+function fillMod() {
+    $("#ModulesTogether").val(null);
+
+    var temp = []
+    $("#ModTable tr").each(function () {
+
+        if ($(this).attr('id') != null) {
+            temp.push($(this).attr('id'))
+        }
+    });
+
+    var tValue = temp.join('-');
+
+    $('[name=ModulesTogether]').val(tValue);
+   
+}
+
+//This code gets called whenever one of the delete functions gets pressed.
+//We will get a confirm dialog and choosing yes will remove the data and clean up the table.
+//After that fillDefinition gets called to fill the selectbox and the Definition_long
+$(document).on('click', '#btn_deleteMod', function () {
+    if (confirm('Deze gegevens verwijderen?')) {
+
+        var id = $(this).attr('data-id');
+
+
+        var tablevalue = [];
+
+
+        $("#ModTable tr").each(function () {
+
+            if ($(this).closest('tr').attr('id') == id) {
+                var trdingm = $(this).closest('tr');
+
+                $(trdingm).children("td").each(function () {
+                    tablevalue.push($(this).html());
+                })
+                return false;
+            }
+        })
+
+        var coursecode = '<tr id="' + id + '"><td>' + tablevalue[0] + '</td>';
+        var coursetitle = '<td>' + tablevalue[1] + '</td>';
+        var coursedefi = '<td>' + tablevalue[2] + '</td>';
+        var buttonAdd = '<td><input type="button" value="Toevoegen" data-id="' + id + '" id="btn_addMod" class="btn btn-avans"/></td></tr>';
+
+        $('#TableMod').append(coursecode + coursetitle + coursedefi + buttonAdd);
+
+
+        $(this).closest('tr').remove(); fillMod();
+    }
 });
 
 
@@ -54,7 +119,7 @@ $('input[name="addGoalBetween"] ').click(function () {
     if (fieldvalue && index > 0) {
         var inputfield = '<tr><td><input type="text" class="form-control" id="field_description" value="' + fieldvalue + '"/></td>';
         var buttonDelete = '<td><input type="button" value="Verwijderen" id="btn_delete"  class="btn btn-danger"/></td></tr>';
-        $('#LongTable > tbody > tr').eq(index-1).after(inputfield + buttonDelete);
+        $('#LongTable > tbody > tr').eq(index - 1).after(inputfield + buttonDelete);
         $('[name=TempValue]').val(null);
 
         fillDefinition();
@@ -113,15 +178,13 @@ $('input[name="btn_collapseGoal"] ').click(function () {
 );
 
 $('input[name="btn_Save"] ').click(function () {
-    if (!$('[id=long]').val())
-    {
+    if (!$('[id=long]').val()) {
         $("#ValidationMes").show();
+        return;
     }
-    else
-    {
+    else {
         $("#ValidationMes").hide();
     }
 
-        
 }
 );
