@@ -12,29 +12,33 @@ namespace Waterval.Controllers
 {
     public class OAuthController : Controller
     {
-        // GET: OAuth
-        private static RestClient client;
-        public const string consumerKey = "ac5baf7568250a03d1e8256b14eee24086fefef0";
-        public const string consumerSecret = "992b60477da323868197dcbcb9f8526eb6c8405b";
-        public static string requestSecret;
+        // Constants
+        private static string           CONSUMER_KEY     = "ac5baf7568250a03d1e8256b14eee24086fefef0";
+        private static string           CONSUMER_SECRET  = "992b60477da323868197dcbcb9f8526eb6c8405b";
+
+        public static string            ACCESS_TOKEN;
+        public static string            ACCESS_SECRET;
+
+        // Fields
+        public static RestClient        client;
+        private static string           requestSecret;
+
         public ActionResult Index()
         {
-
-            // request token
             client = new RestClient
             {
                 BaseUrl = new Uri("https://publicapi.avans.nl/oauth/"),
-                Authenticator = OAuth1Authenticator.ForRequestToken(consumerKey, consumerSecret, "http://localhost:1063/OAuth/OAuth")
+                Authenticator = OAuth1Authenticator.ForRequestToken(CONSUMER_KEY, CONSUMER_SECRET, "http://localhost:1063/OAuth/OAuth")
             };
-            var requestTokenRequest = new RestRequest("request_token");
-            var requestTokenResponse = client.Execute(requestTokenRequest);
+            var requestTokenRequest             = new RestRequest("request_token");
+            var requestTokenResponse            = client.Execute(requestTokenRequest);
 
-            var requestTokenResponseParameters = HttpUtility.ParseQueryString(requestTokenResponse.Content);
-            var requestToken = requestTokenResponseParameters["oauth_token"];
-            requestSecret = requestTokenResponseParameters["oauth_token_secret"];
+            var requestTokenResponseParameters  = HttpUtility.ParseQueryString(requestTokenResponse.Content);
+            var requestToken                    = requestTokenResponseParameters["oauth_token"];
+            requestSecret                       = requestTokenResponseParameters["oauth_token_secret"];
 
-            // redirect user
-            requestTokenRequest = new RestRequest("saml.php?oauth_token=" + requestToken);
+            // Redirect the user
+            requestTokenRequest                 = new RestRequest("saml.php?oauth_token=" + requestToken);
 
             var redirectUri = client.BuildUri(requestTokenRequest);
             return Redirect(redirectUri.ToString());
@@ -42,29 +46,35 @@ namespace Waterval.Controllers
 
         public ActionResult OAuth(string oauth_token, string oauth_verifier)
         {
-            client.Authenticator = OAuth1Authenticator.ForAccessToken(
-                consumerKey, consumerSecret, oauth_token, requestSecret, oauth_verifier);
+            client.Authenticator = OAuth1Authenticator.ForAccessToken(CONSUMER_KEY, CONSUMER_SECRET, oauth_token, requestSecret, oauth_verifier);
 
-            var requestAccessTokenRequest = new RestRequest("access_token");
-            var requestActionTokenResponse = client.Execute(requestAccessTokenRequest);
+            var requestAccessTokenRequest       = new RestRequest("access_token");
+            var requestActionTokenResponse      = client.Execute(requestAccessTokenRequest);
 
-            var requestActionTokenResponseParameters = HttpUtility.ParseQueryString(requestActionTokenResponse.Content);
-            var accessToken = requestActionTokenResponseParameters["oauth_token"];
-            var accessSecret = requestActionTokenResponseParameters["oauth_token_secret"];
+            var response                        = HttpUtility.ParseQueryString(requestActionTokenResponse.Content);
+            ACCESS_TOKEN                        = response["oauth_token"];
+            ACCESS_SECRET                       = response["oauth_token_secret"];
 
-            client.Authenticator = OAuth1Authenticator.ForProtectedResource(consumerKey, consumerSecret, accessToken, accessSecret);
+            client.Authenticator                = OAuth1Authenticator.ForProtectedResource(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET);
             
-            var link = new RestRequest("/people/@me");
-            var linkResponse = client.Execute(link);
+            var link                            = new RestRequest("/people/@me");
+            var linkResponse                    = client.Execute(link);
 
+            // Putting the response into a JSON Object
             JObject obj = JObject.Parse(linkResponse.Content);
 
             string employee = obj["employee"].ToString();
-            string student = obj["student"].ToString();
+            string student  = obj["student"].ToString();
             string nickname = obj["nickname"].ToString();
-            string email = obj["emails"].ToString();
+            string email    = obj["emails"].ToString();
 
-            return Content("Naam : " + nickname + " -- " + "isStudent : " + student + " -- " + "isEmployee : " + employee + " -- Email : " + email);
+            return RedirectToAction("Index", "Home");
+            //return Content(
+            //    "Naam : " + nickname + " -- " + 
+            //    "isStudent : " + student + " -- " + 
+            //    "isEmployee : " + employee + " --" + 
+            //    "Email : " + email
+            //);
         }
     }
 }
