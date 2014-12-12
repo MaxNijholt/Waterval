@@ -1,5 +1,4 @@
-﻿@model Tuple<DomainModel.Models.LearnLine, DomainModel.Models.Theme, DomainModel.Models.Competence>
-<div class="panel-group" id="accordionSearch">
+﻿<div class="panel-group" id="accordionSearch">
     <div class="panel panel-default">
         <div class="panel-heading" data-toggle="collapse" data-parent="#accordionSearch" data-target="#collapsSearch">
             <h4 class="panel-title">
@@ -14,34 +13,18 @@
             <div class="panel-body">
                 <table>
                     <tr>
-                        <td>
-                            <select class="form-control">
-                                <option class="dropdown-header">Leerlijn</option>
-                                @foreach (DomainModel.Models.LearnLine item in @Model.Item1) {
-                                    <option>@item.Title</option>
-                                }
-
-                            </select>
-                        </td>
-                        <td>
-                            <select class="form-control">
-                                <option class="dropdown-header">Thema</option>
-                                <option>Big Data</option>
-                                <option>Onderzoek</option>
-                                <option>Programeren</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select class="form-control">
-                                <option class="dropdown-header">Compententie</option>
-                                <option>Vergaderen</option>
-                                <option>Programeren</option>
-                                <option>Business</option>
-                            </select>
-                        </td>
+                        <td>Leerlijn</td>
+                        <td>Thema</td>
+                        <td>Competentie</td>
+                        <td>Zoekwoorden</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DropDownList("Leerlijn", (SelectList)@ViewBag.LearnLine, new {@class = "form-control"})</td>
+                        <td>@Html.DropDownList("Thema", (SelectList)@ViewBag.Theme, new {@class = "form-control"})</td>
+                        <td>@Html.DropDownList("Competentie", (SelectList)@ViewBag.Competence, new {@class = "form-control"})</td>
                         <td><input type="text" class="form-control" placeholder="Search..." width="75"></td>
-                        <td><a class="btn btn-avans" id="scriptid"><span class="glyphicon glyphicon-search"></span>
-                            </a>
+                        <td><a class="btn btn-avans" id="scriptid"><span class="glyphicon glyphicon-search"></span></a>
                     </tr>
                 </table>
             </div>
