@@ -23,10 +23,10 @@ namespace RepositoryModel.Repository {
 
 		public List<Competence> GetCompetencesWith ( String find ) {
 			List<Competence> notDeleted = dbContext.Competence.Where( b => b.isDeleted == false ).ToList( );
-			return (List<Competence>)( from val in notDeleted 
-									   where ( val.Definition_Long.Contains( "%" + find + "%" ) 
-										   || val.Definition_Short.Contains( "%" + find + "%" ) 
-										   || val.Title.Contains( "%" + find + "%" ) ) 
+			return (List<Competence>)( from val in notDeleted
+									   where ( val.Definition_Long.Contains( "%" + find + "%" )
+										   || val.Definition_Short.Contains( "%" + find + "%" )
+										   || val.Title.Contains( "%" + find + "%" ) )
 									   select val );
 		}
 
@@ -40,6 +40,24 @@ namespace RepositoryModel.Repository {
 								   || val.Foreknowledge.Contains( "%" + find + "%" )
 								   )
 								   select val );
+		}
+
+		public List<LearnLine> GetLearnLinesWith ( String find ) {
+			List<LearnLine> notDeleted = dbContext.LearnLine.Where( b => b.isDeleted == false ).ToList( );
+			return (List<LearnLine>)( from val in notDeleted
+									  where ( val.Title.Contains( "%" + find + "%" )
+									  || val.Definition.Contains( "%" + find + "%" )
+									  )
+									  select val );
+		}
+
+		public List<Theme> GetThemesWith ( String find ) {
+			List<Theme> notDeleted = dbContext.Theme.Where( b => b.isDeleted == false ).ToList( );
+			return (List<Theme>)( from val in notDeleted
+								  where ( val.Title.Contains( "%" + find + "%" )
+								  || val.Definition.Contains( "%" + find + "%" )
+								  )
+								  select val );
 		}
 	}
 }
