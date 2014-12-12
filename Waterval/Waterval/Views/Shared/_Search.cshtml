@@ -11,20 +11,51 @@
         </div>
         <div id="collapsSearch" class="panel-collapse collapse open">
             <div class="panel-body">
+                <div><h3 style="margin:0px;">Geavanceerd zoeken</h3><hr style="margin:10px;" /></div>
+                <div>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default">
+                            @Html.CheckBox("option1", new {@value = "checked"}) Module
+                        </label>
+                        <label class="btn btn-default">
+                            @Html.CheckBox("option2", new {@value = "checked"}) Leerlijn
+                        </label>
+                        <label class="btn btn-default">
+                            @Html.CheckBox("option3", new {@value = "checked"}) Blok
+                        </label>
+                        <label class="btn btn-default">
+                            @Html.CheckBox("option4", new {@value = "checked"}) Thema
+                        </label>
+                        <label class="btn btn-default">
+                            @Html.CheckBox("option5", new {@checked = "checked"}) Competentie
+                        </label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search..." width="75">
+                        <span class="input-group-btn">
+                            <button class="btn btn-avans" id="scriptid"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+               </div>
                 <table>
                     <tr>
                         <td>Leerlijn</td>
                         <td>Thema</td>
                         <td>Competentie</td>
-                        <td>Zoekwoorden</td>
-                        <td></td>
+                        <td>Zoek</td>
                     </tr>
                     <tr>
                         <td>@Html.DropDownList("Leerlijn", (SelectList)@ViewBag.LearnLine, new {@class = "form-control"})</td>
                         <td>@Html.DropDownList("Thema", (SelectList)@ViewBag.Theme, new {@class = "form-control"})</td>
                         <td>@Html.DropDownList("Competentie", (SelectList)@ViewBag.Competence, new {@class = "form-control"})</td>
-                        <td><input type="text" class="form-control" placeholder="Search..." width="75"></td>
-                        <td><a class="btn btn-avans" id="scriptid"><span class="glyphicon glyphicon-search"></span></a>
+                        <td>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search..." width="75">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-avans" id="scriptid"><span class="glyphicon glyphicon-search"></span></button>
+                                </span>
+                            </div>
+                        </td>
                     </tr>
                 </table>
             </div>
