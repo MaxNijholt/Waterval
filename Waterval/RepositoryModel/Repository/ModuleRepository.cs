@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using DomainModel.Models;
 using RepositoryModel.IRepository;
 
-namespace RepositoryModel.Repository
+namespace RepositoryModel
 {
     public class ModuleRepository : IModuleRepository
     {

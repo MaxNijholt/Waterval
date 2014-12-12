@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepositoryModel.Repository {
+namespace RepositoryModel {
 	class SearchRepository {
 
 		Project_WatervalEntities dbContext;
