@@ -51,7 +51,13 @@
     <Compile Include="Models\Account.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Activity.cs">
+    <Compile Include="Models\AccountLaw.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountRole.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssignmentCode.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Block.cs">
@@ -60,19 +66,16 @@
     <Compile Include="Models\Competence.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ExamCode.cs">
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\GradeType.cs">
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LearnCourse.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LearnGoal.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LearningTool.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LearnLine.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Level.cs">
@@ -93,19 +96,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelActivity.cs">
+    <Compile Include="Models\ModelWithWorkform.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Module.cs">
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ModuleHistory.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Phasing.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Program.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Study.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
@@ -115,6 +118,9 @@
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WeekSchedule.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Workform.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

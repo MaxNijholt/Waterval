@@ -1,0 +1,31 @@
+﻿@model IEnumerable<DomainModel.Models.Theme>
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+	<h2>Thema Overzicht</h2>
+	<input type="text" class="form-control" placeholder="filter thema's...">
+
+	<table class="table table-bordered table-striped">
+		<tr>
+			<th>Naam</th>
+			<th>Omschrijving</th>
+			<th>Aanpassen</th>
+			<th>Verwijderen</th>
+		</tr>
+		@foreach(var item in Model)
+		{
+			<tr>
+				<td>@Html.ActionLink(item.Title, "Details", new { id = item.Theme_ID })</td>
+				<td>@item.Definition</td>
+				<td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Theme_ID }, new { @class = "btn btn-warning" })</td>
+				<td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Theme_ID" class="btn btn-avans"></td>
+			</tr>
+		}
+	</table>
+
+	@Html.ActionLink("Nieuw Thema", "Create", null, new { @class = "btn btn-success" })
+</div>

@@ -14,12 +14,16 @@ namespace DomainModel.Models
     
     public partial class Program
     {
+        public Program()
+        {
+            this.Module = new HashSet<Module>();
+        }
+    
         public int Program_ID { get; set; }
         public string Cohort { get; set; }
-        public int Module_ID { get; set; }
         public bool isDeleted { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
     
-        public virtual Module Module { get; set; }
+        public virtual ICollection<Module> Module { get; set; }
     }
 }

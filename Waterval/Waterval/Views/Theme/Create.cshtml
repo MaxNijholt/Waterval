@@ -1,0 +1,24 @@
+﻿@model DomainModel.Models.Theme
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+	<h2>Thema Toevoegen</h2>
+
+	@using(Html.BeginForm("Create", "Theme", new { ReturnUrl = ViewBag.ReturnUrl },
+			FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+	{
+		@Html.ValidationSummary(true)
+		<fieldset>
+			<legend></legend>
+			@Html.Partial("_CreateOrEdit", null)
+			<p>
+				<input type="submit" value="Thema aanmaken" class="btn btn-success" /> |
+				@Html.ActionLink("Terug naar Index", "Index")
+			</p>
+		</fieldset>
+	}
+</div>

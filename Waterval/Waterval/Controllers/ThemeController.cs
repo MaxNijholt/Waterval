@@ -8,28 +8,29 @@ using System.Web.Mvc;
 
 namespace Waterval.Controllers
 {
-    public class ThemaController : Controller
-    {
+	public class ThemeController : Controller
+	{
 		private ThemeRepository themeRepository;
-		public ThemaController()
-        {
-            themeRepository = new ThemeRepository();
-        }
-        public ActionResult Index()
-        {
-            return View(themeRepository.GetAll());
-        }
+		public ThemeController()
+		{
+			themeRepository = new ThemeRepository();
+		}
+		public ActionResult Index()
+		{
+			return View(themeRepository.GetAll());
+		}
 
-        public ActionResult Details(int id)
-        {
-            return View(themeRepository.Get(id));
-        }
+		public ActionResult Details(int id)
+		{
+			Theme theme = themeRepository.Get(id);
+			return View(theme);
+		}
 
-        public ActionResult Create()
-        {
+		public ActionResult Create()
+		{
 			Theme theme = new Theme();
-            return View(theme);
-        }
+			return View(theme);
+		}
 		[HttpPost]
 		public ActionResult Create(Theme theme)
 		{
@@ -66,5 +67,11 @@ namespace Waterval.Controllers
 				return View(theme);
 			}
 		}
-    }
+
+		public ActionResult Delete(Theme theme)
+		{
+			themeRepository.Delete(theme.Theme_ID);
+			return View();
+		}
+	}
 }

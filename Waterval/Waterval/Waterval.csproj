@@ -166,7 +166,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeerlijnController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
-    <Compile Include="Controllers\ThemaController.cs" />
+    <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -243,10 +243,10 @@
     <Content Include="Views\Module\Create.cshtml" />
     <Content Include="Views\Module\Index.cshtml" />
     <Content Include="Views\Module\Details.cshtml" />
-    <Content Include="Views\Thema\Create.cshtml" />
-    <Content Include="Views\Thema\Details.cshtml" />
-    <Content Include="Views\Thema\Edit.cshtml" />
-    <Content Include="Views\Thema\Index.cshtml" />
+    <Content Include="Views\Theme\Create.cshtml" />
+    <Content Include="Views\Theme\Details.cshtml" />
+    <Content Include="Views\Theme\Edit.cshtml" />
+    <Content Include="Views\Theme\Index.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Module\Edit.cshtml" />
@@ -265,6 +265,7 @@
     <Content Include="Views\Competence\Edit.cshtml" />
     <Content Include="Views\Competence\Index.cshtml" />
     <Content Include="Views\Competence\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Theme\_CreateOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -309,7 +310,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1063</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

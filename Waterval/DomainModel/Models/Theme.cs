@@ -17,16 +17,15 @@ namespace DomainModel.Models
         public Theme()
         {
             this.Module = new HashSet<Module>();
-            this.Module1 = new HashSet<Module>();
         }
     
         public int Theme_ID { get; set; }
+        public Nullable<int> PrevTheme_ID { get; set; }
         public string Title { get; set; }
         public string Definition { get; set; }
         public bool isDeleted { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
     
         public virtual ICollection<Module> Module { get; set; }
-        public virtual ICollection<Module> Module1 { get; set; }
     }
 }
