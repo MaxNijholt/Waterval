@@ -17,14 +17,14 @@ namespace DomainModel.Models
         public AccountRole()
         {
             this.Account = new HashSet<Account>();
+            this.AccountLaw = new HashSet<AccountLaw>();
         }
     
         public int Role_ID { get; set; }
         public string RoleName { get; set; }
-        public string RoleDescription { get; set; }
-        public int Law_ID { get; set; }
+        public string Description { get; set; }
     
-        public virtual AccountLaw AccountLaw { get; set; }
         public virtual ICollection<Account> Account { get; set; }
+        public virtual ICollection<AccountLaw> AccountLaw { get; set; }
     }
 }

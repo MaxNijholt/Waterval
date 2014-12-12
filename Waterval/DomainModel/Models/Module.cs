@@ -30,14 +30,14 @@ namespace DomainModel.Models
         public int Module_ID { get; set; }
         public Nullable<int> PrevModule_ID { get; set; }
         public string Title { get; set; }
-        public int CourseCode { get; set; }
+        public string CourseCode { get; set; }
         public string Entry_Level { get; set; }
         public string Definition_Short { get; set; }
         public string Definition_Long { get; set; }
         public string Foreknowledge { get; set; }
         public bool isDeleted { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
-        public int Account_ID { get; set; }
+        public Nullable<int> Account_ID { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual ICollection<AssignmentCode> AssignmentCode { get; set; }
