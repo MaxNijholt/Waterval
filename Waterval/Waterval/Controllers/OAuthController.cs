@@ -19,6 +19,8 @@ namespace Waterval.Controllers
         public static string            ACCESS_TOKEN;
         public static string            ACCESS_SECRET;
 
+        public static string            USERNAME;
+
         // Fields
         public static RestClient        client;
         private static string           requestSecret;
@@ -63,10 +65,11 @@ namespace Waterval.Controllers
             // Putting the response into a JSON Object
             JObject obj = JObject.Parse(linkResponse.Content);
 
-            string employee = obj["employee"].ToString();
-            string student  = obj["student"].ToString();
-            string nickname = obj["nickname"].ToString();
-            string email    = obj["emails"].ToString();
+            USERNAME = obj["id"].ToString();
+            //string employee = obj["employee"].ToString();
+            //string student  = obj["student"].ToString();
+            //string nickname = obj["nickname"].ToString();
+            //string email    = obj["emails"].ToString();
 
             return RedirectToAction("Index", "Home");
             //return Content(
@@ -75,6 +78,12 @@ namespace Waterval.Controllers
             //    "isEmployee : " + employee + " --" + 
             //    "Email : " + email
             //);
+            //return Content(linkResponse.Content);
+        }
+
+        public ActionResult LogOut()
+        {
+            return Redirect("https://logout.sso.avans.nl/logout.html?");
         }
     }
 }
