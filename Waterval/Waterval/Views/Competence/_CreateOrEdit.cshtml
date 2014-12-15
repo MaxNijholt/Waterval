@@ -94,7 +94,7 @@
 <div class="form-group">
     <div class="container">
         <p>
-           
+
             @Html.Label("Modulen Toevoegen", new { @class = "control-label" })
         </p>
         <div id="ValidationMesMod" class="alert alert-danger hidden">
@@ -116,15 +116,16 @@
 
                 @foreach (var item in Model.Level)
                 {
-                    <tr id="@item.Module_ID" >
-                        <td>@item.Module.CourseCode <input type="text" id="@item.Module_ID" class="hidden"/>
-    @*Html.ActionLink(@item.Module.CourseCode.ToString(), "Edit", "Module", new { id = item.Module_ID })*@</td>
-                        <td>@item.Module.Title</td>
-                        <td>@item.Module.Definition_Short</td>
-                    
-                        <td><input type="number" class="form-control" id="level" value="@Convert.ToInt16(@item.Level1)" /></td>
-                        <td><input type="button" value="Verwijderen" id="btn_deleteMod" data-id="@item.Module_ID" class="btn btn-danger" />
-                    </tr>
+                    <tr id="@item.Module_ID">
+                     <td>
+                            @item.Module.CourseCode <input type="text" id="@item.Module_ID" class="hidden" />
+                    </td>
+                    <td>@item.Module.Title</td>
+                    <td>@item.Module.Definition_Short</td>
+                        @{string test = "Level" + item.Module_ID;}
+                    <td><input type="number" class="form-control" id="level" name="@test"  value="@Convert.ToInt16(@item.Level1)" /></td>
+                    <td><input type="button" value="Verwijderen" id="btn_deleteMod" data-id="@item.Module_ID" class="btn btn-danger" />
+                </tr>
                 }
             </tbody>
         </table>
@@ -164,7 +165,7 @@
         </div>
     </div>
 
-    <input  type="text" name="ModulesTogether" class="hidden form-control"/>
+    <input type="text" name="ModulesTogether" class="hidden form-control" />
 
     <div class="container">
         @if (Model.PrevCompetence_ID != null)
@@ -174,7 +175,7 @@
             </div>
         }
 
-        @if (@ViewBag.NewID > 0 )
+        @if (@ViewBag.NewID > 0)
         {
             <div class="container">
                 @Html.ActionLink("Nieuwere versie", "Details", new { id = @ViewBag.NewID }, new { @class = "btn btn-avans" })
