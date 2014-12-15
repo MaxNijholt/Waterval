@@ -13,7 +13,7 @@ namespace RepositoryModel.DummyRepository
 		{
 			List<Phasing> fakePhasings = new List<Phasing>()
 			{
-			new Phasing{Phasing_ID = 1, DeleteDate = DateTime.Now, isDeleted =false, Title = "Propedeuse"},
+			new Phasing{Phasing_ID = 1, DeleteDate = DateTime.Now, isDeleted = false, Title = "Propedeuse"},
 			new Phasing{Phasing_ID  = 2, DeleteDate  = DateTime.Now, isDeleted = false, Title = "Minor"}
 			};
 			return fakePhasings;

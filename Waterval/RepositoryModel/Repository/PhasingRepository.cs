@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RepositoryModel.Repository
 {
-	class PhasingRepository : IPhasingRepository
+	public class PhasingRepository : IPhasingRepository
 	{
 		Project_WatervalEntities dbContext;
 		public PhasingRepository()
