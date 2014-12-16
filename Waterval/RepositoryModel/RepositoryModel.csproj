@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DummyRepository\DBlockRepository.cs" />
+    <Compile Include="DummyRepository\DLearningToolRepository.cs" />
     <Compile Include="DummyRepository\DModuleRepository.cs" />
     <Compile Include="IRepository\ICompetenceRepository.cs" />
     <Compile Include="IRepository\ILearningToolRepository.cs" />
