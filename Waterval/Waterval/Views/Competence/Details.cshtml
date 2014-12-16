@@ -1,11 +1,12 @@
-﻿@{
+﻿@model DomainModel.Models.Competence
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Styles.Render("~/Content/css")
+
 
 <div class="container">
-    <h2>Compententies Details:Procesanalyse uitvoeren</h2>
+    <h2>Compententies Details:@Model.Title</h2>
 
     <table class="table table-bordered table-striped">
         <tr>
@@ -14,8 +15,8 @@
 
         </tr>
         <tr>
-            <td>Procesanalyse uitvoeren</td>
-            <td>De student is in staat om een procesanalyse uit te voeren.</td>
+            <td>@Model.Title</td>
+            <td>@Model.Definition_Short</td>
         </tr>
     </table>
 
@@ -29,30 +30,11 @@
         <tr>
             <td>
                 <ul>
-                   <li> 0. De student is in staat om</li>
-                    <li>
-                        1. de verschillende elementen van een proces te herkennen en onderscheiden
-                    </li>
-                    <li>
-                        2. door middel van interviews te achterhalen hoe een bedrijfsproces in werkelijkheid verloopt, en waar de knelpunten zitten
-                    </li>
-                    <li>
-                        3. contradicties in de verschillende interviews te herkennen en op te lossen
-                    </li>
-                    <li>
-                        4. schema’s van processen te maken die passen bij de probleemstelling en duidelijk zijn voor andere belanghebbenden
-                    </li>
-                    <li>
-                        5. te kunnen bepalen of de analyse volledig is ten aanzien van de probleemstelling
-                    </li>
-                    <li>
-                        6. aan te geven op welke punten het proces verbeterd kan worden, of zelfs een compleet nieuw proces te
-                    </li>
-                    <li>
-                        7. aan te geven welke keuzes gemaakt zijn tijdens het onderzoek en de analyse, en welke argumenten daarvoor gebruikt zijn
-                    </li>
-                    <li> 8. aan te geven waar de informatie voor de analyse vandaan komt en wat de betrouwbaarheid daarvan is</li>
-</ul>
+                    @foreach (string _string in Model.Definition_Long.Split('\n'))
+                    {
+                        <li>@_string</li>
+                    }
+                </ul>
             </td>
         </tr>
     </table>
@@ -69,30 +51,37 @@
                 <th>Niveau</th>
             </tr>
         </tbody>
-        <tr>
-            <td><a>Pr-01</a></td>
-            <td>Programeren 1</td>
-            <td>Het leren programeren</td>
-            <td>4</td>
-        </tr>
-        <tr>
-            <td><a>DB-01</a></td>
-            <td>Database 1</td>
-            <td>Het leren van een database opzetten.</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td><a>SWEN-01</a></td>
-            <td>Software enginering 1</td>
-            <td>Methodieken voor software engineren leren</td>
-            <td>3</td>
-        </tr>
+        @foreach (var item in Model.Level)
+        {
+            <tr>
+                <td>@Html.ActionLink(@item.Module.CourseCode.ToString(), "Edit", "Module", new { id = item.Module_ID })</td>
+                <td>@item.Module.Title</td>
+                <td>@item.Module.Definition_Short</td>
+                <td>@item.Level1</td>
+            </tr>
+        }
     </table>
 
     <p>
-        @Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })
-       
-        <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /></br>|
+        @if (Model.PrevCompetence_ID != null)
+        {
+
+            @Html.ActionLink("Vorige versie", "Details", new { id = Model.PrevCompetence_ID }, new { @class = "btn btn-avans" })
+
+        }
+
+        @if (@ViewBag.NewID > 0)
+        {
+
+            @Html.ActionLink("Nieuwere versie", "Details", new { id = @ViewBag.NewID }, new { @class = "btn btn-avans" })
+
+        }
+    </p>
+    <hr />
+
+    <p>
+        @Html.ActionLink("Aanpassen", "Edit", new { id = Model.Competence_ID }, new { @class = "btn btn-warning" })
+        <input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" />
         @Html.ActionLink("Terug naar Index", "Index")
     </p>
 </div>

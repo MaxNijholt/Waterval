@@ -24,7 +24,7 @@
     @Html.LabelFor(model => model.Definition_Long, new { @class = "col-sm-2 control-label" })
 
     <div class="col-sm-10">
-        @Html.TextAreaFor(model => model.Definition_Long, new { @class = "form-control hidden", id = "long", @style = "height:250px" })
+        @Html.TextAreaFor(model => model.Definition_Long, new { @class = "form-control", id = "long", @style = "height:250px" })
         @Html.ValidationMessageFor(model => model.Definition_Long);
     </div>
 </div>
@@ -38,7 +38,6 @@
         </p>
         <div id="ValidationMes" class="alert alert-danger">
             Minstens een doel verplicht
-
         </div>
         <br /><br />
         <table class="table table-bordered table-striped table-responsive" id="LongTable">
@@ -48,7 +47,7 @@
                     <th>Verwijderen</th>
                 </tr>
             </thead>
-            @if (Model.Competence_ID > 0)
+            @if (!string.IsNullOrEmpty(Model.Definition_Long))
             {
                 foreach (string _string in Model.Definition_Long.Split('\n'))
                 {
@@ -106,55 +105,83 @@
             <thead>
                 <tr>
                     <th width="20%">Vakcode</th>
+                    <th width="20%">Title</th>
                     <th width="50%">Omschrijving</th>
-                    <th width="15%">Niveau</th>
+                    <th width="10%">Niveau</th>
                     <th>Verwijderen</th>
                 </tr>
             </thead>
 
-            <tr>
-                <td>Project-05</td>
-                <td>Project Waterval</td>
-                <td><input type="number" value=0 name="numbers" class="form-control" /></td>
-                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
-            </tr>
+            <tbody>
 
+                @foreach (var item in Model.Level)
+                {
+                    <tr id="@item.Module_ID">
+                     <td>
+                            @item.Module.CourseCode <input type="text" id="@item.Module_ID" class="hidden" />
+                    </td>
+                    <td>@item.Module.Title</td>
+                    <td>@item.Module.Definition_Short</td>
+                        @{string test = "Level" + item.Module_ID;}
+                    <td><input type="number" class="form-control" id="level" name="@test"  value="@Convert.ToInt16(@item.Level1)" /></td>
+                    <td><input type="button" value="Verwijderen" id="btn_deleteMod" data-id="@item.Module_ID" class="btn btn-danger" />
+                </tr>
+                }
+            </tbody>
         </table>
+
         <input type="button" value="Module Toevoegen" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseMod">
 
         <br />
         <br />
         <div id="collapseMod" class="panel-collapse collapse open">
-          
-                <input type="text" class="form-control" placeholder="Module..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTable')" style:size="10" />
-           
 
-            <table class="table table-bordered table-striped" id="ModTable">
+            <input type="text" class="form-control" placeholder="Module..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTable')" style:size="10" />
+
+
+            <table class="table table-bordered table-striped" id="TableMod">
                 <thead>
                     <tr>
+
                         <th>Vakcode</th>
+                        <th>Title</th>
                         <th>Omschrijving</th>
                         <th>Toevoegen</th>
                     </tr>
-
                 </thead>
-        
-                    <tr>
-                        <td id="1">Pr-01</td>
-                        <td id="2">Programeren 1</td>
-                        <td><input type="button" value="Toevoegen" name="addMod" class="btn btn-avans" id="1"></td>
-                    </tr>
-                <tr>
-                    <td>DB-01</td>
-                    <td>Database 1</td>
-                    <td><input type="button" value="Toevoegen" name="addMod" class="btn btn-avans"></td>
-                </tr>
-              
+                <tbody>
+                    <!-- Laat alle modules zien die nog niet zijn verwerkt -->
+                    @foreach (Module item in @ViewBag.ModuleList)
+                    {
+                        <tr id="@item.Module_ID">
+                            <td id="CourseCode">@item.CourseCode</td>
+                            <td>@item.Title</td>
+                            <td>@item.Definition_Short</td>
+                            <td><input type="button" value="Toevoegen" id="btn_addMod" data-id="@item.Module_ID" class="btn btn-avans" /></td>
+                        </tr>
+                    }
+                </tbody>
             </table>
         </div>
     </div>
 
+    <input type="text" name="ModulesTogether" class="hidden form-control" />
 
+    <div class="container">
+        @if (Model.PrevCompetence_ID != null)
+        {
+            <div class="container">
+                @Html.ActionLink("Vorige versie", "Details", new { id = Model.PrevCompetence_ID }, new { @class = "btn btn-avans" })
+            </div>
+        }
+
+        @if (@ViewBag.NewID > 0)
+        {
+            <div class="container">
+                @Html.ActionLink("Nieuwere versie", "Details", new { id = @ViewBag.NewID }, new { @class = "btn btn-avans" })
+            </div>
+        }
+    </div>
 </div>
 
 <hr />

@@ -16,7 +16,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44301</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -164,6 +165,7 @@
     <Compile Include="Controllers\BlockController.cs" />
     <Compile Include="Controllers\CompetenceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LearningToolController.cs" />
     <Compile Include="Controllers\LeerlijnController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\ThemaController.cs" />
@@ -268,6 +270,13 @@
     <Content Include="Views\Leerlijn\Details.cshtml" />
     <Content Include="Views\Leerlijn\Edit.cshtml" />
     <Content Include="Views\Leerlijn\Index.cshtml" />
+    <Content Include="Views\Competence\toNewCohort.cshtml" />
+    <Content Include="Views\LearningTool\Index.cshtml" />
+    <Content Include="Views\LearningTool\Create.cshtml" />
+    <Content Include="Views\LearningTool\_CreateOrEdit.cshtml" />
+    <Content Include="Views\LearningTool\Edit.cshtml" />
+    <Content Include="Views\LearningTool\Details.cshtml" />
+    <Content Include="Views\LearningTool\NewVersion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
