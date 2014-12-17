@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DomainModel.Models.Program>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+<div class="container">
+    <h2>Opleiding</h2>
+    <div class="container">
+        <table class="table table-striped table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th>Opleiding</th>
+                    <th>Zie Modules</th>
+                    <th>Aanpassen</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(item.Cohort, "Details", new { id = item.Program_ID })</td>
+                    <td>@Html.ActionLink("Open Modules", "Index", "Module", new { id = item.Program_ID }, new { @class = "btn btn-avans" })</td>
+                    <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Program_ID }, new { @class = "btn btn-warning" })</td>
+                    <td><input type="button" value="Verwijderen" data-name="@item.Cohort" data-id="@item.Program_ID" class="btn btn-avans"></td>
+                </tr>
+            }
+        </table>
+    </div>
+    @Html.ActionLink("Nieuwe Opleiding", "Create", null, new { @class = "btn btn-success" })
+
+</div>
+
+@section Scripts {
+    <script>
+        $('input[type="button"]').click(function (e) {
+            var title = $(this).attr('data-name');
+            var id = $(this).attr('data-id');
+
+            if (confirm('Gegevens van ' + title + ' verwijderen?')) {
+                var url = "/Program/Delete";
+
+                $.post(url, { Program_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
+                    $("#msg").html(data);
+                });
+                $(this).closest('tr').remove()
+            }
+        })
+    </script>
+
+    <script src="~/Scripts/Filter.js"></script>
+}

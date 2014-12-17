@@ -1,0 +1,109 @@
+﻿@model DomainModel.Models.Study
+@using DomainModel.Models;
+
+<div class="form-group">
+    @Html.Label("Titel", new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.Title, new { @class = "form-control", id = "title" })
+        @Html.ValidationMessageFor(model => model.Title)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.Label("StudieCode", new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.StudyCode, new { @class = "form-control", id = "studycode" })
+        @Html.ValidationMessageFor(model => model.StudyCode)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.Label("Beschrijving", new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.Definition, new { @class = "form-control", id = "defnition" })
+        @Html.ValidationMessageFor(model => model.Definition)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.Label("Niveau", new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.level, new { @class = "form-control", id = "level" })
+        @Html.ValidationMessageFor(model => model.level)
+    </div>
+</div>
+
+
+
+
+
+<div class="form-group">
+    <div class="container">
+        <p>
+
+            @Html.Label("Modulen Toevoegen", new { @class = "control-label" })
+        </p>
+        <div id="ValidationMesMod" class="alert alert-danger hidden">
+            Minstens een Module verplicht
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="ModTable">
+            <thead>
+                <tr>
+                    <th width="20%">Vakcode</th>
+                    <th width="50%">Omschrijving</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td>Project-05</td>
+                <td>Project Waterval</td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
+
+        </table>
+        <input type="button" value="Module Toevoegen" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseMod">
+
+        <br />
+        <br />
+        <div id="collapseMod" class="panel-collapse collapse open">
+
+            <input type="text" class="form-control" placeholder="Module..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTable')" style:size="10" />
+
+
+            <table class="table table-bordered table-striped" id="ModTable">
+                <thead>
+                    <tr>
+                        <th>Vakcode</th>
+                        <th>Omschrijving</th>
+                        <th>Toevoegen</th>
+                    </tr>
+
+                </thead>
+
+                <tr>
+                    <td id="1">Pr-01</td>
+                    <td id="2">Programeren 1</td>
+                    <td><input type="button" value="Toevoegen" name="addMod" class="btn btn-avans" id="1"></td>
+                </tr>
+                <tr>
+                    <td>DB-01</td>
+                    <td>Database 1</td>
+                    <td><input type="button" value="Toevoegen" name="addMod" class="btn btn-avans"></td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+
+<hr />
+@Html.Partial("~/Views/Shared/_Alert.cshtml")

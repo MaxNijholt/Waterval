@@ -1,0 +1,28 @@
+﻿@model DomainModel.Models.Program
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+<div class="container">
+    <h2>@Html.DisplayFor(model => model.Cohort)</h2>
+    <fieldset>
+        <table class="table table-striped table-bordered">
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Cohort)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Cohort)
+                </td>
+            </tr>
+            </table>
+    </fieldset>
+
+    <p>
+        @Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })
+        <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />|
+        @Html.ActionLink("Terug naar Index", "Index")
+    </p>
+</div>
