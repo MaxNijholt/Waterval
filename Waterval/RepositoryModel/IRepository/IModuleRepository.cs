@@ -11,9 +11,9 @@ namespace RepositoryModel.IRepository
     public interface IModuleRepository
     {
         List<Module> GetAll();
-        Module Get(int module_id);
+        Module Get(int module_ID);
         Module Create(Module module);
-        void Delete(int module_id);
+        void Delete(int module_ID);
         Module Update(Module module);
     }
 }

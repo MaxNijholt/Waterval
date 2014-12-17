@@ -18,17 +18,18 @@ namespace Waterval.Models
 
         public string Ingangsniveau { get; set; }
 
-        public string Organisatie { get; set; }
+        public string Vakcoordinator { get; set; }
 
         public string Leerdoelen { get; set; }
 
         public string Beoordelingen { get; set; }
 
         public string BeschrijvingLang { get; set; }
+        public string Voorkennis { get; set; }
         public Modules(string title, string beschrijving, string vakcode, string studiebelasting, string werkvorm, string ingangsniveau,
-            string organisatie,
+            string vakcoordinator,
            string leerdoelen,
-            string beoordelingen,string beschrijvinglang)
+            string beoordelingen,string beschrijvinglang, string voorkennis)
         {
 
             Titel = title;
@@ -37,10 +38,11 @@ namespace Waterval.Models
             Studiebelasting = studiebelasting;
             Werkvorm = werkvorm;
             Ingangsniveau = ingangsniveau;
-            Organisatie = organisatie;
+            Vakcoordinator = vakcoordinator;
             Leerdoelen = leerdoelen;
             Beoordelingen = beoordelingen;
             BeschrijvingLang = beschrijvinglang;
+            Voorkennis = voorkennis;
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿
-@model Waterval.Models.ModuleList
+﻿@model IEnumerable<DomainModel.Models.Module>
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -14,36 +14,54 @@
                     <th>Titel</th>
                     <th>Beschrijving</th>
                     <th>Vakcode</th>
-                    <th>Studiebelasting</th>
-                    <th>Werkvorm</th>
+                    <th>EC</th>
                     <th>Ingangsniveau</th>
-                    <th>Organisatie</th>
-                    <th>Leerdoelen</th>
-                    <th>Beoordelingen</th>
-                    <th>Compententie</th>
                     <th>Aanpassen</th>
                     <th>Verwijderen</th>
                 </tr>
             </thead>
-            @foreach (var c in Model.mods)
+            @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.ActionLink(c.Titel, "Details", new { modelname = c.Vakcode })</td>
-                    <td>@c.Beschrijving </td>
-                    <td>@c.Vakcode </td>
-                    <td>@c.Studiebelasting </td>
-                    <td>@c.Werkvorm </td>
-                    <td>@c.Ingangsniveau </td>
-                    <td>@c.Organisatie </td>
-                    <td>@c.Leerdoelen </td>
-                    <td>@c.Beoordelingen</td>
-                    <td>@c.BeschrijvingLang</td>
-                    <td>@Html.ActionLink("Aanpassen", "Edit", new { modelname = c.Vakcode }, new { @class = "btn btn-warning" })</td>
-                    <td><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /></td>
+                    <td>@Html.ActionLink(item.Title, "Details", new { id = item.Module_ID })</td>
+                    <td>@item.Definition_Short</td>
+                    <td>@item.CourseCode</td>
+
+
+           
+
+                    @* TODO - SUM of EC ophalen
+                        <td>@item.AssignmentCode.Max().EC</td>   TIJDELIJK 2X ENTRY LEVEL
+                    *@
+                 <td>Moet nog komen</td>
+
+                    <td>@item.Entry_Level</td>
+                    <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Module_ID }, new { @class = "btn btn-warning" })</td>
+                    <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Module_ID" class="btn btn-avans"></td>
                 </tr>
             }
-            </table>
+        </table>
     </div>
     @Html.ActionLink("Nieuwe Module", "Create", null, new { @class = "btn btn-success" })
-   
+
 </div>
+
+@section Scripts {
+    <script>
+        $('input[type="button"]').click(function (e) {
+            var title = $(this).attr('data-name');
+            var id = $(this).attr('data-id');
+
+            if (confirm('Gegevens van ' + title + ' verwijderen?')) {
+                var url = "/Module/Delete";
+
+                $.post(url, { Module_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
+                    $("#msg").html(data);
+                });
+                $(this).closest('tr').remove()
+            }
+        })
+    </script>
+
+    <script src="~/Scripts/Filter.js"></script>
+}
