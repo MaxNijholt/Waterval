@@ -4,14 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Project_WatervalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Project_WatervalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Account_ID" />
           </Key>
           <Property Name="Account_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="900" Nullable="false" />
-          <Property Name="isSuperUser" Type="bit" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="900" Nullable="false" />
+          <Property Name="Role_ID" Type="int" Nullable="false" />
           <Property Name="isActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="AccountLaw">
@@ -27,16 +27,15 @@
           </Key>
           <Property Name="Role_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleName" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="RoleDescription" Type="nvarchar" MaxLength="900" Nullable="false" />
-          <Property Name="Law_ID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="900" Nullable="false" />
         </EntityType>
-        <EntityType Name="AccountWithAccountRole">
+        <EntityType Name="AccountRoleWithAccountLaw">
           <Key>
-            <PropertyRef Name="Account_ID" />
             <PropertyRef Name="Role_ID" />
+            <PropertyRef Name="Law_ID" />
           </Key>
-          <Property Name="Account_ID" Type="int" Nullable="false" />
           <Property Name="Role_ID" Type="int" Nullable="false" />
+          <Property Name="Law_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="AssignmentCode">
           <Key>
@@ -147,14 +146,14 @@
           <Property Name="Module_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PrevModule_ID" Type="int" />
           <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="CourseCode" Type="int" Nullable="false" />
+          <Property Name="CourseCode" Type="nvarchar" MaxLength="255" />
           <Property Name="Entry_Level" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Definition_Short" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Definition_Long" Type="nvarchar" MaxLength="900" Nullable="false" />
           <Property Name="Foreknowledge" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
-          <Property Name="Account_ID" Type="int" Nullable="false" />
+          <Property Name="Account_ID" Type="int" />
         </EntityType>
         <EntityType Name="ModuleWithLearnGoal">
           <Key>
@@ -272,31 +271,31 @@
           <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="PrevWorkform_ID" Type="int" />
         </EntityType>
-        <Association Name="FK__AccountWi__Accou__7F80E8EA">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="AccountWithAccountRole" Type="Self.AccountWithAccountRole" Multiplicity="*" />
+        <Association Name="FK__AccountRo__Law_I__1293BD5E">
+          <End Role="AccountLaw" Type="Self.AccountLaw" Multiplicity="1" />
+          <End Role="AccountRoleWithAccountLaw" Type="Self.AccountRoleWithAccountLaw" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="Account_ID" />
+            <Principal Role="AccountLaw">
+              <PropertyRef Name="Law_ID" />
             </Principal>
-            <Dependent Role="AccountWithAccountRole">
-              <PropertyRef Name="Account_ID" />
+            <Dependent Role="AccountRoleWithAccountLaw">
+              <PropertyRef Name="Law_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__AccountWi__Role___00750D23">
+        <Association Name="FK__AccountRo__Role___1387E197">
           <End Role="AccountRole" Type="Self.AccountRole" Multiplicity="1" />
-          <End Role="AccountWithAccountRole" Type="Self.AccountWithAccountRole" Multiplicity="*" />
+          <End Role="AccountRoleWithAccountLaw" Type="Self.AccountRoleWithAccountLaw" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AccountRole">
               <PropertyRef Name="Role_ID" />
             </Principal>
-            <Dependent Role="AccountWithAccountRole">
+            <Dependent Role="AccountRoleWithAccountLaw">
               <PropertyRef Name="Role_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Assignmen__Modul__351DDF8C">
+        <Association Name="FK__Assignmen__Modul__24B26D99">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="AssignmentCode" Type="Self.AssignmentCode" Multiplicity="*" />
           <ReferentialConstraint>
@@ -308,7 +307,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GradeType__Modul__324172E1">
+        <Association Name="FK__GradeType__Modul__21D600EE">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="GradeType" Type="Self.GradeType" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -320,7 +319,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Level__Competenc__2E70E1FD">
+        <Association Name="FK__Level__Competenc__1E05700A">
           <End Role="Competence" Type="Self.Competence" Multiplicity="1" />
           <End Role="Level" Type="Self.Level" Multiplicity="*" />
           <ReferentialConstraint>
@@ -332,7 +331,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Level__Module_ID__2F650636">
+        <Association Name="FK__Level__Module_ID__1EF99443">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="Level" Type="Self.Level" Multiplicity="*" />
           <ReferentialConstraint>
@@ -344,7 +343,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModelWith__Modul__567ED357">
+        <Association Name="FK__ModelWith__Modul__46136164">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="ModelWithWorkform" Type="Self.ModelWithWorkform" Multiplicity="*" />
           <ReferentialConstraint>
@@ -356,7 +355,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModelWith__Modul__5D2BD0E6">
+        <Association Name="FK__ModelWith__Modul__4CC05EF3">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="ModelWithProgram" Type="Self.ModelWithProgram" Multiplicity="*" />
           <ReferentialConstraint>
@@ -368,7 +367,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModelWith__Modul__66B53B20">
+        <Association Name="FK__ModelWith__Modul__536D5C82">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="ModelWithStudy" Type="Self.ModelWithStudy" Multiplicity="*" />
           <ReferentialConstraint>
@@ -380,7 +379,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModelWith__Progr__5C37ACAD">
+        <Association Name="FK__ModelWith__Progr__4BCC3ABA">
           <End Role="Program" Type="Self.Program" Multiplicity="1" />
           <End Role="ModelWithProgram" Type="Self.ModelWithProgram" Multiplicity="*" />
           <ReferentialConstraint>
@@ -392,7 +391,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModelWith__Study__65C116E7">
+        <Association Name="FK__ModelWith__Study__52793849">
           <End Role="Study" Type="Self.Study" Multiplicity="1" />
           <End Role="ModelWithStudy" Type="Self.ModelWithStudy" Multiplicity="*" />
           <ReferentialConstraint>
@@ -404,7 +403,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModelWith__Workf__558AAF1E">
+        <Association Name="FK__ModelWith__Workf__451F3D2B">
           <End Role="Workform" Type="Self.Workform" Multiplicity="1" />
           <End Role="ModelWithWorkform" Type="Self.ModelWithWorkform" Multiplicity="*" />
           <ReferentialConstraint>
@@ -416,7 +415,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModuleWit__Learn__3AD6B8E2">
+        <Association Name="FK__ModuleWit__Learn__2A6B46EF">
           <End Role="LearnGoal" Type="Self.LearnGoal" Multiplicity="1" />
           <End Role="ModuleWithLearnGoal" Type="Self.ModuleWithLearnGoal" Multiplicity="*" />
           <ReferentialConstraint>
@@ -428,7 +427,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModuleWit__Learn__408F9238">
+        <Association Name="FK__ModuleWit__Learn__30242045">
           <End Role="LearningTool" Type="Self.LearningTool" Multiplicity="1" />
           <End Role="ModuleWithLearningTool" Type="Self.ModuleWithLearningTool" Multiplicity="*" />
           <ReferentialConstraint>
@@ -440,7 +439,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModuleWit__Learn__50C5FA01">
+        <Association Name="FK__ModuleWit__Learn__405A880E">
           <End Role="LearnLine" Type="Self.LearnLine" Multiplicity="1" />
           <End Role="ModuleWithLearnLine" Type="Self.ModuleWithLearnLine" Multiplicity="*" />
           <ReferentialConstraint>
@@ -452,7 +451,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModuleWit__Modul__39E294A9">
+        <Association Name="FK__ModuleWit__Modul__297722B6">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="ModuleWithLearnGoal" Type="Self.ModuleWithLearnGoal" Multiplicity="*" />
           <ReferentialConstraint>
@@ -464,7 +463,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModuleWit__Modul__3F9B6DFF">
+        <Association Name="FK__ModuleWit__Modul__2F2FFC0C">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="ModuleWithLearningTool" Type="Self.ModuleWithLearningTool" Multiplicity="*" />
           <ReferentialConstraint>
@@ -476,7 +475,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModuleWit__Modul__4924D839">
+        <Association Name="FK__ModuleWit__Modul__38B96646">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="ModuleWithTheme" Type="Self.ModuleWithTheme" Multiplicity="*" />
           <ReferentialConstraint>
@@ -488,7 +487,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModuleWit__Modul__4FD1D5C8">
+        <Association Name="FK__ModuleWit__Modul__3F6663D5">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="ModuleWithLearnLine" Type="Self.ModuleWithLearnLine" Multiplicity="*" />
           <ReferentialConstraint>
@@ -500,7 +499,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModuleWit__Theme__4A18FC72">
+        <Association Name="FK__ModuleWit__Theme__39AD8A7F">
           <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
           <End Role="ModuleWithTheme" Type="Self.ModuleWithTheme" Multiplicity="*" />
           <ReferentialConstraint>
@@ -512,7 +511,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PhasingWi__Block__731B1205">
+        <Association Name="FK__PhasingWi__Block__5FD33367">
           <End Role="Block" Type="Self.Block" Multiplicity="1" />
           <End Role="PhasingWithBlock" Type="Self.PhasingWithBlock" Multiplicity="*" />
           <ReferentialConstraint>
@@ -524,7 +523,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PhasingWi__Phasi__740F363E">
+        <Association Name="FK__PhasingWi__Phasi__60C757A0">
           <End Role="Phasing" Type="Self.Phasing" Multiplicity="1" />
           <End Role="PhasingWithBlock" Type="Self.PhasingWithBlock" Multiplicity="*" />
           <ReferentialConstraint>
@@ -536,7 +535,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StudyWith__Phasi__6D6238AF">
+        <Association Name="FK__StudyWith__Phasi__5A1A5A11">
           <End Role="Phasing" Type="Self.Phasing" Multiplicity="1" />
           <End Role="StudyWithPhasing" Type="Self.StudyWithPhasing" Multiplicity="*" />
           <ReferentialConstraint>
@@ -548,7 +547,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StudyWith__Study__6C6E1476">
+        <Association Name="FK__StudyWith__Study__592635D8">
           <End Role="Study" Type="Self.Study" Multiplicity="1" />
           <End Role="StudyWithPhasing" Type="Self.StudyWithPhasing" Multiplicity="*" />
           <ReferentialConstraint>
@@ -560,7 +559,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__WeekSched__Modul__436BFEE3">
+        <Association Name="FK__WeekSched__Modul__33008CF0">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="WeekSchedule" Type="Self.WeekSchedule" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -572,20 +571,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_AccountRole_dbo_AccountLaw_Law_ID">
-          <End Role="AccountLaw" Type="Self.AccountLaw" Multiplicity="1" />
-          <End Role="AccountRole" Type="Self.AccountRole" Multiplicity="*" />
+        <Association Name="FK_dbo_Account_dbo_AccountRole_Role_ID">
+          <End Role="AccountRole" Type="Self.AccountRole" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AccountLaw">
-              <PropertyRef Name="Law_ID" />
+            <Principal Role="AccountRole">
+              <PropertyRef Name="Role_ID" />
             </Principal>
-            <Dependent Role="AccountRole">
-              <PropertyRef Name="Law_ID" />
+            <Dependent Role="Account">
+              <PropertyRef Name="Role_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_Module_dbo_Account_Account_ID">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
           <End Role="Module" Type="Self.Module" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
@@ -600,7 +599,7 @@
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountLaw" EntityType="Self.AccountLaw" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountRole" EntityType="Self.AccountRole" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AccountWithAccountRole" EntityType="Self.AccountWithAccountRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountRoleWithAccountLaw" EntityType="Self.AccountRoleWithAccountLaw" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AssignmentCode" EntityType="Self.AssignmentCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Block" EntityType="Self.Block" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Competence" EntityType="Self.Competence" Schema="dbo" store:Type="Tables" />
@@ -626,109 +625,109 @@
           <EntitySet Name="Theme" EntityType="Self.Theme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeekSchedule" EntityType="Self.WeekSchedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workform" EntityType="Self.Workform" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__AccountWi__Accou__7F80E8EA" Association="Self.FK__AccountWi__Accou__7F80E8EA">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="AccountWithAccountRole" EntitySet="AccountWithAccountRole" />
+          <AssociationSet Name="FK__AccountRo__Law_I__1293BD5E" Association="Self.FK__AccountRo__Law_I__1293BD5E">
+            <End Role="AccountLaw" EntitySet="AccountLaw" />
+            <End Role="AccountRoleWithAccountLaw" EntitySet="AccountRoleWithAccountLaw" />
           </AssociationSet>
-          <AssociationSet Name="FK__AccountWi__Role___00750D23" Association="Self.FK__AccountWi__Role___00750D23">
+          <AssociationSet Name="FK__AccountRo__Role___1387E197" Association="Self.FK__AccountRo__Role___1387E197">
             <End Role="AccountRole" EntitySet="AccountRole" />
-            <End Role="AccountWithAccountRole" EntitySet="AccountWithAccountRole" />
+            <End Role="AccountRoleWithAccountLaw" EntitySet="AccountRoleWithAccountLaw" />
           </AssociationSet>
-          <AssociationSet Name="FK__Assignmen__Modul__351DDF8C" Association="Self.FK__Assignmen__Modul__351DDF8C">
+          <AssociationSet Name="FK__Assignmen__Modul__24B26D99" Association="Self.FK__Assignmen__Modul__24B26D99">
             <End Role="Module" EntitySet="Module" />
             <End Role="AssignmentCode" EntitySet="AssignmentCode" />
           </AssociationSet>
-          <AssociationSet Name="FK__GradeType__Modul__324172E1" Association="Self.FK__GradeType__Modul__324172E1">
+          <AssociationSet Name="FK__GradeType__Modul__21D600EE" Association="Self.FK__GradeType__Modul__21D600EE">
             <End Role="Module" EntitySet="Module" />
             <End Role="GradeType" EntitySet="GradeType" />
           </AssociationSet>
-          <AssociationSet Name="FK__Level__Competenc__2E70E1FD" Association="Self.FK__Level__Competenc__2E70E1FD">
+          <AssociationSet Name="FK__Level__Competenc__1E05700A" Association="Self.FK__Level__Competenc__1E05700A">
             <End Role="Competence" EntitySet="Competence" />
             <End Role="Level" EntitySet="Level" />
           </AssociationSet>
-          <AssociationSet Name="FK__Level__Module_ID__2F650636" Association="Self.FK__Level__Module_ID__2F650636">
+          <AssociationSet Name="FK__Level__Module_ID__1EF99443" Association="Self.FK__Level__Module_ID__1EF99443">
             <End Role="Module" EntitySet="Module" />
             <End Role="Level" EntitySet="Level" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModelWith__Modul__567ED357" Association="Self.FK__ModelWith__Modul__567ED357">
+          <AssociationSet Name="FK__ModelWith__Modul__46136164" Association="Self.FK__ModelWith__Modul__46136164">
             <End Role="Module" EntitySet="Module" />
             <End Role="ModelWithWorkform" EntitySet="ModelWithWorkform" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModelWith__Modul__5D2BD0E6" Association="Self.FK__ModelWith__Modul__5D2BD0E6">
+          <AssociationSet Name="FK__ModelWith__Modul__4CC05EF3" Association="Self.FK__ModelWith__Modul__4CC05EF3">
             <End Role="Module" EntitySet="Module" />
             <End Role="ModelWithProgram" EntitySet="ModelWithProgram" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModelWith__Modul__66B53B20" Association="Self.FK__ModelWith__Modul__66B53B20">
+          <AssociationSet Name="FK__ModelWith__Modul__536D5C82" Association="Self.FK__ModelWith__Modul__536D5C82">
             <End Role="Module" EntitySet="Module" />
             <End Role="ModelWithStudy" EntitySet="ModelWithStudy" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModelWith__Progr__5C37ACAD" Association="Self.FK__ModelWith__Progr__5C37ACAD">
+          <AssociationSet Name="FK__ModelWith__Progr__4BCC3ABA" Association="Self.FK__ModelWith__Progr__4BCC3ABA">
             <End Role="Program" EntitySet="Program" />
             <End Role="ModelWithProgram" EntitySet="ModelWithProgram" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModelWith__Study__65C116E7" Association="Self.FK__ModelWith__Study__65C116E7">
+          <AssociationSet Name="FK__ModelWith__Study__52793849" Association="Self.FK__ModelWith__Study__52793849">
             <End Role="Study" EntitySet="Study" />
             <End Role="ModelWithStudy" EntitySet="ModelWithStudy" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModelWith__Workf__558AAF1E" Association="Self.FK__ModelWith__Workf__558AAF1E">
+          <AssociationSet Name="FK__ModelWith__Workf__451F3D2B" Association="Self.FK__ModelWith__Workf__451F3D2B">
             <End Role="Workform" EntitySet="Workform" />
             <End Role="ModelWithWorkform" EntitySet="ModelWithWorkform" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModuleWit__Learn__3AD6B8E2" Association="Self.FK__ModuleWit__Learn__3AD6B8E2">
+          <AssociationSet Name="FK__ModuleWit__Learn__2A6B46EF" Association="Self.FK__ModuleWit__Learn__2A6B46EF">
             <End Role="LearnGoal" EntitySet="LearnGoal" />
             <End Role="ModuleWithLearnGoal" EntitySet="ModuleWithLearnGoal" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModuleWit__Learn__408F9238" Association="Self.FK__ModuleWit__Learn__408F9238">
+          <AssociationSet Name="FK__ModuleWit__Learn__30242045" Association="Self.FK__ModuleWit__Learn__30242045">
             <End Role="LearningTool" EntitySet="LearningTool" />
             <End Role="ModuleWithLearningTool" EntitySet="ModuleWithLearningTool" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModuleWit__Learn__50C5FA01" Association="Self.FK__ModuleWit__Learn__50C5FA01">
+          <AssociationSet Name="FK__ModuleWit__Learn__405A880E" Association="Self.FK__ModuleWit__Learn__405A880E">
             <End Role="LearnLine" EntitySet="LearnLine" />
             <End Role="ModuleWithLearnLine" EntitySet="ModuleWithLearnLine" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModuleWit__Modul__39E294A9" Association="Self.FK__ModuleWit__Modul__39E294A9">
+          <AssociationSet Name="FK__ModuleWit__Modul__297722B6" Association="Self.FK__ModuleWit__Modul__297722B6">
             <End Role="Module" EntitySet="Module" />
             <End Role="ModuleWithLearnGoal" EntitySet="ModuleWithLearnGoal" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModuleWit__Modul__3F9B6DFF" Association="Self.FK__ModuleWit__Modul__3F9B6DFF">
+          <AssociationSet Name="FK__ModuleWit__Modul__2F2FFC0C" Association="Self.FK__ModuleWit__Modul__2F2FFC0C">
             <End Role="Module" EntitySet="Module" />
             <End Role="ModuleWithLearningTool" EntitySet="ModuleWithLearningTool" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModuleWit__Modul__4924D839" Association="Self.FK__ModuleWit__Modul__4924D839">
+          <AssociationSet Name="FK__ModuleWit__Modul__38B96646" Association="Self.FK__ModuleWit__Modul__38B96646">
             <End Role="Module" EntitySet="Module" />
             <End Role="ModuleWithTheme" EntitySet="ModuleWithTheme" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModuleWit__Modul__4FD1D5C8" Association="Self.FK__ModuleWit__Modul__4FD1D5C8">
+          <AssociationSet Name="FK__ModuleWit__Modul__3F6663D5" Association="Self.FK__ModuleWit__Modul__3F6663D5">
             <End Role="Module" EntitySet="Module" />
             <End Role="ModuleWithLearnLine" EntitySet="ModuleWithLearnLine" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModuleWit__Theme__4A18FC72" Association="Self.FK__ModuleWit__Theme__4A18FC72">
+          <AssociationSet Name="FK__ModuleWit__Theme__39AD8A7F" Association="Self.FK__ModuleWit__Theme__39AD8A7F">
             <End Role="Theme" EntitySet="Theme" />
             <End Role="ModuleWithTheme" EntitySet="ModuleWithTheme" />
           </AssociationSet>
-          <AssociationSet Name="FK__PhasingWi__Block__731B1205" Association="Self.FK__PhasingWi__Block__731B1205">
+          <AssociationSet Name="FK__PhasingWi__Block__5FD33367" Association="Self.FK__PhasingWi__Block__5FD33367">
             <End Role="Block" EntitySet="Block" />
             <End Role="PhasingWithBlock" EntitySet="PhasingWithBlock" />
           </AssociationSet>
-          <AssociationSet Name="FK__PhasingWi__Phasi__740F363E" Association="Self.FK__PhasingWi__Phasi__740F363E">
+          <AssociationSet Name="FK__PhasingWi__Phasi__60C757A0" Association="Self.FK__PhasingWi__Phasi__60C757A0">
             <End Role="Phasing" EntitySet="Phasing" />
             <End Role="PhasingWithBlock" EntitySet="PhasingWithBlock" />
           </AssociationSet>
-          <AssociationSet Name="FK__StudyWith__Phasi__6D6238AF" Association="Self.FK__StudyWith__Phasi__6D6238AF">
+          <AssociationSet Name="FK__StudyWith__Phasi__5A1A5A11" Association="Self.FK__StudyWith__Phasi__5A1A5A11">
             <End Role="Phasing" EntitySet="Phasing" />
             <End Role="StudyWithPhasing" EntitySet="StudyWithPhasing" />
           </AssociationSet>
-          <AssociationSet Name="FK__StudyWith__Study__6C6E1476" Association="Self.FK__StudyWith__Study__6C6E1476">
+          <AssociationSet Name="FK__StudyWith__Study__592635D8" Association="Self.FK__StudyWith__Study__592635D8">
             <End Role="Study" EntitySet="Study" />
             <End Role="StudyWithPhasing" EntitySet="StudyWithPhasing" />
           </AssociationSet>
-          <AssociationSet Name="FK__WeekSched__Modul__436BFEE3" Association="Self.FK__WeekSched__Modul__436BFEE3">
+          <AssociationSet Name="FK__WeekSched__Modul__33008CF0" Association="Self.FK__WeekSched__Modul__33008CF0">
             <End Role="Module" EntitySet="Module" />
             <End Role="WeekSchedule" EntitySet="WeekSchedule" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AccountRole_dbo_AccountLaw_Law_ID" Association="Self.FK_dbo_AccountRole_dbo_AccountLaw_Law_ID">
-            <End Role="AccountLaw" EntitySet="AccountLaw" />
+          <AssociationSet Name="FK_dbo_Account_dbo_AccountRole_Role_ID" Association="Self.FK_dbo_Account_dbo_AccountRole_Role_ID">
             <End Role="AccountRole" EntitySet="AccountRole" />
+            <End Role="Account" EntitySet="Account" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_Module_dbo_Account_Account_ID" Association="Self.FK_dbo_Module_dbo_Account_Account_ID">
             <End Role="Account" EntitySet="Account" />
@@ -760,44 +759,44 @@
           <EntitySet Name="Theme" EntityType="Project_WatervalModel.Theme" />
           <EntitySet Name="WeekSchedule" EntityType="Project_WatervalModel.WeekSchedule" />
           <EntitySet Name="Workform" EntityType="Project_WatervalModel.Workform" />
+          <AssociationSet Name="FK_dbo_Account_dbo_AccountRole_Role_ID" Association="Project_WatervalModel.FK_dbo_Account_dbo_AccountRole_Role_ID">
+            <End Role="AccountRole" EntitySet="AccountRole" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_Module_dbo_Account_Account_ID" Association="Project_WatervalModel.FK_dbo_Module_dbo_Account_Account_ID">
             <End Role="Account" EntitySet="Account" />
             <End Role="Module" EntitySet="Module" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_AccountRole_dbo_AccountLaw_Law_ID" Association="Project_WatervalModel.FK_dbo_AccountRole_dbo_AccountLaw_Law_ID">
-            <End Role="AccountLaw" EntitySet="AccountLaw" />
-            <End Role="AccountRole" EntitySet="AccountRole" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Assignmen__Modul__351DDF8C" Association="Project_WatervalModel.FK__Assignmen__Modul__351DDF8C">
+          <AssociationSet Name="FK__Assignmen__Modul__24B26D99" Association="Project_WatervalModel.FK__Assignmen__Modul__24B26D99">
             <End Role="Module" EntitySet="Module" />
             <End Role="AssignmentCode" EntitySet="AssignmentCode" />
           </AssociationSet>
-          <AssociationSet Name="FK__Level__Competenc__2E70E1FD" Association="Project_WatervalModel.FK__Level__Competenc__2E70E1FD">
+          <AssociationSet Name="FK__Level__Competenc__1E05700A" Association="Project_WatervalModel.FK__Level__Competenc__1E05700A">
             <End Role="Competence" EntitySet="Competence" />
             <End Role="Level" EntitySet="Level" />
           </AssociationSet>
-          <AssociationSet Name="FK__GradeType__Modul__324172E1" Association="Project_WatervalModel.FK__GradeType__Modul__324172E1">
+          <AssociationSet Name="FK__GradeType__Modul__21D600EE" Association="Project_WatervalModel.FK__GradeType__Modul__21D600EE">
             <End Role="Module" EntitySet="Module" />
             <End Role="GradeType" EntitySet="GradeType" />
           </AssociationSet>
-          <AssociationSet Name="FK__Level__Module_ID__2F650636" Association="Project_WatervalModel.FK__Level__Module_ID__2F650636">
+          <AssociationSet Name="FK__Level__Module_ID__1EF99443" Association="Project_WatervalModel.FK__Level__Module_ID__1EF99443">
             <End Role="Module" EntitySet="Module" />
             <End Role="Level" EntitySet="Level" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModelWith__Modul__567ED357" Association="Project_WatervalModel.FK__ModelWith__Modul__567ED357">
+          <AssociationSet Name="FK__ModelWith__Modul__46136164" Association="Project_WatervalModel.FK__ModelWith__Modul__46136164">
             <End Role="Module" EntitySet="Module" />
             <End Role="ModelWithWorkform" EntitySet="ModelWithWorkform" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModelWith__Workf__558AAF1E" Association="Project_WatervalModel.FK__ModelWith__Workf__558AAF1E">
+          <AssociationSet Name="FK__ModelWith__Workf__451F3D2B" Association="Project_WatervalModel.FK__ModelWith__Workf__451F3D2B">
             <End Role="Workform" EntitySet="Workform" />
             <End Role="ModelWithWorkform" EntitySet="ModelWithWorkform" />
           </AssociationSet>
-          <AssociationSet Name="FK__WeekSched__Modul__436BFEE3" Association="Project_WatervalModel.FK__WeekSched__Modul__436BFEE3">
+          <AssociationSet Name="FK__WeekSched__Modul__33008CF0" Association="Project_WatervalModel.FK__WeekSched__Modul__33008CF0">
             <End Role="Module" EntitySet="Module" />
             <End Role="WeekSchedule" EntitySet="WeekSchedule" />
           </AssociationSet>
-          <AssociationSet Name="AccountWithAccountRole" Association="Project_WatervalModel.AccountWithAccountRole">
-            <End Role="Account" EntitySet="Account" />
+          <AssociationSet Name="AccountRoleWithAccountLaw" Association="Project_WatervalModel.AccountRoleWithAccountLaw">
+            <End Role="AccountLaw" EntitySet="AccountLaw" />
             <End Role="AccountRole" EntitySet="AccountRole" />
           </AssociationSet>
           <AssociationSet Name="ModelWithProgram" Association="Project_WatervalModel.ModelWithProgram">
@@ -838,11 +837,11 @@
             <PropertyRef Name="Account_ID" />
           </Key>
           <Property Name="Account_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
-          <Property Name="isSuperUser" Type="Boolean" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="Role_ID" Type="Int32" Nullable="false" />
           <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AccountRole" Relationship="Project_WatervalModel.FK_dbo_Account_dbo_AccountRole_Role_ID" FromRole="Account" ToRole="AccountRole" />
           <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK_dbo_Module_dbo_Account_Account_ID" FromRole="Account" ToRole="Module" />
-          <NavigationProperty Name="AccountRole" Relationship="Project_WatervalModel.AccountWithAccountRole" FromRole="Account" ToRole="AccountRole" />
         </EntityType>
         <EntityType Name="AccountLaw">
           <Key>
@@ -850,7 +849,7 @@
           </Key>
           <Property Name="Law_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LawName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AccountRole" Relationship="Project_WatervalModel.FK_dbo_AccountRole_dbo_AccountLaw_Law_ID" FromRole="AccountLaw" ToRole="AccountRole" />
+          <NavigationProperty Name="AccountRole" Relationship="Project_WatervalModel.AccountRoleWithAccountLaw" FromRole="AccountLaw" ToRole="AccountRole" />
         </EntityType>
         <EntityType Name="AccountRole">
           <Key>
@@ -858,10 +857,9 @@
           </Key>
           <Property Name="Role_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="RoleDescription" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
-          <Property Name="Law_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AccountLaw" Relationship="Project_WatervalModel.FK_dbo_AccountRole_dbo_AccountLaw_Law_ID" FromRole="AccountRole" ToRole="AccountLaw" />
-          <NavigationProperty Name="Account" Relationship="Project_WatervalModel.AccountWithAccountRole" FromRole="AccountRole" ToRole="Account" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account" Relationship="Project_WatervalModel.FK_dbo_Account_dbo_AccountRole_Role_ID" FromRole="AccountRole" ToRole="Account" />
+          <NavigationProperty Name="AccountLaw" Relationship="Project_WatervalModel.AccountRoleWithAccountLaw" FromRole="AccountRole" ToRole="AccountLaw" />
         </EntityType>
         <EntityType Name="AssignmentCode">
           <Key>
@@ -872,7 +870,7 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Module_ID" Type="Int32" Nullable="false" />
           <Property Name="PrevModule_ID" Type="Int32" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__Assignmen__Modul__351DDF8C" FromRole="AssignmentCode" ToRole="Module" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__Assignmen__Modul__24B26D99" FromRole="AssignmentCode" ToRole="Module" />
         </EntityType>
         <EntityType Name="Block">
           <Key>
@@ -895,7 +893,7 @@
           <Property Name="Definition_Long" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Level" Relationship="Project_WatervalModel.FK__Level__Competenc__2E70E1FD" FromRole="Competence" ToRole="Level" />
+          <NavigationProperty Name="Level" Relationship="Project_WatervalModel.FK__Level__Competenc__1E05700A" FromRole="Competence" ToRole="Level" />
         </EntityType>
         <EntityType Name="GradeType">
           <Key>
@@ -903,7 +901,7 @@
           </Key>
           <Property Name="Module_ID" Type="Int32" Nullable="false" />
           <Property Name="GradeDescription" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__GradeType__Modul__324172E1" FromRole="GradeType" ToRole="Module" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__GradeType__Modul__21D600EE" FromRole="GradeType" ToRole="Module" />
         </EntityType>
         <EntityType Name="LearnGoal">
           <Key>
@@ -943,8 +941,8 @@
           <Property Name="Competence_ID" Type="Int32" Nullable="false" />
           <Property Name="Module_ID" Type="Int32" Nullable="false" />
           <Property Name="Level1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Competence" Relationship="Project_WatervalModel.FK__Level__Competenc__2E70E1FD" FromRole="Level" ToRole="Competence" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__Level__Module_ID__2F650636" FromRole="Level" ToRole="Module" />
+          <NavigationProperty Name="Competence" Relationship="Project_WatervalModel.FK__Level__Competenc__1E05700A" FromRole="Level" ToRole="Competence" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__Level__Module_ID__1EF99443" FromRole="Level" ToRole="Module" />
         </EntityType>
         <EntityType Name="ModelWithWorkform">
           <Key>
@@ -957,8 +955,8 @@
           <Property Name="Frequency" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Workload" Type="Int32" Nullable="false" />
           <Property Name="Duration" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__ModelWith__Modul__567ED357" FromRole="ModelWithWorkform" ToRole="Module" />
-          <NavigationProperty Name="Workform" Relationship="Project_WatervalModel.FK__ModelWith__Workf__558AAF1E" FromRole="ModelWithWorkform" ToRole="Workform" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__ModelWith__Modul__46136164" FromRole="ModelWithWorkform" ToRole="Module" />
+          <NavigationProperty Name="Workform" Relationship="Project_WatervalModel.FK__ModelWith__Workf__451F3D2B" FromRole="ModelWithWorkform" ToRole="Workform" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -967,20 +965,20 @@
           <Property Name="Module_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PrevModule_ID" Type="Int32" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CourseCode" Type="Int32" Nullable="false" />
+          <Property Name="CourseCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Entry_Level" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Definition_Short" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Definition_Long" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
           <Property Name="Foreknowledge" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
-          <Property Name="Account_ID" Type="Int32" Nullable="false" />
+          <Property Name="Account_ID" Type="Int32" />
           <NavigationProperty Name="Account" Relationship="Project_WatervalModel.FK_dbo_Module_dbo_Account_Account_ID" FromRole="Module" ToRole="Account" />
-          <NavigationProperty Name="AssignmentCode" Relationship="Project_WatervalModel.FK__Assignmen__Modul__351DDF8C" FromRole="Module" ToRole="AssignmentCode" />
-          <NavigationProperty Name="GradeType" Relationship="Project_WatervalModel.FK__GradeType__Modul__324172E1" FromRole="Module" ToRole="GradeType" />
-          <NavigationProperty Name="Level" Relationship="Project_WatervalModel.FK__Level__Module_ID__2F650636" FromRole="Module" ToRole="Level" />
-          <NavigationProperty Name="ModelWithWorkform" Relationship="Project_WatervalModel.FK__ModelWith__Modul__567ED357" FromRole="Module" ToRole="ModelWithWorkform" />
-          <NavigationProperty Name="WeekSchedule" Relationship="Project_WatervalModel.FK__WeekSched__Modul__436BFEE3" FromRole="Module" ToRole="WeekSchedule" />
+          <NavigationProperty Name="AssignmentCode" Relationship="Project_WatervalModel.FK__Assignmen__Modul__24B26D99" FromRole="Module" ToRole="AssignmentCode" />
+          <NavigationProperty Name="GradeType" Relationship="Project_WatervalModel.FK__GradeType__Modul__21D600EE" FromRole="Module" ToRole="GradeType" />
+          <NavigationProperty Name="Level" Relationship="Project_WatervalModel.FK__Level__Module_ID__1EF99443" FromRole="Module" ToRole="Level" />
+          <NavigationProperty Name="ModelWithWorkform" Relationship="Project_WatervalModel.FK__ModelWith__Modul__46136164" FromRole="Module" ToRole="ModelWithWorkform" />
+          <NavigationProperty Name="WeekSchedule" Relationship="Project_WatervalModel.FK__WeekSched__Modul__33008CF0" FromRole="Module" ToRole="WeekSchedule" />
           <NavigationProperty Name="Program" Relationship="Project_WatervalModel.ModelWithProgram" FromRole="Module" ToRole="Program" />
           <NavigationProperty Name="Study" Relationship="Project_WatervalModel.ModelWithStudy" FromRole="Module" ToRole="Study" />
           <NavigationProperty Name="LearnGoal" Relationship="Project_WatervalModel.ModuleWithLearnGoal" FromRole="Module" ToRole="LearnGoal" />
@@ -1053,7 +1051,7 @@
           <Property Name="PrevModule_ID" Type="Int32" />
           <Property Name="WeekNr" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__WeekSched__Modul__436BFEE3" FromRole="WeekSchedule" ToRole="Module" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__WeekSched__Modul__33008CF0" FromRole="WeekSchedule" ToRole="Module" />
         </EntityType>
         <EntityType Name="Workform">
           <Key>
@@ -1062,10 +1060,22 @@
           <Property Name="Workform_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="PrevWorkform_ID" Type="Int32" />
-          <NavigationProperty Name="ModelWithWorkform" Relationship="Project_WatervalModel.FK__ModelWith__Workf__558AAF1E" FromRole="Workform" ToRole="ModelWithWorkform" />
+          <NavigationProperty Name="ModelWithWorkform" Relationship="Project_WatervalModel.FK__ModelWith__Workf__451F3D2B" FromRole="Workform" ToRole="ModelWithWorkform" />
         </EntityType>
+        <Association Name="FK_dbo_Account_dbo_AccountRole_Role_ID">
+          <End Type="Project_WatervalModel.AccountRole" Role="AccountRole" Multiplicity="1" />
+          <End Type="Project_WatervalModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountRole">
+              <PropertyRef Name="Role_ID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_Module_dbo_Account_Account_ID">
-          <End Type="Project_WatervalModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="Project_WatervalModel.Account" Role="Account" Multiplicity="0..1" />
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
@@ -1076,19 +1086,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_AccountRole_dbo_AccountLaw_Law_ID">
-          <End Type="Project_WatervalModel.AccountLaw" Role="AccountLaw" Multiplicity="1" />
-          <End Type="Project_WatervalModel.AccountRole" Role="AccountRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccountLaw">
-              <PropertyRef Name="Law_ID" />
-            </Principal>
-            <Dependent Role="AccountRole">
-              <PropertyRef Name="Law_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Assignmen__Modul__351DDF8C">
+        <Association Name="FK__Assignmen__Modul__24B26D99">
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
           <End Type="Project_WatervalModel.AssignmentCode" Role="AssignmentCode" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1100,7 +1098,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Level__Competenc__2E70E1FD">
+        <Association Name="FK__Level__Competenc__1E05700A">
           <End Type="Project_WatervalModel.Competence" Role="Competence" Multiplicity="1" />
           <End Type="Project_WatervalModel.Level" Role="Level" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1112,7 +1110,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GradeType__Modul__324172E1">
+        <Association Name="FK__GradeType__Modul__21D600EE">
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
           <End Type="Project_WatervalModel.GradeType" Role="GradeType" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1124,7 +1122,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Level__Module_ID__2F650636">
+        <Association Name="FK__Level__Module_ID__1EF99443">
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
           <End Type="Project_WatervalModel.Level" Role="Level" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1136,7 +1134,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModelWith__Modul__567ED357">
+        <Association Name="FK__ModelWith__Modul__46136164">
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
           <End Type="Project_WatervalModel.ModelWithWorkform" Role="ModelWithWorkform" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1148,7 +1146,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModelWith__Workf__558AAF1E">
+        <Association Name="FK__ModelWith__Workf__451F3D2B">
           <End Type="Project_WatervalModel.Workform" Role="Workform" Multiplicity="1" />
           <End Type="Project_WatervalModel.ModelWithWorkform" Role="ModelWithWorkform" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1160,7 +1158,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__WeekSched__Modul__436BFEE3">
+        <Association Name="FK__WeekSched__Modul__33008CF0">
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
           <End Type="Project_WatervalModel.WeekSchedule" Role="WeekSchedule" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1172,8 +1170,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AccountWithAccountRole">
-          <End Type="Project_WatervalModel.Account" Role="Account" Multiplicity="*" />
+        <Association Name="AccountRoleWithAccountLaw">
+          <End Type="Project_WatervalModel.AccountLaw" Role="AccountLaw" Multiplicity="*" />
           <End Type="Project_WatervalModel.AccountRole" Role="AccountRole" Multiplicity="*" />
         </Association>
         <Association Name="ModelWithProgram">
@@ -1218,8 +1216,8 @@
             <EntityTypeMapping TypeName="Project_WatervalModel.Account">
               <MappingFragment StoreEntitySet="Account">
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
-                <ScalarProperty Name="isSuperUser" ColumnName="isSuperUser" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1235,8 +1233,7 @@
           <EntitySetMapping Name="AccountRole">
             <EntityTypeMapping TypeName="Project_WatervalModel.AccountRole">
               <MappingFragment StoreEntitySet="AccountRole">
-                <ScalarProperty Name="Law_ID" ColumnName="Law_ID" />
-                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
               </MappingFragment>
@@ -1427,12 +1424,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AccountWithAccountRole" TypeName="Project_WatervalModel.AccountWithAccountRole" StoreEntitySet="AccountWithAccountRole">
+          <AssociationSetMapping Name="AccountRoleWithAccountLaw" TypeName="Project_WatervalModel.AccountRoleWithAccountLaw" StoreEntitySet="AccountRoleWithAccountLaw">
             <EndProperty Name="AccountRole">
               <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
             </EndProperty>
-            <EndProperty Name="Account">
-              <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
+            <EndProperty Name="AccountLaw">
+              <ScalarProperty Name="Law_ID" ColumnName="Law_ID" />
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="ModelWithProgram" TypeName="Project_WatervalModel.ModelWithProgram" StoreEntitySet="ModelWithProgram">

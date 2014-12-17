@@ -1,0 +1,632 @@
+﻿@model DomainModel.Models.Module
+@using DomainModel.Models;
+
+<div class="form-group">
+    @Html.Label("Titel", new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.Title, new { @class = "form-control", id = "title" })
+        @Html.ValidationMessageFor(model => model.Title)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.Label("Korte Omschrijving", new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.Definition_Short, new { @class = "form-control", id = "definitionShort" })
+        @Html.ValidationMessageFor(model => model.Definition_Short)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.Label("Lange Omschrijving", new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.Definition_Long, new { @class = "form-control hidden", id = "definitionLong" })
+        @Html.ValidationMessageFor(model => model.Definition_Long)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.Label("Vakcode", new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.CourseCode, new { @class = "form-control", id = "courseCode" })
+        @Html.ValidationMessageFor(model => model.CourseCode)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.Label("Vakcoordinator", new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.Account_ID, new { @class = "form-control", id = "courseCoordinator" })
+        @Html.ValidationMessageFor(model => model.Account_ID)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.Label("Voorkennis", new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.Foreknowledge, new { @class = "form-control", id = "foreknowledge" })
+        @Html.ValidationMessageFor(model => model.Foreknowledge)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.Label("Ingangsniveau", new { @class = "col-sm-2 control-label" })
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.Entry_Level, new { @class = "form-control", id = "entryLevel" })
+        @Html.ValidationMessageFor(model => model.Entry_Level)
+    </div>
+</div>
+
+<hr />
+
+<div class="form-group">
+    <div class="container">
+        <p>
+
+            @Html.Label("Leerdoel Toevoegen", new { @class = "control-label" })
+        </p>
+        <div id="ValidationMesGoal" class="alert alert-danger hidden">
+            Minstens een Leerdoel verplicht
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="LearnGoalTable">
+            <thead>
+                <tr>
+                    <th width="20%">De student kan</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>Project-05</td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
+        </table>
+        <input type="button" value="Leerdoel Toevoegen" name="btn_collapseLearnGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseLearnGoal">
+        <br />
+        <br />
+        <div id="collapseLearnGoal" class="panel-collapse collapse open">
+
+            <input type="text" class="form-control" placeholder="Leerdoel..." name="TempValue" id="searchTerm" onkeyup="doSearch('LearnGoalTable')" style:size="10" />
+            <table class="table table-bordered table-striped" id="LearnGoalTable">
+                <thead>
+                    <tr>
+                        <th>Doel</th>
+                        <th>Toevoegen</th>
+                    </tr>
+
+                </thead>
+                <tr>
+                    <td id="1">in een praktijksituatie een keuze maken tussen het gebruik van een gekoppelde lijst, array, binaire boom en een hashtabel.</td>
+                    <td><input type="button" value="Toevoegen" name="addLearnGoal" class="btn btn-avans" id="1"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="form-group">
+    <div class="container">
+        <p>
+
+            @Html.Label("Leermiddel Toevoegen", new { @class = "control-label" })
+        </p>
+        <div id="ValidationMesGoal" class="alert alert-danger hidden">
+            Minstens een Leermiddel verplicht
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="LearnToolTable">
+            <thead>
+                <tr>
+                    <th width="20%">Leermiddel</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>Project-05</td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
+        </table>
+        <input type="button" value="Leermiddel Toevoegen" name="btn_collapseLearnTool" class="btn btn-avans" data-toggle="collapse" data-target="#collapseLearnTool">
+        <br />
+        <br />
+        <div id="collapseLearnTool" class="panel-collapse collapse open">
+
+            <input type="text" class="form-control" placeholder="Leermiddel..." name="TempValue" id="searchTerm" onkeyup="doSearch('LearnToolTable')" style:size="10" />
+            <table class="table table-bordered table-striped" id="LearnToolTable">
+                <thead>
+                    <tr>
+                        <th>Middel</th>
+                        <th>Toevoegen</th>
+                    </tr>
+
+                </thead>
+                <tr>
+                    <td id="1">Boek: Data structures & algorithms in JAVA, Second edition, Robert Lafore, ISBN: 0 672 32453 9</td>
+                    <td><input type="button" value="Toevoegen" name="addLearnTool" class="btn btn-avans" id="1"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="form-group">
+    <div class="container">
+        <p>
+
+            @Html.Label("Weekplanning Toevoegen", new { @class = "col-sm-2 control-label" })
+        </p>
+        <div id="ValidationMesSchedule" class="alert alert-danger">
+            Minstens een Weekplanning verplicht
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="WeekSchedule">
+            <thead>
+                <tr>
+                    <th width="5%">WeekNr</th>
+                    <th width="80%">Onderwerp</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td><input type="number" class="form-control" id="fieldNr_descriptionNr" value=".." /></td>
+                <td><input type="text" class="form-control" id="field_description" value="..." /></td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
+
+        </table>
+        <input type="button" value="Weekplanning Toevoegen" name="btn_collapseWeekSchedule" class="btn btn-avans" data-toggle="collapse" data-target="#collapseWeekSchedule">
+        <br />
+        <br />
+        <div id="collapseWeekSchedule" class="panel-collapse collapse open">
+            <form action="" class="form-inline">
+                <table class="table">
+                    <tr>
+                        <td width="10%">
+                            <input type="number" class="form-control" placeholder="0" name="TempValue" style:size="10" />
+                        </td>
+                        <td width="50%">
+                            <input type="text" class="form-control" placeholder="weekbeschrijving..." name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="button" value="Toevoegen" name="addWeekSchedule" class="btn btn-avans">
+                        </td>
+
+                        <td width="10%">
+                            <input type="button" value="Toevoegen Na" name="addWeekSchedulebetween" class="btn btn-avans">
+                        </td>
+                        <td width="20%">
+                            <select id="selecteer" class="form-control"><option value="-1" disabled selected>Maak een keuze</option></select>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+
+<div class="form-group">
+    <div class="container">
+        <p>
+
+            @Html.Label("Beoordeling Toevoegen", new { @class = "col-sm-2 control-label" })
+        </p>
+        <div id="ValidationMesGrade" class="alert alert-danger">
+            Minstens een beoordeling verplicht
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="GradeType">
+            <thead>
+                <tr>
+                    <th width="85%">Onderwerp</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td><input type="text" class="form-control" id="field_description" value="..." /></td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
+
+        </table>
+        <input type="button" value="Beoordeling Toevoegen" name="btn_collapseGradeType" class="btn btn-avans" data-toggle="collapse" data-target="#collapseGradeType">
+        <br />
+        <br />
+        <div id="collapseGradeType" class="panel-collapse collapse open">
+            <form action="" class="form-inline">
+                <table class="table">
+                    <tr>
+                        <td width="50%">
+                            <input type="text" class="form-control" placeholder="Beoordeling..." name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="button" value="Toevoegen" name="addGradeType" class="btn btn-avans">
+                        </td>
+
+                        <td width="10%">
+                            <input type="button" value="Toevoegen Na" name="addGradeTypebetween" class="btn btn-avans">
+                        </td>
+                        <td width="20%">
+                            <select id="selecteer" class="form-control"><option value="-1" disabled selected>Maak een keuze</option></select>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+
+<div class="form-group">
+    <div class="container">
+        <p>
+
+            @Html.Label("Toetscode Toevoegen", new { @class = "col-sm-2 control-label" })
+        </p>
+        <div id="ValidationMesAssignmentCode" class="alert alert-danger">
+            Minstens een toetscode verplicht
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="AssignmentCode">
+            <thead>
+                <tr>
+                    <th>Omschrijving</th>
+                    <th>EC</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+            <tr>
+                <td><input type="text" class="form-control" id="field_description" value="..." /></td>
+                <td><input type="number" class="form-control" id="field_descriptionEC" value="0" /></td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
+        </table>
+        <input type="button" value="Toetscode Toevoegen" name="btn_collapseAssignmentCode" class="btn btn-avans" data-toggle="collapse" data-target="#collapseAssignmentCode">
+        <br />
+        <br />
+        <div id="collapseAssignmentCode" class="panel-collapse collapse open">
+            <form action="" class="form-inline">
+                <table class="table">
+                    <tr>
+                        <td width="50%">
+                            <input type="text" class="form-control" placeholder="Omschrijving..." name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="number" class="form-control" placeholder="#" name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="button" value="Toevoegen" name="addAssignmentCode" class="btn btn-avans">
+                        </td>
+
+                        <td width="10%">
+                            <input type="button" value="Toevoegen Na" name="addAssignmentCodebetween" class="btn btn-avans">
+                        </td>
+                        <td width="20%">
+                            <select id="selecteer" class="form-control"><option value="-1" disabled selected>Maak een keuze</option></select>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="form-group">
+    <div class="container">
+        <p>
+
+            @Html.Label("Werkvorm Toevoegen", new { @class = "col-sm-2 control-label" })
+        </p>
+        <div id="ValidationMesWorkform" class="alert alert-danger">
+            Minstens een werkvorm verplicht
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="Workform">
+            <thead>
+                <tr>
+                    <th>Werkvorm</th>
+                    <th>Duur</th>
+                    <th>Frequentie</th>
+                    <th>Studiebelasting</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+            <tr>
+                <td><input type="text" class="form-control" id="field_descriptionDesc" value="..." /></td>
+                <td><input type="number" class="form-control" id="field_descriptionDuration" value="0" /></td>
+                <td><input type="text" class="form-control" id="field_descriptionFreq" value="..." /></td>
+                <td><input type="number" class="form-control" id="field_descriptionLoad" value="0" /></td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
+        </table>
+        <input type="button" value="Werkvorm Toevoegen" name="btn_collapseWorkform" class="btn btn-avans" data-toggle="collapse" data-target="#collapseWorkform">
+        <br />
+        <br />
+        <div id="collapseWorkform" class="panel-collapse collapse open">
+            <form action="" class="form-inline">
+                <table class="table">
+                    <tr>
+                        <td width="30%">
+                            <input type="text" class="form-control" placeholder="Omschrijving..." name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="number" class="form-control" placeholder="#." name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="text" class="form-control" placeholder="Frequentie..." name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="number" class="form-control" placeholder="#" name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="button" value="Toevoegen" name="addWorkform" class="btn btn-avans">
+                        </td>
+
+                        <td width="10%">
+                            <input type="button" value="Toevoegen Na" name="addWorkformbetween" class="btn btn-avans">
+                        </td>
+                        <td width="20%">
+                            <select id="selecteer" class="form-control"><option value="-1" disabled selected>Maak een keuze</option></select>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="form-group">
+    <div class="container">
+        <p>
+
+            @Html.Label("Leerlijn Toevoegen", new { @class = "control-label" })
+        </p>
+        <div id="ValidationMesLearnLine" class="alert alert-danger hidden">
+            Minstens een leerlijn verplicht
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="LearnLineTable">
+            <thead>
+                <tr>
+                    <th width="20%">Onderwerp</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>Project-05</td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
+        </table>
+        <input type="button" value="Leerlijn Toevoegen" name="btn_collapseLearnLine" class="btn btn-avans" data-toggle="collapse" data-target="#collapseLearnLine">
+        <br />
+        <br />
+        <div id="collapseLearnLine" class="panel-collapse collapse open">
+
+            <input type="text" class="form-control" placeholder="Leerlijn..." name="TempValue" id="searchTerm" onkeyup="doSearch('LearnLineTable')" style:size="10" />
+            <table class="table table-bordered table-striped" id="LearnLineTable">
+                <thead>
+                    <tr>
+                        <th>Onderwerp</th>
+                        <th>Toevoegen</th>
+                    </tr>
+
+                </thead>
+                <tr>
+                    <td id="1">Programeren</td>
+                    <td><input type="button" value="Toevoegen" name="addLearnLine" class="btn btn-avans" id="1"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="form-group">
+    <div class="container">
+        <p>
+
+            @Html.Label("Thema Toevoegen", new { @class = "control-label" })
+        </p>
+        <div id="ValidationMesTheme" class="alert alert-danger hidden">
+            Minstens een thema verplicht
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="ThemeTable">
+            <thead>
+                <tr>
+                    <th width="20%">Onderwerp</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>Project-05</td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
+        </table>
+        <input type="button" value="Thema Toevoegen" name="btn_collapseTheme" class="btn btn-avans" data-toggle="collapse" data-target="#collapseTheme">
+        <br />
+        <br />
+        <div id="collapseTheme" class="panel-collapse collapse open">
+
+            <input type="text" class="form-control" placeholder="Thema..." name="TempValue" id="searchTerm" onkeyup="doSearch('ThemeTable')" style:size="10" />
+            <table class="table table-bordered table-striped" id="ThemeTable">
+                <thead>
+                    <tr>
+                        <th>Onderwerp</th>
+                        <th>Toevoegen</th>
+                    </tr>
+
+                </thead>
+                <tr>
+                    <td id="1">Programeren</td>
+                    <td><input type="button" value="Toevoegen" name="addTheme" class="btn btn-avans" id="1"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="form-group">
+    <div class="container">
+        <p>
+
+            @Html.Label("Competentie Toevoegen", new { @class = "control-label" })
+        </p>
+        <div id="ValidationMesCompetence" class="alert alert-danger hidden">
+            Minstens een competentie verplicht
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="CompetenceTable">
+            <thead>
+                <tr>
+                    <th width="20%">Onderwerp</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>Project-05</td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
+        </table>
+        <input type="button" value="Competentie Toevoegen" name="btn_collapseCompetence" class="btn btn-avans" data-toggle="collapse" data-target="#collapseCompetence">
+        <br />
+        <br />
+        <div id="collapseCompetence" class="panel-collapse collapse open">
+
+            <input type="text" class="form-control" placeholder="Competentie..." name="TempValue" id="searchTerm" onkeyup="doSearch('CompetenceTable')" style:size="10" />
+            <table class="table table-bordered table-striped" id="CompetenceTable">
+                <thead>
+                    <tr>
+                        <th>Onderwerp</th>
+                        <th>Toevoegen</th>
+                    </tr>
+
+                </thead>
+                <tr>
+                    <td id="1">Programeren</td>
+                    <td><input type="button" value="Toevoegen" name="addCompetence" class="btn btn-avans" id="1"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="form-group">
+    <div class="container">
+        <p>
+
+            @Html.Label("Opleiding Toevoegen", new { @class = "control-label" })
+        </p>
+        <div id="ValidationMesProgram" class="alert alert-danger hidden">
+            Minstens een opleideing verplicht
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="ProgramTable">
+            <thead>
+                <tr>
+                    <th width="20%">Onderwerp</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>Project-05</td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
+        </table>
+        <input type="button" value="Opleiding Toevoegen" name="btn_collapseProgram" class="btn btn-avans" data-toggle="collapse" data-target="#collapseProgram">
+        <br />
+        <br />
+        <div id="collapseProgram" class="panel-collapse collapse open">
+
+            <input type="text" class="form-control" placeholder="Opleiding..." name="TempValue" id="searchTerm" onkeyup="doSearch('ProgramTable')" style:size="10" />
+            <table class="table table-bordered table-striped" id="ProgramTable">
+                <thead>
+                    <tr>
+                        <th>Onderwerp</th>
+                        <th>Toevoegen</th>
+                    </tr>
+
+                </thead>
+                <tr>
+                    <td id="1">Programeren</td>
+                    <td><input type="button" value="Toevoegen" name="addProgram" class="btn btn-avans" id="1"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="form-group">
+    <div class="container">
+        <p>
+
+            @Html.Label("Studierichting Toevoegen", new { @class = "control-label" })
+        </p>
+        <div id="ValidationMesStudy" class="alert alert-danger hidden">
+            Minstens een studierichting verplicht
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="StudyTable">
+            <thead>
+                <tr>
+                    <th width="20%">Onderwerp</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>Project-05</td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
+        </table>
+        <input type="button" value="Studierichting Toevoegen" name="btn_collapseTheme" class="btn btn-avans" data-toggle="collapse" data-target="#collapseStudy">
+        <br />
+        <br />
+        <div id="collapseStudy" class="panel-collapse collapse open">
+
+            <input type="text" class="form-control" placeholder="Stuedierichting..." name="TempValue" id="searchTerm" onkeyup="doSearch('StudyTable')" style:size="10" />
+            <table class="table table-bordered table-striped" id="StudyTable">
+                <thead>
+                    <tr>
+                        <th>Onderwerp</th>
+                        <th>Toevoegen</th>
+                    </tr>
+
+                </thead>
+                <tr>
+                    <td id="1">Programeren</td>
+                    <td><input type="button" value="Toevoegen" name="addStudy" class="btn btn-avans" id="1"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr />
+@Html.Partial("~/Views/Shared/_Alert.cshtml")
+
+
+
+
+
+
+
