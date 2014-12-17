@@ -1,0 +1,14 @@
+﻿@model DomainModel.Models.Phasing
+@using DomainModel.Models;
+
+<div class="form-group">
+    @Html.Label("Naam", new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.Title, new { @class = "form-control", id = "title" })
+        @Html.ValidationMessageFor(model => model.Title)
+    </div>
+</div>
+
+<hr />
+@Html.Partial("~/Views/Shared/_Alert.cshtml")

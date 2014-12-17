@@ -1,0 +1,33 @@
+﻿@model DomainModel.Models.Phasing
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+	<h2>Fasering Details</h2>
+
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Titel</th>
+			</tr>
+		</thead>
+		<tr>
+			@Model.Title
+		</tr>
+	</table>
+
+
+
+
+
+
+	<p>
+		@Html.ActionLink("Aanpassen", "Edit", new { id = Model.Phasing_ID }, new { @class = "btn btn-warning" })
+
+		<br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /></br>|
+		@Html.ActionLink("Terug naar Index", "Index")
+	</p>
+</div>
