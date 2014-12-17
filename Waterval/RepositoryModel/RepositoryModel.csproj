@@ -50,6 +50,7 @@
     <Compile Include="DummyRepository\DModuleRepository.cs" />
     <Compile Include="IRepository\ICompetenceRepository.cs" />
     <Compile Include="IRepository\IModuleRepository.cs" />
+    <Compile Include="IRepository\ISearchRepository.cs" />
     <Compile Include="Repository\BlockRepository.cs" />
     <Compile Include="IRepository\IBlockRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

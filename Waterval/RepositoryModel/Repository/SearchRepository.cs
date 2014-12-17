@@ -1,13 +1,14 @@
-﻿using DomainModel.Models;
-using RepositoryModel.IRepository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
+using DomainModel.Models;
+using RepositoryModel.IRepository;
 
-namespace RepositoryModel {
-	class SearchRepository {
+namespace RepositoryModel.Repository {
+	public class SearchRepository : ISearchRepository {
 
 		Project_WatervalEntities dbContext;
 

@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RepositoryModel.Repository;
+using DomainModel.Models;
 
 namespace Waterval.Controllers
 {
     public class SearchController : Controller
     {
+		private SearchRepository searchRepo;
+
         // GET: Search
         public ActionResult Index() {
 			DomainModel.Models.Project_WatervalEntities dbContext = new DomainModel.Models.Project_WatervalEntities( );
@@ -17,9 +21,10 @@ namespace Waterval.Controllers
 			return View();
         }
 
-		public ActionResult Result ( String search, Boolean searchBlock) {
-			RepositoryModel.Repository.SearchRepository
-			return View( );
+		public ActionResult BlockResult ( String search) {
+			search = "";
+			List<Block> blocks = searchRepo.GetBlocksWith( search );
+			return View( blocks );
 		}
     }
 }
