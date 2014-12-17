@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("toNewCohort", "Competence", new { ReturnUrl = ViewBag.ReturnUrl },
+@using (Html.BeginForm("toNewVersion", "Competence", new { ReturnUrl = ViewBag.ReturnUrl },
             FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
 {
 
@@ -25,6 +25,6 @@
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/competentieScripts.js"></script>
-    <script src="~/Scripts/Filter.js"></script>
+<script src="~/Scripts/competentieScripts.js"></script>
+<script src="~/Scripts/Filter.js"></script>
 }

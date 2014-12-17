@@ -22,6 +22,8 @@ namespace DomainModel.Models
         public int Workform_ID { get; set; }
         public string Description { get; set; }
         public Nullable<int> PrevWorkform_ID { get; set; }
+        public bool isDeleted { get; set; }
+        public Nullable<System.DateTime> DeleteDate { get; set; }
     
         public virtual ICollection<ModelWithWorkform> ModelWithWorkform { get; set; }
     }

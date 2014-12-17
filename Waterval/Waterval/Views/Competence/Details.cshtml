@@ -61,7 +61,7 @@
             </tr>
         }
     </table>
-
+    <hr />
     <p>
         @if (Model.PrevCompetence_ID != null)
         {
@@ -81,7 +81,7 @@
 
     <p>
         @Html.ActionLink("Aanpassen", "Edit", new { id = Model.Competence_ID }, new { @class = "btn btn-warning" })
-        <input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" />
+
         @Html.ActionLink("Terug naar Index", "Index")
     </p>
 </div>

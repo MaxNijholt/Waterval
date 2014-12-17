@@ -1,4 +1,4 @@
-﻿@model DomainModel.Models.LearningTool
+﻿@model DomainModel.Models.Workform
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -7,17 +7,17 @@
 
 <h2>Leermiddel aanpassen</h2>
 
-@using (Html.BeginForm("NewVersion", "LearningTool", new { ReturnUrl = ViewBag.ReturnUrl },
+@using (Html.BeginForm("toNewVersion", "Workform", new { ReturnUrl = ViewBag.ReturnUrl },
             FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
 {
     @Html.ValidationSummary(true)
     <fieldset>
 
-        @Html.HiddenFor(model => model.PrevLearnTool_ID)
+        @Html.HiddenFor(model => model.PrevWorkform_ID)
         @Html.Partial("_CreateOrEdit", Model)
 
         <p>
-            <input type="submit" value="Competentie aanpassen" class="btn btn-success" /> |
+            <input type="submit" value="Nieuwe variant" class="btn btn-success" /> |
             @Html.ActionLink("Terug naar Index", "Index")
         </p>
     </fieldset>

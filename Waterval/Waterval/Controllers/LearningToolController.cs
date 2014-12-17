@@ -20,7 +20,7 @@ namespace Waterval.Controllers
         }
         public ActionResult Index()
         {
-            return View(learningtoolRepository.GetAll());
+            return View(learningtoolRepository.GetAll().Where(l => l.isDeleted == false));
         }
 
         public ActionResult Create()

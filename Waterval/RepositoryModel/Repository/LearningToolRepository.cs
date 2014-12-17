@@ -38,8 +38,8 @@ namespace RepositoryModel.Repository
             LearningTool learningtool = dbContext.LearningTool.SingleOrDefault(c => c.LearnTool_ID == learningtool_id);
         //    learningtool.isDeleted = true;
         //    learningtool.DeleteDate = DateTime.UtcNow;
-
-            learningtool.Description = learningtool.Description + " IK BEN VERWIJDERD";
+            learningtool.isDeleted = true;
+            learningtool.DeleteDate = DateTime.UtcNow;
             dbContext.SaveChanges();
         }
 

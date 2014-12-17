@@ -179,7 +179,7 @@ namespace Waterval.Controllers
         /// </summary>
         /// <param name="id">The id of the competence that we want to use as a base.</param>
         /// <returns></returns>
-        public ActionResult toNewCohort(int id)
+        public ActionResult toNewVersion(int id)
         {
             Competence competence = compenteceRepository.Get(id);
 
@@ -196,7 +196,7 @@ namespace Waterval.Controllers
         }
 
         [ValidateInput(true), HttpPost]
-        public ActionResult toNewCohort(int id, FormCollection form)
+        public ActionResult toNewVersion(int id, FormCollection form)
         {
             Competence competence = new Competence();
             try

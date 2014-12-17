@@ -52,7 +52,7 @@
             var id = $(this).attr('data-id');
 
             if (confirm('Gegevens van ' + title + ' verwijderen?')) {
-                var url = "/Blok/Delete";
+                var url = "/Block/Delete";
 
                 $.post(url, { Block_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
                     $("#msg").html(data);

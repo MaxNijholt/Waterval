@@ -49,15 +49,19 @@
     <Compile Include="DummyRepository\DBlockRepository.cs" />
     <Compile Include="DummyRepository\DLearningToolRepository.cs" />
     <Compile Include="DummyRepository\DModuleRepository.cs" />
+    <Compile Include="IRepository\IGradeTypeRepository.cs" />
+    <Compile Include="IRepository\IWorkformRepository.cs" />
     <Compile Include="IRepository\ICompetenceRepository.cs" />
     <Compile Include="IRepository\ILearningToolRepository.cs" />
     <Compile Include="IRepository\IModuleRepository.cs" />
+    <Compile Include="Repository\GradeTypeRepository.cs" />
     <Compile Include="Repository\BlockRepository.cs" />
     <Compile Include="IRepository\IBlockRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CompetenceRepository.cs" />
     <Compile Include="Repository\LearningToolRepository.cs" />
     <Compile Include="Repository\ModuleRepository.cs" />
+    <Compile Include="Repository\WorkformRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">

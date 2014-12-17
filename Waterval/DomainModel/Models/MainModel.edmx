@@ -82,6 +82,8 @@
           <Property Name="LearnGoal_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PrevLearnGoal_ID" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="900" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
         </EntityType>
         <EntityType Name="LearningTool">
           <Key>
@@ -90,6 +92,8 @@
           <Property Name="LearnTool_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PrevLearnTool_ID" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="900" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
         </EntityType>
         <EntityType Name="LearnLine">
           <Key>
@@ -270,6 +274,8 @@
           <Property Name="Workform_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="PrevWorkform_ID" Type="int" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
         </EntityType>
         <Association Name="FK__AccountRo__Law_I__1293BD5E">
           <End Role="AccountLaw" Type="Self.AccountLaw" Multiplicity="1" />
@@ -911,6 +917,8 @@
           <Property Name="PrevLearnGoal_ID" Type="Int32" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Module" Relationship="Project_WatervalModel.ModuleWithLearnGoal" FromRole="LearnGoal" ToRole="Module" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="LearningTool">
           <Key>
@@ -920,6 +928,8 @@
           <Property Name="PrevLearnTool_ID" Type="Int32" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Module" Relationship="Project_WatervalModel.ModuleWithLearningTool" FromRole="LearningTool" ToRole="Module" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="LearnLine">
           <Key>
@@ -1061,6 +1071,8 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="PrevWorkform_ID" Type="Int32" />
           <NavigationProperty Name="ModelWithWorkform" Relationship="Project_WatervalModel.FK__ModelWith__Workf__451F3D2B" FromRole="Workform" ToRole="ModelWithWorkform" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="FK_dbo_Account_dbo_AccountRole_Role_ID">
           <End Type="Project_WatervalModel.AccountRole" Role="AccountRole" Multiplicity="1" />
@@ -1284,6 +1296,8 @@
           <EntitySetMapping Name="LearnGoal">
             <EntityTypeMapping TypeName="Project_WatervalModel.LearnGoal">
               <MappingFragment StoreEntitySet="LearnGoal">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PrevLearnGoal_ID" ColumnName="PrevLearnGoal_ID" />
                 <ScalarProperty Name="LearnGoal_ID" ColumnName="LearnGoal_ID" />
@@ -1293,6 +1307,8 @@
           <EntitySetMapping Name="LearningTool">
             <EntityTypeMapping TypeName="Project_WatervalModel.LearningTool">
               <MappingFragment StoreEntitySet="LearningTool">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PrevLearnTool_ID" ColumnName="PrevLearnTool_ID" />
                 <ScalarProperty Name="LearnTool_ID" ColumnName="LearnTool_ID" />
@@ -1418,6 +1434,8 @@
           <EntitySetMapping Name="Workform">
             <EntityTypeMapping TypeName="Project_WatervalModel.Workform">
               <MappingFragment StoreEntitySet="Workform">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="PrevWorkform_ID" ColumnName="PrevWorkform_ID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Workform_ID" ColumnName="Workform_ID" />

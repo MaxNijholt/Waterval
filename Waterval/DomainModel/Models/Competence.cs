@@ -11,7 +11,6 @@ namespace DomainModel.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Competence
     {
@@ -22,11 +21,8 @@ namespace DomainModel.Models
     
         public int Competence_ID { get; set; }
         public Nullable<int> PrevCompetence_ID { get; set; }
-        [Required]
         public string Title { get; set; }
-        [Required]
         public string Definition_Short { get; set; }
-        [Required]
         public string Definition_Long { get; set; }
         public bool isDeleted { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }

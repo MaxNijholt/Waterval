@@ -169,6 +169,7 @@
     <Compile Include="Controllers\LeerlijnController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\ThemaController.cs" />
+    <Compile Include="Controllers\WorkformController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -270,13 +271,19 @@
     <Content Include="Views\Leerlijn\Details.cshtml" />
     <Content Include="Views\Leerlijn\Edit.cshtml" />
     <Content Include="Views\Leerlijn\Index.cshtml" />
-    <Content Include="Views\Competence\toNewCohort.cshtml" />
+    <Content Include="Views\Competence\toNewVersion.cshtml" />
     <Content Include="Views\LearningTool\Index.cshtml" />
     <Content Include="Views\LearningTool\Create.cshtml" />
     <Content Include="Views\LearningTool\_CreateOrEdit.cshtml" />
     <Content Include="Views\LearningTool\Edit.cshtml" />
     <Content Include="Views\LearningTool\Details.cshtml" />
     <Content Include="Views\LearningTool\NewVersion.cshtml" />
+    <Content Include="Views\Workform\Index.cshtml" />
+    <Content Include="Views\Workform\Create.cshtml" />
+    <Content Include="Views\Workform\Edit.cshtml" />
+    <Content Include="Views\Workform\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Workform\toNewVersion.cshtml" />
+    <Content Include="Views\Workform\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

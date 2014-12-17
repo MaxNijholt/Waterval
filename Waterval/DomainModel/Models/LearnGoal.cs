@@ -22,6 +22,8 @@ namespace DomainModel.Models
         public int LearnGoal_ID { get; set; }
         public Nullable<int> PrevLearnGoal_ID { get; set; }
         public string Description { get; set; }
+        public bool isDeleted { get; set; }
+        public Nullable<System.DateTime> DeleteDate { get; set; }
     
         public virtual ICollection<Module> Module { get; set; }
     }

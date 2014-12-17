@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="Project_WatervalModel.AssignmentCode" Width="1.5" PointX="9.75" PointY="13" />
         <EntityTypeShape EntityType="Project_WatervalModel.Block" Width="1.5" PointX="8.25" PointY="21.25" />
         <EntityTypeShape EntityType="Project_WatervalModel.Competence" Width="1.5" PointX="10.5" PointY="3" />
-        <EntityTypeShape EntityType="Project_WatervalModel.GradeType" Width="1.5" PointX="9.75" PointY="18.625" />
+        <EntityTypeShape EntityType="Project_WatervalModel.GradeType" Width="1.5" PointX="10" PointY="17.75" />
         <EntityTypeShape EntityType="Project_WatervalModel.LearnGoal" Width="1.5" PointX="5.25" PointY="16.125" />
         <EntityTypeShape EntityType="Project_WatervalModel.LearningTool" Width="1.5" PointX="5.25" PointY="9.5" />
         <EntityTypeShape EntityType="Project_WatervalModel.LearnLine" Width="1.5" PointX="5.25" PointY="18.625" />

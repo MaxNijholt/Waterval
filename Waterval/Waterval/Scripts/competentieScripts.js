@@ -180,7 +180,6 @@ $('input[name="btn_collapseGoal"] ').click(function () {
 $('input[name="btn_Save"] ').click(function () {
     if (!$('[id=long]').val()) {
         $("#ValidationMes").show();
-        return;
     }
     else {
         $("#ValidationMes").hide();
