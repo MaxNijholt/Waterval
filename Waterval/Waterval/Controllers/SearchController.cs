@@ -10,7 +10,7 @@ namespace Waterval.Controllers
 {
     public class SearchController : Controller
     {
-		private SearchRepository searchRepo;
+		private SearchRepository searchRepo = new SearchRepository();
 
         // GET: Search
         public ActionResult Index() {
@@ -21,9 +21,8 @@ namespace Waterval.Controllers
 			return View();
         }
 
-		public ActionResult BlockResult ( String search) {
-			search = "";
-			List<Block> blocks = searchRepo.GetBlocksWith( search );
+		public ActionResult BlockResult ( String SearchText) {
+            List<Block> blocks = searchRepo.GetBlocksWith(SearchText);
 			return View( blocks );
 		}
     }

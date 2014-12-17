@@ -17,8 +17,9 @@ namespace RepositoryModel.Repository {
 		}
 
 		public List<Block> GetBlocksWith ( String find ) {
-			List<Block> notDeleted = dbContext.Block.Where( b => b.isDeleted == false ).ToList( );
-			return (List<Block>)( from val in notDeleted where ( val.Title.Contains( "%" + find + "%" ) ) select val );
+			List<Block> notDeleted = dbContext.Block.Where( b => b.isDeleted == false && b.Title.Contains(find) ).ToList( );
+            List<Block> returnValues = (List<Block>)( from val in notDeleted where ( val.Title.Contains( "%" + find + "%" ) ) select val ).ToList();
+            return notDeleted;
 
 		}
 
