@@ -1,5 +1,4 @@
-﻿
-@model DomainModel.Models.Module
+﻿@model DomainModel.Models.Module
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,7 +11,7 @@
         <table class="table table-striped table-bordered">
             <tr>
                 <td>
-                    @Html.DisplayNameFor(model => model.Title)
+                    Titel
                 </td>
                 <td>
                     @Html.DisplayFor(model => model.Title)
@@ -20,7 +19,7 @@
             </tr>
             <tr>
                 <td>
-                    @Html.DisplayNameFor(model => model.Definition_Short)
+                    Korte beschrijving
                 </td>
                 <td>
                     @Html.DisplayFor(model => model.Definition_Short)
@@ -28,7 +27,7 @@
             </tr>
             <tr>
                 <td>
-                    @Html.DisplayNameFor(model => model.Definition_Long)
+                    Lange Beschrijving
                 </td>
                 <td>
                     @Html.DisplayFor(model => model.Definition_Long)
@@ -36,7 +35,7 @@
             </tr>
             <tr>
                 <td>
-                    @Html.DisplayNameFor(model => model.CourseCode)
+                    Vakcode
                 </td>
                 <td>
                     @Html.DisplayFor(model => model.CourseCode)
@@ -44,15 +43,15 @@
             </tr>
             <tr>
                 <td>
-                    @Html.DisplayNameFor(model => model.Account_ID)
+                    VakCoordinator
                 </td>
                 <td>
-                    @Html.DisplayFor(model => model.Account_ID)
+                    @Html.DisplayFor(model => model.Account.Username)
                 </td>
             </tr>
             <tr>
                 <td>
-                    @Html.DisplayNameFor(model => model.Foreknowledge)
+                    Voorkennis
                 </td>
                 <td>
                     @Html.DisplayFor(model => model.Foreknowledge)
@@ -60,7 +59,7 @@
             </tr>
             <tr>
                 <td>
-                    @Html.DisplayNameFor(model => model.Entry_Level)
+                    Ingangsniveau
                 </td>
                 <td>
                     @Html.DisplayFor(model => model.Entry_Level)
@@ -75,9 +74,13 @@
                 <tr>
                     <th>Doel</th>
                 </tr>
-                <tr>
-                    <td>in een praktijksituatie een keuze maken tussen het gebruik van een gekoppelde lijst, array, binaire boom en een hashtabel.</td>
-                </tr>
+
+                @foreach (var x in Model.LearnGoal.Where(c => c.isDeleted == false))
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(model => x.Description)</td>
+                    </tr>
+                }
             </table>
         </div>
 
@@ -88,9 +91,13 @@
                 <tr>
                     <th>Leermiddel</th>
                 </tr>
-                <tr>
-                    <td>Boek: Data structures & algorithms in JAVA, Second edition, Robert Lafore, ISBN: 0 672 32453 9</td>
-                </tr>
+                @foreach (var x in Model.LearningTool.Where(c => c.isDeleted == false))
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(model => x.Description)</td>
+                    </tr>
+                }
+
             </table>
         </div>
 
@@ -101,153 +108,179 @@
                     <th>Weeknr</th>
                     <th>Onderwerp</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Introductie</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Variables, Methods.</td>
-                </tr>
-            </table>
-        </div>
 
 
-        <div class="container">
-            <p>Beoordelingen</p>
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <th>Onderwerp</th>
-                </tr>
-                <tr>
-                    <td>Assesment</td>
-                </tr>
-            </table>
-        </div>
+               
+                    @foreach (var i in Model.WeekSchedule.Where(c => c.isDeleted == false))
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(model => i.WeekNr)</td>
+                            <td>@Html.DisplayFor(model => i.Description)</td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
 
 
-        <div class="container">
-            <p>Toetscode</p>
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <th>Omschrijving</th>
-                    <th>EC</th>
-                </tr>
-                <tr>
-                    <td>Prog1-tentamen</td>
-                    <td>4</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="container">
-            <p>Werkvorm</p>
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <th>Werkvorm</th>
-                    <th>Duur</th>
-                    <th>Studiebelasting</th>
-                    <th>Frequentie</th>
-                </tr>
-                <tr>
-                    <td>Hoorcollege</td>
-                    <td>52 uur</td>
-                    <td>1</td>
-                    <td>2x2 weken</td>
-                </tr>
-                <tr>
-                    <td>Practicum</td>
-                    <td>104 uur</td>
-                    <td>2</td>
-                    <td>2x4 weken</td>
-                </tr>
-            </table>
-        </div>
+            <div class="container">
+                <p>Beoordelingen</p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Onderwerp</th>
+                    </tr>
+                    @foreach (var x in Model.GradeType.Where(c => c.isDeleted == false))
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(model => x.GradeDescription)</td>
+                            </tr>
+                        }
+                </table>
+            </div>
 
 
-        <div class="container">
-            <p>Leerlijnen</p>
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <th>Naam</th>
-                    <th>Omschrijving</th>
-                </tr>
-                <tr>
-                    <td>@Html.ActionLink("Programeren", "Details", "Leerlijn")</td>
-                    <td>Het leren van programeren</td>
-                </tr>
-                <tr>
-                    <td>@Html.ActionLink("Onderzoek", "Details", "Leerlijn")</td>
-                    <td>Het leren van Onderzoeken</td>
-                </tr>
-            </table>
-        </div>
+            <div class="container">
+                <p>Toetscode</p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Omschrijving</th>
+                        <th>EC</th>
+                    </tr>
+
+                    @foreach (var i in Model.AssignmentCode.Where(c => c.isDeleted == false))
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(model => i.Description)</td>
+                            <td>@Html.DisplayFor(model => i.EC)</td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+
+            <div class="container">
+                <p>Werkvorm</p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Werkvorm</th>
+                        <th>Duur</th>
+                        <th>Frequentie</th>
+                        <th>Studiebelasting</th>
+                    </tr>
+
+                    @foreach (var i in Model.ModelWithWorkform.Where(c => c.Workform.isDeleted == false))
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(model => i.Workform.Description)</td>
+                            <td>@Html.DisplayFor(model => i.Duration) Weken</td>
+                            <td>@Html.DisplayFor(model => i.Frequency)</td>
+                            <td>@Html.DisplayFor(model => i.Workload)</td>
+
+                        </tr>
+                    }
+                  
+                </table>
+            </div>
 
 
-        <div class="container">
-            <p>Opleiding</p>
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <th>Cohort</th>
-                </tr>
-                <tr>
-                    <td>@Html.ActionLink("Voorbeeld", "Details", "Leerlijn")</td>
-                </tr>
-            </table>
-        </div>
+            <div class="container">
+                <p>Leerlijnen</p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Naam</th>
+                        <th>Omschrijving</th>
+                    </tr>
 
-        <div class="container">
-            <p>Studierichting</p>
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <th>Onderwerp</th>
-                </tr>
-                <tr>
-                    <td>@Html.ActionLink("SO", "Details", "Leerlijn")</td>
-                </tr>
-            </table>
-        </div>
+                    @foreach (var i in Model.LearnLine.Where(c => c.isDeleted == false))
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(i.Title, "../Leerlijn/Details", new { id = i.LearnLine_ID })</td>
+
+                            <td>@Html.DisplayFor(model => i.Definition)</td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
 
 
-        <div class="container">
-            <p>Thema's</p>
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <th>Naam</th>
-                    <th>Omschrijving</th>
-                </tr>
-                <tr>
-                    <td>@Html.ActionLink("Programeren", "Details", "Thema")</td>
-                    <td>Het leren van programeren</td>
-                </tr>
-                <tr>
-                    <td>@Html.ActionLink("Onderzoek", "Details", "Thema")</td>
-                    <td>Het leren van Onderzoeken</td>
-                </tr>
-            </table>
+            <div class="container">
+                <p>Opleiding</p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Cohort</th>
+                    </tr>
 
-        </div>
+                    @foreach (var i in Model.Program.Where(c => c.isDeleted == false))
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(i.Cohort, "../Program/Details", new { id = i.Program_ID })</td>
+                        </tr>
+                    }
 
-        <div class="container">
-            <p>Compententie's</p>
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <th>Titel</th>
-                    <th>Omschrijving</th>
-                </tr>
-                <tr>
-                    <td>@Html.ActionLink("Procesanalyse uitvoeren", "Details", "Compententie")</td>
-                    <td>De student is in staat om een procesanalyse uit te voeren.</td>
-                </tr>
-            </table>
+                </table>
+            </div>
 
-        </div>
+            <div class="container">
+                <p>Studierichting</p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Onderwerp</th>
+                    </tr>
+                    @foreach (var i in Model.Study.Where(c => c.isDeleted == false))
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(i.Title, "../Study/Details", new { id = i.Study_ID })</td>
+                        </tr>
+                    }
 
-    </fieldset>
+                </table>
+            </div>
 
-    <p>
-      @Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })
-        <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />|
-        @Html.ActionLink("Terug naar Index", "Index")
-    </p>
-</div>
+
+            <div class="container">
+                <p>Thema's</p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Naam</th>
+                        <th>Omschrijving</th>
+                    </tr>
+
+                    @foreach (var i in Model.Theme.Where(c => c.isDeleted == false))
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(i.Title, "../Theme/Details", new { id = i.Theme_ID })</td>
+                            <td>@Html.DisplayFor(model => i.Definition)</td>
+                        </tr>
+                    }
+
+                </table>
+
+            </div>
+
+            <div class="container">
+                <p>Compententie's</p>
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Titel</th>
+                        <th>Omschrijving</th>
+                    </tr>
+                    @foreach (var i in Model.Level.Where(c => c.Competence.isDeleted == false))
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(i.Competence.Title, "../Competence/Details", new { id = i.Competence_ID })</td>
+                            <td>@Html.DisplayFor(model => i.Level1)</td>
+                        </tr>
+                    }
+                </table>
+
+            </div>
+
+        </fieldset>
+
+        <p>
+            @Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })
+            <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />|
+            @Html.ActionLink("Terug naar Index", "Index")
+        </p>
+    </div>

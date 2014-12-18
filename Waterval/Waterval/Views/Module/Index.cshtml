@@ -26,15 +26,7 @@
                     <td>@Html.ActionLink(item.Title, "Details", new { id = item.Module_ID })</td>
                     <td>@item.Definition_Short</td>
                     <td>@item.CourseCode</td>
-
-
-           
-
-                    @* TODO - SUM of EC ophalen
-                        <td>@item.AssignmentCode.Max().EC</td>   TIJDELIJK 2X ENTRY LEVEL
-                    *@
-                 <td>Moet nog komen</td>
-
+                    <td>@item.AssignmentCode.Sum(s => s.EC)</td>
                     <td>@item.Entry_Level</td>
                     <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Module_ID }, new { @class = "btn btn-warning" })</td>
                     <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Module_ID" class="btn btn-avans"></td>

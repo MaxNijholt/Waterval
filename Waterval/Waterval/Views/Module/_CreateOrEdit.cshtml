@@ -1,6 +1,7 @@
 ﻿@model DomainModel.Models.Module
 @using DomainModel.Models;
 
+
 <div class="form-group">
     @Html.Label("Titel", new { @class = "col-sm-2 control-label" })
     <div class="col-sm-10">
@@ -20,7 +21,7 @@
 <div class="form-group">
     @Html.Label("Lange Omschrijving", new { @class = "col-sm-2 control-label" })
     <div class="col-sm-10">
-        @Html.TextBoxFor(model => model.Definition_Long, new { @class = "form-control hidden", id = "definitionLong" })
+        @Html.TextBoxFor(model => model.Definition_Long, new { @class = "form-control", id = "definitionLong" })
         @Html.ValidationMessageFor(model => model.Definition_Long)
     </div>
 </div>
@@ -72,14 +73,18 @@
         <table class="table table-bordered table-striped table-responsive" id="LearnGoalTable">
             <thead>
                 <tr>
-                    <th width="20%">De student kan</th>
+                    <th width="85%">De student kan</th>
                     <th>Verwijderen</th>
                 </tr>
             </thead>
+
+
             <tr>
                 <td>Project-05</td>
                 <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
             </tr>
+
+
         </table>
         <input type="button" value="Leerdoel Toevoegen" name="btn_collapseLearnGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseLearnGoal">
         <br />
@@ -173,7 +178,7 @@
             </thead>
 
             <tr>
-                <td><input type="number" class="form-control" id="fieldNr_descriptionNr" value=".." /></td>
+                <td><input type="text" class="form-control" id="fieldNr_descriptionNr" value=".." /></td>
                 <td><input type="text" class="form-control" id="field_description" value="..." /></td>
                 <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
             </tr>
@@ -187,10 +192,10 @@
                 <table class="table">
                     <tr>
                         <td width="10%">
-                            <input type="number" class="form-control" placeholder="0" name="TempValue" style:size="10" />
+                            <input type="text" class="form-control" placeholder="0" name="TempValue" style:size="10" />
                         </td>
                         <td width="50%">
-                            <input type="text" class="form-control" placeholder="weekbeschrijving..." name="TempValue" style:size="10" />
+                            <input type="text" class="form-control" placeholder="weekbeschrijving..." name="TempValueDesc" style:size="10" />
                         </td>
                         <td width="10%">
                             <input type="button" value="Toevoegen" name="addWeekSchedule" class="btn btn-avans">
