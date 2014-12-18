@@ -1,0 +1,28 @@
+﻿@model DomainModel.Models.Theme
+
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+	<h2>Thema Details: @Html.DisplayFor(model => model.Title)</h2>
+
+	<table class="table table-bordered table-striped">
+		<tr>
+			<th>Naam</th>
+			<th>Omschrijving</th>
+
+		</tr>
+		<tr>
+			<td>@Html.DisplayFor(model => model.Title)</td>
+			<td>@Html.DisplayFor(model => model.Definition)</td>
+			<!--TODO: koppelen met Module
+						En gekoppelde modulen latenzien.-->
+		</tr>
+	</table>
+	@Html.ActionLink("Aanpassen", "Edit", new { id = Model.Theme_ID }, new { @class = "btn btn-warning" })
+	<br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />|
+	@Html.ActionLink("Terug naar Index", "Index")
+</div>
