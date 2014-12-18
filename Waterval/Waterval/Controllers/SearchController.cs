@@ -23,10 +23,11 @@ namespace Waterval.Controllers
         }
 
 		public ActionResult BlockResult ( String SearchText) {
-            SearchLists sl = new SearchLists() {
+            SearchLists sl = new SearchLists()
+            {
                 Blocks = searchRepo.GetBlocksWith(SearchText),
                 LearnLines = searchRepo.GetLearnLinesWith(SearchText)
-            }
+            };
             return View(sl);
 		}
     }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DomainModel.Models.Block>
+﻿@model Waterval.Models.SearchLists
 
 @{
     ViewBag.Title = "BlockResult";
@@ -9,18 +9,39 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            Blokken
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Blocks) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
             @Html.ActionLink("Details", "../Block/Details", new {  id=item.Block_ID })
+        </td>
+    </tr>
+}
+
+</table>
+
+<table class="table">
+    <tr>
+        <th>
+            Leerlijnen
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.LearnLines) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "../LearnLine/Details", new {  id=item.LearnLine_ID })
         </td>
     </tr>
 }
