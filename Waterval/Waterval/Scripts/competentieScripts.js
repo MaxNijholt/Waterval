@@ -3,7 +3,7 @@
 $(document).ready(function () {
     $("#ValidationMes").hide();
     fillDefinition();
-    fillMod();
+    //  fillMod();
 });
 
 //This function will add data to the table
@@ -40,16 +40,22 @@ $(document).on('click', '#btn_addMod', function () {
             return false;
         }
     })
+
+
+    var i = $("#ModTable tr").length;
     var coursecode = '<tr id="' + id + '"><td>' + tablevalue[0] + '</td>';
     var coursetitle = '<td>' + tablevalue[1] + '</td>';
     var coursedefi = '<td>' + tablevalue[2] + '</td>';
-    var inputfield = '<td><input type="number" class="form-control" id="level" name="Level' + id + '" value="0" /></td>'
+
+    var inputfield = '<td><input type="number" class="form-control" id="Level[' + (i - 1) + '].Level1" name="Level[' + (i - 1) + '].Level1" value="0" />'
+    var hiddenfield = '<input type="number" id="Level[' + (i - 1) + '].Module_ID" name="Level[' + (i - 1) + '].Module_ID" class="form-control hidden" value=' + id + ' /></td>'
+
     var buttonDelete = '<td><input type="button" value="Verwijderen" id="btn_deleteMod" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
-    $('#ModTable').append(coursecode + coursetitle + coursedefi + inputfield + buttonDelete);
+    $('#ModTable').append(coursecode + coursetitle + coursedefi + inputfield + hiddenfield + buttonDelete);
     $(this).closest('tr').remove();
 
-    fillMod();
+    //   fillMod();
 });
 
 function fillMod() {
@@ -66,7 +72,7 @@ function fillMod() {
     var tValue = temp.join('-');
 
     $('[name=ModulesTogether]').val(tValue);
-   
+
 }
 
 //This code gets called whenever one of the delete functions gets pressed.
@@ -101,7 +107,33 @@ $(document).on('click', '#btn_deleteMod', function () {
         $('#TableMod').append(coursecode + coursetitle + coursedefi + buttonAdd);
 
 
-        $(this).closest('tr').remove(); fillMod();
+        $(this).closest('tr').remove();
+
+
+        var index = 0;
+
+        $('#ModTable tr').each(function () {
+            if ($(this).closest('tr').attr('id') != null) {
+                $(this).closest('tr').find("input[type=number]").each(function () {
+
+                    if ($(this).attr('name').match("ID$")) {
+
+                        $(this).attr('name', 'Level[' + (index) + '].Module_ID')
+                        $(this).attr('id', 'Level[' + (index) + '].Module_ID')
+
+                    }
+                    else {
+                        $(this).attr('name', 'Level[' + (index) + '].Level1')
+                        $(this).attr('id', 'Level[' + (index) + '].Level1')
+                    }
+                });
+                index += 1;
+            }
+
+        });
+
+
+        //    fillMod();
     }
 });
 
@@ -180,10 +212,10 @@ $('input[name="btn_collapseGoal"] ').click(function () {
 $('input[name="btn_Save"] ').click(function () {
     if (!$('[id=long]').val()) {
         $("#ValidationMes").show();
+        return;
     }
     else {
         $("#ValidationMes").hide();
     }
-
 }
 );

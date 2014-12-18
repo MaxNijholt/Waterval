@@ -54,19 +54,15 @@ namespace Waterval.Controllers
         /// <param name="form">The complete collection of al the form controllers</param>
         /// <returns></returns>
         [ValidateInput(true), HttpPost]
-        public ActionResult Create(FormCollection form)
+        public ActionResult Create(Competence comp)
         {
-            Competence comp = new Competence();
 
             //Gives back al of the exsiting modules.
             @ViewBag.ModuleList = moduleRepository.GetAll();
             try
             {
                 //Fills the competence with the values of the form collection.
-                //if the defination long is not filled we return the view so we can see the error message.
-                comp.Title = form["Title"];
-                comp.Definition_Long = form["Definition_Long"];
-                comp.Definition_Short = form["Definition_Short"];
+       
 
                 if (string.IsNullOrEmpty(comp.Definition_Long))
                     return View(comp);
@@ -77,13 +73,8 @@ namespace Waterval.Controllers
                 //From the textbox ModulesTogether we get the value. 
                 //We split this value on - and loop through them all.
                 //We save the combination of the Comptence, Module and Level.
-                var mods = form["ModulesTogether"];
-                if (!string.IsNullOrEmpty(mods))
-                    foreach (string modid in mods.Split('-'))
-                    {
-                        var level = form["Level" + modid];
-                        compenteceRepository.CompentenceAndModules(id, Convert.ToInt16(modid), level);
-                    }
+                    foreach (var item in comp.Level)
+                        compenteceRepository.CompentenceAndModules(id, item.Module_ID, item.Level1);
 
                 //We go back to the index.
                 return RedirectToAction("Index");
