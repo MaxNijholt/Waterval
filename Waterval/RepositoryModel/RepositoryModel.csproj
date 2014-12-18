@@ -50,11 +50,13 @@
     <Compile Include="DummyRepository\DLearningToolRepository.cs" />
     <Compile Include="DummyRepository\DModuleRepository.cs" />
     <Compile Include="DummyRepository\DThemeRepository.cs" />
+    <Compile Include="DummyRepository\DPhasingRepository.cs" />
     <Compile Include="IRepository\ICompetenceRepository.cs" />
     <Compile Include="IRepository\ILearningToolRepository.cs" />
     <Compile Include="IRepository\ILearnLineRepository.cs" />
     <Compile Include="IRepository\IModuleRepository.cs" />
     <Compile Include="IRepository\IThemeRepository.cs" />
+    <Compile Include="IRepository\IPhasingRepository.cs" />
     <Compile Include="Repository\BlockRepository.cs" />
     <Compile Include="IRepository\IBlockRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="Repository\LearnLineRepository.cs" />
     <Compile Include="Repository\ModuleRepository.cs" />
     <Compile Include="Repository\ThemeRepository.cs" />
+    <Compile Include="Repository\PhasingRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">

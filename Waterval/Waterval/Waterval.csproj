@@ -169,6 +169,7 @@
     <Compile Include="Controllers\LearnLineController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\ThemeController.cs" />
+    <Compile Include="Controllers\PhasingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -279,9 +280,15 @@
     <Content Include="Views\LearnLine\_CreateOrEdit.cshtml" />
     <Content Include="Views\LearnLine\Index.cshtml" />
     <Content Include="Views\Theme\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Phasing\Index.cshtml" />
+    <Content Include="Views\Phasing\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Phasing\Create.cshtml" />
+    <Content Include="Views\Phasing\Edit.cshtml" />
+    <Content Include="Views\Phasing\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Views\Phasing\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
