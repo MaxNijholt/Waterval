@@ -1,0 +1,25 @@
+﻿@model DomainModel.Models.LearnLine
+@using DomainModel.Models;
+
+<div class="form-group">
+    @Html.Label("Titel", new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.Title, new { @class = "form-control", id = "title" })
+        @Html.ValidationMessageFor(model => model.Title)
+    </div>
+</div>
+
+
+<div class="form-group">
+    @Html.Label("Omschrijving", new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.Definition, new { @class = "form-control", id = "short" })
+        @Html.ValidationMessageFor(model => model.Definition)
+    </div>
+</div>
+
+
+<hr />
+@Html.Partial("~/Views/Shared/_Alert.cshtml")

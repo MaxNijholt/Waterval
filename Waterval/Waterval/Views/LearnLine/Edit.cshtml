@@ -1,0 +1,46 @@
+﻿@model DomainModel.Models.LearnLine
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<h2>Competentie aanpassen: @Model.Title</h2>
+
+@using (Html.BeginForm("Edit", "LearnLine", new { ReturnUrl = ViewBag.ReturnUrl },
+            FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+
+        @Html.HiddenFor(model => model.LearnLine_ID)
+        @Html.Partial("_CreateOrEdit", Model)
+
+        <p>
+            <input type="submit" value="Leerlijn aanpassen" class="btn btn-success" /> |
+            @Html.ActionLink("Terug naar Index", "Index")
+        </p>
+    </fieldset>
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/competentieScripts.js"></script>
+    <script src="~/Scripts/Filter.js"></script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

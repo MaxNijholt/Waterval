@@ -1,0 +1,59 @@
+﻿@model IEnumerable<DomainModel.Models.LearnLine>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+<div class="container">
+    <h2>Leerlijnen</h2>
+    <div class="container">
+        <input class="form-control" type="text" placeholder="Search..." id="searchTerm" onkeyup="doSearch('indexTable')" />
+        <table class="table table-striped table-bordered" id="indexTable">
+            <caption></caption>
+            <thead>
+                <tr>
+                    <th>Titel</th>
+                    <th>Omschrijving</th>
+                    <th>Aanpassen</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+                    <td>@Html.ActionLink(item.Title, "Details", new { id = item.LearnLine_ID })</td>
+                    <td>@item.Definition</td>
+                    <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.LearnLine_ID }, new { @class = "btn btn-warning" })</td>
+                    <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.LearnLine_ID" class="btn btn-avans"></td>
+                </tr>   }
+
+
+        </table>
+    </div>
+    @Html.ActionLink("Nieuwe Leerlijn", "Create", null, new { @class = "btn btn-success" })
+
+</div>
+
+
+@section Scripts {
+    <script>
+        $('input[type="button"]').click(function (e) {
+            var title = $(this).attr('data-name');
+            var id = $(this).attr('data-id');
+
+            if (confirm('Gegevens van ' + title + ' verwijderen?')) {
+                var url = "/LearnLine/Delete";
+
+                $.post(url, { LearnLine_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
+                    $("#msg").html(data);
+                });
+                $(this).closest('tr').remove()
+            }
+        })
+    </script>
+
+    <script src="~/Scripts/Filter.js"></script>
+}

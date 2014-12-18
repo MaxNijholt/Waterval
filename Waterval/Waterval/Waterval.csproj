@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -166,7 +166,7 @@
     <Compile Include="Controllers\CompetenceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LearningToolController.cs" />
-    <Compile Include="Controllers\LeerlijnController.cs" />
+    <Compile Include="Controllers\LearnLineController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\ThemaController.cs" />
     <Compile Include="Global.asax.cs">
@@ -240,10 +240,10 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Leerlijn\OLD\Edit.cshtml" />
-    <Content Include="Views\Leerlijn\OLD\Details.cshtml" />
-    <Content Include="Views\Leerlijn\OLD\Index.cshtml" />
-    <Content Include="Views\Leerlijn\OLD\Create.cshtml" />
+    <Content Include="Views\LearnLine\OLD\Edit.cshtml" />
+    <Content Include="Views\LearnLine\OLD\Details.cshtml" />
+    <Content Include="Views\LearnLine\OLD\Index.cshtml" />
+    <Content Include="Views\LearnLine\OLD\Create.cshtml" />
     <Content Include="Views\Module\Create.cshtml" />
     <Content Include="Views\Module\Index.cshtml" />
     <Content Include="Views\Module\Details.cshtml" />
@@ -266,10 +266,6 @@
     <Content Include="Views\Competence\Edit.cshtml" />
     <Content Include="Views\Competence\Index.cshtml" />
     <Content Include="Views\Competence\_CreateOrEdit.cshtml" />
-    <Content Include="Views\Leerlijn\Create.cshtml" />
-    <Content Include="Views\Leerlijn\Details.cshtml" />
-    <Content Include="Views\Leerlijn\Edit.cshtml" />
-    <Content Include="Views\Leerlijn\Index.cshtml" />
     <Content Include="Views\Competence\toNewCohort.cshtml" />
     <Content Include="Views\LearningTool\Index.cshtml" />
     <Content Include="Views\LearningTool\Create.cshtml" />
@@ -277,6 +273,11 @@
     <Content Include="Views\LearningTool\Edit.cshtml" />
     <Content Include="Views\LearningTool\Details.cshtml" />
     <Content Include="Views\LearningTool\NewVersion.cshtml" />
+    <Content Include="Views\LearnLine\Create.cshtml" />
+    <Content Include="Views\LearnLine\Details.cshtml" />
+    <Content Include="Views\LearnLine\Edit.cshtml" />
+    <Content Include="Views\LearnLine\_CreateOrEdit.cshtml" />
+    <Content Include="Views\LearnLine\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
