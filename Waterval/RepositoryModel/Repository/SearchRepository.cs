@@ -18,18 +18,21 @@ namespace RepositoryModel.Repository {
 
 		public List<Block> GetBlocksWith ( String find ) {
 			List<Block> notDeleted = dbContext.Block.Where( b => b.isDeleted == false && b.Title.Contains(find) ).ToList( );
-            List<Block> returnValues = (List<Block>)( from val in notDeleted where ( val.Title.Contains( "%" + find + "%" ) ) select val ).ToList();
+            //List<Block> returnValues = (List<Block>)( from val in notDeleted where ( val.Title.Contains( "%" + find + "%" ) ) select val ).ToList();
             return notDeleted;
 
 		}
 
 		public List<Competence> GetCompetencesWith ( String find ) {
-			List<Competence> notDeleted = dbContext.Competence.Where( b => b.isDeleted == false ).ToList( );
+			return (List<Competence>) dbContext.Competence.Where( b => b.isDeleted == false && ( b.Definition_Long.Contains(find) || b.Definition_Short.Contains(find) || b.Title.Contains(find) )).ToList( );
+
+			/*
 			return (List<Competence>)( from val in notDeleted
 									   where ( val.Definition_Long.Contains( "%" + find + "%" )
 										   || val.Definition_Short.Contains( "%" + find + "%" )
 										   || val.Title.Contains( "%" + find + "%" ) )
-									   select val );
+									   select val ).ToList();
+			 */
 		}
 
 		public List<Module> GetModulesWith ( String find ) {
@@ -41,7 +44,7 @@ namespace RepositoryModel.Repository {
 								   || val.Definition_Short.Contains( "%" + find + "%" )
 								   || val.Foreknowledge.Contains( "%" + find + "%" )
 								   )
-								   select val );
+								   select val ).ToList( );
 		}
 
 		public List<LearnLine> GetLearnLinesWith ( String find ) {
@@ -50,7 +53,7 @@ namespace RepositoryModel.Repository {
 									  where ( val.Title.Contains( "%" + find + "%" )
 									  || val.Definition.Contains( "%" + find + "%" )
 									  )
-									  select val );
+									  select val ).ToList( );
 		}
 
 		public List<Theme> GetThemesWith ( String find ) {
@@ -59,7 +62,7 @@ namespace RepositoryModel.Repository {
 								  where ( val.Title.Contains( "%" + find + "%" )
 								  || val.Definition.Contains( "%" + find + "%" )
 								  )
-								  select val );
+								  select val ).ToList( );
 		}
 	}
 }
