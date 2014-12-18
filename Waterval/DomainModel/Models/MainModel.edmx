@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Project_WatervalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Project_WatervalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Account_ID" />
@@ -46,6 +46,8 @@
           <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Module_ID" Type="int" Nullable="false" />
           <Property Name="PrevModule_ID" Type="int" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
         </EntityType>
         <EntityType Name="Block">
           <Key>
@@ -68,12 +70,18 @@
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="GradeType">
           <Key>
             <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="GradeDescription" />
+            <PropertyRef Name="isDeleted" />
           </Key>
           <Property Name="Module_ID" Type="int" Nullable="false" />
           <Property Name="GradeDescription" Type="nvarchar" MaxLength="900" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
         </EntityType>
         <EntityType Name="LearnGoal">
           <Key>
@@ -82,6 +90,8 @@
           <Property Name="LearnGoal_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PrevLearnGoal_ID" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="900" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
         </EntityType>
         <EntityType Name="LearningTool">
           <Key>
@@ -90,6 +100,8 @@
           <Property Name="LearnTool_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PrevLearnTool_ID" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="900" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
         </EntityType>
         <EntityType Name="LearnLine">
           <Key>
@@ -256,12 +268,14 @@
         </EntityType>
         <EntityType Name="WeekSchedule">
           <Key>
-            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="WeekNr" />
           </Key>
           <Property Name="Module_ID" Type="int" Nullable="false" />
+          <Property Name="WeekNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PrevModule_ID" Type="int" />
-          <Property Name="WeekNr" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="900" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
         </EntityType>
         <EntityType Name="Workform">
           <Key>
@@ -270,6 +284,8 @@
           <Property Name="Workform_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="PrevWorkform_ID" Type="int" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
         </EntityType>
         <Association Name="FK__AccountRo__Law_I__1293BD5E">
           <End Role="AccountLaw" Type="Self.AccountLaw" Multiplicity="1" />
@@ -307,9 +323,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GradeType__Modul__21D600EE">
+        <Association Name="FK__GradeType__Modul__68687968">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
-          <End Role="GradeType" Type="Self.GradeType" Multiplicity="0..1" />
+          <End Role="GradeType" Type="Self.GradeType" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="Module_ID" />
@@ -559,9 +575,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__WeekSched__Modul__33008CF0">
+        <Association Name="FK__WeekSched__Modul__6D2D2E85">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
-          <End Role="WeekSchedule" Type="Self.WeekSchedule" Multiplicity="0..1" />
+          <End Role="WeekSchedule" Type="Self.WeekSchedule" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="Module_ID" />
@@ -603,7 +619,6 @@
           <EntitySet Name="AssignmentCode" EntityType="Self.AssignmentCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Block" EntityType="Self.Block" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Competence" EntityType="Self.Competence" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="GradeType" EntityType="Self.GradeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LearnGoal" EntityType="Self.LearnGoal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LearningTool" EntityType="Self.LearningTool" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LearnLine" EntityType="Self.LearnLine" Schema="dbo" store:Type="Tables" />
@@ -625,6 +640,14 @@
           <EntitySet Name="Theme" EntityType="Self.Theme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeekSchedule" EntityType="Self.WeekSchedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workform" EntityType="Self.Workform" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GradeType" EntityType="Self.GradeType" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GradeType].[Module_ID] AS [Module_ID], 
+    [GradeType].[GradeDescription] AS [GradeDescription], 
+    [GradeType].[isDeleted] AS [isDeleted], 
+    [GradeType].[DeleteDate] AS [DeleteDate]
+    FROM [dbo].[GradeType] AS [GradeType]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__AccountRo__Law_I__1293BD5E" Association="Self.FK__AccountRo__Law_I__1293BD5E">
             <End Role="AccountLaw" EntitySet="AccountLaw" />
             <End Role="AccountRoleWithAccountLaw" EntitySet="AccountRoleWithAccountLaw" />
@@ -637,7 +660,7 @@
             <End Role="Module" EntitySet="Module" />
             <End Role="AssignmentCode" EntitySet="AssignmentCode" />
           </AssociationSet>
-          <AssociationSet Name="FK__GradeType__Modul__21D600EE" Association="Self.FK__GradeType__Modul__21D600EE">
+          <AssociationSet Name="FK__GradeType__Modul__68687968" Association="Self.FK__GradeType__Modul__68687968">
             <End Role="Module" EntitySet="Module" />
             <End Role="GradeType" EntitySet="GradeType" />
           </AssociationSet>
@@ -721,7 +744,7 @@
             <End Role="Study" EntitySet="Study" />
             <End Role="StudyWithPhasing" EntitySet="StudyWithPhasing" />
           </AssociationSet>
-          <AssociationSet Name="FK__WeekSched__Modul__33008CF0" Association="Self.FK__WeekSched__Modul__33008CF0">
+          <AssociationSet Name="FK__WeekSched__Modul__6D2D2E85" Association="Self.FK__WeekSched__Modul__6D2D2E85">
             <End Role="Module" EntitySet="Module" />
             <End Role="WeekSchedule" EntitySet="WeekSchedule" />
           </AssociationSet>
@@ -745,7 +768,6 @@
           <EntitySet Name="AssignmentCode" EntityType="Project_WatervalModel.AssignmentCode" />
           <EntitySet Name="Block" EntityType="Project_WatervalModel.Block" />
           <EntitySet Name="Competence" EntityType="Project_WatervalModel.Competence" />
-          <EntitySet Name="GradeType" EntityType="Project_WatervalModel.GradeType" />
           <EntitySet Name="LearnGoal" EntityType="Project_WatervalModel.LearnGoal" />
           <EntitySet Name="LearningTool" EntityType="Project_WatervalModel.LearningTool" />
           <EntitySet Name="LearnLine" EntityType="Project_WatervalModel.LearnLine" />
@@ -759,6 +781,7 @@
           <EntitySet Name="Theme" EntityType="Project_WatervalModel.Theme" />
           <EntitySet Name="WeekSchedule" EntityType="Project_WatervalModel.WeekSchedule" />
           <EntitySet Name="Workform" EntityType="Project_WatervalModel.Workform" />
+          <EntitySet Name="GradeType" EntityType="Project_WatervalModel.GradeType" />
           <AssociationSet Name="FK_dbo_Account_dbo_AccountRole_Role_ID" Association="Project_WatervalModel.FK_dbo_Account_dbo_AccountRole_Role_ID">
             <End Role="AccountRole" EntitySet="AccountRole" />
             <End Role="Account" EntitySet="Account" />
@@ -775,10 +798,6 @@
             <End Role="Competence" EntitySet="Competence" />
             <End Role="Level" EntitySet="Level" />
           </AssociationSet>
-          <AssociationSet Name="FK__GradeType__Modul__21D600EE" Association="Project_WatervalModel.FK__GradeType__Modul__21D600EE">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="GradeType" EntitySet="GradeType" />
-          </AssociationSet>
           <AssociationSet Name="FK__Level__Module_ID__1EF99443" Association="Project_WatervalModel.FK__Level__Module_ID__1EF99443">
             <End Role="Module" EntitySet="Module" />
             <End Role="Level" EntitySet="Level" />
@@ -791,7 +810,11 @@
             <End Role="Workform" EntitySet="Workform" />
             <End Role="ModelWithWorkform" EntitySet="ModelWithWorkform" />
           </AssociationSet>
-          <AssociationSet Name="FK__WeekSched__Modul__33008CF0" Association="Project_WatervalModel.FK__WeekSched__Modul__33008CF0">
+          <AssociationSet Name="FK__GradeType__Modul__68687968" Association="Project_WatervalModel.FK__GradeType__Modul__68687968">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="GradeType" EntitySet="GradeType" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WeekSched__Modul__6D2D2E85" Association="Project_WatervalModel.FK__WeekSched__Modul__6D2D2E85">
             <End Role="Module" EntitySet="Module" />
             <End Role="WeekSchedule" EntitySet="WeekSchedule" />
           </AssociationSet>
@@ -870,6 +893,8 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Module_ID" Type="Int32" Nullable="false" />
           <Property Name="PrevModule_ID" Type="Int32" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__Assignmen__Modul__24B26D99" FromRole="AssignmentCode" ToRole="Module" />
         </EntityType>
         <EntityType Name="Block">
@@ -895,14 +920,6 @@
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Level" Relationship="Project_WatervalModel.FK__Level__Competenc__1E05700A" FromRole="Competence" ToRole="Level" />
         </EntityType>
-        <EntityType Name="GradeType">
-          <Key>
-            <PropertyRef Name="Module_ID" />
-          </Key>
-          <Property Name="Module_ID" Type="Int32" Nullable="false" />
-          <Property Name="GradeDescription" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__GradeType__Modul__21D600EE" FromRole="GradeType" ToRole="Module" />
-        </EntityType>
         <EntityType Name="LearnGoal">
           <Key>
             <PropertyRef Name="LearnGoal_ID" />
@@ -910,6 +927,8 @@
           <Property Name="LearnGoal_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PrevLearnGoal_ID" Type="Int32" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Module" Relationship="Project_WatervalModel.ModuleWithLearnGoal" FromRole="LearnGoal" ToRole="Module" />
         </EntityType>
         <EntityType Name="LearningTool">
@@ -919,6 +938,8 @@
           <Property Name="LearnTool_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PrevLearnTool_ID" Type="Int32" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Module" Relationship="Project_WatervalModel.ModuleWithLearningTool" FromRole="LearningTool" ToRole="Module" />
         </EntityType>
         <EntityType Name="LearnLine">
@@ -975,10 +996,10 @@
           <Property Name="Account_ID" Type="Int32" />
           <NavigationProperty Name="Account" Relationship="Project_WatervalModel.FK_dbo_Module_dbo_Account_Account_ID" FromRole="Module" ToRole="Account" />
           <NavigationProperty Name="AssignmentCode" Relationship="Project_WatervalModel.FK__Assignmen__Modul__24B26D99" FromRole="Module" ToRole="AssignmentCode" />
-          <NavigationProperty Name="GradeType" Relationship="Project_WatervalModel.FK__GradeType__Modul__21D600EE" FromRole="Module" ToRole="GradeType" />
           <NavigationProperty Name="Level" Relationship="Project_WatervalModel.FK__Level__Module_ID__1EF99443" FromRole="Module" ToRole="Level" />
           <NavigationProperty Name="ModelWithWorkform" Relationship="Project_WatervalModel.FK__ModelWith__Modul__46136164" FromRole="Module" ToRole="ModelWithWorkform" />
-          <NavigationProperty Name="WeekSchedule" Relationship="Project_WatervalModel.FK__WeekSched__Modul__33008CF0" FromRole="Module" ToRole="WeekSchedule" />
+          <NavigationProperty Name="GradeType" Relationship="Project_WatervalModel.FK__GradeType__Modul__68687968" FromRole="Module" ToRole="GradeType" />
+          <NavigationProperty Name="WeekSchedule" Relationship="Project_WatervalModel.FK__WeekSched__Modul__6D2D2E85" FromRole="Module" ToRole="WeekSchedule" />
           <NavigationProperty Name="Program" Relationship="Project_WatervalModel.ModelWithProgram" FromRole="Module" ToRole="Program" />
           <NavigationProperty Name="Study" Relationship="Project_WatervalModel.ModelWithStudy" FromRole="Module" ToRole="Study" />
           <NavigationProperty Name="LearnGoal" Relationship="Project_WatervalModel.ModuleWithLearnGoal" FromRole="Module" ToRole="LearnGoal" />
@@ -1045,13 +1066,15 @@
         </EntityType>
         <EntityType Name="WeekSchedule">
           <Key>
-            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="WeekNr" />
           </Key>
           <Property Name="Module_ID" Type="Int32" Nullable="false" />
+          <Property Name="WeekNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PrevModule_ID" Type="Int32" />
-          <Property Name="WeekNr" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__WeekSched__Modul__33008CF0" FromRole="WeekSchedule" ToRole="Module" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__WeekSched__Modul__6D2D2E85" FromRole="WeekSchedule" ToRole="Module" />
         </EntityType>
         <EntityType Name="Workform">
           <Key>
@@ -1060,7 +1083,21 @@
           <Property Name="Workform_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="PrevWorkform_ID" Type="Int32" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="ModelWithWorkform" Relationship="Project_WatervalModel.FK__ModelWith__Workf__451F3D2B" FromRole="Workform" ToRole="ModelWithWorkform" />
+        </EntityType>
+        <EntityType Name="GradeType">
+          <Key>
+            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="GradeDescription" />
+            <PropertyRef Name="isDeleted" />
+          </Key>
+          <Property Name="Module_ID" Type="Int32" Nullable="false" />
+          <Property Name="GradeDescription" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__GradeType__Modul__68687968" FromRole="GradeType" ToRole="Module" />
         </EntityType>
         <Association Name="FK_dbo_Account_dbo_AccountRole_Role_ID">
           <End Type="Project_WatervalModel.AccountRole" Role="AccountRole" Multiplicity="1" />
@@ -1110,18 +1147,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GradeType__Modul__21D600EE">
-          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
-          <End Type="Project_WatervalModel.GradeType" Role="GradeType" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Module">
-              <PropertyRef Name="Module_ID" />
-            </Principal>
-            <Dependent Role="GradeType">
-              <PropertyRef Name="Module_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Level__Module_ID__1EF99443">
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
           <End Type="Project_WatervalModel.Level" Role="Level" Multiplicity="*" />
@@ -1158,9 +1183,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__WeekSched__Modul__33008CF0">
+        <Association Name="FK__GradeType__Modul__68687968">
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
-          <End Type="Project_WatervalModel.WeekSchedule" Role="WeekSchedule" Multiplicity="0..1" />
+          <End Type="Project_WatervalModel.GradeType" Role="GradeType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Module_ID" />
+            </Principal>
+            <Dependent Role="GradeType">
+              <PropertyRef Name="Module_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WeekSched__Modul__6D2D2E85">
+          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
+          <End Type="Project_WatervalModel.WeekSchedule" Role="WeekSchedule" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="Module_ID" />
@@ -1242,6 +1279,8 @@
           <EntitySetMapping Name="AssignmentCode">
             <EntityTypeMapping TypeName="Project_WatervalModel.AssignmentCode">
               <MappingFragment StoreEntitySet="AssignmentCode">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="PrevModule_ID" ColumnName="PrevModule_ID" />
                 <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1273,17 +1312,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GradeType">
-            <EntityTypeMapping TypeName="Project_WatervalModel.GradeType">
-              <MappingFragment StoreEntitySet="GradeType">
-                <ScalarProperty Name="GradeDescription" ColumnName="GradeDescription" />
-                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LearnGoal">
             <EntityTypeMapping TypeName="Project_WatervalModel.LearnGoal">
               <MappingFragment StoreEntitySet="LearnGoal">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PrevLearnGoal_ID" ColumnName="PrevLearnGoal_ID" />
                 <ScalarProperty Name="LearnGoal_ID" ColumnName="LearnGoal_ID" />
@@ -1293,6 +1326,8 @@
           <EntitySetMapping Name="LearningTool">
             <EntityTypeMapping TypeName="Project_WatervalModel.LearningTool">
               <MappingFragment StoreEntitySet="LearningTool">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PrevLearnTool_ID" ColumnName="PrevLearnTool_ID" />
                 <ScalarProperty Name="LearnTool_ID" ColumnName="LearnTool_ID" />
@@ -1408,9 +1443,11 @@
           <EntitySetMapping Name="WeekSchedule">
             <EntityTypeMapping TypeName="Project_WatervalModel.WeekSchedule">
               <MappingFragment StoreEntitySet="WeekSchedule">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="WeekNr" ColumnName="WeekNr" />
                 <ScalarProperty Name="PrevModule_ID" ColumnName="PrevModule_ID" />
+                <ScalarProperty Name="WeekNr" ColumnName="WeekNr" />
                 <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1418,9 +1455,21 @@
           <EntitySetMapping Name="Workform">
             <EntityTypeMapping TypeName="Project_WatervalModel.Workform">
               <MappingFragment StoreEntitySet="Workform">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="PrevWorkform_ID" ColumnName="PrevWorkform_ID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Workform_ID" ColumnName="Workform_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GradeType">
+            <EntityTypeMapping TypeName="Project_WatervalModel.GradeType">
+              <MappingFragment StoreEntitySet="GradeType">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="GradeDescription" ColumnName="GradeDescription" />
+                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

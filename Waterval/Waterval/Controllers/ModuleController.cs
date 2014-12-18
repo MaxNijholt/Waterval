@@ -1,8 +1,8 @@
-﻿using Waterval.Models;
+﻿using DomainModel.Models;
+using RepositoryModel.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,70 +12,77 @@ namespace MvcApplication1.Controllers
     {
         //
         // GET: /Module/
-        static ModuleList modules = new ModuleList();
-        public ActionResult Index(int id = 0)
-        {
-            FillList(id);
-            var mCollection = modules;
+        private ModuleRepository moduleRepository;
 
-            return View(mCollection);
+        public ModuleController()
+        {
+            moduleRepository = new ModuleRepository();
         }
 
-        public ActionResult Details(string modelname)
+       // static ModuleList modules = new ModuleList();
+
+        public ActionResult Index()
         {
-            if (modelname == null || modules == null)
-                return HttpNotFound();
-
-            Modules model = null;
-
-            foreach (Modules c in modules.mods)
-            {
-                if (c.Vakcode == modelname)
-                {
-                    model = c;
-                    break;
-                }
-            }
-
-            return View(model);
-        }
-
-        void FillList(int id)
-        {
-            modules.mods.Clear();
-            if (modules.mods.Count > 0) return;
-            if (id != 1)
-                modules.mods.Add(new Modules("Programeren 1", "Programen 1 voor beginners", "PR-01", "4 EC", "Huiswerk+Workshop", "1", "Workshop+Hoorcollege", "Basis java programeren", "Assigment", "Procesanalyse uitvoeren"));
-            if (id != 2)
-                modules.mods.Add(new Modules("Database 1", "Database start", "DB-01", "2 EC", "Huiswerk+Workshop", "1", "Workshop+Hoorcollege", "Basis Databse", "Opdracht", "Informatieanalyse uitvoeren"));
+            return View(moduleRepository.GetAll());
         }
 
         public ActionResult Create()
         {
-
-
             return View();
         }
 
-
-        public ActionResult Edit(string modelname)
+        [HttpPost]
+        public ActionResult Create(Module module)
         {
-            if (modelname == null || modules == null)
-                return HttpNotFound();
-
-            Modules model = null;
-
-            foreach (Modules c in modules.mods)
+            try
             {
-                if (c.Vakcode == modelname)
-                {
-                    model = c;
-                    break;
-                }
+                moduleRepository.Create(module);
+                return RedirectToAction("Index");
             }
-
-            return View(model);
-
+            catch
+            {
+                return View(module);
+            }
         }
+
+
+        public ActionResult Details(int id)
+        {
+            Module module = moduleRepository.Get(id);
+		       
+            return View(module);
+        }
+
+        public ActionResult Delete(Module module)
+        {
+
+            moduleRepository.Delete(module.Module_ID);
+            return View();
+        }
+
+        public ActionResult Edit(int id)
+        {
+            Module module = moduleRepository.Get(id);
+           
+            return View(module);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, Module module)
+        {
+            try
+            {
+                if (moduleRepository.Update(module) == null)
+                {
+                    return View(module).ViewBag.Error = "Er is iets fout gegaan.";
+                }
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View(module);
+            }
+        }
+
     }
 }

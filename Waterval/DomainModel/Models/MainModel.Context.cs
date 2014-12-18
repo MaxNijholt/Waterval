@@ -31,7 +31,6 @@ namespace DomainModel.Models
         public virtual DbSet<AssignmentCode> AssignmentCode { get; set; }
         public virtual DbSet<Block> Block { get; set; }
         public virtual DbSet<Competence> Competence { get; set; }
-        public virtual DbSet<GradeType> GradeType { get; set; }
         public virtual DbSet<LearnGoal> LearnGoal { get; set; }
         public virtual DbSet<LearningTool> LearningTool { get; set; }
         public virtual DbSet<LearnLine> LearnLine { get; set; }
@@ -45,5 +44,6 @@ namespace DomainModel.Models
         public virtual DbSet<Theme> Theme { get; set; }
         public virtual DbSet<WeekSchedule> WeekSchedule { get; set; }
         public virtual DbSet<Workform> Workform { get; set; }
+        public virtual DbSet<GradeType> GradeType { get; set; }
     }
 }

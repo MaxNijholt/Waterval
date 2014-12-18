@@ -19,6 +19,8 @@ namespace DomainModel.Models
         public string Description { get; set; }
         public int Module_ID { get; set; }
         public Nullable<int> PrevModule_ID { get; set; }
+        public bool isDeleted { get; set; }
+        public Nullable<System.DateTime> DeleteDate { get; set; }
     
         public virtual Module Module { get; set; }
     }

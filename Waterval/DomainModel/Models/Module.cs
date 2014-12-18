@@ -19,6 +19,8 @@ namespace DomainModel.Models
             this.AssignmentCode = new HashSet<AssignmentCode>();
             this.Level = new HashSet<Level>();
             this.ModelWithWorkform = new HashSet<ModelWithWorkform>();
+            this.GradeType = new HashSet<GradeType>();
+            this.WeekSchedule = new HashSet<WeekSchedule>();
             this.Program = new HashSet<Program>();
             this.Study = new HashSet<Study>();
             this.LearnGoal = new HashSet<LearnGoal>();
@@ -41,10 +43,10 @@ namespace DomainModel.Models
     
         public virtual Account Account { get; set; }
         public virtual ICollection<AssignmentCode> AssignmentCode { get; set; }
-        public virtual GradeType GradeType { get; set; }
         public virtual ICollection<Level> Level { get; set; }
         public virtual ICollection<ModelWithWorkform> ModelWithWorkform { get; set; }
-        public virtual WeekSchedule WeekSchedule { get; set; }
+        public virtual ICollection<GradeType> GradeType { get; set; }
+        public virtual ICollection<WeekSchedule> WeekSchedule { get; set; }
         public virtual ICollection<Program> Program { get; set; }
         public virtual ICollection<Study> Study { get; set; }
         public virtual ICollection<LearnGoal> LearnGoal { get; set; }

@@ -24,6 +24,8 @@ namespace DomainModel.Models
         public Nullable<int> PrevLearnTool_ID { get; set; }
         [Required]
         public string Description { get; set; }
+        public bool isDeleted { get; set; }
+        public Nullable<System.DateTime> DeleteDate { get; set; }
     
         public virtual ICollection<Module> Module { get; set; }
     }
