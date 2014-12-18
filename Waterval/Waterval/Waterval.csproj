@@ -165,7 +165,6 @@
     <Compile Include="Controllers\CompetenceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LearnLineController.cs" />
-    <Compile Include="Controllers\LeerlijnController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\ThemaController.cs" />
     <Compile Include="Global.asax.cs">
