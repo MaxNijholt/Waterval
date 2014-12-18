@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RepositoryModel.Repository;
 using DomainModel.Models;
+using Waterval.Models;
 
 namespace Waterval.Controllers
 {
@@ -22,8 +23,11 @@ namespace Waterval.Controllers
         }
 
 		public ActionResult BlockResult ( String SearchText) {
-            List<Block> blocks = searchRepo.GetBlocksWith(SearchText);
-			return View( blocks );
+            SearchLists sl = new SearchLists() {
+                Blocks = searchRepo.GetBlocksWith(SearchText),
+                LearnLines = searchRepo.GetLearnLinesWith(SearchText)
+            }
+            return View(sl);
 		}
     }
 }

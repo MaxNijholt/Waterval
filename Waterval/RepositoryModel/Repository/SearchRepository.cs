@@ -45,12 +45,15 @@ namespace RepositoryModel.Repository {
 		}
 
 		public List<LearnLine> GetLearnLinesWith ( String find ) {
-			List<LearnLine> notDeleted = dbContext.LearnLine.Where( b => b.isDeleted == false ).ToList( );
-			return (List<LearnLine>)( from val in notDeleted
-									  where ( val.Title.Contains( "%" + find + "%" )
-									  || val.Definition.Contains( "%" + find + "%" )
-									  )
-									  select val );
+            List<LearnLine> notDeleted = dbContext.LearnLine.Where(b => b.isDeleted == false && b.Title.Contains(find)).ToList();
+
+			//List<LearnLine> notDeleted = dbContext.LearnLine.Where( b => b.isDeleted == false ).ToList( );
+		//	return (List<LearnLine>)( from val in notDeleted
+		//							  where ( val.Title.Contains( "%" + find + "%" )
+		//							  || val.Definition.Contains( "%" + find + "%" )
+		//							  )
+		//							  select val );
+            return notDeleted;
 		}
 
 		public List<Theme> GetThemesWith ( String find ) {
