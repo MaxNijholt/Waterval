@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace MvcApplication1.Controllers
 {
@@ -21,10 +22,42 @@ namespace MvcApplication1.Controllers
 
        // static ModuleList modules = new ModuleList();
 
-        public ActionResult Index()
-        {
-            return View(moduleRepository.GetAll());
-        }
+		//public ActionResult Index()
+		//{
+		//	return View(moduleRepository.GetAll());
+		//}
+
+		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10 ) {
+			ViewBag.CurrentSort = sortOrder;
+			ViewBag.ResultAmount = pagesize;
+			ViewBag.NameSortParm = String.IsNullOrEmpty( sortOrder ) ? "Title" : "";
+
+			if ( searchString != null ) {
+				page = 1;
+			} else {
+				searchString = currentFilter;
+			}
+
+			ViewBag.CurrentFilter = searchString;
+
+			var modules = moduleRepository.GetAll( );
+			if ( !String.IsNullOrEmpty( searchString ) ) {
+				modules = modules.Where( b => b.Title.Contains( searchString ) ).ToList( );
+				// TODO: change this to the searchRepo!
+			}
+			switch ( sortOrder ) {
+				case "Title":
+				modules = modules.OrderBy( b => b.Title ).ToList( );
+				break;
+				default:
+				modules = modules.OrderByDescending( b => b.Title ).ToList( );
+				break;
+			}
+			int pageSize = pagesize;
+			int pageNumber = ( page ?? 1 );
+			return View( modules.ToPagedList( pageNumber, pageSize ) );
+		}
+
 
         public ActionResult Create()
         {

@@ -20,11 +20,6 @@ namespace Waterval.Controllers
         {
             BlockRepository = new BlockRepository();
         }
-		//public ActionResult Index()
-		//{
-
-		//	return View(BlockRepository.GetAll());
-		//}
 
 		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize =10 ) {
 			ViewBag.CurrentSort = sortOrder;
