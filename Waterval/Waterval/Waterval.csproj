@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -165,6 +165,7 @@
     <Compile Include="Controllers\BlockController.cs" />
     <Compile Include="Controllers\CompetenceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LearnGoalController.cs" />
     <Compile Include="Controllers\LearningToolController.cs" />
     <Compile Include="Controllers\LearnLineController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
@@ -285,6 +286,11 @@
     <Content Include="Views\Phasing\Create.cshtml" />
     <Content Include="Views\Phasing\Edit.cshtml" />
     <Content Include="Views\Phasing\Details.cshtml" />
+    <Content Include="Views\LearnGoal\Index.cshtml" />
+    <Content Include="Views\LearnGoal\Create.cshtml" />
+    <Content Include="Views\LearnGoal\Edit.cshtml" />
+    <Content Include="Views\LearnGoal\_CreateOrEdit.cshtml" />
+    <Content Include="Views\LearnGoal\ToNewVersion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
