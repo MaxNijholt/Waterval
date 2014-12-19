@@ -116,6 +116,7 @@
 
                 @foreach (var item in Model.Level)
                 {
+                    if (item.Module.isDeleted) { continue; }
                     <tr id="@item.Module_ID">
                      <td>
                             @item.Module.CourseCode <input type="text" id="@item.Module_ID" class="hidden" />
@@ -157,7 +158,7 @@
                             <td id="CourseCode">@item.CourseCode</td>
                             <td>@item.Title</td>
                             <td>@item.Definition_Short</td>
-                            <td><input type="button" value="Toevoegen" id="btn_addMod" data-id="@item.Module_ID" class="btn btn-avans" /></td>
+                            <td><input type="button" value="+" id="btn_addMod" data-id="@item.Module_ID" class="btn btn-avans" /></td>
                         </tr>
                     }
                 </tbody>
@@ -165,6 +166,9 @@
         </div>
     </div>
 
+  
+    
+    
     <input type="text" name="ModulesTogether" class="hidden form-control" />
 
     <div class="container">
