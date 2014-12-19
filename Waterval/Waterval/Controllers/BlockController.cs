@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using DomainModel.Models;
 using RepositoryModel;
+using PagedList;
 
 
 namespace Waterval.Controllers
@@ -19,11 +20,41 @@ namespace Waterval.Controllers
         {
             BlockRepository = new BlockRepository();
         }
-        public ActionResult Index()
-        {
+		//public ActionResult Index()
+		//{
 
-            return View(BlockRepository.GetAll());
-        }
+		//	return View(BlockRepository.GetAll());
+		//}
+
+		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize =10 ) {
+			ViewBag.CurrentSort = sortOrder;
+			ViewBag.ResultAmount = pagesize;
+			ViewBag.NameSortParm = String.IsNullOrEmpty( sortOrder ) ? "Title" : "";
+
+			if ( searchString != null ) {
+				page = 1;
+			} else {
+				searchString = currentFilter;
+			}
+
+			ViewBag.CurrentFilter = searchString;
+
+			var blocks = BlockRepository.GetAll( );
+			if ( !String.IsNullOrEmpty( searchString ) ) {
+				blocks = blocks.Where( b => b.Title.Contains( searchString ) ).ToList();
+			}
+			switch ( sortOrder ) {
+				case "Title":
+					blocks = blocks.OrderBy( b => b.Title ).ToList();
+					break;
+				default:
+					blocks = blocks.OrderByDescending( b => b.Title ).ToList( );
+					break;
+			}
+			int pageSize = pagesize;
+			int pageNumber = ( page ?? 1 );
+			return View( blocks.ToPagedList( pageNumber, pageSize ) );
+		}
 
         public ActionResult Details(int id)
         {
