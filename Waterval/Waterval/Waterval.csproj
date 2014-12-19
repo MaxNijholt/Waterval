@@ -270,7 +270,7 @@
     <Content Include="Views\Leerlijn\Details.cshtml" />
     <Content Include="Views\Leerlijn\Edit.cshtml" />
     <Content Include="Views\Leerlijn\Index.cshtml" />
-    <Content Include="Views\Search\BlockResult.cshtml" />
+    <Content Include="Views\Search\SearchResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

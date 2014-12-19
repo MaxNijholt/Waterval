@@ -21,5 +21,23 @@ namespace Waterval.Models
             set;
         }
 
+        public List<Competence> Compentences
+        {
+            get;
+            set;
+        }
+
+        public List<Theme> Themes
+        {
+            get;
+            set;
+        }
+
+        public List<Module> Modules
+        {
+            get;
+            set;
+        }
+
     }
 }

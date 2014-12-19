@@ -22,11 +22,14 @@ namespace Waterval.Controllers
 			return View();
         }
 
-		public ActionResult BlockResult ( String SearchText) {
+		public ActionResult SearchResults ( String SearchText) {
             SearchLists sl = new SearchLists()
             {
                 Blocks = searchRepo.GetBlocksWith(SearchText),
-                LearnLines = searchRepo.GetLearnLinesWith(SearchText)
+                LearnLines = searchRepo.GetLearnLinesWith(SearchText),
+                Modules = searchRepo.GetModulesWith(SearchText),
+                Themes = searchRepo.GetThemesWith(SearchText),
+                Compentences = searchRepo.GetCompetencesWith(SearchText)
             };
             return View(sl);
 		}
