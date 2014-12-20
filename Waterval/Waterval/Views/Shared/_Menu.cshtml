@@ -30,13 +30,16 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                @using (Html.BeginForm("SearchResults", "Search"))
+
+                @using (Html.BeginForm("SearchResults", "Search")) 
                 {
-                    <div class="navbar-form navbar-left">
-                        <div class="input-group" style="width:325px;">
-                            <input type="text" class="form-control" name="SearchText" id="SearchText" placeholder="Zoeken">
+                    <div id="custom-search-input" style="width:325px;">
+                        <div class="input-group">
+                            <input type="text" class="search-query form-control" name="SearchText" id="SearchText" placeholder="Zoeken" />
                             <span class="input-group-btn">
-                                <button type="submit" class="btn btn-avans" id="Search"><span class="glyphicon glyphicon-search"></span></button>
+                                <button class="btn btn-danger" type="submit" id="Search">
+                                    <span class=" glyphicon glyphicon-search"></span>
+                                </button>
                             </span>
                         </div>
                     </div>

@@ -9,6 +9,8 @@ namespace Waterval.Models
     public class SearchLists
     {
 
+        private int _totalCount;
+
         public List<Block> Blocks
         {
             get;
@@ -37,6 +39,12 @@ namespace Waterval.Models
         {
             get;
             set;
+        }
+
+        public int TotalCount 
+        {
+            set { _totalCount = value; }
+            get { return Blocks.Count + LearnLines.Count + Modules.Count + Compentences.Count + Themes.Count; }
         }
 
     }
