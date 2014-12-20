@@ -8,20 +8,17 @@ using RepositoryModel;
 using PagedList;
 
 
-namespace Waterval.Controllers
-{
-    public class BlockController : Controller
-    {
-        //
-        // GET: /Block/
-        private BlockRepository BlockRepository;
+namespace Waterval.Controllers {
+	public class BlockController : Controller {
+		//
+		// GET: /Block/
+		private BlockRepository BlockRepository;
 
-        public BlockController()
-        {
-            BlockRepository = new BlockRepository();
-        }
+		public BlockController ( ) {
+			BlockRepository = new BlockRepository( );
+		}
 
-		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize =10 ) {
+		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10 ) {
 			ViewBag.CurrentSort = sortOrder;
 			ViewBag.ResultAmount = pagesize;
 			ViewBag.NameSortParm = String.IsNullOrEmpty( sortOrder ) ? "Title" : "";
@@ -36,76 +33,65 @@ namespace Waterval.Controllers
 
 			var blocks = BlockRepository.GetAll( );
 			if ( !String.IsNullOrEmpty( searchString ) ) {
-				blocks = blocks.Where( b => b.Title.Contains( searchString ) ).ToList();
+				blocks = blocks.Where( b => b.Title.Contains( searchString ) ).ToList( );
 			}
 			switch ( sortOrder ) {
 				case "Title":
-					blocks = blocks.OrderBy( b => b.Title ).ToList();
-					break;
+				blocks = blocks.OrderBy( b => b.Title ).ToList( );
+				break;
 				default:
-					blocks = blocks.OrderByDescending( b => b.Title ).ToList( );
-					break;
+				blocks = blocks.OrderByDescending( b => b.Title ).ToList( );
+				break;
 			}
 			int pageSize = pagesize;
 			int pageNumber = ( page ?? 1 );
 			return View( blocks.ToPagedList( pageNumber, pageSize ) );
 		}
 
-        public ActionResult Details(int id)
-        {
-            Block model = BlockRepository.Get(id);
-            return View(model);
-        }
+		public ActionResult Details ( int id ) {
+			Block model = BlockRepository.Get( id );
+			return View( model );
+		}
 
-        public ActionResult Create()
-        {
-            Block block = new Block();
-            return View(block);
-        }
-        [HttpPost]
-        public ActionResult Create(Block block)
-        {
-            try
-            {
-                block.DeleteDate = DateTime.Now;
-                BlockRepository.Create(block);
+		public ActionResult Create ( ) {
+			Block block = new Block( );
+			return View( block );
+		}
+		[HttpPost]
+		public ActionResult Create ( Block block ) {
+			try {
+				block.DeleteDate = DateTime.Now;
+				BlockRepository.Create( block );
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View(block);
-            }
-        }
-        public ActionResult Edit(int id)
-        {
-            var model = BlockRepository.Get(id);
-            return View(model);
-        }
+				return RedirectToAction( "Index" );
+			}
+			catch {
+				return View( block );
+			}
+		}
+		public ActionResult Edit ( int id ) {
+			var model = BlockRepository.Get( id );
+			return View( model );
+		}
 
-        [HttpPost]
-        public ActionResult Edit(int id, Block block)
-        {
-            try
-            {
-                if (BlockRepository.Update(block) == null)
-                {
-                    return View(block).ViewBag.Error = "Er is iets fout gegaan.";
-                }
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View(block);
-            }
-        }
+		[HttpPost]
+		public ActionResult Edit ( int id, Block block ) {
+			try {
+				if ( BlockRepository.Update( block ) == null ) {
+					return View( block ).ViewBag.Error = "Er is iets fout gegaan.";
+				}
+				return RedirectToAction( "Index" );
+			}
+			catch {
+				return View( block );
+			}
+		}
 
-        [HttpPost]
-        public ActionResult Delete(Block blok)
-        {
+		[HttpPost]
+		public ActionResult Delete ( Block blok ) {
 
-            BlockRepository.Delete(blok.Block_ID);
-            return View();
-        }
-    }
+			BlockRepository.Delete( blok.Block_ID );
+			return View( );
+		}
+	}
 }

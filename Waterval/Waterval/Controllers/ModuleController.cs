@@ -19,14 +19,7 @@ namespace MvcApplication1.Controllers
         {
             moduleRepository = new ModuleRepository();
         }
-
-       // static ModuleList modules = new ModuleList();
-
-		//public ActionResult Index()
-		//{
-		//	return View(moduleRepository.GetAll());
-		//}
-
+		
 		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10 ) {
 			ViewBag.CurrentSort = sortOrder;
 			ViewBag.ResultAmount = pagesize;
@@ -48,6 +41,15 @@ namespace MvcApplication1.Controllers
 			switch ( sortOrder ) {
 				case "Title":
 				modules = modules.OrderBy( b => b.Title ).ToList( );
+				break;
+				case "Vakcode":
+				modules = modules.OrderBy( b => b.CourseCode ).ToList( );
+				break;
+				case "EC":
+				modules = modules.OrderBy( b => b.AssignmentCode.Sum( s => s.EC ) ).ToList( );
+				break;
+				case "Ingangsniveau":
+				modules = modules.OrderBy( b => b.Entry_Level ).ToList( );
 				break;
 				default:
 				modules = modules.OrderByDescending( b => b.Title ).ToList( );

@@ -20,11 +20,6 @@ namespace MvcApplication1.Controllers
             learnLineRepository = new LearnLineRepository();
         }
 
-		//public ActionResult Index()
-		//{
-		//	return View(learnLineRepository.GetAll());
-		//}
-
 		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10 ) {
 			ViewBag.CurrentSort = sortOrder;
 			ViewBag.ResultAmount = pagesize;

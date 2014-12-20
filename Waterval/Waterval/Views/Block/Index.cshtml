@@ -1,5 +1,4 @@
-﻿@*@model IEnumerable<DomainModel.Models.Block>*@
-@model PagedList.IPagedList<DomainModel.Models.Block>
+﻿@model PagedList.IPagedList<DomainModel.Models.Block>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
@@ -15,8 +14,6 @@
 
 <div class="container">
     <h2>Blok Overzicht</h2>
-    @*<input type="text" class="form-control" placeholder="filter blokken...">*@
-
     @using ( Html.BeginForm( "Index", "Block", FormMethod.Get ) ) {
         <p>
             Zoeken op Titel: @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string )
@@ -35,11 +32,9 @@
 
             @foreach ( var item in Model ) {
             <tr>
-
                 <td>
                     @Html.ActionLink( item.Title, "Details", new { id = item.Block_ID } )
                 </td>
-
                 <td>
                     @Html.ActionLink( "Aanpassen", "Edit", new { id = item.Block_ID }, new { @class = "btn btn-warning" } )
                 </td>
@@ -48,7 +43,6 @@
                 </td>
             </tr>
             }
-
         </table>
 
         @Html.ActionLink( "Nieuw Blok", "Create", null, new { @class = "btn btn-success" } )
