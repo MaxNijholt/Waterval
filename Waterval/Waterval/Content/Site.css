@@ -14,6 +14,7 @@
 /* Default tabbed panel */
 .panel.with-nav-tabs .panel-heading{
     padding: 5px 5px 0 5px;
+    background-color:rgba(230, 24, 24, 0.79);
 }
 .panel.with-nav-tabs .nav-tabs{
 	border-bottom: none;
@@ -26,15 +27,15 @@
 .with-nav-tabs.panel-default .nav-tabs > li > a,
 .with-nav-tabs.panel-default .nav-tabs > li > a:hover,
 .with-nav-tabs.panel-default .nav-tabs > li > a:focus {
-    color: #777;
+    color: #FFF;
 }
 .with-nav-tabs.panel-default .nav-tabs > .open > a,
 .with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
 .with-nav-tabs.panel-default .nav-tabs > .open > a:focus,
 .with-nav-tabs.panel-default .nav-tabs > li > a:hover,
 .with-nav-tabs.panel-default .nav-tabs > li > a:focus {
-    color: #777;
-	background-color: #ddd;
+    color: #000;
+	background-color: #FFF;
 	border-color: transparent;
 }
 .with-nav-tabs.panel-default .nav-tabs > li.active > a,
