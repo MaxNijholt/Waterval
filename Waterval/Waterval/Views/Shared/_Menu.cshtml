@@ -33,11 +33,12 @@
                 @using (Html.BeginForm("SearchResults", "Search"))
                 {
                     <div class="navbar-form navbar-left">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="SearchText" placeholder="Search all.." name="SearchText" style="width: 325px" />
+                        <div class="input-group" style="width:325px;">
+                            <input type="text" class="form-control" name="SearchText" id="SearchText" placeholder="Zoeken">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-avans" id="Search"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
                         </div>
-
-                        <input class="btn btn-avans" type="submit" id="Search" value="Search" /> 
                     </div>
                 }
             
