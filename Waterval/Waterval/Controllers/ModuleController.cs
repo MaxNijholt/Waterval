@@ -13,11 +13,13 @@ namespace MvcApplication1.Controllers
     {
         //
         // GET: /Module/
-        private ModuleRepository moduleRepository;
+		private ModuleRepository moduleRepository;
+		private SearchRepository search;
 
         public ModuleController()
         {
-            moduleRepository = new ModuleRepository();
+			moduleRepository = new ModuleRepository( );
+			search = new SearchRepository( );
         }
 		
 		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10 ) {
@@ -35,8 +37,7 @@ namespace MvcApplication1.Controllers
 
 			var modules = moduleRepository.GetAll( );
 			if ( !String.IsNullOrEmpty( searchString ) ) {
-				modules = modules.Where( b => b.Title.Contains( searchString ) ).ToList( );
-				// TODO: change this to the searchRepo!
+				modules = search.GetModulesWith( searchString );
 			}
 			switch ( sortOrder ) {
 				case "Title":

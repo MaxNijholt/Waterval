@@ -14,9 +14,11 @@ namespace Waterval.Controllers {
 		//
 		// GET: /Block/
 		private BlockRepository BlockRepository;
+		private SearchRepository search;
 
 		public BlockController ( ) {
 			BlockRepository = new BlockRepository( );
+			search = new SearchRepository( );
 		}
 
 		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10 ) {
@@ -34,7 +36,7 @@ namespace Waterval.Controllers {
 
 			var blocks = BlockRepository.GetAll( );
 			if ( !String.IsNullOrEmpty( searchString ) ) {
-				blocks = blocks.Where( b => b.Title.Contains( searchString ) ).ToList( );
+				blocks = search.GetBlocksWith( searchString );
 			}
 			switch ( sortOrder ) {
 				case "Title":

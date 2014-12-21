@@ -12,9 +12,11 @@ namespace Waterval.Controllers
 	public class ThemeController : Controller
 	{
 		private ThemeRepository themeRepository;
+		private SearchRepository search;
 		public ThemeController()
 		{
 			themeRepository = new ThemeRepository();
+			search = new SearchRepository( );
 		}
 
 		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10 ) {
@@ -32,8 +34,7 @@ namespace Waterval.Controllers
 
 			var themes = themeRepository.GetAll( );
 			if ( !String.IsNullOrEmpty( searchString ) ) {
-				themes = themes.Where( b => b.Title.Contains( searchString ) ).ToList( );
-				// TODO: change this to the searchRepo!
+				themes = search.GetThemesWith( searchString );
 			}
 			switch ( sortOrder ) {
 				case "Title":

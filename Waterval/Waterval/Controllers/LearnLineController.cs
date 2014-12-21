@@ -13,11 +13,13 @@ namespace MvcApplication1.Controllers
     {
         //
         // GET: /LearnLine/
-        private LearnLineRepository learnLineRepository;
+		private LearnLineRepository learnLineRepository;
+		private SearchRepository search;
 
         public LearnLineController()
         {
-            learnLineRepository = new LearnLineRepository();
+			learnLineRepository = new LearnLineRepository( );
+			search = new SearchRepository( );
         }
 
 		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10 ) {
@@ -35,8 +37,7 @@ namespace MvcApplication1.Controllers
 
 			var learnLines = learnLineRepository.GetAll( );
 			if ( !String.IsNullOrEmpty( searchString ) ) {
-				learnLines = learnLines.Where( b => b.Title.Contains( searchString ) ).ToList( );
-				// TODO: change this to the searchRepo!
+				learnLines = search.GetLearnLinesWith( searchString );
 			}
 			switch ( sortOrder ) {
 				case "Title":
