@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using DomainModel.Models;
 using RepositoryModel;
 using PagedList;
+using RepositoryModel.Repository;
 
 
 namespace Waterval.Controllers {
