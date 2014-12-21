@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DomainModel.Models;
-using RepositoryModel;
+using RepositoryModel.Repository;
 
 
 namespace Waterval.Controllers

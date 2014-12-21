@@ -1,0 +1,229 @@
+﻿@model Waterval.Models.SearchLists
+
+@{
+    ViewBag.Title = "Zoekresultaten";
+    <script type="text/javascript">
+        function buttonDisabler() {
+            if (document.getElementById("modules").innerHTML == "Modules (0)") {
+                document.getElementById("modules").disabled = true;
+                document.getElementById("modules").setAttribute("disabled", "disabled");
+            }
+            if (document.getElementById("blocks").innerHTML == "Blokken (0)") {
+                document.getElementById("blocks").disabled = true;
+                document.getElementById("blocks").setAttribute("disabled", "disabled");
+            }
+            if (document.getElementById("learnlines").innerHTML == "Leerlijnen (0)") {
+                document.getElementById("learnlines").disabled = true;
+                document.getElementById("learnlines").setAttribute("disabled", "disabled");
+            }
+            if (document.getElementById("competences").innerHTML == "Competenties (0)") {
+                document.getElementById("competences").disabled = true;
+                document.getElementById("competences").setAttribute("disabled", "disabled");
+            }
+            if (document.getElementById("themes").innerHTML == "Thema's (0)") {
+                document.getElementById("themes").disabled = true;
+                document.getElementById("themes").setAttribute("disabled", "disabled");
+            }
+        }
+        window.onload = buttonDisabler;
+    </script>
+}
+
+<h2>Zoekresultaten</h2>
+
+@using (Html.BeginForm("SearchResults", "Search"))
+{
+    <div id="custom-search-input" style="width: 102%;">
+        <div class="input-group">
+            <input type="text" class="search-query form-control" name="SearchText" id="SearchText" placeholder="Zoeken" />
+            <span class="input-group-btn">
+                <button class="btn btn-danger" type="submit" id="Search">
+                    <span class=" glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+    </div>
+}
+<br />
+
+<div class="panel with-nav-tabs panel-default">
+    <div class="panel-heading">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab1default" data-toggle="tab">Resultaten (@Model.TotalCount)</a></li>
+            <li><a id="modules" href="#tab2default" data-toggle="tab">Modules (@Model.Modules.Count)</a></li>
+            <li><a id="blocks" href="#tab3default" data-toggle="tab">Blokken (@Model.Blocks.Count)</a></li>
+            <li><a id="learnlines" href="#tab4default" data-toggle="tab">Leerlijnen (@Model.LearnLines.Count)</a></li>
+            <li><a id="competences" href="#tab5default" data-toggle="tab">Competenties (@Model.Compentences.Count)</a></li>
+            <li><a id="themes" href="#tab6default" data-toggle="tab">Thema's (@Model.Themes.Count)</a></li>
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="tab1default">
+                <!-- All results -->
+                <table class="table table-bordered">
+                    <tr>
+                        <th>#</th>
+                        <th width="100%">Resultaat</th>
+                    </tr>
+
+                    <!-- Module results -->
+                    @for (int i = 0; i < Model.Modules.Count; i++) {
+                        <tr>
+                            <td>
+                                @(i + 1)
+                            </td>
+                            <td>
+                                @Html.ActionLink(Model.Modules.ElementAt(i).Title, "../Module/Details", new { id = Model.Modules.ElementAt(i).Module_ID }) <span style="float:right;">Module</span>
+                            </td>
+                        </tr>
+                    }
+                    <!-- Block results -->
+                    @for (int i = 0; i < Model.Blocks.Count; i++) {
+                        <tr>
+                            <td>
+                                @(i + 1 + Model.Modules.Count)
+                            </td>
+                            <td>
+                                @Html.ActionLink(Model.Blocks.ElementAt(i).Title, "../Block/Details", new { id = Model.Blocks.ElementAt(i).Block_ID }) <span style="float:right;">Blok</span> 
+                            </td>
+                        </tr>
+                    }
+                    <!-- LearnLine results -->
+                    @for (int i = 0; i < Model.LearnLines.Count; i++) {
+                        <tr>
+                            <td>
+                                @(i + 1 + Model.Modules.Count + Model.Blocks.Count)
+                            </td>
+                            <td>
+                                @Html.ActionLink(Model.LearnLines.ElementAt(i).Title, "../Leerlijn/Details", new { id = Model.LearnLines.ElementAt(i).LearnLine_ID }) <span style="float:right;">Leerlijn</span>
+                            </td>
+                        </tr>
+                    }
+                    <!-- Competence results -->
+                    @for (int i = 0; i < Model.Compentences.Count; i++) {
+                        <tr>
+                            <td>
+                                @(i + 1 + Model.Modules.Count + Model.Blocks.Count + Model.LearnLines.Count)
+                            </td>
+                            <td>
+                                @Html.ActionLink(Model.Compentences.ElementAt(i).Title, "../Competence/Details", new { id = Model.Compentences.ElementAt(i).Competence_ID }) <span style="float:right;">Competentie</span>
+                            </td>
+                        </tr>
+                    }
+                    <!-- Theme results -->
+                    @for (int i = 0; i < Model.Themes.Count; i++) {
+                        <tr>
+                            <td>
+                                @(i + 1 + Model.Modules.Count + Model.Blocks.Count + Model.LearnLines.Count + Model.Compentences.Count)
+                            </td>
+                            <td>
+                                @Html.ActionLink(Model.Themes.ElementAt(i).Title, "../Thema/Details", new { id = Model.Themes.ElementAt(i).Theme_ID }) <span style="float:right;">Thema</span>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="tab-pane fade" id="tab2default">
+                <!-- Module results -->
+                <table class="table table-bordered">
+                    <tr>
+                        <th>#</th>
+                        <th>Module</th>
+                    </tr>
+                    
+                    @for (int i = 0; i < Model.Modules.Count; i++) {
+                        <tr>
+                            <td>
+                                @(i + 1)
+                            </td>
+                            <td width="100%">
+                                @Html.ActionLink(Model.Modules.ElementAt(i).Title, "../Module/Details", new { id = Model.Modules.ElementAt(i).Module_ID })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="tab-pane fade" id="tab3default">
+                <!-- Block results -->
+                <table class="table table-bordered">
+                    <tr>
+                        <th>#</th>
+                        <th>Blok</th>
+                    </tr>
+
+                    @for (int i = 0; i < Model.Blocks.Count; i++) {
+                        <tr>
+                            <td>
+                                @(i + 1)
+                            </td>
+                            <td width="100%">
+                                @Html.ActionLink(Model.Blocks.ElementAt(i).Title, "../Block/Details", new { id = Model.Blocks.ElementAt(i).Block_ID })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="tab-pane fade" id="tab4default">
+                <!-- LearnLine results -->
+                <table class="table table-bordered">
+                    <tr>
+                        <th>#</th>
+                        <th>Leerlijn</th>
+                    </tr>
+
+                    @for (int i = 0; i < Model.LearnLines.Count; i++) {
+                        <tr>
+                            <td>
+                                @(i + 1)
+                            </td>
+                            <td width="100%">
+                                @Html.ActionLink(Model.LearnLines.ElementAt(i).Title, "../LearnLine/Details", new { id = Model.LearnLines.ElementAt(i).LearnLine_ID })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="tab-pane fade" id="tab5default">
+                <!-- Competence results -->
+                <table class="table table-bordered">
+                    <tr>
+                        <th>#</th>
+                        <th>Competentie</th>
+                    </tr>
+
+                    @for (int i = 0; i < Model.Compentences.Count; i++) {
+                        <tr>
+                            <td>
+                                @(i + 1)
+                            </td>
+                            <td width="100%">
+                                @Html.ActionLink(Model.Compentences.ElementAt(i).Title, "../Competence/Details", new { id = Model.Compentences.ElementAt(i).Competence_ID })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="tab-pane fade" id="tab6default">
+                <!-- Theme results -->
+                <table class="table table-bordered">
+                    <tr>
+                        <th>#</th>
+                        <th>Thema</th>
+                    </tr>
+
+                    @for (int i = 0; i < Model.Themes.Count; i++) {
+                        <tr>
+                            <td>
+                                @(i + 1)
+                            </td>
+                            <td width="100%">
+                                @Html.ActionLink(Model.Themes.ElementAt(i).Title, "../Thema/Details", new { id = Model.Themes.ElementAt(i).Theme_ID })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
