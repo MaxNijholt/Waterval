@@ -30,16 +30,14 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                @using (Html.BeginForm("SearchResults", "Search"))
-                {
-                    <div class="navbar-form navbar-left">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="SearchText" placeholder="Search all.." name="SearchText" style="width: 325px" />
-                        </div>
-
-                        <input class="btn btn-avans" type="submit" id="Search" value="Search" /> 
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search all...">
                     </div>
-                }
+                    <a class="btn btn-avans" id="scriptid">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </a>
+                </form>
             
                 <!-- TODO: If user is logged int then show user name with a dropdown.
                     Else Just the login button-->

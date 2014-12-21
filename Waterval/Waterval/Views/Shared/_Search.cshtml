@@ -3,64 +3,51 @@
         <div class="panel-heading" data-toggle="collapse" data-parent="#accordionSearch" data-target="#collapsSearch">
             <h4 class="panel-title">
                 <td>
-                    <a class="accordion-toggle btn btn-avans">
-                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    <a class="accordion-toggle btn btn-lg btn-avans">
+                        <span class="glyphicon glyphicon-search"></span>
                     </a>
-                </td><td>Zoeken</td>
+                </td><td>Zoekfilter instellen.</td>
             </h4>
         </div>
         <div id="collapsSearch" class="panel-collapse collapse open">
             <div class="panel-body">
-                <div><h3 style="margin:0px;">Zoeken op</h3></div>
                 <table>
                     <tr>
                         <td>
-                            <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default">
-                                    @Html.CheckBox("option1", new {@value = "checked"}) Module
-                                </label>
-                                <label class="btn btn-default">
-                                    @Html.CheckBox("option2", new {@value = "checked"}) Leerlijn
-                                </label>
-                                <label class="btn btn-default">
-                                    @Html.CheckBox("option3", new {@value = "checked"}) Blok
-                                </label>
-                                <label class="btn btn-default">
-                                    @Html.CheckBox("option4", new {@value = "checked"}) Thema
-                                </label>
-                                <label class="btn btn-default">
-                                    @Html.CheckBox("option5", new {@checked = "checked"}) Competentie
-                                </label>
-                            </div>
+                            <select class="form-control">
+                                <option class="dropdown-header">Leerlijn</option>
+                                <option>BI</option>
+                                <option>SO</option>
+                                <option>CMD</option>
+
+                            </select>
+
                         </td>
                         <td>
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Zoeken" width="100">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-avans" id="scriptid"><span class="glyphicon glyphicon-search"></span></button>
-                                </span>
-                            </div>
+                            <select class="form-control">
+                                <option class="dropdown-header">Thema</option>
+                                <option>Big Data</option>
+                                <option>Onderzoek</option>
+                                <option>Programeren</option>
+
+                            </select>
                         </td>
-                    </tr>
-               </table>
-                <div><h3 style="margin:10px 0px 0px 0px;">Geavanceerd zoeken</h3></div>
-                <table class="table">
-                    <tr>
-                        <td>Leerlijn</td>
-                        <td>@Html.DropDownList("Leerlijn", (SelectList)@ViewBag.LearnLine, new {@class = "form-control"})</td>
-                    </tr>
-                    <tr>
-                        <td>Thema</td>
-                        <td>@Html.DropDownList("Thema", (SelectList)@ViewBag.Theme, new {@class = "form-control"})</td>
-                    </tr>
-                    <tr>
-                        <td>Competentie</td>
-                        <td>@Html.DropDownList("Competentie", (SelectList)@ViewBag.Competence, new {@class = "form-control"})</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><button class="btn btn-avans" id="scriptid"><span class="glyphicon glyphicon-search"></span> Zoeken</button></td>
+                        <td>
+                            <select class="form-control">
+                                <option class="dropdown-header">Compententie</option>
+                                <option>Vergaderen</option>
+                                <option>Programeren</option>
+                                <option>Business</option>
+
+                            </select>
+                        </td>
+                        <td><input type="text" class="form-control" placeholder="Search..." width="75"></td>
+                  
+                        <td><a class="btn btn-avans" id="scriptid"><span class="glyphicon glyphicon-search"></span>
+                            </a>
                     </tr>
                 </table>
+
             </div>
         </div>
     </div>
