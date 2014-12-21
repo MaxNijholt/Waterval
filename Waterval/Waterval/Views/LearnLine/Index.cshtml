@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DomainModel.Models.LearnLine>
+﻿@model PagedList.IPagedList<DomainModel.Models.LearnLine>
+@using PagedList.Mvc;
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,13 +8,19 @@
 @Styles.Render("~/Content/css")
 <div class="container">
     <h2>Leerlijnen</h2>
+    @using ( Html.BeginForm( "Index", "LearnLine", FormMethod.Get ) ) {
+        <p>
+            Zoeken op Titel: @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string )
+            <input type="submit" value="Search" />
+        </p>
+    }
     <div class="container">
         <input class="form-control" type="text" placeholder="Search..." id="searchTerm" onkeyup="doSearch('indexTable')" />
         <table class="table table-striped table-bordered" id="indexTable">
             <caption></caption>
             <thead>
                 <tr>
-                    <th>Titel</th>
+                    <th>@Html.ActionLink( "Titel", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
                     <th>Omschrijving</th>
                     <th>Aanpassen</th>
                     <th>Verwijderen</th>
@@ -34,8 +41,13 @@
         </table>
     </div>
     @Html.ActionLink("Nieuwe Leerlijn", "Create", null, new { @class = "btn btn-success" })
-
 </div>
+
+<br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager( Model, page => Url.Action( "Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } ) )
 
 
 @section Scripts {

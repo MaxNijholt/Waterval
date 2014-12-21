@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DomainModel.Models.Theme>
+﻿@model PagedList.IPagedList<DomainModel.Models.Theme>
+@using PagedList.Mvc;
 @{
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -7,12 +8,16 @@
 
 <div class="container">
 	<h2>Thema Overzicht</h2>
-	<input type="text" class="form-control" placeholder="filter thema's...">
-
+	@using ( Html.BeginForm( "Index", "Theme", FormMethod.Get ) ) {
+        <p>
+            Zoeken op Titel: @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string )
+            <input type="submit" value="Search" />
+        </p>
+    }
 	<table class="table table-bordered table-striped">
 		<tr>
-			<th>Naam</th>
-			<th>Omschrijving</th>
+            <th>@Html.ActionLink( "Naam", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
+            <th>@Html.ActionLink( "Omschrijving", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
 			<th>Aanpassen</th>
 			<th>Verwijderen</th>
 		</tr>
@@ -29,3 +34,10 @@
 
 	@Html.ActionLink("Nieuw Thema", "Create", null, new { @class = "btn btn-success" })
 </div>
+
+<br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager( Model, page => Url.Action( "Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } ) )
+

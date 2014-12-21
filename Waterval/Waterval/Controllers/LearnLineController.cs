@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace MvcApplication1.Controllers
 {
@@ -19,10 +20,36 @@ namespace MvcApplication1.Controllers
             learnLineRepository = new LearnLineRepository();
         }
 
-        public ActionResult Index()
-        {
-            return View(learnLineRepository.GetAll());
-        }
+		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10 ) {
+			ViewBag.CurrentSort = sortOrder;
+			ViewBag.ResultAmount = pagesize;
+			ViewBag.NameSortParm = String.IsNullOrEmpty( sortOrder ) ? "Title" : "";
+
+			if ( searchString != null ) {
+				page = 1;
+			} else {
+				searchString = currentFilter;
+			}
+
+			ViewBag.CurrentFilter = searchString;
+
+			var learnLines = learnLineRepository.GetAll( );
+			if ( !String.IsNullOrEmpty( searchString ) ) {
+				learnLines = learnLines.Where( b => b.Title.Contains( searchString ) ).ToList( );
+				// TODO: change this to the searchRepo!
+			}
+			switch ( sortOrder ) {
+				case "Title":
+				learnLines = learnLines.OrderBy( b => b.Title ).ToList( );
+				break;
+				default:
+				learnLines = learnLines.OrderByDescending( b => b.Title ).ToList( );
+				break;
+			}
+			int pageSize = pagesize;
+			int pageNumber = ( page ?? 1 );
+			return View( learnLines.ToPagedList( pageNumber, pageSize ) );
+		}
 
         public ActionResult Create()
         {

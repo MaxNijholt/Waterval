@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DomainModel.Models.Module>
+﻿@model PagedList.IPagedList<DomainModel.Models.Module>
+@using PagedList.Mvc;
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,14 +9,20 @@
 <div class="container">
     <h2>Module</h2>
     <div class="container">
+        @using ( Html.BeginForm( "Index", "Module", FormMethod.Get ) ) {
+            <p>
+                Zoeken op Titel: @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string )
+                <input type="submit" value="Search" />
+            </p>
+        }
         <table class="table table-striped table-bordered table-responsive">
             <thead>
                 <tr>
-                    <th>Titel</th>
+                    <th>@Html.ActionLink( "Titel", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
                     <th>Beschrijving</th>
-                    <th>Vakcode</th>
-                    <th>EC</th>
-                    <th>Ingangsniveau</th>
+                    <th>@Html.ActionLink( "Vakcode", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
+                    <th>@Html.ActionLink( "EC", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
+                    <th>@Html.ActionLink( "Ingangsniveau", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
                     <th>Aanpassen</th>
                     <th>Verwijderen</th>
                 </tr>
@@ -37,6 +44,12 @@
     @Html.ActionLink("Nieuwe Module", "Create", null, new { @class = "btn btn-success" })
 
 </div>
+<br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager( Model, page => Url.Action( "Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } ) )
+
 
 @section Scripts {
     <script>

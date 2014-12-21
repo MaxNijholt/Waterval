@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace MvcApplication1.Controllers
 {
@@ -18,13 +19,47 @@ namespace MvcApplication1.Controllers
         {
             moduleRepository = new ModuleRepository();
         }
+		
+		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10 ) {
+			ViewBag.CurrentSort = sortOrder;
+			ViewBag.ResultAmount = pagesize;
+			ViewBag.NameSortParm = String.IsNullOrEmpty( sortOrder ) ? "Title" : "";
 
-       // static ModuleList modules = new ModuleList();
+			if ( searchString != null ) {
+				page = 1;
+			} else {
+				searchString = currentFilter;
+			}
 
-        public ActionResult Index()
-        {
-            return View(moduleRepository.GetAll());
-        }
+			ViewBag.CurrentFilter = searchString;
+
+			var modules = moduleRepository.GetAll( );
+			if ( !String.IsNullOrEmpty( searchString ) ) {
+				modules = modules.Where( b => b.Title.Contains( searchString ) ).ToList( );
+				// TODO: change this to the searchRepo!
+			}
+			switch ( sortOrder ) {
+				case "Title":
+				modules = modules.OrderBy( b => b.Title ).ToList( );
+				break;
+				case "Vakcode":
+				modules = modules.OrderBy( b => b.CourseCode ).ToList( );
+				break;
+				case "EC":
+				modules = modules.OrderBy( b => b.AssignmentCode.Sum( s => s.EC ) ).ToList( );
+				break;
+				case "Ingangsniveau":
+				modules = modules.OrderBy( b => b.Entry_Level ).ToList( );
+				break;
+				default:
+				modules = modules.OrderByDescending( b => b.Title ).ToList( );
+				break;
+			}
+			int pageSize = pagesize;
+			int pageNumber = ( page ?? 1 );
+			return View( modules.ToPagedList( pageNumber, pageSize ) );
+		}
+
 
         public ActionResult Create()
         {
