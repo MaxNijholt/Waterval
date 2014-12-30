@@ -113,7 +113,7 @@
             </thead>
 
             <tbody>
-
+                @{int index = 0;}
                 @foreach (var item in Model.Level)
                 {
                     if (item.Module.isDeleted) { continue; }
@@ -124,8 +124,12 @@
                     <td>@item.Module.Title</td>
                     <td>@item.Module.Definition_Short</td>
                         @{string test = "Level" + item.Module_ID;}
-                    <td><input type="number" class="form-control" id="level" name="@test"  value="@Convert.ToInt16(@item.Level1)" /></td>
+                    <td><input type="number" class="form-control" id="Level[@index].Level1" name="Level[@index].Level1" value="@item.Level1" />
+                        <input type="number" id="Level[@index].Module_ID" name="Level[@index].Module_ID" class="form-control" value="@item.Module_ID" />
+                        
+                        </td>
                     <td><input type="button" value="Verwijderen" id="btn_deleteMod" data-id="@item.Module_ID" class="btn btn-danger" />
+                        @{index++; }
                 </tr>
                 }
             </tbody>

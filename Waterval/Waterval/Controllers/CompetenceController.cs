@@ -60,8 +60,6 @@ namespace Waterval.Controllers
             //Gives back al of the exsiting modules.
             @ViewBag.ModuleList = GetModules(comp);
 
-            foreach (var item in comp.Level)
-                item.Module = moduleRepository.Get(item.Module_ID);
 
             try
             {
@@ -81,6 +79,10 @@ namespace Waterval.Controllers
             }
             catch
             {
+
+                foreach (var item in comp.Level)
+                    item.Module = moduleRepository.Get(item.Module_ID);
+
                 //Did something go wrong we return the view with the model.
                 return View(comp);
             }
@@ -182,8 +184,7 @@ namespace Waterval.Controllers
         {
             @ViewBag.ModuleList = GetModules(competence);
 
-            foreach (var item in competence.Level)
-                item.Module = moduleRepository.Get(item.Module_ID);
+         
             try
             {
                 @ViewBag.NewID = newVersion(id);
@@ -201,6 +202,9 @@ namespace Waterval.Controllers
             }
             catch
             {
+                foreach (var item in competence.Level)
+                    item.Module = moduleRepository.Get(item.Module_ID);
+
                 return View(competence);
             }
         }
