@@ -11,7 +11,6 @@ namespace DomainModel.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class LearningTool
     {
@@ -22,7 +21,6 @@ namespace DomainModel.Models
     
         public int LearnTool_ID { get; set; }
         public Nullable<int> PrevLearnTool_ID { get; set; }
-        [Required]
         public string Description { get; set; }
         public bool isDeleted { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }

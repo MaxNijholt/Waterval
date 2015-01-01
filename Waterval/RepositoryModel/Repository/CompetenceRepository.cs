@@ -45,7 +45,6 @@ namespace RepositoryModel.Repository
         /// <returns></returns>
         public Competence Create(Competence compentence)
         {
-
             dbContext.Competence.Add(compentence);
             dbContext.SaveChanges();
             return compentence;

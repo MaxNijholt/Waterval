@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DomainModel.Models.Workform>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+
+
+
+<div class="container">
+    <h2>Werkvorm Overzicht</h2>
+    <input type="text" class="form-control" placeholder="filter blokken...">
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Omschrijving</th>
+
+            <th>Aanpassen</th>
+            <th>Verwijderen</th>
+        </tr>
+        <tr>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+
+                <td>
+                    @Html.ActionLink(item.Description, "Details", new { id = item.Workform_ID })
+                </td>
+
+                <td>
+                    @Html.ActionLink("Aanpassen", "Edit", new { id = item.Workform_ID }, new { @class = "btn btn-warning" })
+                </td>
+                <td>
+                    <input type="button" value="Verwijderen" data-name="@item.Description" data-id="@item.Workform_ID" class="btn btn-avans">
+                </td>
+                <td>@Html.ActionLink("Nieuwe versie", "toNewVersion", new { id = item.Workform_ID }, new { @class = "btn btn-avans" })</td>
+            </tr>
+            }
+        </table>
+
+        @Html.ActionLink("Nieuw Blok", "Create", null, new { @class = "btn btn-success" })
+    </div>
+
+    @section Scripts {
+        <script>
+            $('input[type="button"]').click(function (e) {
+                var title = $(this).attr('data-name');
+                var id = $(this).attr('data-id');
+
+                if (confirm('Gegevens van ' + title + ' verwijderen?')) {
+                    var url = "/Workform/Delete";
+
+                    $.post(url, { Workform_ID: id, Description: title }, function (data) {
+                        $("#msg").html(data);
+                    });
+                    $(this).closest('tr').remove()
+                }
+            })
+        </script>
+    }

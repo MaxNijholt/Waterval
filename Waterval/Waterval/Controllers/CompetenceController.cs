@@ -43,7 +43,7 @@ namespace Waterval.Controllers
         {
             Competence comp = new Competence();
 
-            @ViewBag.ModuleList = moduleRepository.GetAll();
+            @ViewBag.ModuleList = GetModules(comp);
             @ViewBag.NewID = -1;
             return View(comp);
         }
@@ -51,45 +51,38 @@ namespace Waterval.Controllers
         /// <summary>
         /// This create gets called when a httpost get done on the form.
         /// </summary>
-        /// <param name="form">The complete collection of al the form controllers</param>
+        /// <param name="competence">The complete ccompetence</param>
         /// <returns></returns>
         [ValidateInput(true), HttpPost]
-        public ActionResult Create(FormCollection form)
+        public ActionResult Create(Competence comp)
         {
-            Competence comp = new Competence();
 
             //Gives back al of the exsiting modules.
-            @ViewBag.ModuleList = moduleRepository.GetAll();
+            @ViewBag.ModuleList = GetModules(comp);
+
+
             try
             {
-                //Fills the competence with the values of the form collection.
-                //if the defination long is not filled we return the view so we can see the error message.
-                comp.Title = form["Title"];
-                comp.Definition_Long = form["Definition_Long"];
-                comp.Definition_Short = form["Definition_Short"];
-
                 if (string.IsNullOrEmpty(comp.Definition_Long))
                     return View(comp);
 
                 //We create a new competence and we store the id of it in a variabele
                 var id = compenteceRepository.Create(comp).Competence_ID;
 
-                //From the textbox ModulesTogether we get the value. 
-                //We split this value on - and loop through them all.
+                //We loop through all levels 
                 //We save the combination of the Comptence, Module and Level.
-                var mods = form["ModulesTogether"];
-                if (!string.IsNullOrEmpty(mods))
-                    foreach (string modid in mods.Split('-'))
-                    {
-                        var level = form["Level" + modid];
-                        compenteceRepository.CompentenceAndModules(id, Convert.ToInt16(modid), level);
-                    }
+                foreach (var item in comp.Level)
+                    compenteceRepository.CompentenceAndModules(id, item.Module_ID, item.Level1);
 
                 //We go back to the index.
                 return RedirectToAction("Index");
             }
             catch
             {
+
+                foreach (var item in comp.Level)
+                    item.Module = moduleRepository.Get(item.Module_ID);
+
                 //Did something go wrong we return the view with the model.
                 return View(comp);
             }
@@ -105,7 +98,7 @@ namespace Waterval.Controllers
             compenteceRepository.Delete(compentence.Competence_ID);
             return View();
         }
-        
+
         /// <summary>
         /// Calls the create view with a model
         /// </summary>
@@ -124,25 +117,22 @@ namespace Waterval.Controllers
         /// Gets called from a post of the edit view it edits an existing competence
         /// </summary>
         /// <param name="id">id of the competence</param>
-        /// <param name="form">the complete form collection</param>
+        /// <param name="competence">the complete competence</param>
         /// <returns></returns>
         [ValidateInput(true), HttpPost]
-        public ActionResult Edit(int id, FormCollection form)
+        public ActionResult Edit(int id, Competence competence)
         {
-            Competence competence = new Competence();
+            @ViewBag.ModuleList = GetModules(competence);
+
+            foreach (var item in competence.Level)
+                item.Module = moduleRepository.Get(item.Module_ID);
             try
             {
                 //Fills the id of the competence with the hidden value from competence id.
-                competence.Competence_ID = Convert.ToInt16(form["Competence_ID"]);
                 @ViewBag.NewID = newVersion(competence.Competence_ID);
 
-                //Fills al the other values from competence with the form collection
-                competence.Title = form["Title"];
-                competence.Definition_Long = form["Definition_Long"];
-                competence.Definition_Short = form["Definition_Short"];
-
                 //Get a list of modules based on this competence. 
-                @ViewBag.ModuleList = GetModules(competence);
+                @ViewBag.ModuleList = GetModules(competence).Where(m => m.isDeleted = false);
 
                 //if the defination is empty we return the view.
                 if (string.IsNullOrEmpty(competence.Definition_Long))
@@ -155,16 +145,10 @@ namespace Waterval.Controllers
                 //We delete all of the levels from this competence. 
                 compenteceRepository.CompentenceAndModulesDelete(competence.Competence_ID);
 
-                //From the textbox ModulesTogether we get the value. 
-                //We split this value on - and loop through them all.
-                //We save the combination of the Comptence, Module and Level.
-                var mods = form["ModulesTogether"];
-                if (!string.IsNullOrEmpty(mods))
-                    foreach (string modid in mods.Split('-'))
-                    {
-                        var level = form["Level" + modid];
-                        compenteceRepository.CompentenceAndModules(competence.Competence_ID, Convert.ToInt16(modid), level);
-                    }           
+
+                foreach (var item in competence.Level)
+                    compenteceRepository.CompentenceAndModules(id, item.Module_ID, item.Level1);
+
                 return RedirectToAction("Index");
             }
             catch
@@ -179,7 +163,7 @@ namespace Waterval.Controllers
         /// </summary>
         /// <param name="id">The id of the competence that we want to use as a base.</param>
         /// <returns></returns>
-        public ActionResult toNewCohort(int id)
+        public ActionResult toNewVersion(int id)
         {
             Competence competence = compenteceRepository.Get(id);
 
@@ -196,45 +180,31 @@ namespace Waterval.Controllers
         }
 
         [ValidateInput(true), HttpPost]
-        public ActionResult toNewCohort(int id, FormCollection form)
+        public ActionResult toNewVersion(int id, Competence competence)
         {
-            Competence competence = new Competence();
+            @ViewBag.ModuleList = GetModules(competence);
+
+         
             try
             {
                 @ViewBag.NewID = newVersion(id);
-            
-
-                competence.Title = form["Title"];
-                competence.Definition_Long = form["Definition_Long"];
-                competence.Definition_Short = form["Definition_Short"];
-                competence.PrevCompetence_ID = Convert.ToInt16(form["PrevCompetence_ID"]);
-
-              
 
                 if (string.IsNullOrEmpty(competence.Definition_Long))
                     return View(competence);
 
-                var model = compenteceRepository.Create(competence);
-              
-                
-                @ViewBag.ModuleList = GetModules(model);
-             
-                var mods = form["ModulesTogether"];
+                int newestID = compenteceRepository.Create(competence).Competence_ID;
 
-                if (!string.IsNullOrEmpty(mods))
-                    foreach (string modid in mods.Split('-'))
-                    {
-                        var level = form["Level" + modid];
-                        compenteceRepository.CompentenceAndModules(model.Competence_ID, Convert.ToInt16(modid), level);
-                    }
-
-           
+                foreach (var item in competence.Level)
+                    compenteceRepository.CompentenceAndModules(newestID, item.Module_ID, item.Level1);
 
                 compenteceRepository.Delete(id);
                 return RedirectToAction("Index");
             }
             catch
             {
+                foreach (var item in competence.Level)
+                    item.Module = moduleRepository.Get(item.Module_ID);
+
                 return View(competence);
             }
         }
@@ -250,13 +220,12 @@ namespace Waterval.Controllers
         private List<Module> GetModules(Competence competence)
         {
             List<Module> modules = moduleRepository.GetAll();
-            foreach (Level mo in competence.Level)
-            {
-                Module temp = modules.Where(b => b.Module_ID == mo.Module_ID).First();
-                modules.Remove(temp);
-            }
 
-            return modules;
+            if (competence != null)
+                foreach (Level lvl in competence.Level)
+                    modules.Remove(modules.Where(b => b.Module_ID == lvl.Module_ID).First());
+
+            return modules.Where(m => m.isDeleted == false).ToList();
         }
 
         private int newVersion(int id)

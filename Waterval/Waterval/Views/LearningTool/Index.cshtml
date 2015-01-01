@@ -25,7 +25,7 @@
                     <td>@Html.ActionLink(item.Description, "Details", new { id = item.LearnTool_ID })</td>
                  
                     <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.LearnTool_ID }, new { @class = "btn btn-warning" })</td>
-                    <td><input type="button" value="Verwijderen"  data-id="@item.LearnTool_ID" class="btn btn-danger"></td>
+                    <td><input type="button" value="Verwijderen" data-id="@item.LearnTool_ID" data-name="@item.Description" class="btn btn-danger"></td>
                     <td>@Html.ActionLink("Nieuwe versie", "NewVersion", new { id = item.LearnTool_ID }, new { @class = "btn btn-avans" })</td>
                 </tr>   }
 
@@ -46,7 +46,7 @@
             if (confirm('Gegevens van ' + title + ' verwijderen?')) {
                 var url = "/LearningTool/Delete";
 
-                $.post(url, { Competence_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
+                $.post(url, { LearnTool_ID: id, Description: title, isDeleted: false, DeleteDate: 0 }, function (data) {
                     $("#msg").html(data);
                 });
                 $(this).closest('tr').remove()

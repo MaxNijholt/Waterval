@@ -20,7 +20,7 @@ namespace RepositoryModel.Repository
 
         public List<DomainModel.Models.Module> GetAll()
         {
-            return dbContext.Module.Where(b => b.isDeleted == false).ToList();
+            return dbContext.Module.ToList();
         }
 
         public DomainModel.Models.Module Get(int module_id)

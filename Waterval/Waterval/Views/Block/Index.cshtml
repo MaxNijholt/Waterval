@@ -47,6 +47,7 @@
 
         @Html.ActionLink( "Nieuw Blok", "Create", null, new { @class = "btn btn-success" } )
     </div>
+<<<<<<< HEAD
     <br />
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
@@ -71,3 +72,23 @@
             })
         </script>
     }
+=======
+
+@section Scripts {
+    <script>
+        $('input[type="button"]').click(function (e) {
+            var title = $(this).attr('data-name');
+            var id = $(this).attr('data-id');
+
+            if (confirm('Gegevens van ' + title + ' verwijderen?')) {
+                var url = "/Block/Delete";
+
+                $.post(url, { Block_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
+                    $("#msg").html(data);
+                });
+                $(this).closest('tr').remove()
+            }
+        })
+    </script>
+}
+>>>>>>> feature/Crud_ToetsVorm_WerkVorm
