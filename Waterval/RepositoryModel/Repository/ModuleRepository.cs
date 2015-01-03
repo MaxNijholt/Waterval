@@ -72,6 +72,43 @@ namespace RepositoryModel.Repository
 
         }
 
+        public void ModulesAndGradeTypes(int module_id)
+        {
+
+            if (dbContext.GradeType.Any(l => l.Module_ID == module_id))
+                return;
+
+            GradeType model = new GradeType();
+            model.Module_ID = module_id;
+            dbContext.GradeType.Add(model);
+            dbContext.SaveChanges();
+        }
+
+        public void ModulesAndWorkForm(int module_id, int workform_id)
+        {
+
+            if (dbContext.ModelWithWorkform.Any(l => l.Workform_ID == workform_id && l.Module_ID == module_id))
+                return;
+
+            ModelWithWorkform model = new ModelWithWorkform();
+            model.Workform_ID = workform_id;
+            model.Module_ID = module_id;
+            dbContext.ModelWithWorkform.Add(model);
+            dbContext.SaveChanges();
+        }
+
+
+        /// <summary>
+        /// Deletes al level record based on the competence_id
+        /// </summary>
+        /// <param name="competence_id">The id of the competence from which levels you want to delete</param>
+        public void ModulesAndWorkFormDelete(int module_id)
+        {
+            var itemsToDelete = dbContext.ModelWithWorkform.Where(x => x.Module_ID == module_id);
+            dbContext.ModelWithWorkform.RemoveRange(itemsToDelete);
+            dbContext.SaveChanges();
+        }
+
 
 
     }

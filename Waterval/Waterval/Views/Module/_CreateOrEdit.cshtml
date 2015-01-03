@@ -235,11 +235,14 @@
                 </tr>
             </thead>
 
-            <tr>
-                <td><input type="text" class="form-control" id="field_description" value="..." /></td>
-                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
-            </tr>
-
+                @foreach (string _string in Model.GradeType.Select(s => s.GradeDescription))
+                {
+                    <tr>
+                        <td><input type="text" class="form-control" id="field_descriptionGradeType" value="@_string" /></td>
+                        <td><input type="button" value="Verwijderen" id="btn_deleteGradeType" class="btn btn-danger" /></td>
+                    </tr>
+                }
+            
         </table>
         <input type="button" value="Beoordeling Toevoegen" name="btn_collapseGradeType" class="btn btn-avans" data-toggle="collapse" data-target="#collapseGradeType">
         <br />
@@ -347,13 +350,50 @@
                     <th>Verwijderen</th>
                 </tr>
             </thead>
-            <tr>
+            <tbody>
+
+                @{int index = 0;}
+
+
+                @foreach (var item in Model.ModelWithWorkform)
+                {
+                    if (item.Workform.isDeleted) { continue; }
+                    <tr id="@item.Workform_ID">
+                        @{string test = "Workform" + item.Workform_ID;}
+                        <td>
+                            <input type="text" class="form-control" id="Workform" name="Workform" value="@item.Workform.Description" />
+                            <input type="text" id="ModelWithWorkform.Workform_ID" name="ModelWithWorkform.Workform_ID" class="form-control" value="@item.Workform_ID" />
+                        </td>
+                        @{string test2 = "Duration" + item.Workform_ID;}
+                        <td>
+                            <input type="number" class="form-control" id="Duration" name="Duration" value="@item.Duration" />
+                            <input type="number" id="ModelWithWorkform.Workform_ID" name="ModelWithWorkform.Workform_ID" class="form-control" value="@item.Workform_ID" />
+                        </td>
+                        @{string test3 = "Frequency" + item.Workform_ID;}
+                        <td>
+                            <input type="text" class="form-control" id="Frequency" name="Frequency" value="@item.Frequency" />
+                            <input type="text" id="ModelWithWorkform.Workform_ID" name="ModelWithWorkform.Workform_ID" class="form-control" value="@item.Workform_ID" />
+                        </td>
+                        @{string test4 = "Workload" + item.Workform_ID;}
+                        <td>
+                            <input type="text" class="form-control" id="Workload" name="Workload" value="@item.Workload" />
+                            <input type="text" id="ModelWithWorkform.Workform_ID" name="ModelWithWorkform.Workform_ID" class="form-control" value="@item.Workform_ID" />
+                        </td>
+                        <td>
+                            <input type="button" value="Verwijderen" id="btn_delete" data-id="@item.Module_ID" class="btn btn-danger" />
+                            @{index++; }
+                    </tr>
+                }
+            </tbody>
+
+
+                @*<tr>
                 <td><input type="text" class="form-control" id="field_descriptionDesc" value="..." /></td>
                 <td><input type="number" class="form-control" id="field_descriptionDuration" value="0" /></td>
                 <td><input type="text" class="form-control" id="field_descriptionFreq" value="..." /></td>
                 <td><input type="number" class="form-control" id="field_descriptionLoad" value="0" /></td>
                 <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
-            </tr>
+            </tr>*@
         </table>
         <input type="button" value="Werkvorm Toevoegen" name="btn_collapseWorkform" class="btn btn-avans" data-toggle="collapse" data-target="#collapseWorkform">
         <br />
@@ -366,13 +406,13 @@
                             <input type="text" class="form-control" placeholder="Omschrijving..." name="TempValue" style:size="10" />
                         </td>
                         <td width="10%">
-                            <input type="number" class="form-control" placeholder="#." name="TempValue" style:size="10" />
+                            <input type="number" class="form-control" placeholder="#." name="TempValue2" style:size="10" />
                         </td>
                         <td width="10%">
-                            <input type="text" class="form-control" placeholder="Frequentie..." name="TempValue" style:size="10" />
+                            <input type="text" class="form-control" placeholder="Frequentie..." name="TempValue3" style:size="10" />
                         </td>
                         <td width="10%">
-                            <input type="number" class="form-control" placeholder="#" name="TempValue" style:size="10" />
+                            <input type="number" class="form-control" placeholder="#" name="TempValue4" style:size="10" />
                         </td>
                         <td width="10%">
                             <input type="button" value="Toevoegen" name="addWorkform" class="btn btn-avans">
@@ -410,10 +450,21 @@
                     <th>Verwijderen</th>
                 </tr>
             </thead>
-            <tr>
-                <td>Project-05</td>
-                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
-            </tr>
+            <tbody>
+                @foreach (var item in Model.LearnLine)
+                {
+                    if (item.isDeleted) { continue; }
+                    <tr id="@item.LearnLine_ID">
+                        <td>
+                            @item.Title <input type="text" id="@item.LearnLine_ID" class="hidden" />
+                        </td>
+                      
+
+                        <td>
+                            <input type="button" value="Verwijderen" id="btn_deleteLearnLine" data-id="@item.LearnLine_ID" class="btn btn-danger" />
+                    </tr>
+                }
+            </tbody>
         </table>
         <input type="button" value="Leerlijn Toevoegen" name="btn_collapseLearnLine" class="btn btn-avans" data-toggle="collapse" data-target="#collapseLearnLine">
         <br />
@@ -421,7 +472,7 @@
         <div id="collapseLearnLine" class="panel-collapse collapse open">
 
             <input type="text" class="form-control" placeholder="Leerlijn..." name="TempValue" id="searchTerm" onkeyup="doSearch('LearnLineTable')" style:size="10" />
-            <table class="table table-bordered table-striped" id="LearnLineTable">
+            <table class="table table-bordered table-striped" id="TableLearnLine">
                 <thead>
                     <tr>
                         <th>Onderwerp</th>
@@ -429,10 +480,16 @@
                     </tr>
 
                 </thead>
-                <tr>
-                    <td id="1">Programeren</td>
-                    <td><input type="button" value="Toevoegen" name="addLearnLine" class="btn btn-avans" id="1"></td>
-                </tr>
+                <tbody>
+                    <!-- Laat alle modules zien die nog niet zijn verwerkt -->
+                    @foreach (LearnLine item in @ViewBag.LearnLineList)
+                    {
+                        <tr id="@item.LearnLine_ID">
+                            <td id="Title">@item.Title</td>
+                            <td><input type="button" value="+" id="btn_addLearnLine" data-id="@item.LearnLine_ID" class="btn btn-avans" /></td>
+                        </tr>
+                    }
+                </tbody>
             </table>
         </div>
     </div>

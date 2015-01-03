@@ -930,8 +930,6 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Module" Relationship="Project_WatervalModel.ModuleWithLearnGoal" FromRole="LearnGoal" ToRole="Module" />
-          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="LearningTool">
           <Key>
@@ -943,8 +941,6 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Module" Relationship="Project_WatervalModel.ModuleWithLearningTool" FromRole="LearningTool" ToRole="Module" />
-          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="LearnLine">
           <Key>
@@ -1090,8 +1086,6 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="ModelWithWorkform" Relationship="Project_WatervalModel.FK__ModelWith__Workf__451F3D2B" FromRole="Workform" ToRole="ModelWithWorkform" />
-          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="GradeType">
           <Key>
