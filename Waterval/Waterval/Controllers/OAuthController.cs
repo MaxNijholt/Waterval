@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Web.Security;
 
 namespace Waterval.Controllers
 {
@@ -64,14 +65,21 @@ namespace Waterval.Controllers
 
             // Putting the response into a JSON Object
             JObject obj = JObject.Parse(linkResponse.Content);
+            string username = (string) obj["id"];
+            bool employee = (bool) obj["employee"];
 
-            USERNAME = obj["id"].ToString();
+            if (!string.IsNullOrEmpty(username) && !employee) {
+                FormsAuthentication.SetAuthCookie(username, false);
+            }
+
+            return RedirectToAction("Index", "Home");
+            //USERNAME = obj["id"].ToString();
             //string employee = obj["employee"].ToString();
             //string student  = obj["student"].ToString();
             //string nickname = obj["nickname"].ToString();
             //string email    = obj["emails"].ToString();
 
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
             //return Content(
             //    "Naam : " + nickname + " -- " + 
             //    "isStudent : " + student + " -- " + 
@@ -83,6 +91,7 @@ namespace Waterval.Controllers
 
         public ActionResult LogOut()
         {
+            FormsAuthentication.SignOut();
             return Redirect("https://logout.sso.avans.nl/logout.html?");
         }
     }
