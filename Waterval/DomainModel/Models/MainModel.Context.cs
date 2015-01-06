@@ -37,6 +37,7 @@ namespace DomainModel.Models
         public virtual DbSet<Level> Level { get; set; }
         public virtual DbSet<ModelWithWorkform> ModelWithWorkform { get; set; }
         public virtual DbSet<Module> Module { get; set; }
+        public virtual DbSet<ModuleStudyPhasingBlock> ModuleStudyPhasingBlock { get; set; }
         public virtual DbSet<Phasing> Phasing { get; set; }
         public virtual DbSet<Program> Program { get; set; }
         public virtual DbSet<Study> Study { get; set; }
