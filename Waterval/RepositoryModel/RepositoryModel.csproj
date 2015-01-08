@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -55,6 +55,9 @@
     <Compile Include="DummyRepository\DThemeRepository.cs" />
     <Compile Include="DummyRepository\DPhasingRepository.cs" />
     <Compile Include="IRepository\IGradeTypeRepository.cs" />
+    <Compile Include="IRepository\IPhasingRepository.cs" />
+    <Compile Include="IRepository\ISearchRepository.cs" />
+    <Compile Include="IRepository\IThemeRepository.cs" />
     <Compile Include="IRepository\IWorkformRepository.cs" />
     <Compile Include="IRepository\ICompetenceRepository.cs" />
     <Compile Include="IRepository\ILearningToolRepository.cs" />

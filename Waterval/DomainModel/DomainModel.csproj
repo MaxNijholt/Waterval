@@ -113,6 +113,9 @@
     <Compile Include="Models\Module.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModuleStudyPhasingBlock.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Phasing.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>

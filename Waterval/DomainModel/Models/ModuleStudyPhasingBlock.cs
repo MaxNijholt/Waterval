@@ -12,18 +12,16 @@ namespace DomainModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Block
+    public partial class ModuleStudyPhasingBlock
     {
-        public Block()
-        {
-            this.ModuleStudyPhasingBlock = new HashSet<ModuleStudyPhasingBlock>();
-        }
-    
+        public int Module_ID { get; set; }
+        public int Study_ID { get; set; }
+        public int Phasing_ID { get; set; }
         public int Block_ID { get; set; }
-        public string Title { get; set; }
-        public bool isDeleted { get; set; }
-        public Nullable<System.DateTime> DeleteDate { get; set; }
     
-        public virtual ICollection<ModuleStudyPhasingBlock> ModuleStudyPhasingBlock { get; set; }
+        public virtual Block Block { get; set; }
+        public virtual Module Module { get; set; }
+        public virtual Phasing Phasing { get; set; }
+        public virtual Study Study { get; set; }
     }
 }
