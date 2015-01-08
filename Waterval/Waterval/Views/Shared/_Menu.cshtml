@@ -41,12 +41,13 @@
             
                 <!-- TODO: If user is logged int then show user name with a dropdown.
                     Else Just the login button-->
-                    @if (Waterval.Controllers.OAuthController.ACCESS_TOKEN != null) {
+                    @if (User.Identity.IsAuthenticated) {
                         <li>@Html.ActionLink("Uitloggen", "LogOut", "OAuth")</li>
                     }
                     else {
-                        <li>@Html.ActionLink("Login", "Index", "OAuth")</li>
+                        <li>@Html.ActionLink("Inloggen", "Index", "OAuth")</li>
                     }
+                    
                  <!--
                              <li class="dropdown">
                 <a href="~/Login" class="dropdown-toggle" data-toggle="dropdown">
