@@ -1,7 +1,6 @@
 ﻿@model DomainModel.Models.Module
 @using DomainModel.Models;
 
-
 <div class="form-group">
     @Html.Label("Titel", new { @class = "col-sm-2 control-label" })
     <div class="col-sm-10">
@@ -21,7 +20,7 @@
 <div class="form-group">
     @Html.Label("Lange Omschrijving", new { @class = "col-sm-2 control-label" })
     <div class="col-sm-10">
-        @Html.TextAreaFor(model => model.Definition_Long, new { @class = "form-control", id = "definitionLong",  @rows=10})
+        @Html.TextBoxFor(model => model.Definition_Long, new { @class = "form-control hidden", id = "definitionLong" })
         @Html.ValidationMessageFor(model => model.Definition_Long)
     </div>
 </div>
@@ -73,30 +72,14 @@
         <table class="table table-bordered table-striped table-responsive" id="LearnGoalTable">
             <thead>
                 <tr>
-                    <th width="85%">De student kan</th>
+                    <th width="20%">De student kan</th>
                     <th>Verwijderen</th>
                 </tr>
             </thead>
-
-
-            @* <tbody>
-                @foreach (var item in Model.LearnGoal)
-                {
-                    if (item.isDeleted) { continue; }
-                    <tr id="@item.LearnGoal_ID">
-                        <td>
-                            @item.Description <input type="text" id="@item.LearnGoal_ID" name="Aap2" class="hidden" />
-
-                        </td>
-                       <td id="TitleLearnLine">@item.Title</td>
-                                    <td>
-                                        <input type="button" value="Verwijderen" id="btn_deleteLearnGoal" data-id="@item.LearnGoal_ID" class="btn btn-danger" />
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>*@
-
-
+            <tr>
+                <td>Project-05</td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
         </table>
         <input type="button" value="Leerdoel Toevoegen" name="btn_collapseLearnGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseLearnGoal">
         <br />
@@ -104,7 +87,7 @@
         <div id="collapseLearnGoal" class="panel-collapse collapse open">
 
             <input type="text" class="form-control" placeholder="Leerdoel..." name="TempValue" id="searchTerm" onkeyup="doSearch('LearnGoalTable')" style:size="10" />
-            <table class="table table-bordered table-striped" id="TableLearnGoal">
+            <table class="table table-bordered table-striped" id="LearnGoalTable">
                 <thead>
                     <tr>
                         <th>Doel</th>
@@ -112,16 +95,10 @@
                     </tr>
 
                 </thead>
-                @* <tbody>
-                    <!-- Laat alle modules zien die nog niet zijn verwerkt -->
-                    @foreach (LearnGoal item in @ViewBag.LearnGoalList)
-                    {
-                        <tr id="@item.LearnGoal_ID">
-                            <td id="Title">@item.Description</td>
-                            <td><input type="button" value="+" id="btn_addLearngoal" data-id="@item.LearnGoal_ID" class="btn btn-avans" /></td>
-                        </tr>
-                    }
-                                </tbody>*@
+                <tr>
+                    <td id="1">in een praktijksituatie een keuze maken tussen het gebruik van een gekoppelde lijst, array, binaire boom en een hashtabel.</td>
+                    <td><input type="button" value="Toevoegen" name="addLearnGoal" class="btn btn-avans" id="1"></td>
+                </tr>
             </table>
         </div>
     </div>
@@ -142,26 +119,14 @@
         <table class="table table-bordered table-striped table-responsive" id="LearnToolTable">
             <thead>
                 <tr>
-                    <th width="70%">Leermiddel</th>
-                    <th width="5%">Leermiddel</th>
+                    <th width="20%">Leermiddel</th>
                     <th>Verwijderen</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var item in Model.LearningTool)
-                {
-                    if (item.isDeleted) { continue; }
-                    <tr id="@item.LearnTool_ID">
-                        <td>
-                            @item.Description <input type="text" id="@item.LearnTool_ID" name="Aap3" class="hidden" />
-
-                        </td>
-                        <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteLearnTool" data-id="@item.LearnTool_ID" class="btn btn-danger" />
-                        </td>
-                    </tr>
-                }
-            </tbody>
+            <tr>
+                <td>Project-05</td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
         </table>
         <input type="button" value="Leermiddel Toevoegen" name="btn_collapseLearnTool" class="btn btn-avans" data-toggle="collapse" data-target="#collapseLearnTool">
         <br />
@@ -169,7 +134,7 @@
         <div id="collapseLearnTool" class="panel-collapse collapse open">
 
             <input type="text" class="form-control" placeholder="Leermiddel..." name="TempValue" id="searchTerm" onkeyup="doSearch('LearnToolTable')" style:size="10" />
-            <table class="table table-bordered table-striped" id="TableLearnTool">
+            <table class="table table-bordered table-striped" id="LearnToolTable">
                 <thead>
                     <tr>
                         <th>Middel</th>
@@ -177,16 +142,10 @@
                     </tr>
 
                 </thead>
-                <tbody>
-                    @*  Laat alle modules zien die nog niet zijn verwerkt*@
-                    @foreach (LearningTool item in @ViewBag.LearningToolList)
-                    {
-                        <tr id="@item.LearnTool_ID">
-                            <td id="Title">@item.Description</td>
-                            <td><input type="button" value="+" id="btn_addLearningtool" data-id="@item.LearnTool_ID" class="btn btn-avans" /></td>
-                        </tr>
-                    }
-                </tbody>
+                <tr>
+                    <td id="1">Boek: Data structures & algorithms in JAVA, Second edition, Robert Lafore, ISBN: 0 672 32453 9</td>
+                    <td><input type="button" value="Toevoegen" name="addLearnTool" class="btn btn-avans" id="1"></td>
+                </tr>
             </table>
         </div>
     </div>
@@ -194,96 +153,61 @@
 
 <hr />
 
-
-
 <div class="form-group">
     <div class="container">
         <p>
-            @Html.Label("Weekplanning Toevoegen", new { @class = "control-label" })
+
+            @Html.Label("Weekplanning Toevoegen", new { @class = "col-sm-2 control-label" })
         </p>
-        <div id="ValidationMesModg" class="alert alert-danger hidden">
-            Minstens een weekplanning verplicht
+        <div id="ValidationMesSchedule" class="alert alert-danger">
+            Minstens een Weekplanning verplicht
         </div>
         <br /><br />
-        <table class="table table-bordered table-striped table-responsive" id="ModTablew">
+        <table class="table table-bordered table-striped table-responsive" id="WeekSchedule">
             <thead>
                 <tr>
-                    <th width="10%">WeekNr</th>
-                    <th width="70%">Onderwerp</th>
+                    <th width="5%">WeekNr</th>
+                    <th width="80%">Onderwerp</th>
                     <th>Verwijderen</th>
                 </tr>
             </thead>
-
-            <tbody>
-                @{int indexe2 = 0;}
-                @foreach (var item3 in Model.WeekSchedule)
-                {
-                    if (item3.isDeleted) { continue; }
-                    <tr id="@item3.Module_ID">
-                        @*<td>
-                            @item3.Module_ID <input type="number" id="@item3.Module_ID" class="hidden" />
-                        </td>*@
-                        @{string test3 = "WeekSchedule" + item3.Module_ID;}
-                        <td>
-                            <input type="number" class="form-control" id="WeekSchedule[@indexe2].WeekNr" name="WeekSchedule[@indexe2].WeekNr" value="@item3.WeekNr" />
-                            <input type="number" id="WeekSchedule[@indexe2].Module_ID" name="AssignmentCode[@indexe2].Module_ID" class="form-control hidden" value="@item3.Module_ID" />
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" id="WeekSchedule[@indexe2].Description" name="WeekSchedule[@indexe2].Description" value="@item3.Description" />
-                            <input type="text" id="WeekSchedule[@indexe2].Module_ID" name="WeekSchedule[@indexe2].Module_ID" class="form-control hidden" value="@item3.Module_ID" />
-                        </td>
-                        <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteModw" data-id="@item3.Module_ID" class="btn btn-danger" />
-                            @{indexe2++; }
-                    </tr>
-                }
-            </tbody>
-        </table>
-
-        @* <input type="button" value="Test Toevoegen" name="btn_collapseGoalg" class="btn btn-avans" data-toggle="collapse" data-target="#collapseModg">*@
-        <input type="button" value="Weekplanning Toevoegen" id="btn_addModw" data-id="@Model.Module_ID" class="btn btn-avans" />
-        <br />
-        <br />
-        @*<div id="collapseModg" class="panel-collapse collapse open">
-
-            <input type="text" class="form-control" placeholder="Test..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTableg')" style:size="10" />
-
-
-            <table class="table table-bordered table-striped" id="TableModg">
-                <thead>
+           
                     <tr>
-                        <th>Title</th>
-                        <th>Toevoegen</th>
+                        <td><input type="number" class="form-control" id="fieldNr_descriptionNr" value=".." /></td>
+                        <td><input type="text" class="form-control" id="field_description" value="..." /></td>
+                        <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
                     </tr>
-                </thead>
-                <tbody>*@
-        <!-- Laat alle modules zien die nog niet zijn verwerkt -->
-        @*<tr id="@Model.Module_ID">
-                <td id="Module_ID">SHIT</td>
-                <td><input type="button" value="+" id="btn_addModg" data-id="@Model.Module_ID" class="btn btn-avans" /></td>
-            </tr>*@
+          
+        </table>
+        <input type="button" value="Weekplanning Toevoegen" name="btn_collapseWeekSchedule" class="btn btn-avans" data-toggle="collapse" data-target="#collapseWeekSchedule">
+        <br />
+        <br />
+        <div id="collapseWeekSchedule" class="panel-collapse collapse open">
+            <form action="" class="form-inline">
+                <table class="table">
+                    <tr>
+                        <td width="10%">
+                            <input type="number" class="form-control" placeholder="0" name="TempValue" style:size="10" />
+                        </td>
+                        <td width="50%">
+                            <input type="text" class="form-control" placeholder="weekbeschrijving..." name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="button" value="Toevoegen" name="addWeekSchedule" class="btn btn-avans">
+                        </td>
 
-        @*</tbody>
+                        <td width="10%">
+                            <input type="button" value="Toevoegen Na" name="addWeekSchedulebetween" class="btn btn-avans">
+                        </td>
+                        <td width="20%">
+                            <select id="selecteer" class="form-control"><option value="-1" disabled selected>Maak een keuze</option></select>
+                        </td>
+                    </tr>
                 </table>
-            </div>*@
+            </form>
+        </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <hr />
 
@@ -292,69 +216,50 @@
     <div class="container">
         <p>
 
-            @Html.Label("Beoordeling Toevoegen", new { @class = "control-label" })
+            @Html.Label("Beoordeling Toevoegen", new { @class = "col-sm-2 control-label" })
         </p>
-        <div id="ValidationMesModg" class="alert alert-danger hidden">
+        <div id="ValidationMesGrade" class="alert alert-danger">
             Minstens een beoordeling verplicht
         </div>
         <br /><br />
-        <table class="table table-bordered table-striped table-responsive" id="ModTableg">
+        <table class="table table-bordered table-striped table-responsive" id="GradeType">
             <thead>
                 <tr>
-                    <th width="70%">Onderwerp</th>
+                    <th width="85%">Onderwerp</th>
                     <th>Verwijderen</th>
                 </tr>
             </thead>
-
-            <tbody>
-                @{int indexe = 0;}
-                @foreach (var item2 in Model.GradeType)
-                {
-                    if (item2.isDeleted) { continue; }
-                    <tr id="@item2.Module_ID">
-                        @*<td>
-                            @item2.Module_ID <input type="number" id="@item2.Module_ID" class="hidden" />
-                        </td>*@
-                        @{string test3 = "GradeType" + item2.Module_ID;}
-                        <td>
-                            <input type="text" class="form-control" id="GradeType[@indexe].GradeDescription" name="GradeType[@indexe].GradeDescription" value="@item2.GradeDescription" />
-                            <input type="text" id="GradeType[@indexe].Module_ID" name="GradeType[@indexe].Module_ID" class="form-control hidden" value="@item2.Module_ID" />
-
-                        </td>
-                        <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteModg" data-id="@item2.Module_ID" class="btn btn-danger" />
-                            @{indexe++; }
-                    </tr>
-                }
-            </tbody>
-        </table>
-
-        @* <input type="button" value="Test Toevoegen" name="btn_collapseGoalg" class="btn btn-avans" data-toggle="collapse" data-target="#collapseModg">*@
-        <input type="button" value="Beoordeling Toevoegen" id="btn_addModg" data-id="@Model.Module_ID" class="btn btn-avans" />
-        <br />
-        <br />
-        @*<div id="collapseModg" class="panel-collapse collapse open">
-
-            <input type="text" class="form-control" placeholder="Test..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTableg')" style:size="10" />
-
-
-            <table class="table table-bordered table-striped" id="TableModg">
-                <thead>
+        
                     <tr>
-                        <th>Title</th>
-                        <th>Toevoegen</th>
+                        <td><input type="text" class="form-control" id="field_description" value="..." /></td>
+                        <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
                     </tr>
-                </thead>
-                <tbody>*@
-        <!-- Laat alle modules zien die nog niet zijn verwerkt -->
-        @*<tr id="@Model.Module_ID">
-                <td id="Module_ID">SHIT</td>
-                <td><input type="button" value="+" id="btn_addModg" data-id="@Model.Module_ID" class="btn btn-avans" /></td>
-            </tr>*@
 
-        @*</tbody>
+        </table>
+        <input type="button" value="Beoordeling Toevoegen" name="btn_collapseGradeType" class="btn btn-avans" data-toggle="collapse" data-target="#collapseGradeType">
+        <br />
+        <br />
+        <div id="collapseGradeType" class="panel-collapse collapse open">
+            <form action="" class="form-inline">
+                <table class="table">
+                    <tr>
+                        <td width="50%">
+                            <input type="text" class="form-control" placeholder="Beoordeling..." name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="button" value="Toevoegen" name="addGradeType" class="btn btn-avans">
+                        </td>
+
+                        <td width="10%">
+                            <input type="button" value="Toevoegen Na" name="addGradeTypebetween" class="btn btn-avans">
+                        </td>
+                        <td width="20%">
+                            <select id="selecteer" class="form-control"><option value="-1" disabled selected>Maak een keuze</option></select>
+                        </td>
+                    </tr>
                 </table>
-            </div>*@
+            </form>
+        </div>
     </div>
 </div>
 
@@ -365,162 +270,119 @@
     <div class="container">
         <p>
 
-            @Html.Label("Werkvorm Toevoegen", new { @class = "control-label" })
+            @Html.Label("Toetscode Toevoegen", new { @class = "col-sm-2 control-label" })
         </p>
-        <div id="ValidationMesModa" class="alert alert-danger hidden">
-            Minstens een Werkvorm verplicht
+        <div id="ValidationMesAssignmentCode" class="alert alert-danger">
+            Minstens een toetscode verplicht
         </div>
         <br /><br />
-        <table class="table table-bordered table-striped table-responsive" id="ModTablea">
+        <table class="table table-bordered table-striped table-responsive" id="AssignmentCode">
             <thead>
                 <tr>
-                    <th width="50%">Onderwerp</th>
-                    <th width="10%">Duur</th>
-                    <th width="10%">Frequentie</th>
-                    <th width="10%">Studiebelasting</th>
-
+                    <th>Omschrijving</th>
+                    <th>EC</th>
                     <th>Verwijderen</th>
                 </tr>
             </thead>
-
-            <tbody>
-                @{int indexa = 0;}
-                @foreach (var item in Model.ModelWithWorkform)
-                {
-                if (item.Workform.isDeleted) { continue; }
-                <tr id="@item.Workform_ID">
-                    <td>
-                        @item.Workform.Description <input type="text" id="@item.Workform_ID" class="hidden" />
-                    </td>
-                    @{string testa = "ModelWithWorkform" + item.Workform_ID;}
-                    <td>
-                        <input type="number" class="form-control" id="ModelWithWorkform[@indexa].Duration" name="ModelWithWorkform[@indexa].Duration" value="@item.Duration" />
-                        <input type="number" id="ModelWithWorkform[@indexa].Workform_ID" name="ModelWithWorkform[@indexa].Workform_ID" class="form-control hidden" value="@item.Workform_ID" />
-                    </td>
-                    <td>
-                        <input type="text" class="form-control" id="ModelWithWorkform[@indexa].Frequency" name="ModelWithWorkform[@indexa].Frequency" value="@item.Frequency" />
-                        <input type="text" id="ModelWithWorkform[@indexa].Workform_ID" name="ModelWithWorkform[@indexa].Workform_ID" class="form-control hidden" value="@item.Workform_ID" />
-                    </td>
-                    <td>
-                        <input type="number" class="form-control" id="ModelWithWorkform[@indexa].Workload" name="ModelWithWorkform[@indexa].Workload" value="@item.Workload" />
-                        <input type="number" id="ModelWithWorkform[@indexa].Workform_ID" name="ModelWithWorkform[@indexa].Workform_ID" class="form-control hidden" value="@item.Workform_ID" />
-                    </td>
-                    <td>
-                        <input type="button" value="Verwijderen" id="btn_deleteModa" data-id="@item.Workform_ID" class="btn btn-danger" />
-                        @{indexa++; }
-                </tr>
-                }
-            </tbody>
-        </table>
-
-        <input type="button" value="Werkvorm Toevoegen" name="btn_collapseGoala" class="btn btn-avans" data-toggle="collapse" data-target="#collapseModa">
-
-        <br />
-        <br />
-        <div id="collapseModa" class="panel-collapse collapse open">
-
-            <input type="text" class="form-control" placeholder="Werkvorm..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTablea')" style:size="10" />
-
-
-            <table class="table table-bordered table-striped" id="TableModa">
-                <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Toevoegen</th>
+                        <td><input type="text" class="form-control" id="field_description" value="..." /></td>
+                        <td><input type="number" class="form-control" id="field_descriptionEC" value="0" /></td>
+                        <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
                     </tr>
-                </thead>
-                <tbody>
-                    <!-- Laat alle modules zien die nog niet zijn verwerkt -->
-                    @foreach (Workform item in @ViewBag.WorkformList)
-                    {
-                    <tr id="@item.Workform_ID">
-                        <td id="Description">@item.Description</td>
-                        <td><input type="button" value="+" id="btn_addModa" data-id="@item.Workform_ID" class="btn btn-avans" /></td>
+        </table>
+        <input type="button" value="Toetscode Toevoegen" name="btn_collapseAssignmentCode" class="btn btn-avans" data-toggle="collapse" data-target="#collapseAssignmentCode">
+        <br />
+        <br />
+        <div id="collapseAssignmentCode" class="panel-collapse collapse open">
+            <form action="" class="form-inline">
+                <table class="table">
+                    <tr>
+                        <td width="50%">
+                            <input type="text" class="form-control" placeholder="Omschrijving..." name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="number" class="form-control" placeholder="#" name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="button" value="Toevoegen" name="addAssignmentCode" class="btn btn-avans">
+                        </td>
+
+                        <td width="10%">
+                            <input type="button" value="Toevoegen Na" name="addAssignmentCodebetween" class="btn btn-avans">
+                        </td>
+                        <td width="20%">
+                            <select id="selecteer" class="form-control"><option value="-1" disabled selected>Maak een keuze</option></select>
+                        </td>
                     </tr>
-                    }
-                </tbody>
-            </table>
+                </table>
+            </form>
         </div>
     </div>
 </div>
 
-
 <hr />
-
 
 <div class="form-group">
     <div class="container">
         <p>
 
-            @Html.Label("Toetscode Toevoegen", new { @class = "control-label" })
+            @Html.Label("Werkvorm Toevoegen", new { @class = "col-sm-2 control-label" })
         </p>
-        <div id="ValidationMesModt" class="alert alert-danger hidden">
-            Minstens een beoordeling verplicht
+        <div id="ValidationMesWorkform" class="alert alert-danger">
+            Minstens een werkvorm verplicht
         </div>
         <br /><br />
-        <table class="table table-bordered table-striped table-responsive" id="ModTablet">
+        <table class="table table-bordered table-striped table-responsive" id="Workform">
             <thead>
                 <tr>
-                    <th width="80">Omschrijving</th>
-                    <th width="15">EC</th>
-                    <th width ="5">Verwijderen</th>
+                    <th>Werkvorm</th>
+                    <th>Duur</th>
+                    <th>Frequentie</th>
+                    <th>Studiebelasting</th>
+                    <th>Verwijderen</th>
                 </tr>
             </thead>
-
-            <tbody>
-                @{int indexe5 = 0;}
-                @foreach (var itema in Model.AssignmentCode)
-                {
-                    if (itema.isDeleted) { continue; }
-                    <tr id="@itema.Module_ID">
-                        @*<td>
-                            @itema.Module_ID <input type="number" id="@itema.Module_ID" class="hidden" />
-                        </td>*@
-                        @{string testa = "AssignmentCode" + itema.Module_ID;}
-                        <td>
-                            <input type="text" class="form-control" id="AssignmentCode[@indexe5].Description" name="AssignmentCode[@indexe5].Description" value="@itema.Description" />
-                            <input type="text" id="AssignmentCode[@indexe5].Module_ID" name="AssignmentCode[@indexe5].Module_ID" class="form-control hidden" value="@itema.Module_ID" />
-
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="AssignmentCode[@indexe5].EC" name="AssignmentCode[@indexe5].EC" value="@itema.EC" />
-                            <input type="number" id="AssignmentCode[@indexe5].Module_ID" name="AssignmentCode[@indexe5].Module_ID" class="form-control hidden" value="@itema.Module_ID" />
-
-                        </td>
-                        <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteModt" data-id="@itema.Module_ID" class="btn btn-danger" />
-                            @{indexe5++; }
-                    </tr>
-                }
-            </tbody>
+            <tr>
+                <td><input type="text" class="form-control" id="field_descriptionDesc" value="..." /></td>
+                <td><input type="number" class="form-control" id="field_descriptionDuration" value="0" /></td>
+                <td><input type="text" class="form-control" id="field_descriptionFreq" value="..." /></td>
+                <td><input type="number" class="form-control" id="field_descriptionLoad" value="0" /></td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
         </table>
-
-        @* <input type="button" value="Test Toevoegen" name="btn_collapseGoalg" class="btn btn-avans" data-toggle="collapse" data-target="#collapseModg">*@
-        <input type="button" value="Toetscode Toevoegen" id="btn_addModt" data-id="@Model.Module_ID" class="btn btn-avans" />
+        <input type="button" value="Werkvorm Toevoegen" name="btn_collapseWorkform" class="btn btn-avans" data-toggle="collapse" data-target="#collapseWorkform">
         <br />
         <br />
-        @*<div id="collapseModg" class="panel-collapse collapse open">
-
-            <input type="text" class="form-control" placeholder="Test..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTableg')" style:size="10" />
-
-
-            <table class="table table-bordered table-striped" id="TableModg">
-                <thead>
+        <div id="collapseWorkform" class="panel-collapse collapse open">
+            <form action="" class="form-inline">
+                <table class="table">
                     <tr>
-                        <th>Title</th>
-                        <th>Toevoegen</th>
-                    </tr>
-                </thead>
-                <tbody>*@
-        <!-- Laat alle modules zien die nog niet zijn verwerkt -->
-        @*<tr id="@Model.Module_ID">
-                <td id="Module_ID">SHIT</td>
-                <td><input type="button" value="+" id="btn_addModg" data-id="@Model.Module_ID" class="btn btn-avans" /></td>
-            </tr>*@
+                        <td width="30%">
+                            <input type="text" class="form-control" placeholder="Omschrijving..." name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="number" class="form-control" placeholder="#." name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="text" class="form-control" placeholder="Frequentie..." name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="number" class="form-control" placeholder="#" name="TempValue" style:size="10" />
+                        </td>
+                        <td width="10%">
+                            <input type="button" value="Toevoegen" name="addWorkform" class="btn btn-avans">
+                        </td>
 
-        @*</tbody>
+                        <td width="10%">
+                            <input type="button" value="Toevoegen Na" name="addWorkformbetween" class="btn btn-avans">
+                        </td>
+                        <td width="20%">
+                            <select id="selecteer" class="form-control"><option value="-1" disabled selected>Maak een keuze</option></select>
+                        </td>
+                    </tr>
                 </table>
-            </div>*@
+            </form>
+        </div>
     </div>
 </div>
 
@@ -539,27 +401,14 @@
         <table class="table table-bordered table-striped table-responsive" id="LearnLineTable">
             <thead>
                 <tr>
-                    <th width="40%">Onderwerp</th>
-                    <th width="10%">ID</th>
+                    <th width="20%">Onderwerp</th>
                     <th>Verwijderen</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (var item in Model.LearnLine)
-                {
-                    if (item.isDeleted) { continue; }
-                    <tr id="@item.LearnLine_ID">
-                        <td>
-                            @item.Title <input type="text" id="@item.LearnLine_ID" name="Aap" class="hidden" />
-
-                        </td>
-                        @*<td id="TitleLearnLine">@item.Title</td>*@
-                        <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteLearnLine" data-id="@item.LearnLine_ID" class="btn btn-danger" />
-                        </td>
-                    </tr>
-                }
-            </tbody>
+            <tr>
+                <td>Project-05</td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
         </table>
         <input type="button" value="Leerlijn Toevoegen" name="btn_collapseLearnLine" class="btn btn-avans" data-toggle="collapse" data-target="#collapseLearnLine">
         <br />
@@ -567,7 +416,7 @@
         <div id="collapseLearnLine" class="panel-collapse collapse open">
 
             <input type="text" class="form-control" placeholder="Leerlijn..." name="TempValue" id="searchTerm" onkeyup="doSearch('LearnLineTable')" style:size="10" />
-            <table class="table table-bordered table-striped" id="TableLearnLine">
+            <table class="table table-bordered table-striped" id="LearnLineTable">
                 <thead>
                     <tr>
                         <th>Onderwerp</th>
@@ -575,16 +424,10 @@
                     </tr>
 
                 </thead>
-                <tbody>
-                    <!-- Laat alle modules zien die nog niet zijn verwerkt -->
-                    @foreach (LearnLine item in @ViewBag.LearnLineList)
-                    {
-                        <tr id="@item.LearnLine_ID">
-                            <td id="Title">@item.Title</td>
-                            <td><input type="button" value="+" id="btn_addLearnLine" data-id="@item.LearnLine_ID" class="btn btn-avans" /></td>
-                        </tr>
-                    }
-                </tbody>
+                <tr>
+                    <td id="1">Programeren</td>
+                    <td><input type="button" value="Toevoegen" name="addLearnLine" class="btn btn-avans" id="1"></td>
+                </tr>
             </table>
         </div>
     </div>
@@ -605,27 +448,14 @@
         <table class="table table-bordered table-striped table-responsive" id="ThemeTable">
             <thead>
                 <tr>
-                    <th width="40%">Onderwerp</th>
-                    <th width="10%">ID</th>
+                    <th width="20%">Onderwerp</th>
                     <th>Verwijderen</th>
                 </tr>
             </thead>
-
-            <tbody>
-                @foreach (var item in Model.Theme)
-                {
-                    if (item.isDeleted) { continue; }
-                    <tr id="@item.Theme_ID">
-                        <td>
-                            @item.Title <input type="text" id="@item.Theme_ID" class="hidden" />
-                        </td>
-
-                        <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteTheme" data-id="@item.Theme_ID" class="btn btn-danger" />
-                        </td>
-                    </tr>
-                }
-            </tbody>
+            <tr>
+                <td>Project-05</td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
         </table>
         <input type="button" value="Thema Toevoegen" name="btn_collapseTheme" class="btn btn-avans" data-toggle="collapse" data-target="#collapseTheme">
         <br />
@@ -633,7 +463,7 @@
         <div id="collapseTheme" class="panel-collapse collapse open">
 
             <input type="text" class="form-control" placeholder="Thema..." name="TempValue" id="searchTerm" onkeyup="doSearch('ThemeTable')" style:size="10" />
-            <table class="table table-bordered table-striped" id="TableTheme">
+            <table class="table table-bordered table-striped" id="ThemeTable">
                 <thead>
                     <tr>
                         <th>Onderwerp</th>
@@ -641,16 +471,10 @@
                     </tr>
 
                 </thead>
-                <tbody>
-                    <!-- Laat alle modules zien die nog niet zijn verwerkt -->
-                    @foreach (Theme item in @ViewBag.ThemeList)
-                    {
-                        <tr id="@item.Theme_ID">
-                            <td id="Title">@item.Title</td>
-                            <td><input type="button" value="+" id="btn_addTheme" data-id="@item.Theme_ID" class="btn btn-avans" /></td>
-                        </tr>
-                    }
-                </tbody>
+                <tr>
+                    <td id="1">Programeren</td>
+                    <td><input type="button" value="Toevoegen" name="addTheme" class="btn btn-avans" id="1"></td>
+                </tr>
             </table>
         </div>
     </div>
@@ -664,68 +488,87 @@
 
             @Html.Label("Competentie Toevoegen", new { @class = "control-label" })
         </p>
-        <div id="ValidationMesMod" class="alert alert-danger hidden">
-            Minstens een Competentie verplicht
+        <div id="ValidationMesCompetence" class="alert alert-danger hidden">
+            Minstens een competentie verplicht
         </div>
         <br /><br />
-        <table class="table table-bordered table-striped table-responsive" id="ModTable">
+        <table class="table table-bordered table-striped table-responsive" id="CompetenceTable">
             <thead>
                 <tr>
-                    <th width="50%">Onderwerp</th>
-                    <th width="10%">Niveau</th>
+                    <th width="20%">Onderwerp</th>
                     <th>Verwijderen</th>
                 </tr>
             </thead>
-
-            <tbody>
-                @{int index = 0;}
-                @foreach (var item in Model.Level)
-                {
-                    if (item.Competence.isDeleted) { continue; }
-                    <tr id="@item.Competence_ID">
-                        <td>
-                            @item.Competence.Title <input type="text" id="@item.Competence_ID" class="hidden" />
-                        </td>
-                        @{string test = "Level" + item.Competence_ID;}
-                        <td>
-                            <input type="number" class="form-control" id="Level[@index].Level1" name="Level[@index].Level1" value="@item.Level1" />
-                            <input type="number" id="Level[@index].Competence_ID" name="Level[@index].Competence_ID" class="form-control hidden" value="@item.Competence_ID" />
-
-                        </td>
-                        <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteMod" data-id="@item.Competence_ID" class="btn btn-danger" />
-                            @{index++; }
-                    </tr>
-                }
-            </tbody>
+            <tr>
+                <td>Project-05</td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
         </table>
-
-        <input type="button" value="Competence Toevoegen" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseMod">
-
+        <input type="button" value="Competentie Toevoegen" name="btn_collapseCompetence" class="btn btn-avans" data-toggle="collapse" data-target="#collapseCompetence">
         <br />
         <br />
-        <div id="collapseMod" class="panel-collapse collapse open">
+        <div id="collapseCompetence" class="panel-collapse collapse open">
 
-            <input type="text" class="form-control" placeholder="Competence..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTable')" style:size="10" />
-
-
-            <table class="table table-bordered table-striped" id="TableMod">
+            <input type="text" class="form-control" placeholder="Competentie..." name="TempValue" id="searchTerm" onkeyup="doSearch('CompetenceTable')" style:size="10" />
+            <table class="table table-bordered table-striped" id="CompetenceTable">
                 <thead>
                     <tr>
-                        <th>Title</th>
+                        <th>Onderwerp</th>
                         <th>Toevoegen</th>
                     </tr>
+
                 </thead>
-                <tbody>
-                    <!-- Laat alle modules zien die nog niet zijn verwerkt -->
-                    @foreach (Competence item in @ViewBag.CompetenceList)
-                    {
-                        <tr id="@item.Competence_ID">
-                            <td id="CourseCode">@item.Title</td>
-                            <td><input type="button" value="+" id="btn_addMod" data-id="@item.Competence_ID" class="btn btn-avans" /></td>
-                        </tr>
-                    }
-                </tbody>
+                <tr>
+                    <td id="1">Programeren</td>
+                    <td><input type="button" value="Toevoegen" name="addCompetence" class="btn btn-avans" id="1"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="form-group">
+    <div class="container">
+        <p>
+
+            @Html.Label("Opleiding Toevoegen", new { @class = "control-label" })
+        </p>
+        <div id="ValidationMesProgram" class="alert alert-danger hidden">
+            Minstens een opleideing verplicht
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="ProgramTable">
+            <thead>
+                <tr>
+                    <th width="20%">Onderwerp</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>Project-05</td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
+        </table>
+        <input type="button" value="Opleiding Toevoegen" name="btn_collapseProgram" class="btn btn-avans" data-toggle="collapse" data-target="#collapseProgram">
+        <br />
+        <br />
+        <div id="collapseProgram" class="panel-collapse collapse open">
+
+            <input type="text" class="form-control" placeholder="Opleiding..." name="TempValue" id="searchTerm" onkeyup="doSearch('ProgramTable')" style:size="10" />
+            <table class="table table-bordered table-striped" id="ProgramTable">
+                <thead>
+                    <tr>
+                        <th>Onderwerp</th>
+                        <th>Toevoegen</th>
+                    </tr>
+
+                </thead>
+                <tr>
+                    <td id="1">Programeren</td>
+                    <td><input type="button" value="Toevoegen" name="addProgram" class="btn btn-avans" id="1"></td>
+                </tr>
             </table>
         </div>
     </div>
@@ -750,29 +593,18 @@
                     <th>Verwijderen</th>
                 </tr>
             </thead>
-            <tbody>
-                @*@foreach (var item in Model.Study)
-                    {
-                        if (item.isDeleted) { continue; }
-                        <tr id="@item.Study_ID">
-                            <td>
-                                @item.Title <input type="text" id="@item.Study_ID" class="hidden" />
-                            </td>
-
-                            <td>
-                                <input type="button" value="Verwijderen" id="btn_deleteStudy" data-id="@item.Study_ID" class="btn btn-danger" />
-                            </td>
-                        </tr>
-                    }*@
-            </tbody>
+            <tr>
+                <td>Project-05</td>
+                <td><input type="button" value="Verwijderen" id="btn_delete" class="btn btn-danger" /></td>
+            </tr>
         </table>
-        <input type="button" value="Studierichting Toevoegen" name="btn_collapseStudy" class="btn btn-avans" data-toggle="collapse" data-target="#collapseStudy">
+        <input type="button" value="Studierichting Toevoegen" name="btn_collapseTheme" class="btn btn-avans" data-toggle="collapse" data-target="#collapseStudy">
         <br />
         <br />
         <div id="collapseStudy" class="panel-collapse collapse open">
 
-            <input type="text" class="form-control" placeholder="Studierichting..." name="TempValue" id="searchTerm" onkeyup="doSearch('StudyTable')" style:size="10" />
-            <table class="table table-bordered table-striped" id="TableStudy">
+            <input type="text" class="form-control" placeholder="Stuedierichting..." name="TempValue" id="searchTerm" onkeyup="doSearch('StudyTable')" style:size="10" />
+            <table class="table table-bordered table-striped" id="StudyTable">
                 <thead>
                     <tr>
                         <th>Onderwerp</th>
@@ -780,43 +612,17 @@
                     </tr>
 
                 </thead>
-                <tbody>
-                    <!-- Laat alle modules zien die nog niet zijn verwerkt -->
-                    @*@foreach (Study item in @ViewBag.StudyList)
-                        {
-                            <tr id="@item.Study_ID">
-                                <td id="Title">@item.Title</td>
-                                <td><input type="button" value="+" id="btn_addStudy" data-id="@item.Study_ID" class="btn btn-avans" /></td>
-                            </tr>
-                        }*@
-                </tbody>
+                <tr>
+                    <td id="1">Programeren</td>
+                    <td><input type="button" value="Toevoegen" name="addStudy" class="btn btn-avans" id="1"></td>
+                </tr>
             </table>
         </div>
     </div>
-
-    <div class="container">
-        @if (Model.PrevModule_ID != null)
-        {
-            <div class="container">
-                @Html.ActionLink("Vorige versie", "Details", new { id = Model.PrevModule_ID }, new { @class = "btn btn-avans" })
-            </div>
-        }
-
-        @if (@ViewBag.NewID > 0)
-        {
-            <div class="container">
-                @Html.ActionLink("Nieuwere versie", "Details", new { id = @ViewBag.NewID }, new { @class = "btn btn-avans" })
-            </div>
-        }
-    </div>
 </div>
-
-
-
 
 <hr />
 @Html.Partial("~/Views/Shared/_Alert.cshtml")
-
 
 
 
