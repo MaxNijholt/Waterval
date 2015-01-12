@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/bootsrap.css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
 
 </head>
 <body>
@@ -13,7 +14,7 @@
     @Html.Partial("_Menu")
   
     <div class="container body-content">
-        @Html.Partial("_Search")
+        
         @RenderBody()
         <hr />
         <footer>

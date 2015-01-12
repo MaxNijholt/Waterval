@@ -1,0 +1,37 @@
+﻿@model DomainModel.Models.Workform
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<h2>Leermiddel aanpassen</h2>
+
+@using (Html.BeginForm("Edit", "Workform", new { ReturnUrl = ViewBag.ReturnUrl },
+            FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+
+        @Html.HiddenFor(model => model.Workform_ID)
+        @Html.Partial("_CreateOrEdit", Model)
+
+        <p>
+            <input type="submit" value="Werkvorm aanpassen" class="btn btn-success" /> |
+            @Html.ActionLink("Terug naar Index", "Index")
+        </p>
+    </fieldset>
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Filter.js"></script>
+}
+
+
+
+
+
+
+

@@ -1,0 +1,27 @@
+﻿@model DomainModel.Models.LearnLine
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+    <h2>Leerlijn Details: @Html.DisplayFor(Model => Model.Title)
+</h2>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Titel</th>
+            <th>Omschrijving</th>
+         
+        </tr>
+        <tr>
+            <td>@Html.DisplayFor(Model => Model.Title)</td>
+            <td>@Html.DisplayFor(Model => Model.Definition)</td>
+        </tr>
+    </table>
+ @Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
+    <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />|
+    @Html.ActionLink("Terug naar Index", "Index")
+</div>

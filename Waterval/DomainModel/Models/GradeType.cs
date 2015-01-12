@@ -16,6 +16,9 @@ namespace DomainModel.Models
     {
         public int Module_ID { get; set; }
         public string GradeDescription { get; set; }
+        public bool isDeleted { get; set; }
+        public Nullable<System.DateTime> DeleteDate { get; set; }
+        public int GradeType_ID { get; set; }
     
         public virtual Module Module { get; set; }
     }

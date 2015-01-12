@@ -15,8 +15,12 @@ namespace DomainModel.Models
     public partial class WeekSchedule
     {
         public int Module_ID { get; set; }
-        public int WeekNr { get; set; }
+        public int Weekschedule_ID { get; set; }
+        public Nullable<int> PrevModule_ID { get; set; }
         public string Description { get; set; }
+        public bool isDeleted { get; set; }
+        public Nullable<System.DateTime> DeleteDate { get; set; }
+        public int WeekNr { get; set; }
     
         public virtual Module Module { get; set; }
     }

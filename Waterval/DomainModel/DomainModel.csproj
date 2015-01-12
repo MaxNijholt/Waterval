@@ -30,11 +30,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -51,7 +63,13 @@
     <Compile Include="Models\Account.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Activity.cs">
+    <Compile Include="Models\AccountLaw.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountRole.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AssignmentCode.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Block.cs">
@@ -60,19 +78,16 @@
     <Compile Include="Models\Competence.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ExamCode.cs">
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\GradeType.cs">
-      <DependentUpon>MainModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LearnCourse.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LearnGoal.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LearningTool.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LearnLine.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Level.cs">
@@ -93,19 +108,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelActivity.cs">
+    <Compile Include="Models\ModelWithWorkform.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Module.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModuleHistory.cs">
+    <Compile Include="Models\ModuleStudyPhasingBlock.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Phasing.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Program.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Study.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
@@ -117,10 +135,15 @@
     <Compile Include="Models\WeekSchedule.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Workform.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="Models\MainModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MainModel.Designer.cs</LastGenOutput>
@@ -142,6 +165,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\PagedList.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -13,8 +13,8 @@
             <ul class="nav navbar-nav">
 
                 <li>@Html.ActionLink("Module", "Index", "Module")</li>
-                <li>@Html.ActionLink("Leerlijn", "Index", "Leerlijn")</li>
-                <li>@Html.ActionLink("Thema", "Index", "Thema")</li>
+                <li>@Html.ActionLink("Leerlijn", "Index", "LearnLine")</li>
+                <li>@Html.ActionLink("Thema", "Index", "Theme")</li>
                 <li>@Html.ActionLink("Compententie", "Index", "Competence")</li>
                 <li>@Html.ActionLink("Blok", "Index", "Block")</li>
                 <!--This code can be used to make a dropdown in our menu.
@@ -30,19 +30,31 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search all...">
+
+                @using (Html.BeginForm("SearchResults", "Search")) 
+                {
+                    <div id="custom-search-input" style="width:325px;">
+                        <div class="input-group">
+                            <input type="text" class="search-query form-control" name="SearchText" id="SearchText" placeholder="Zoeken" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-danger" type="submit" id="Search">
+                                    <span class=" glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
                     </div>
-                    <a class="btn btn-avans" id="scriptid">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </a>
-                </form>
+                }
             
                 <!-- TODO: If user is logged int then show user name with a dropdown.
                     Else Just the login button-->
-
-                <!--  <li>@Html.ActionLink("Login", "Index", "Login")</li>
+                    @if (User.Identity.IsAuthenticated) {
+                        <li>@Html.ActionLink("Uitloggen", "LogOut", "OAuth")</li>
+                    }
+                    else {
+                        <li>@Html.ActionLink("Inloggen", "Index", "OAuth")</li>
+                    }
+                    
+                 <!--
                              <li class="dropdown">
                 <a href="~/Login" class="dropdown-toggle" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-user"></span>

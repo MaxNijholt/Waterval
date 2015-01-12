@@ -1,5 +1,6 @@
-﻿
-@model Waterval.Models.ModuleList
+﻿@model PagedList.IPagedList<DomainModel.Models.Module>
+@using PagedList.Mvc;
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,42 +9,66 @@
 <div class="container">
     <h2>Module</h2>
     <div class="container">
+        @using ( Html.BeginForm( "Index", "Module", FormMethod.Get ) ) {
+            <p>
+                Zoeken op Titel: @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string )
+                <input type="submit" value="Search" />
+            </p>
+        }
         <table class="table table-striped table-bordered table-responsive">
             <thead>
                 <tr>
-                    <th>Titel</th>
+                    <th>@Html.ActionLink( "Titel", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
                     <th>Beschrijving</th>
-                    <th>Vakcode</th>
-                    <th>Studiebelasting</th>
-                    <th>Werkvorm</th>
-                    <th>Ingangsniveau</th>
-                    <th>Organisatie</th>
-                    <th>Leerdoelen</th>
-                    <th>Beoordelingen</th>
-                    <th>Compententie</th>
+                    <th>@Html.ActionLink( "Vakcode", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
+                    <th>@Html.ActionLink( "EC", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
+                    <th>@Html.ActionLink( "Ingangsniveau", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
                     <th>Aanpassen</th>
                     <th>Verwijderen</th>
+                    <th>Nieuwe Versie</th>
                 </tr>
             </thead>
-            @foreach (var c in Model.mods)
+            @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.ActionLink(c.Titel, "Details", new { modelname = c.Vakcode })</td>
-                    <td>@c.Beschrijving </td>
-                    <td>@c.Vakcode </td>
-                    <td>@c.Studiebelasting </td>
-                    <td>@c.Werkvorm </td>
-                    <td>@c.Ingangsniveau </td>
-                    <td>@c.Organisatie </td>
-                    <td>@c.Leerdoelen </td>
-                    <td>@c.Beoordelingen</td>
-                    <td>@c.BeschrijvingLang</td>
-                    <td>@Html.ActionLink("Aanpassen", "Edit", new { modelname = c.Vakcode }, new { @class = "btn btn-warning" })</td>
-                    <td><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /></td>
+                    <td>@Html.ActionLink(item.Title, "Details", new { id = item.Module_ID })</td>
+                    <td>@item.Definition_Short</td>
+                    <td>@item.CourseCode</td>
+                    <td>@item.AssignmentCode.Sum(s => s.EC)</td>
+                    <td>@item.Entry_Level</td>
+                    <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Module_ID }, new { @class = "btn btn-warning" })</td>
+                    <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Module_ID" class="btn btn-avans"></td>
+                    <td>@Html.ActionLink("Nieuwe versie", "toNewVersion", new { id = item.Module_ID }, new { @class = "btn btn-avans" })</td>
                 </tr>
             }
-            </table>
+        </table>
     </div>
     @Html.ActionLink("Nieuwe Module", "Create", null, new { @class = "btn btn-success" })
-   
+
 </div>
+<br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager( Model, page => Url.Action( "Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } ) )
+
+
+@section Scripts {
+    <script>
+        $('input[type="button"]').click(function (e) {
+            var title = $(this).attr('data-name');
+            var id = $(this).attr('data-id');
+
+            if (confirm('Gegevens van ' + title + ' verwijderen?')) {
+                var url = "/Module/Delete";
+
+                $.post(url, { Module_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
+                    $("#msg").html(data);
+                });
+                $(this).closest('tr').remove()
+            }
+        })
+    </script>
+
+    <script src="~/Scripts/Filter.js"></script>
+}

@@ -3,7 +3,6 @@
 
     var targetTable = document.getElementById(elementname);
     var targetTableColCount;
-
     //Loop through table rows
     for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
         var rowData = '';

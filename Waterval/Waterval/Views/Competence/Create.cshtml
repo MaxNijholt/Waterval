@@ -3,15 +3,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Styles.Render("~/Content/css")
-
-
-
-
 @using (Html.BeginForm("Create", "Competence", new { ReturnUrl = ViewBag.ReturnUrl },
-            FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+            FormMethod.Post, new { @class = "form-horizontal", @role = "form", id = "MainForm" }))
 {
-
+    
     @Html.ValidationSummary(true)
 
     <fieldset>
@@ -22,14 +17,14 @@
             @Html.ActionLink("Terug naar Index", "Index")
         </p>
 
+
+    
     </fieldset>
 }
-
 
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
-
     <script src="~/Scripts/competentieScripts.js"></script>
-
+<script src="~/Scripts/Filter.js"></script>
 }

@@ -1,0 +1,32 @@
+﻿@model DomainModel.Models.LearningTool
+@using DomainModel.Models;
+
+<div class="form-group">
+    @Html.Label("Omschrijving", new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.Description, new { @class = "form-control", id = "title" })
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+</div>
+
+    <div class="container">
+        @if (Model.PrevLearnTool_ID != null)
+        {
+            <div class="container">
+                @Html.ActionLink("Vorige versie", "Details", new { id = Model.PrevLearnTool_ID }, new { @class = "btn btn-avans" })
+            </div>
+        }
+
+        @if (@ViewBag.NewID > 0)
+        {
+            <div class="container">
+                @Html.ActionLink("Nieuwere versie", "Details", new { id = @ViewBag.NewID }, new { @class = "btn btn-avans" })
+            </div>
+        }
+    </div>
+
+<hr />
+@Html.Partial("~/Views/Shared/_Alert.cshtml")
+
+

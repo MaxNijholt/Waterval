@@ -1,0 +1,43 @@
+﻿@model PagedList.IPagedList<DomainModel.Models.Theme>
+@using PagedList.Mvc;
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+	<h2>Thema Overzicht</h2>
+	@using ( Html.BeginForm( "Index", "Theme", FormMethod.Get ) ) {
+        <p>
+            Zoeken op Titel: @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string )
+            <input type="submit" value="Search" />
+        </p>
+    }
+	<table class="table table-bordered table-striped">
+		<tr>
+            <th>@Html.ActionLink( "Naam", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
+            <th>@Html.ActionLink( "Omschrijving", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
+			<th>Aanpassen</th>
+			<th>Verwijderen</th>
+		</tr>
+		@foreach(var item in Model)
+		{
+			<tr>
+				<td>@Html.ActionLink(item.Title, "Details", new { id = item.Theme_ID })</td>
+				<td>@item.Definition</td>
+				<td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Theme_ID }, new { @class = "btn btn-warning" })</td>
+				<td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Theme_ID" class="btn btn-avans"></td>
+			</tr>
+		}
+	</table>
+
+	@Html.ActionLink("Nieuw Thema", "Create", null, new { @class = "btn btn-success" })
+</div>
+
+<br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager( Model, page => Url.Action( "Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } ) )
+

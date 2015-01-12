@@ -1,0 +1,47 @@
+﻿@model DomainModel.Models.LearningTool
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container">
+    <h2></h2>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Omschrijving</th>
+         
+
+        </tr>
+        <tr>
+            <td>@Model.Description</td>
+
+        </tr>
+    </table>
+
+    <hr />
+
+    <p>
+        @if (Model.PrevLearnTool_ID != null)
+        {
+
+            @Html.ActionLink("Vorige versie", "Details", new { id = Model.PrevLearnTool_ID }, new { @class = "btn btn-avans" })
+
+        }
+
+        @if (@ViewBag.NewID > 0)
+        {
+
+            @Html.ActionLink("Nieuwere versie", "Details", new { id = @ViewBag.NewID }, new { @class = "btn btn-avans" })
+
+        }
+    </p>
+    <hr />
+
+    <p>
+        @Html.ActionLink("Aanpassen", "Edit", new { id = Model.LearnTool_ID }, new { @class = "btn btn-warning" })
+
+        @Html.ActionLink("Terug naar Index", "Index")
+    </p>
+</div>

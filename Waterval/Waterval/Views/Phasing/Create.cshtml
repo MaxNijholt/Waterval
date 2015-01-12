@@ -1,0 +1,18 @@
+﻿@model DomainModel.Models.Phasing
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Phasing", new {ReturnUrl = ViewBag.ReturnUrl },
+			FormMethod.Post, new { @class = "form-horizontal", @role = "rorm"}))
+{
+	@Html.ValidationSummary(true)
+	
+	<fieldset>
+		<legend ></legend>
+		@Html.Partial("_CreateOrEdit", null)
+		<p>
+			<input type="submit" value="Fase opslaan" name="btn_Save" class="btn btn-success" /> @Html.ActionLink("Terug naar Index", "Index")
+		</p>
+	</fieldset>
+}

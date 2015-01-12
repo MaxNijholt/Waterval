@@ -4,30 +4,57 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Project_WatervalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Project_WatervalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
-            <PropertyRef Name="Username" />
+            <PropertyRef Name="Account_ID" />
           </Key>
-          <Property Name="Username" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="isSuperUser" Type="bit" Nullable="false" />
-          <Property Name="isDeleted" Type="bit" Nullable="false" />
-          <Property Name="Salt" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Account_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="900" Nullable="false" />
+          <Property Name="Role_ID" Type="int" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="Activity">
+        <EntityType Name="AccountLaw">
           <Key>
-            <PropertyRef Name="Activity_ID" />
+            <PropertyRef Name="Law_ID" />
           </Key>
-          <Property Name="Activity_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="Law_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LawName" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountRole">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+          </Key>
+          <Property Name="Role_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="900" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountRoleWithAccountLaw">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+            <PropertyRef Name="Law_ID" />
+          </Key>
+          <Property Name="Role_ID" Type="int" Nullable="false" />
+          <Property Name="Law_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AssignmentCode">
+          <Key>
+            <PropertyRef Name="AssignmentCode_ID" />
+          </Key>
+          <Property Name="AssignmentCode_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EC" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Module_ID" Type="int" Nullable="false" />
+          <Property Name="PrevModule_ID" Type="int" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
         </EntityType>
         <EntityType Name="Block">
           <Key>
             <PropertyRef Name="Block_ID" />
           </Key>
           <Property Name="Block_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
         </EntityType>
@@ -36,52 +63,53 @@
             <PropertyRef Name="Competence_ID" />
           </Key>
           <Property Name="Competence_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Definition_Short" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Definition_Long" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="PrevCompetence_ID" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Definition_Short" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Definition_Long" Type="nvarchar" MaxLength="900" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
-        </EntityType>
-        <EntityType Name="ExamCode">
-          <Key>
-            <PropertyRef Name="Module_ID" />
-          </Key>
-          <Property Name="Module_ID" Type="int" Nullable="false" />
-          <Property Name="Exam_Code" Type="nvarchar" MaxLength="400" Nullable="false" />
         </EntityType>
         <EntityType Name="GradeType">
           <Key>
-            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="GradeType_ID" />
           </Key>
           <Property Name="Module_ID" Type="int" Nullable="false" />
-          <Property Name="GradeDescription" Type="nvarchar" MaxLength="400" Nullable="false" />
-        </EntityType>
-        <EntityType Name="LearnCourse">
-          <Key>
-            <PropertyRef Name="LearnCourse_ID" />
-          </Key>
-          <Property Name="LearnCourse_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Definition" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="LearnCourseCode" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="level" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="GradeDescription" Type="nvarchar" MaxLength="900" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
-          <Property Name="Phasing_ID" Type="int" Nullable="false" />
+          <Property Name="GradeType_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="LearnGoal">
           <Key>
-            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="LearnGoal_ID" />
           </Key>
-          <Property Name="Module_ID" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="LearnGoal_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrevLearnGoal_ID" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="900" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
         </EntityType>
         <EntityType Name="LearningTool">
           <Key>
-            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="LearnTool_ID" />
           </Key>
-          <Property Name="Module_ID" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="LearnTool_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrevLearnTool_ID" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="900" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
+        </EntityType>
+        <EntityType Name="LearnLine">
+          <Key>
+            <PropertyRef Name="LearnLine_ID" />
+          </Key>
+          <Property Name="LearnLine_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrevLearnLine_ID" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Definition" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
         </EntityType>
         <EntityType Name="Level">
           <Key>
@@ -90,16 +118,24 @@
           </Key>
           <Property Name="Competence_ID" Type="int" Nullable="false" />
           <Property Name="Module_ID" Type="int" Nullable="false" />
-          <Property Name="Level" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="Level" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
-        <EntityType Name="ModelActivity">
+        <EntityType Name="ModelWithStudy">
           <Key>
             <PropertyRef Name="Module_ID" />
-            <PropertyRef Name="Activity_ID" />
+            <PropertyRef Name="Study_ID" />
           </Key>
           <Property Name="Module_ID" Type="int" Nullable="false" />
-          <Property Name="Activity_ID" Type="int" Nullable="false" />
-          <Property Name="Frequency" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="Study_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModelWithWorkform">
+          <Key>
+            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="Workform_ID" />
+          </Key>
+          <Property Name="Module_ID" Type="int" Nullable="false" />
+          <Property Name="Workform_ID" Type="int" Nullable="false" />
+          <Property Name="Frequency" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Workload" Type="int" Nullable="false" />
           <Property Name="Duration" Type="int" Nullable="false" />
         </EntityType>
@@ -108,29 +144,52 @@
             <PropertyRef Name="Module_ID" />
           </Key>
           <Property Name="Module_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Course_Code" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="EC" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Method" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Entry_Level" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Workload" Type="int" Nullable="false" />
-          <Property Name="GradeType" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Organization" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Definition_Short" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Definition_Long" Type="nvarchar" MaxLength="400" Nullable="false" />
-          <Property Name="Foreknowledge" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Competence_ID" Type="int" Nullable="false" />
-          <Property Name="Theme_ID" Type="int" Nullable="false" />
-          <Property Name="LearnCourse_ID" Type="int" Nullable="false" />
-          <Property Name="ModuleYear_ID" Type="int" Nullable="false" />
+          <Property Name="PrevModule_ID" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CourseCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="Entry_Level" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Definition_Short" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Definition_Long" Type="nvarchar" MaxLength="900" Nullable="false" />
+          <Property Name="Foreknowledge" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
+          <Property Name="Account_ID" Type="int" />
         </EntityType>
-        <EntityType Name="ModuleHistory">
+        <EntityType Name="ModuleStudyPhasingBlock">
           <Key>
-            <PropertyRef Name="ModuleYear_ID" />
+            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="Study_ID" />
+            <PropertyRef Name="Phasing_ID" />
+            <PropertyRef Name="Block_ID" />
           </Key>
-          <Property Name="ModuleYear_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Module_ID" Type="int" Nullable="false" />
+          <Property Name="Study_ID" Type="int" Nullable="false" />
+          <Property Name="Phasing_ID" Type="int" Nullable="false" />
+          <Property Name="Block_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleWithLearnGoal">
+          <Key>
+            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="LearnGoal_ID" />
+          </Key>
+          <Property Name="Module_ID" Type="int" Nullable="false" />
+          <Property Name="LearnGoal_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleWithLearningTool">
+          <Key>
+            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="LearnTool_ID" />
+          </Key>
+          <Property Name="Module_ID" Type="int" Nullable="false" />
+          <Property Name="LearnTool_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleWithLearnLine">
+          <Key>
+            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="LearnLine_ID" />
+          </Key>
+          <Property Name="Module_ID" Type="int" Nullable="false" />
+          <Property Name="LearnLine_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ModuleWithTheme">
           <Key>
@@ -145,10 +204,9 @@
             <PropertyRef Name="Phasing_ID" />
           </Key>
           <Property Name="Phasing_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
-          <Property Name="Block_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Program">
           <Key>
@@ -156,7 +214,26 @@
           </Key>
           <Property Name="Program_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Cohort" Type="nvarchar" MaxLength="10" />
-          <Property Name="Module_ID" Type="int" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
+        </EntityType>
+        <EntityType Name="ProgramWithStudy">
+          <Key>
+            <PropertyRef Name="Program_ID" />
+            <PropertyRef Name="Study_ID" />
+          </Key>
+          <Property Name="Program_ID" Type="int" Nullable="false" />
+          <Property Name="Study_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Study">
+          <Key>
+            <PropertyRef Name="Study_ID" />
+          </Key>
+          <Property Name="Study_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Definition" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="StudyCode" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="level" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
         </EntityType>
@@ -175,46 +252,73 @@
             <PropertyRef Name="Theme_ID" />
           </Key>
           <Property Name="Theme_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Definition" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PrevTheme_ID" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Definition" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
         </EntityType>
         <EntityType Name="WeekSchedule">
           <Key>
-            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="Weekschedule_ID" />
           </Key>
           <Property Name="Module_ID" Type="int" Nullable="false" />
+          <Property Name="Weekschedule_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrevModule_ID" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="900" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
           <Property Name="WeekNr" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="400" Nullable="false" />
         </EntityType>
-        <Association Name="Block_ID">
-          <End Role="Block" Type="Self.Block" Multiplicity="1" />
-          <End Role="Phasing" Type="Self.Phasing" Multiplicity="*" />
+        <EntityType Name="Workform">
+          <Key>
+            <PropertyRef Name="Workform_ID" />
+          </Key>
+          <Property Name="Workform_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PrevWorkform_ID" Type="int" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeleteDate" Type="date" />
+        </EntityType>
+        <Association Name="FK__AccountRo__Law_I__1293BD5E">
+          <End Role="AccountLaw" Type="Self.AccountLaw" Multiplicity="1" />
+          <End Role="AccountRoleWithAccountLaw" Type="Self.AccountRoleWithAccountLaw" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Block">
-              <PropertyRef Name="Block_ID" />
+            <Principal Role="AccountLaw">
+              <PropertyRef Name="Law_ID" />
             </Principal>
-            <Dependent Role="Phasing">
-              <PropertyRef Name="Block_ID" />
+            <Dependent Role="AccountRoleWithAccountLaw">
+              <PropertyRef Name="Law_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ExamCode__Module__40F9A68C">
+        <Association Name="FK__AccountRo__Role___1387E197">
+          <End Role="AccountRole" Type="Self.AccountRole" Multiplicity="1" />
+          <End Role="AccountRoleWithAccountLaw" Type="Self.AccountRoleWithAccountLaw" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountRole">
+              <PropertyRef Name="Role_ID" />
+            </Principal>
+            <Dependent Role="AccountRoleWithAccountLaw">
+              <PropertyRef Name="Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Assignmen__Modul__24B26D99">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
-          <End Role="ExamCode" Type="Self.ExamCode" Multiplicity="0..1" />
+          <End Role="AssignmentCode" Type="Self.AssignmentCode" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="Module_ID" />
             </Principal>
-            <Dependent Role="ExamCode">
+            <Dependent Role="AssignmentCode">
               <PropertyRef Name="Module_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GradeType__Modul__43D61337">
+        <Association Name="FK__GradeType__Modul__68687968">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
-          <End Role="GradeType" Type="Self.GradeType" Multiplicity="0..1" />
+          <End Role="GradeType" Type="Self.GradeType" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="Module_ID" />
@@ -224,31 +328,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__LearnGoal__Modul__4D5F7D71">
-          <End Role="Module" Type="Self.Module" Multiplicity="1" />
-          <End Role="LearnGoal" Type="Self.LearnGoal" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Module">
-              <PropertyRef Name="Module_ID" />
-            </Principal>
-            <Dependent Role="LearnGoal">
-              <PropertyRef Name="Module_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__LearningT__Modul__503BEA1C">
-          <End Role="Module" Type="Self.Module" Multiplicity="1" />
-          <End Role="LearningTool" Type="Self.LearningTool" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Module">
-              <PropertyRef Name="Module_ID" />
-            </Principal>
-            <Dependent Role="LearningTool">
-              <PropertyRef Name="Module_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Level__Competenc__3D2915A8">
+        <Association Name="FK__Level__Competenc__1E05700A">
           <End Role="Competence" Type="Self.Competence" Multiplicity="1" />
           <End Role="Level" Type="Self.Level" Multiplicity="*" />
           <ReferentialConstraint>
@@ -260,7 +340,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Level__Module_ID__3E1D39E1">
+        <Association Name="FK__Level__Module_ID__1EF99443">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="Level" Type="Self.Level" Multiplicity="*" />
           <ReferentialConstraint>
@@ -272,31 +352,175 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModelActi__Activ__46B27FE2">
-          <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
-          <End Role="ModelActivity" Type="Self.ModelActivity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Activity">
-              <PropertyRef Name="Activity_ID" />
-            </Principal>
-            <Dependent Role="ModelActivity">
-              <PropertyRef Name="Activity_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ModelActi__Modul__47A6A41B">
+        <Association Name="FK__ModelWith__Modul__46136164">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
-          <End Role="ModelActivity" Type="Self.ModelActivity" Multiplicity="*" />
+          <End Role="ModelWithWorkform" Type="Self.ModelWithWorkform" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="Module_ID" />
             </Principal>
-            <Dependent Role="ModelActivity">
+            <Dependent Role="ModelWithWorkform">
               <PropertyRef Name="Module_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModuleWit__Modul__531856C7">
+        <Association Name="FK__ModelWith__Modul__536D5C82">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ModelWithStudy" Type="Self.ModelWithStudy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Module_ID" />
+            </Principal>
+            <Dependent Role="ModelWithStudy">
+              <PropertyRef Name="Module_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModelWith__Study__52793849">
+          <End Role="Study" Type="Self.Study" Multiplicity="1" />
+          <End Role="ModelWithStudy" Type="Self.ModelWithStudy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Study">
+              <PropertyRef Name="Study_ID" />
+            </Principal>
+            <Dependent Role="ModelWithStudy">
+              <PropertyRef Name="Study_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModelWith__Workf__451F3D2B">
+          <End Role="Workform" Type="Self.Workform" Multiplicity="1" />
+          <End Role="ModelWithWorkform" Type="Self.ModelWithWorkform" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workform">
+              <PropertyRef Name="Workform_ID" />
+            </Principal>
+            <Dependent Role="ModelWithWorkform">
+              <PropertyRef Name="Workform_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleStu__Block__75C27486">
+          <End Role="Block" Type="Self.Block" Multiplicity="1" />
+          <End Role="ModuleStudyPhasingBlock" Type="Self.ModuleStudyPhasingBlock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Block">
+              <PropertyRef Name="Block_ID" />
+            </Principal>
+            <Dependent Role="ModuleStudyPhasingBlock">
+              <PropertyRef Name="Block_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleStu__Modul__72E607DB">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ModuleStudyPhasingBlock" Type="Self.ModuleStudyPhasingBlock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Module_ID" />
+            </Principal>
+            <Dependent Role="ModuleStudyPhasingBlock">
+              <PropertyRef Name="Module_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleStu__Phasi__74CE504D">
+          <End Role="Phasing" Type="Self.Phasing" Multiplicity="1" />
+          <End Role="ModuleStudyPhasingBlock" Type="Self.ModuleStudyPhasingBlock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phasing">
+              <PropertyRef Name="Phasing_ID" />
+            </Principal>
+            <Dependent Role="ModuleStudyPhasingBlock">
+              <PropertyRef Name="Phasing_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleStu__Study__73DA2C14">
+          <End Role="Study" Type="Self.Study" Multiplicity="1" />
+          <End Role="ModuleStudyPhasingBlock" Type="Self.ModuleStudyPhasingBlock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Study">
+              <PropertyRef Name="Study_ID" />
+            </Principal>
+            <Dependent Role="ModuleStudyPhasingBlock">
+              <PropertyRef Name="Study_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleWit__Learn__2A6B46EF">
+          <End Role="LearnGoal" Type="Self.LearnGoal" Multiplicity="1" />
+          <End Role="ModuleWithLearnGoal" Type="Self.ModuleWithLearnGoal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LearnGoal">
+              <PropertyRef Name="LearnGoal_ID" />
+            </Principal>
+            <Dependent Role="ModuleWithLearnGoal">
+              <PropertyRef Name="LearnGoal_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleWit__Learn__30242045">
+          <End Role="LearningTool" Type="Self.LearningTool" Multiplicity="1" />
+          <End Role="ModuleWithLearningTool" Type="Self.ModuleWithLearningTool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LearningTool">
+              <PropertyRef Name="LearnTool_ID" />
+            </Principal>
+            <Dependent Role="ModuleWithLearningTool">
+              <PropertyRef Name="LearnTool_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleWit__Learn__405A880E">
+          <End Role="LearnLine" Type="Self.LearnLine" Multiplicity="1" />
+          <End Role="ModuleWithLearnLine" Type="Self.ModuleWithLearnLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LearnLine">
+              <PropertyRef Name="LearnLine_ID" />
+            </Principal>
+            <Dependent Role="ModuleWithLearnLine">
+              <PropertyRef Name="LearnLine_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleWit__Modul__297722B6">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ModuleWithLearnGoal" Type="Self.ModuleWithLearnGoal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Module_ID" />
+            </Principal>
+            <Dependent Role="ModuleWithLearnGoal">
+              <PropertyRef Name="Module_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleWit__Modul__2F2FFC0C">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ModuleWithLearningTool" Type="Self.ModuleWithLearningTool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Module_ID" />
+            </Principal>
+            <Dependent Role="ModuleWithLearningTool">
+              <PropertyRef Name="Module_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleWit__Modul__3F6663D5">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ModuleWithLearnLine" Type="Self.ModuleWithLearnLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Module_ID" />
+            </Principal>
+            <Dependent Role="ModuleWithLearnLine">
+              <PropertyRef Name="Module_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleWit__Modul__7C6F7215">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="ModuleWithTheme" Type="Self.ModuleWithTheme" Multiplicity="*" />
           <ReferentialConstraint>
@@ -308,7 +532,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModuleWit__Theme__540C7B00">
+        <Association Name="FK__ModuleWit__Theme__7D63964E">
           <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
           <End Role="ModuleWithTheme" Type="Self.ModuleWithTheme" Multiplicity="*" />
           <ReferentialConstraint>
@@ -320,9 +544,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__WeekSched__Modul__4A8310C6">
+        <Association Name="FK__ProgramWi__Progr__789EE131">
+          <End Role="Program" Type="Self.Program" Multiplicity="1" />
+          <End Role="ProgramWithStudy" Type="Self.ProgramWithStudy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="Program_ID" />
+            </Principal>
+            <Dependent Role="ProgramWithStudy">
+              <PropertyRef Name="Program_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProgramWi__Study__7993056A">
+          <End Role="Study" Type="Self.Study" Multiplicity="1" />
+          <End Role="ProgramWithStudy" Type="Self.ProgramWithStudy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Study">
+              <PropertyRef Name="Study_ID" />
+            </Principal>
+            <Dependent Role="ProgramWithStudy">
+              <PropertyRef Name="Study_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WeekSched__Modul__6D2D2E85">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
-          <End Role="WeekSchedule" Type="Self.WeekSchedule" Multiplicity="0..1" />
+          <End Role="WeekSchedule" Type="Self.WeekSchedule" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="Module_ID" />
@@ -332,169 +580,166 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Module_dbo_Competence_Competence_ID">
-          <End Role="Competence" Type="Self.Competence" Multiplicity="1" />
+        <Association Name="FK_dbo_Account_dbo_AccountRole_Role_ID">
+          <End Role="AccountRole" Type="Self.AccountRole" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountRole">
+              <PropertyRef Name="Role_ID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Module_dbo_Account_Account_ID">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
           <End Role="Module" Type="Self.Module" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Competence">
-              <PropertyRef Name="Competence_ID" />
+            <Principal Role="Account">
+              <PropertyRef Name="Account_ID" />
             </Principal>
             <Dependent Role="Module">
-              <PropertyRef Name="Competence_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Module_dbo_ModuleHistory_ModuleYear_ID">
-          <End Role="ModuleHistory" Type="Self.ModuleHistory" Multiplicity="1" />
-          <End Role="Module" Type="Self.Module" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ModuleHistory">
-              <PropertyRef Name="ModuleYear_ID" />
-            </Principal>
-            <Dependent Role="Module">
-              <PropertyRef Name="ModuleYear_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Module_dbo_Theme_Theme_ID">
-          <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
-          <End Role="Module" Type="Self.Module" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Theme">
-              <PropertyRef Name="Theme_ID" />
-            </Principal>
-            <Dependent Role="Module">
-              <PropertyRef Name="Theme_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Program_dbo_Module_Module_ID">
-          <End Role="Module" Type="Self.Module" Multiplicity="1" />
-          <End Role="Program" Type="Self.Program" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Module">
-              <PropertyRef Name="Module_ID" />
-            </Principal>
-            <Dependent Role="Program">
-              <PropertyRef Name="Module_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="LearnCourse_ID">
-          <End Role="LearnCourse" Type="Self.LearnCourse" Multiplicity="1" />
-          <End Role="Module" Type="Self.Module" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LearnCourse">
-              <PropertyRef Name="LearnCourse_ID" />
-            </Principal>
-            <Dependent Role="Module">
-              <PropertyRef Name="LearnCourse_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Phasing_ID">
-          <End Role="Phasing" Type="Self.Phasing" Multiplicity="1" />
-          <End Role="LearnCourse" Type="Self.LearnCourse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Phasing">
-              <PropertyRef Name="Phasing_ID" />
-            </Principal>
-            <Dependent Role="LearnCourse">
-              <PropertyRef Name="Phasing_ID" />
+              <PropertyRef Name="Account_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Project_WatervalModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountLaw" EntityType="Self.AccountLaw" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountRole" EntityType="Self.AccountRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountRoleWithAccountLaw" EntityType="Self.AccountRoleWithAccountLaw" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AssignmentCode" EntityType="Self.AssignmentCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Block" EntityType="Self.Block" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Competence" EntityType="Self.Competence" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ExamCode" EntityType="Self.ExamCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GradeType" EntityType="Self.GradeType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LearnCourse" EntityType="Self.LearnCourse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LearnGoal" EntityType="Self.LearnGoal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LearningTool" EntityType="Self.LearningTool" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LearnLine" EntityType="Self.LearnLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Level" EntityType="Self.Level" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ModelActivity" EntityType="Self.ModelActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModelWithStudy" EntityType="Self.ModelWithStudy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModelWithWorkform" EntityType="Self.ModelWithWorkform" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ModuleHistory" EntityType="Self.ModuleHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleStudyPhasingBlock" EntityType="Self.ModuleStudyPhasingBlock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleWithLearnGoal" EntityType="Self.ModuleWithLearnGoal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleWithLearningTool" EntityType="Self.ModuleWithLearningTool" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleWithLearnLine" EntityType="Self.ModuleWithLearnLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModuleWithTheme" EntityType="Self.ModuleWithTheme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Phasing" EntityType="Self.Phasing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProgramWithStudy" EntityType="Self.ProgramWithStudy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Study" EntityType="Self.Study" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Theme" EntityType="Self.Theme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeekSchedule" EntityType="Self.WeekSchedule" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="Block_ID" Association="Self.Block_ID">
-            <End Role="Block" EntitySet="Block" />
-            <End Role="Phasing" EntitySet="Phasing" />
+          <EntitySet Name="Workform" EntityType="Self.Workform" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AccountRo__Law_I__1293BD5E" Association="Self.FK__AccountRo__Law_I__1293BD5E">
+            <End Role="AccountLaw" EntitySet="AccountLaw" />
+            <End Role="AccountRoleWithAccountLaw" EntitySet="AccountRoleWithAccountLaw" />
           </AssociationSet>
-          <AssociationSet Name="FK__ExamCode__Module__40F9A68C" Association="Self.FK__ExamCode__Module__40F9A68C">
+          <AssociationSet Name="FK__AccountRo__Role___1387E197" Association="Self.FK__AccountRo__Role___1387E197">
+            <End Role="AccountRole" EntitySet="AccountRole" />
+            <End Role="AccountRoleWithAccountLaw" EntitySet="AccountRoleWithAccountLaw" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Assignmen__Modul__24B26D99" Association="Self.FK__Assignmen__Modul__24B26D99">
             <End Role="Module" EntitySet="Module" />
-            <End Role="ExamCode" EntitySet="ExamCode" />
+            <End Role="AssignmentCode" EntitySet="AssignmentCode" />
           </AssociationSet>
-          <AssociationSet Name="FK__GradeType__Modul__43D61337" Association="Self.FK__GradeType__Modul__43D61337">
+          <AssociationSet Name="FK__GradeType__Modul__68687968" Association="Self.FK__GradeType__Modul__68687968">
             <End Role="Module" EntitySet="Module" />
             <End Role="GradeType" EntitySet="GradeType" />
           </AssociationSet>
-          <AssociationSet Name="FK__LearnGoal__Modul__4D5F7D71" Association="Self.FK__LearnGoal__Modul__4D5F7D71">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="LearnGoal" EntitySet="LearnGoal" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LearningT__Modul__503BEA1C" Association="Self.FK__LearningT__Modul__503BEA1C">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="LearningTool" EntitySet="LearningTool" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Level__Competenc__3D2915A8" Association="Self.FK__Level__Competenc__3D2915A8">
+          <AssociationSet Name="FK__Level__Competenc__1E05700A" Association="Self.FK__Level__Competenc__1E05700A">
             <End Role="Competence" EntitySet="Competence" />
             <End Role="Level" EntitySet="Level" />
           </AssociationSet>
-          <AssociationSet Name="FK__Level__Module_ID__3E1D39E1" Association="Self.FK__Level__Module_ID__3E1D39E1">
+          <AssociationSet Name="FK__Level__Module_ID__1EF99443" Association="Self.FK__Level__Module_ID__1EF99443">
             <End Role="Module" EntitySet="Module" />
             <End Role="Level" EntitySet="Level" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModelActi__Activ__46B27FE2" Association="Self.FK__ModelActi__Activ__46B27FE2">
-            <End Role="Activity" EntitySet="Activity" />
-            <End Role="ModelActivity" EntitySet="ModelActivity" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ModelActi__Modul__47A6A41B" Association="Self.FK__ModelActi__Modul__47A6A41B">
+          <AssociationSet Name="FK__ModelWith__Modul__46136164" Association="Self.FK__ModelWith__Modul__46136164">
             <End Role="Module" EntitySet="Module" />
-            <End Role="ModelActivity" EntitySet="ModelActivity" />
+            <End Role="ModelWithWorkform" EntitySet="ModelWithWorkform" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModuleWit__Modul__531856C7" Association="Self.FK__ModuleWit__Modul__531856C7">
+          <AssociationSet Name="FK__ModelWith__Modul__536D5C82" Association="Self.FK__ModelWith__Modul__536D5C82">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModelWithStudy" EntitySet="ModelWithStudy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModelWith__Study__52793849" Association="Self.FK__ModelWith__Study__52793849">
+            <End Role="Study" EntitySet="Study" />
+            <End Role="ModelWithStudy" EntitySet="ModelWithStudy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModelWith__Workf__451F3D2B" Association="Self.FK__ModelWith__Workf__451F3D2B">
+            <End Role="Workform" EntitySet="Workform" />
+            <End Role="ModelWithWorkform" EntitySet="ModelWithWorkform" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleStu__Block__75C27486" Association="Self.FK__ModuleStu__Block__75C27486">
+            <End Role="Block" EntitySet="Block" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleStu__Modul__72E607DB" Association="Self.FK__ModuleStu__Modul__72E607DB">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleStu__Phasi__74CE504D" Association="Self.FK__ModuleStu__Phasi__74CE504D">
+            <End Role="Phasing" EntitySet="Phasing" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleStu__Study__73DA2C14" Association="Self.FK__ModuleStu__Study__73DA2C14">
+            <End Role="Study" EntitySet="Study" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleWit__Learn__2A6B46EF" Association="Self.FK__ModuleWit__Learn__2A6B46EF">
+            <End Role="LearnGoal" EntitySet="LearnGoal" />
+            <End Role="ModuleWithLearnGoal" EntitySet="ModuleWithLearnGoal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleWit__Learn__30242045" Association="Self.FK__ModuleWit__Learn__30242045">
+            <End Role="LearningTool" EntitySet="LearningTool" />
+            <End Role="ModuleWithLearningTool" EntitySet="ModuleWithLearningTool" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleWit__Learn__405A880E" Association="Self.FK__ModuleWit__Learn__405A880E">
+            <End Role="LearnLine" EntitySet="LearnLine" />
+            <End Role="ModuleWithLearnLine" EntitySet="ModuleWithLearnLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleWit__Modul__297722B6" Association="Self.FK__ModuleWit__Modul__297722B6">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModuleWithLearnGoal" EntitySet="ModuleWithLearnGoal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleWit__Modul__2F2FFC0C" Association="Self.FK__ModuleWit__Modul__2F2FFC0C">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModuleWithLearningTool" EntitySet="ModuleWithLearningTool" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleWit__Modul__3F6663D5" Association="Self.FK__ModuleWit__Modul__3F6663D5">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModuleWithLearnLine" EntitySet="ModuleWithLearnLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleWit__Modul__7C6F7215" Association="Self.FK__ModuleWit__Modul__7C6F7215">
             <End Role="Module" EntitySet="Module" />
             <End Role="ModuleWithTheme" EntitySet="ModuleWithTheme" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModuleWit__Theme__540C7B00" Association="Self.FK__ModuleWit__Theme__540C7B00">
+          <AssociationSet Name="FK__ModuleWit__Theme__7D63964E" Association="Self.FK__ModuleWit__Theme__7D63964E">
             <End Role="Theme" EntitySet="Theme" />
             <End Role="ModuleWithTheme" EntitySet="ModuleWithTheme" />
           </AssociationSet>
-          <AssociationSet Name="FK__WeekSched__Modul__4A8310C6" Association="Self.FK__WeekSched__Modul__4A8310C6">
+          <AssociationSet Name="FK__ProgramWi__Progr__789EE131" Association="Self.FK__ProgramWi__Progr__789EE131">
+            <End Role="Program" EntitySet="Program" />
+            <End Role="ProgramWithStudy" EntitySet="ProgramWithStudy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProgramWi__Study__7993056A" Association="Self.FK__ProgramWi__Study__7993056A">
+            <End Role="Study" EntitySet="Study" />
+            <End Role="ProgramWithStudy" EntitySet="ProgramWithStudy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WeekSched__Modul__6D2D2E85" Association="Self.FK__WeekSched__Modul__6D2D2E85">
             <End Role="Module" EntitySet="Module" />
             <End Role="WeekSchedule" EntitySet="WeekSchedule" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Module_dbo_Competence_Competence_ID" Association="Self.FK_dbo_Module_dbo_Competence_Competence_ID">
-            <End Role="Competence" EntitySet="Competence" />
-            <End Role="Module" EntitySet="Module" />
+          <AssociationSet Name="FK_dbo_Account_dbo_AccountRole_Role_ID" Association="Self.FK_dbo_Account_dbo_AccountRole_Role_ID">
+            <End Role="AccountRole" EntitySet="AccountRole" />
+            <End Role="Account" EntitySet="Account" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Module_dbo_ModuleHistory_ModuleYear_ID" Association="Self.FK_dbo_Module_dbo_ModuleHistory_ModuleYear_ID">
-            <End Role="ModuleHistory" EntitySet="ModuleHistory" />
+          <AssociationSet Name="FK_dbo_Module_dbo_Account_Account_ID" Association="Self.FK_dbo_Module_dbo_Account_Account_ID">
+            <End Role="Account" EntitySet="Account" />
             <End Role="Module" EntitySet="Module" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Module_dbo_Theme_Theme_ID" Association="Self.FK_dbo_Module_dbo_Theme_Theme_ID">
-            <End Role="Theme" EntitySet="Theme" />
-            <End Role="Module" EntitySet="Module" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Program_dbo_Module_Module_ID" Association="Self.FK_dbo_Program_dbo_Module_Module_ID">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="Program" EntitySet="Program" />
-          </AssociationSet>
-          <AssociationSet Name="LearnCourse_ID" Association="Self.LearnCourse_ID">
-            <End Role="LearnCourse" EntitySet="LearnCourse" />
-            <End Role="Module" EntitySet="Module" />
-          </AssociationSet>
-          <AssociationSet Name="Phasing_ID" Association="Self.Phasing_ID">
-            <End Role="Phasing" EntitySet="Phasing" />
-            <End Role="LearnCourse" EntitySet="LearnCourse" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -503,179 +748,216 @@
       <Schema Namespace="Project_WatervalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Project_WatervalEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Account" EntityType="Project_WatervalModel.Account" />
-          <EntitySet Name="Activity" EntityType="Project_WatervalModel.Activity" />
+          <EntitySet Name="AccountLaw" EntityType="Project_WatervalModel.AccountLaw" />
+          <EntitySet Name="AccountRole" EntityType="Project_WatervalModel.AccountRole" />
+          <EntitySet Name="AssignmentCode" EntityType="Project_WatervalModel.AssignmentCode" />
           <EntitySet Name="Block" EntityType="Project_WatervalModel.Block" />
           <EntitySet Name="Competence" EntityType="Project_WatervalModel.Competence" />
-          <EntitySet Name="ExamCode" EntityType="Project_WatervalModel.ExamCode" />
           <EntitySet Name="GradeType" EntityType="Project_WatervalModel.GradeType" />
-          <EntitySet Name="LearnCourse" EntityType="Project_WatervalModel.LearnCourse" />
           <EntitySet Name="LearnGoal" EntityType="Project_WatervalModel.LearnGoal" />
           <EntitySet Name="LearningTool" EntityType="Project_WatervalModel.LearningTool" />
+          <EntitySet Name="LearnLine" EntityType="Project_WatervalModel.LearnLine" />
           <EntitySet Name="Level" EntityType="Project_WatervalModel.Level" />
-          <EntitySet Name="ModelActivity" EntityType="Project_WatervalModel.ModelActivity" />
+          <EntitySet Name="ModelWithWorkform" EntityType="Project_WatervalModel.ModelWithWorkform" />
           <EntitySet Name="Module" EntityType="Project_WatervalModel.Module" />
-          <EntitySet Name="ModuleHistory" EntityType="Project_WatervalModel.ModuleHistory" />
+          <EntitySet Name="ModuleStudyPhasingBlock" EntityType="Project_WatervalModel.ModuleStudyPhasingBlock" />
           <EntitySet Name="Phasing" EntityType="Project_WatervalModel.Phasing" />
           <EntitySet Name="Program" EntityType="Project_WatervalModel.Program" />
+          <EntitySet Name="Study" EntityType="Project_WatervalModel.Study" />
           <EntitySet Name="sysdiagrams" EntityType="Project_WatervalModel.sysdiagrams" />
           <EntitySet Name="Theme" EntityType="Project_WatervalModel.Theme" />
           <EntitySet Name="WeekSchedule" EntityType="Project_WatervalModel.WeekSchedule" />
-          <AssociationSet Name="FK__ModelActi__Activ__46B27FE2" Association="Project_WatervalModel.FK__ModelActi__Activ__46B27FE2">
-            <End Role="Activity" EntitySet="Activity" />
-            <End Role="ModelActivity" EntitySet="ModelActivity" />
+          <EntitySet Name="Workform" EntityType="Project_WatervalModel.Workform" />
+          <AssociationSet Name="FK_dbo_Account_dbo_AccountRole_Role_ID" Association="Project_WatervalModel.FK_dbo_Account_dbo_AccountRole_Role_ID">
+            <End Role="AccountRole" EntitySet="AccountRole" />
+            <End Role="Account" EntitySet="Account" />
           </AssociationSet>
-          <AssociationSet Name="Block_ID" Association="Project_WatervalModel.Block_ID">
+          <AssociationSet Name="FK_dbo_Module_dbo_Account_Account_ID" Association="Project_WatervalModel.FK_dbo_Module_dbo_Account_Account_ID">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Module" EntitySet="Module" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Assignmen__Modul__24B26D99" Association="Project_WatervalModel.FK__Assignmen__Modul__24B26D99">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="AssignmentCode" EntitySet="AssignmentCode" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleStu__Block__75C27486" Association="Project_WatervalModel.FK__ModuleStu__Block__75C27486">
             <End Role="Block" EntitySet="Block" />
-            <End Role="Phasing" EntitySet="Phasing" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
           </AssociationSet>
-          <AssociationSet Name="FK__Level__Competenc__3D2915A8" Association="Project_WatervalModel.FK__Level__Competenc__3D2915A8">
+          <AssociationSet Name="FK__Level__Competenc__1E05700A" Association="Project_WatervalModel.FK__Level__Competenc__1E05700A">
             <End Role="Competence" EntitySet="Competence" />
             <End Role="Level" EntitySet="Level" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Module_dbo_Competence_Competence_ID" Association="Project_WatervalModel.FK_dbo_Module_dbo_Competence_Competence_ID">
-            <End Role="Competence" EntitySet="Competence" />
-            <End Role="Module" EntitySet="Module" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ExamCode__Module__40F9A68C" Association="Project_WatervalModel.FK__ExamCode__Module__40F9A68C">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="ExamCode" EntitySet="ExamCode" />
-          </AssociationSet>
-          <AssociationSet Name="FK__GradeType__Modul__43D61337" Association="Project_WatervalModel.FK__GradeType__Modul__43D61337">
+          <AssociationSet Name="FK__GradeType__Modul__68687968" Association="Project_WatervalModel.FK__GradeType__Modul__68687968">
             <End Role="Module" EntitySet="Module" />
             <End Role="GradeType" EntitySet="GradeType" />
           </AssociationSet>
-          <AssociationSet Name="LearnCourse_ID" Association="Project_WatervalModel.LearnCourse_ID">
-            <End Role="LearnCourse" EntitySet="LearnCourse" />
-            <End Role="Module" EntitySet="Module" />
-          </AssociationSet>
-          <AssociationSet Name="Phasing_ID" Association="Project_WatervalModel.Phasing_ID">
-            <End Role="Phasing" EntitySet="Phasing" />
-            <End Role="LearnCourse" EntitySet="LearnCourse" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LearnGoal__Modul__4D5F7D71" Association="Project_WatervalModel.FK__LearnGoal__Modul__4D5F7D71">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="LearnGoal" EntitySet="LearnGoal" />
-          </AssociationSet>
-          <AssociationSet Name="FK__LearningT__Modul__503BEA1C" Association="Project_WatervalModel.FK__LearningT__Modul__503BEA1C">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="LearningTool" EntitySet="LearningTool" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Level__Module_ID__3E1D39E1" Association="Project_WatervalModel.FK__Level__Module_ID__3E1D39E1">
+          <AssociationSet Name="FK__Level__Module_ID__1EF99443" Association="Project_WatervalModel.FK__Level__Module_ID__1EF99443">
             <End Role="Module" EntitySet="Module" />
             <End Role="Level" EntitySet="Level" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModelActi__Modul__47A6A41B" Association="Project_WatervalModel.FK__ModelActi__Modul__47A6A41B">
+          <AssociationSet Name="FK__ModelWith__Modul__46136164" Association="Project_WatervalModel.FK__ModelWith__Modul__46136164">
             <End Role="Module" EntitySet="Module" />
-            <End Role="ModelActivity" EntitySet="ModelActivity" />
+            <End Role="ModelWithWorkform" EntitySet="ModelWithWorkform" />
           </AssociationSet>
-          <AssociationSet Name="FK__WeekSched__Modul__4A8310C6" Association="Project_WatervalModel.FK__WeekSched__Modul__4A8310C6">
+          <AssociationSet Name="FK__ModelWith__Workf__451F3D2B" Association="Project_WatervalModel.FK__ModelWith__Workf__451F3D2B">
+            <End Role="Workform" EntitySet="Workform" />
+            <End Role="ModelWithWorkform" EntitySet="ModelWithWorkform" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleStu__Modul__72E607DB" Association="Project_WatervalModel.FK__ModuleStu__Modul__72E607DB">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WeekSched__Modul__6D2D2E85" Association="Project_WatervalModel.FK__WeekSched__Modul__6D2D2E85">
             <End Role="Module" EntitySet="Module" />
             <End Role="WeekSchedule" EntitySet="WeekSchedule" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Module_dbo_ModuleHistory_ModuleYear_ID" Association="Project_WatervalModel.FK_dbo_Module_dbo_ModuleHistory_ModuleYear_ID">
-            <End Role="ModuleHistory" EntitySet="ModuleHistory" />
+          <AssociationSet Name="FK__ModuleStu__Phasi__74CE504D" Association="Project_WatervalModel.FK__ModuleStu__Phasi__74CE504D">
+            <End Role="Phasing" EntitySet="Phasing" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleStu__Study__73DA2C14" Association="Project_WatervalModel.FK__ModuleStu__Study__73DA2C14">
+            <End Role="Study" EntitySet="Study" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
+          </AssociationSet>
+          <AssociationSet Name="AccountRoleWithAccountLaw" Association="Project_WatervalModel.AccountRoleWithAccountLaw">
+            <End Role="AccountLaw" EntitySet="AccountLaw" />
+            <End Role="AccountRole" EntitySet="AccountRole" />
+          </AssociationSet>
+          <AssociationSet Name="ModelWithStudy" Association="Project_WatervalModel.ModelWithStudy">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="Study" EntitySet="Study" />
+          </AssociationSet>
+          <AssociationSet Name="ModuleWithLearnGoal" Association="Project_WatervalModel.ModuleWithLearnGoal">
+            <End Role="LearnGoal" EntitySet="LearnGoal" />
             <End Role="Module" EntitySet="Module" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Module_dbo_Theme_Theme_ID" Association="Project_WatervalModel.FK_dbo_Module_dbo_Theme_Theme_ID">
-            <End Role="Theme" EntitySet="Theme" />
+          <AssociationSet Name="ModuleWithLearningTool" Association="Project_WatervalModel.ModuleWithLearningTool">
+            <End Role="LearningTool" EntitySet="LearningTool" />
             <End Role="Module" EntitySet="Module" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Program_dbo_Module_Module_ID" Association="Project_WatervalModel.FK_dbo_Program_dbo_Module_Module_ID">
+          <AssociationSet Name="ModuleWithLearnLine" Association="Project_WatervalModel.ModuleWithLearnLine">
+            <End Role="LearnLine" EntitySet="LearnLine" />
             <End Role="Module" EntitySet="Module" />
-            <End Role="Program" EntitySet="Program" />
           </AssociationSet>
           <AssociationSet Name="ModuleWithTheme" Association="Project_WatervalModel.ModuleWithTheme">
             <End Role="Module" EntitySet="Module" />
             <End Role="Theme" EntitySet="Theme" />
           </AssociationSet>
+          <AssociationSet Name="ProgramWithStudy" Association="Project_WatervalModel.ProgramWithStudy">
+            <End Role="Program" EntitySet="Program" />
+            <End Role="Study" EntitySet="Study" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
-            <PropertyRef Name="Username" />
+            <PropertyRef Name="Account_ID" />
           </Key>
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="isSuperUser" Type="Boolean" Nullable="false" />
-          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="Salt" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Account_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="Role_ID" Type="Int32" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AccountRole" Relationship="Project_WatervalModel.FK_dbo_Account_dbo_AccountRole_Role_ID" FromRole="Account" ToRole="AccountRole" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK_dbo_Module_dbo_Account_Account_ID" FromRole="Account" ToRole="Module" />
         </EntityType>
-        <EntityType Name="Activity">
+        <EntityType Name="AccountLaw">
           <Key>
-            <PropertyRef Name="Activity_ID" />
+            <PropertyRef Name="Law_ID" />
           </Key>
-          <Property Name="Activity_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ModelActivity" Relationship="Project_WatervalModel.FK__ModelActi__Activ__46B27FE2" FromRole="Activity" ToRole="ModelActivity" />
+          <Property Name="Law_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LawName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AccountRole" Relationship="Project_WatervalModel.AccountRoleWithAccountLaw" FromRole="AccountLaw" ToRole="AccountRole" />
+        </EntityType>
+        <EntityType Name="AccountRole">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+          </Key>
+          <Property Name="Role_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account" Relationship="Project_WatervalModel.FK_dbo_Account_dbo_AccountRole_Role_ID" FromRole="AccountRole" ToRole="Account" />
+          <NavigationProperty Name="AccountLaw" Relationship="Project_WatervalModel.AccountRoleWithAccountLaw" FromRole="AccountRole" ToRole="AccountLaw" />
+        </EntityType>
+        <EntityType Name="AssignmentCode">
+          <Key>
+            <PropertyRef Name="AssignmentCode_ID" />
+          </Key>
+          <Property Name="AssignmentCode_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EC" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Module_ID" Type="Int32" Nullable="false" />
+          <Property Name="PrevModule_ID" Type="Int32" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__Assignmen__Modul__24B26D99" FromRole="AssignmentCode" ToRole="Module" />
         </EntityType>
         <EntityType Name="Block">
           <Key>
             <PropertyRef Name="Block_ID" />
           </Key>
           <Property Name="Block_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Phasing" Relationship="Project_WatervalModel.Block_ID" FromRole="Block" ToRole="Phasing" />
+          <NavigationProperty Name="ModuleStudyPhasingBlock" Relationship="Project_WatervalModel.FK__ModuleStu__Block__75C27486" FromRole="Block" ToRole="ModuleStudyPhasingBlock" />
         </EntityType>
         <EntityType Name="Competence">
           <Key>
             <PropertyRef Name="Competence_ID" />
           </Key>
           <Property Name="Competence_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Definition_Short" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Definition_Long" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="PrevCompetence_ID" Type="Int32" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Definition_Short" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Definition_Long" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Level" Relationship="Project_WatervalModel.FK__Level__Competenc__3D2915A8" FromRole="Competence" ToRole="Level" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK_dbo_Module_dbo_Competence_Competence_ID" FromRole="Competence" ToRole="Module" />
-        </EntityType>
-        <EntityType Name="ExamCode">
-          <Key>
-            <PropertyRef Name="Module_ID" />
-          </Key>
-          <Property Name="Module_ID" Type="Int32" Nullable="false" />
-          <Property Name="Exam_Code" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__ExamCode__Module__40F9A68C" FromRole="ExamCode" ToRole="Module" />
+          <NavigationProperty Name="Level" Relationship="Project_WatervalModel.FK__Level__Competenc__1E05700A" FromRole="Competence" ToRole="Level" />
         </EntityType>
         <EntityType Name="GradeType">
           <Key>
-            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="GradeType_ID" />
           </Key>
           <Property Name="Module_ID" Type="Int32" Nullable="false" />
-          <Property Name="GradeDescription" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__GradeType__Modul__43D61337" FromRole="GradeType" ToRole="Module" />
-        </EntityType>
-        <EntityType Name="LearnCourse">
-          <Key>
-            <PropertyRef Name="LearnCourse_ID" />
-          </Key>
-          <Property Name="LearnCourse_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Definition" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="LearnCourseCode" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="level" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GradeDescription" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
-          <Property Name="Phasing_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.LearnCourse_ID" FromRole="LearnCourse" ToRole="Module" />
-          <NavigationProperty Name="Phasing" Relationship="Project_WatervalModel.Phasing_ID" FromRole="LearnCourse" ToRole="Phasing" />
+          <Property Name="GradeType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__GradeType__Modul__68687968" FromRole="GradeType" ToRole="Module" />
         </EntityType>
         <EntityType Name="LearnGoal">
           <Key>
-            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="LearnGoal_ID" />
           </Key>
-          <Property Name="Module_ID" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__LearnGoal__Modul__4D5F7D71" FromRole="LearnGoal" ToRole="Module" />
+          <Property Name="LearnGoal_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PrevLearnGoal_ID" Type="Int32" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.ModuleWithLearnGoal" FromRole="LearnGoal" ToRole="Module" />
         </EntityType>
         <EntityType Name="LearningTool">
           <Key>
-            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="LearnTool_ID" />
           </Key>
-          <Property Name="Module_ID" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__LearningT__Modul__503BEA1C" FromRole="LearningTool" ToRole="Module" />
+          <Property Name="LearnTool_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PrevLearnTool_ID" Type="Int32" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.ModuleWithLearningTool" FromRole="LearningTool" ToRole="Module" />
+        </EntityType>
+        <EntityType Name="LearnLine">
+          <Key>
+            <PropertyRef Name="LearnLine_ID" />
+          </Key>
+          <Property Name="LearnLine_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PrevLearnLine_ID" Type="Int32" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Definition" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.ModuleWithLearnLine" FromRole="LearnLine" ToRole="Module" />
         </EntityType>
         <EntityType Name="Level">
           <Key>
@@ -684,77 +966,76 @@
           </Key>
           <Property Name="Competence_ID" Type="Int32" Nullable="false" />
           <Property Name="Module_ID" Type="Int32" Nullable="false" />
-          <Property Name="Level1" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Competence" Relationship="Project_WatervalModel.FK__Level__Competenc__3D2915A8" FromRole="Level" ToRole="Competence" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__Level__Module_ID__3E1D39E1" FromRole="Level" ToRole="Module" />
+          <Property Name="Level1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Competence" Relationship="Project_WatervalModel.FK__Level__Competenc__1E05700A" FromRole="Level" ToRole="Competence" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__Level__Module_ID__1EF99443" FromRole="Level" ToRole="Module" />
         </EntityType>
-        <EntityType Name="ModelActivity">
+        <EntityType Name="ModelWithWorkform">
           <Key>
             <PropertyRef Name="Module_ID" />
-            <PropertyRef Name="Activity_ID" />
+            <PropertyRef Name="Workform_ID" />
           </Key>
           <Property Name="Module_ID" Type="Int32" Nullable="false" />
-          <Property Name="Activity_ID" Type="Int32" Nullable="false" />
-          <Property Name="Frequency" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Workform_ID" Type="Int32" Nullable="false" />
+          <Property Name="Frequency" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Workload" Type="Int32" Nullable="false" />
           <Property Name="Duration" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Activity" Relationship="Project_WatervalModel.FK__ModelActi__Activ__46B27FE2" FromRole="ModelActivity" ToRole="Activity" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__ModelActi__Modul__47A6A41B" FromRole="ModelActivity" ToRole="Module" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__ModelWith__Modul__46136164" FromRole="ModelWithWorkform" ToRole="Module" />
+          <NavigationProperty Name="Workform" Relationship="Project_WatervalModel.FK__ModelWith__Workf__451F3D2B" FromRole="ModelWithWorkform" ToRole="Workform" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
             <PropertyRef Name="Module_ID" />
           </Key>
           <Property Name="Module_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Course_Code" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="EC" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Method" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Entry_Level" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Workload" Type="Int32" Nullable="false" />
-          <Property Name="GradeType" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Organization" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Definition_Short" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Definition_Long" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
-          <Property Name="Foreknowledge" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Competence_ID" Type="Int32" Nullable="false" />
-          <Property Name="Theme_ID" Type="Int32" Nullable="false" />
-          <Property Name="LearnCourse_ID" Type="Int32" Nullable="false" />
-          <Property Name="ModuleYear_ID" Type="Int32" Nullable="false" />
+          <Property Name="PrevModule_ID" Type="Int32" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CourseCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Entry_Level" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Definition_Short" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Definition_Long" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="Foreknowledge" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Competence" Relationship="Project_WatervalModel.FK_dbo_Module_dbo_Competence_Competence_ID" FromRole="Module" ToRole="Competence" />
-          <NavigationProperty Name="ExamCode" Relationship="Project_WatervalModel.FK__ExamCode__Module__40F9A68C" FromRole="Module" ToRole="ExamCode" />
-          <NavigationProperty Name="GradeType1" Relationship="Project_WatervalModel.FK__GradeType__Modul__43D61337" FromRole="Module" ToRole="GradeType" />
-          <NavigationProperty Name="LearnCourse" Relationship="Project_WatervalModel.LearnCourse_ID" FromRole="Module" ToRole="LearnCourse" />
-          <NavigationProperty Name="LearnGoal" Relationship="Project_WatervalModel.FK__LearnGoal__Modul__4D5F7D71" FromRole="Module" ToRole="LearnGoal" />
-          <NavigationProperty Name="LearningTool" Relationship="Project_WatervalModel.FK__LearningT__Modul__503BEA1C" FromRole="Module" ToRole="LearningTool" />
-          <NavigationProperty Name="Level" Relationship="Project_WatervalModel.FK__Level__Module_ID__3E1D39E1" FromRole="Module" ToRole="Level" />
-          <NavigationProperty Name="ModelActivity" Relationship="Project_WatervalModel.FK__ModelActi__Modul__47A6A41B" FromRole="Module" ToRole="ModelActivity" />
-          <NavigationProperty Name="WeekSchedule" Relationship="Project_WatervalModel.FK__WeekSched__Modul__4A8310C6" FromRole="Module" ToRole="WeekSchedule" />
-          <NavigationProperty Name="ModuleHistory" Relationship="Project_WatervalModel.FK_dbo_Module_dbo_ModuleHistory_ModuleYear_ID" FromRole="Module" ToRole="ModuleHistory" />
-          <NavigationProperty Name="Theme" Relationship="Project_WatervalModel.FK_dbo_Module_dbo_Theme_Theme_ID" FromRole="Module" ToRole="Theme" />
-          <NavigationProperty Name="Program" Relationship="Project_WatervalModel.FK_dbo_Program_dbo_Module_Module_ID" FromRole="Module" ToRole="Program" />
-          <NavigationProperty Name="Theme1" Relationship="Project_WatervalModel.ModuleWithTheme" FromRole="Module" ToRole="Theme" />
+          <Property Name="Account_ID" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Project_WatervalModel.FK_dbo_Module_dbo_Account_Account_ID" FromRole="Module" ToRole="Account" />
+          <NavigationProperty Name="AssignmentCode" Relationship="Project_WatervalModel.FK__Assignmen__Modul__24B26D99" FromRole="Module" ToRole="AssignmentCode" />
+          <NavigationProperty Name="GradeType" Relationship="Project_WatervalModel.FK__GradeType__Modul__68687968" FromRole="Module" ToRole="GradeType" />
+          <NavigationProperty Name="Level" Relationship="Project_WatervalModel.FK__Level__Module_ID__1EF99443" FromRole="Module" ToRole="Level" />
+          <NavigationProperty Name="ModelWithWorkform" Relationship="Project_WatervalModel.FK__ModelWith__Modul__46136164" FromRole="Module" ToRole="ModelWithWorkform" />
+          <NavigationProperty Name="ModuleStudyPhasingBlock" Relationship="Project_WatervalModel.FK__ModuleStu__Modul__72E607DB" FromRole="Module" ToRole="ModuleStudyPhasingBlock" />
+          <NavigationProperty Name="WeekSchedule" Relationship="Project_WatervalModel.FK__WeekSched__Modul__6D2D2E85" FromRole="Module" ToRole="WeekSchedule" />
+          <NavigationProperty Name="Study" Relationship="Project_WatervalModel.ModelWithStudy" FromRole="Module" ToRole="Study" />
+          <NavigationProperty Name="LearnGoal" Relationship="Project_WatervalModel.ModuleWithLearnGoal" FromRole="Module" ToRole="LearnGoal" />
+          <NavigationProperty Name="LearningTool" Relationship="Project_WatervalModel.ModuleWithLearningTool" FromRole="Module" ToRole="LearningTool" />
+          <NavigationProperty Name="LearnLine" Relationship="Project_WatervalModel.ModuleWithLearnLine" FromRole="Module" ToRole="LearnLine" />
+          <NavigationProperty Name="Theme" Relationship="Project_WatervalModel.ModuleWithTheme" FromRole="Module" ToRole="Theme" />
         </EntityType>
-        <EntityType Name="ModuleHistory">
+        <EntityType Name="ModuleStudyPhasingBlock">
           <Key>
-            <PropertyRef Name="ModuleYear_ID" />
+            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="Study_ID" />
+            <PropertyRef Name="Phasing_ID" />
+            <PropertyRef Name="Block_ID" />
           </Key>
-          <Property Name="ModuleYear_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK_dbo_Module_dbo_ModuleHistory_ModuleYear_ID" FromRole="ModuleHistory" ToRole="Module" />
+          <Property Name="Module_ID" Type="Int32" Nullable="false" />
+          <Property Name="Study_ID" Type="Int32" Nullable="false" />
+          <Property Name="Phasing_ID" Type="Int32" Nullable="false" />
+          <Property Name="Block_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Block" Relationship="Project_WatervalModel.FK__ModuleStu__Block__75C27486" FromRole="ModuleStudyPhasingBlock" ToRole="Block" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__ModuleStu__Modul__72E607DB" FromRole="ModuleStudyPhasingBlock" ToRole="Module" />
+          <NavigationProperty Name="Phasing" Relationship="Project_WatervalModel.FK__ModuleStu__Phasi__74CE504D" FromRole="ModuleStudyPhasingBlock" ToRole="Phasing" />
+          <NavigationProperty Name="Study" Relationship="Project_WatervalModel.FK__ModuleStu__Study__73DA2C14" FromRole="ModuleStudyPhasingBlock" ToRole="Study" />
         </EntityType>
         <EntityType Name="Phasing">
           <Key>
             <PropertyRef Name="Phasing_ID" />
           </Key>
           <Property Name="Phasing_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
-          <Property Name="Block_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Block" Relationship="Project_WatervalModel.Block_ID" FromRole="Phasing" ToRole="Block" />
-          <NavigationProperty Name="LearnCourse" Relationship="Project_WatervalModel.Phasing_ID" FromRole="Phasing" ToRole="LearnCourse" />
+          <NavigationProperty Name="ModuleStudyPhasingBlock" Relationship="Project_WatervalModel.FK__ModuleStu__Phasi__74CE504D" FromRole="Phasing" ToRole="ModuleStudyPhasingBlock" />
         </EntityType>
         <EntityType Name="Program">
           <Key>
@@ -762,10 +1043,24 @@
           </Key>
           <Property Name="Program_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Cohort" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Module_ID" Type="Int32" Nullable="false" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK_dbo_Program_dbo_Module_Module_ID" FromRole="Program" ToRole="Module" />
+          <NavigationProperty Name="Study" Relationship="Project_WatervalModel.ProgramWithStudy" FromRole="Program" ToRole="Study" />
+        </EntityType>
+        <EntityType Name="Study">
+          <Key>
+            <PropertyRef Name="Study_ID" />
+          </Key>
+          <Property Name="Study_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Definition" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StudyCode" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="level" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ModuleStudyPhasingBlock" Relationship="Project_WatervalModel.FK__ModuleStu__Study__73DA2C14" FromRole="Study" ToRole="ModuleStudyPhasingBlock" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.ModelWithStudy" FromRole="Study" ToRole="Module" />
+          <NavigationProperty Name="Program" Relationship="Project_WatervalModel.ProgramWithStudy" FromRole="Study" ToRole="Program" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -782,47 +1077,86 @@
             <PropertyRef Name="Theme_ID" />
           </Key>
           <Property Name="Theme_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Definition" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PrevTheme_ID" Type="Int32" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Definition" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK_dbo_Module_dbo_Theme_Theme_ID" FromRole="Theme" ToRole="Module" />
-          <NavigationProperty Name="Module1" Relationship="Project_WatervalModel.ModuleWithTheme" FromRole="Theme" ToRole="Module" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.ModuleWithTheme" FromRole="Theme" ToRole="Module" />
         </EntityType>
         <EntityType Name="WeekSchedule">
           <Key>
-            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="Weekschedule_ID" />
           </Key>
           <Property Name="Module_ID" Type="Int32" Nullable="false" />
+          <Property Name="Weekschedule_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PrevModule_ID" Type="Int32" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
           <Property Name="WeekNr" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__WeekSched__Modul__4A8310C6" FromRole="WeekSchedule" ToRole="Module" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__WeekSched__Modul__6D2D2E85" FromRole="WeekSchedule" ToRole="Module" />
         </EntityType>
-        <Association Name="FK__ModelActi__Activ__46B27FE2">
-          <End Type="Project_WatervalModel.Activity" Role="Activity" Multiplicity="1" />
-          <End Type="Project_WatervalModel.ModelActivity" Role="ModelActivity" Multiplicity="*" />
+        <EntityType Name="Workform">
+          <Key>
+            <PropertyRef Name="Workform_ID" />
+          </Key>
+          <Property Name="Workform_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PrevWorkform_ID" Type="Int32" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ModelWithWorkform" Relationship="Project_WatervalModel.FK__ModelWith__Workf__451F3D2B" FromRole="Workform" ToRole="ModelWithWorkform" />
+        </EntityType>
+        <Association Name="FK_dbo_Account_dbo_AccountRole_Role_ID">
+          <End Type="Project_WatervalModel.AccountRole" Role="AccountRole" Multiplicity="1" />
+          <End Type="Project_WatervalModel.Account" Role="Account" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Activity">
-              <PropertyRef Name="Activity_ID" />
+            <Principal Role="AccountRole">
+              <PropertyRef Name="Role_ID" />
             </Principal>
-            <Dependent Role="ModelActivity">
-              <PropertyRef Name="Activity_ID" />
+            <Dependent Role="Account">
+              <PropertyRef Name="Role_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Block_ID">
+        <Association Name="FK_dbo_Module_dbo_Account_Account_ID">
+          <End Type="Project_WatervalModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Account_ID" />
+            </Principal>
+            <Dependent Role="Module">
+              <PropertyRef Name="Account_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Assignmen__Modul__24B26D99">
+          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
+          <End Type="Project_WatervalModel.AssignmentCode" Role="AssignmentCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Module_ID" />
+            </Principal>
+            <Dependent Role="AssignmentCode">
+              <PropertyRef Name="Module_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleStu__Block__75C27486">
           <End Type="Project_WatervalModel.Block" Role="Block" Multiplicity="1" />
-          <End Type="Project_WatervalModel.Phasing" Role="Phasing" Multiplicity="*" />
+          <End Type="Project_WatervalModel.ModuleStudyPhasingBlock" Role="ModuleStudyPhasingBlock" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Block">
               <PropertyRef Name="Block_ID" />
             </Principal>
-            <Dependent Role="Phasing">
+            <Dependent Role="ModuleStudyPhasingBlock">
               <PropertyRef Name="Block_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Level__Competenc__3D2915A8">
+        <Association Name="FK__Level__Competenc__1E05700A">
           <End Type="Project_WatervalModel.Competence" Role="Competence" Multiplicity="1" />
           <End Type="Project_WatervalModel.Level" Role="Level" Multiplicity="*" />
           <ReferentialConstraint>
@@ -834,33 +1168,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Module_dbo_Competence_Competence_ID">
-          <End Type="Project_WatervalModel.Competence" Role="Competence" Multiplicity="1" />
-          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Competence">
-              <PropertyRef Name="Competence_ID" />
-            </Principal>
-            <Dependent Role="Module">
-              <PropertyRef Name="Competence_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ExamCode__Module__40F9A68C">
+        <Association Name="FK__GradeType__Modul__68687968">
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
-          <End Type="Project_WatervalModel.ExamCode" Role="ExamCode" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Module">
-              <PropertyRef Name="Module_ID" />
-            </Principal>
-            <Dependent Role="ExamCode">
-              <PropertyRef Name="Module_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__GradeType__Modul__43D61337">
-          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
-          <End Type="Project_WatervalModel.GradeType" Role="GradeType" Multiplicity="0..1" />
+          <End Type="Project_WatervalModel.GradeType" Role="GradeType" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="Module_ID" />
@@ -870,55 +1180,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="LearnCourse_ID">
-          <End Type="Project_WatervalModel.LearnCourse" Role="LearnCourse" Multiplicity="1" />
-          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LearnCourse">
-              <PropertyRef Name="LearnCourse_ID" />
-            </Principal>
-            <Dependent Role="Module">
-              <PropertyRef Name="LearnCourse_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Phasing_ID">
-          <End Type="Project_WatervalModel.Phasing" Role="Phasing" Multiplicity="1" />
-          <End Type="Project_WatervalModel.LearnCourse" Role="LearnCourse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Phasing">
-              <PropertyRef Name="Phasing_ID" />
-            </Principal>
-            <Dependent Role="LearnCourse">
-              <PropertyRef Name="Phasing_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__LearnGoal__Modul__4D5F7D71">
-          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
-          <End Type="Project_WatervalModel.LearnGoal" Role="LearnGoal" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Module">
-              <PropertyRef Name="Module_ID" />
-            </Principal>
-            <Dependent Role="LearnGoal">
-              <PropertyRef Name="Module_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__LearningT__Modul__503BEA1C">
-          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
-          <End Type="Project_WatervalModel.LearningTool" Role="LearningTool" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Module">
-              <PropertyRef Name="Module_ID" />
-            </Principal>
-            <Dependent Role="LearningTool">
-              <PropertyRef Name="Module_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Level__Module_ID__3E1D39E1">
+        <Association Name="FK__Level__Module_ID__1EF99443">
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
           <End Type="Project_WatervalModel.Level" Role="Level" Multiplicity="*" />
           <ReferentialConstraint>
@@ -930,21 +1192,45 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModelActi__Modul__47A6A41B">
+        <Association Name="FK__ModelWith__Modul__46136164">
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
-          <End Type="Project_WatervalModel.ModelActivity" Role="ModelActivity" Multiplicity="*" />
+          <End Type="Project_WatervalModel.ModelWithWorkform" Role="ModelWithWorkform" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="Module_ID" />
             </Principal>
-            <Dependent Role="ModelActivity">
+            <Dependent Role="ModelWithWorkform">
               <PropertyRef Name="Module_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__WeekSched__Modul__4A8310C6">
+        <Association Name="FK__ModelWith__Workf__451F3D2B">
+          <End Type="Project_WatervalModel.Workform" Role="Workform" Multiplicity="1" />
+          <End Type="Project_WatervalModel.ModelWithWorkform" Role="ModelWithWorkform" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workform">
+              <PropertyRef Name="Workform_ID" />
+            </Principal>
+            <Dependent Role="ModelWithWorkform">
+              <PropertyRef Name="Workform_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleStu__Modul__72E607DB">
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
-          <End Type="Project_WatervalModel.WeekSchedule" Role="WeekSchedule" Multiplicity="0..1" />
+          <End Type="Project_WatervalModel.ModuleStudyPhasingBlock" Role="ModuleStudyPhasingBlock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Module_ID" />
+            </Principal>
+            <Dependent Role="ModuleStudyPhasingBlock">
+              <PropertyRef Name="Module_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WeekSched__Modul__6D2D2E85">
+          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
+          <End Type="Project_WatervalModel.WeekSchedule" Role="WeekSchedule" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="Module_ID" />
@@ -954,45 +1240,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Module_dbo_ModuleHistory_ModuleYear_ID">
-          <End Type="Project_WatervalModel.ModuleHistory" Role="ModuleHistory" Multiplicity="1" />
-          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="*" />
+        <Association Name="FK__ModuleStu__Phasi__74CE504D">
+          <End Type="Project_WatervalModel.Phasing" Role="Phasing" Multiplicity="1" />
+          <End Type="Project_WatervalModel.ModuleStudyPhasingBlock" Role="ModuleStudyPhasingBlock" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ModuleHistory">
-              <PropertyRef Name="ModuleYear_ID" />
+            <Principal Role="Phasing">
+              <PropertyRef Name="Phasing_ID" />
             </Principal>
-            <Dependent Role="Module">
-              <PropertyRef Name="ModuleYear_ID" />
+            <Dependent Role="ModuleStudyPhasingBlock">
+              <PropertyRef Name="Phasing_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Module_dbo_Theme_Theme_ID">
-          <End Type="Project_WatervalModel.Theme" Role="Theme" Multiplicity="1" />
-          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="*" />
+        <Association Name="FK__ModuleStu__Study__73DA2C14">
+          <End Type="Project_WatervalModel.Study" Role="Study" Multiplicity="1" />
+          <End Type="Project_WatervalModel.ModuleStudyPhasingBlock" Role="ModuleStudyPhasingBlock" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Theme">
-              <PropertyRef Name="Theme_ID" />
+            <Principal Role="Study">
+              <PropertyRef Name="Study_ID" />
             </Principal>
-            <Dependent Role="Module">
-              <PropertyRef Name="Theme_ID" />
+            <Dependent Role="ModuleStudyPhasingBlock">
+              <PropertyRef Name="Study_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Program_dbo_Module_Module_ID">
-          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
-          <End Type="Project_WatervalModel.Program" Role="Program" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Module">
-              <PropertyRef Name="Module_ID" />
-            </Principal>
-            <Dependent Role="Program">
-              <PropertyRef Name="Module_ID" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="AccountRoleWithAccountLaw">
+          <End Type="Project_WatervalModel.AccountLaw" Role="AccountLaw" Multiplicity="*" />
+          <End Type="Project_WatervalModel.AccountRole" Role="AccountRole" Multiplicity="*" />
+        </Association>
+        <Association Name="ModelWithStudy">
+          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="*" />
+          <End Type="Project_WatervalModel.Study" Role="Study" Multiplicity="*" />
+        </Association>
+        <Association Name="ModuleWithLearnGoal">
+          <End Type="Project_WatervalModel.LearnGoal" Role="LearnGoal" Multiplicity="*" />
+          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="*" />
+        </Association>
+        <Association Name="ModuleWithLearningTool">
+          <End Type="Project_WatervalModel.LearningTool" Role="LearningTool" Multiplicity="*" />
+          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="*" />
+        </Association>
+        <Association Name="ModuleWithLearnLine">
+          <End Type="Project_WatervalModel.LearnLine" Role="LearnLine" Multiplicity="*" />
+          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="*" />
         </Association>
         <Association Name="ModuleWithTheme">
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="*" />
           <End Type="Project_WatervalModel.Theme" Role="Theme" Multiplicity="*" />
+        </Association>
+        <Association Name="ProgramWithStudy">
+          <End Type="Project_WatervalModel.Program" Role="Program" Multiplicity="*" />
+          <End Type="Project_WatervalModel.Study" Role="Study" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1003,19 +1301,40 @@
           <EntitySetMapping Name="Account">
             <EntityTypeMapping TypeName="Project_WatervalModel.Account">
               <MappingFragment StoreEntitySet="Account">
-                <ScalarProperty Name="Salt" ColumnName="Salt" />
-                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
-                <ScalarProperty Name="isSuperUser" ColumnName="isSuperUser" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Activity">
-            <EntityTypeMapping TypeName="Project_WatervalModel.Activity">
-              <MappingFragment StoreEntitySet="Activity">
+          <EntitySetMapping Name="AccountLaw">
+            <EntityTypeMapping TypeName="Project_WatervalModel.AccountLaw">
+              <MappingFragment StoreEntitySet="AccountLaw">
+                <ScalarProperty Name="LawName" ColumnName="LawName" />
+                <ScalarProperty Name="Law_ID" ColumnName="Law_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountRole">
+            <EntityTypeMapping TypeName="Project_WatervalModel.AccountRole">
+              <MappingFragment StoreEntitySet="AccountRole">
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Activity_ID" ColumnName="Activity_ID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssignmentCode">
+            <EntityTypeMapping TypeName="Project_WatervalModel.AssignmentCode">
+              <MappingFragment StoreEntitySet="AssignmentCode">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="PrevModule_ID" ColumnName="PrevModule_ID" />
+                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="EC" ColumnName="EC" />
+                <ScalarProperty Name="AssignmentCode_ID" ColumnName="AssignmentCode_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1037,53 +1356,53 @@
                 <ScalarProperty Name="Definition_Long" ColumnName="Definition_Long" />
                 <ScalarProperty Name="Definition_Short" ColumnName="Definition_Short" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PrevCompetence_ID" ColumnName="PrevCompetence_ID" />
                 <ScalarProperty Name="Competence_ID" ColumnName="Competence_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ExamCode">
-            <EntityTypeMapping TypeName="Project_WatervalModel.ExamCode">
-              <MappingFragment StoreEntitySet="ExamCode">
-                <ScalarProperty Name="Exam_Code" ColumnName="Exam_Code" />
-                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GradeType">
             <EntityTypeMapping TypeName="Project_WatervalModel.GradeType">
               <MappingFragment StoreEntitySet="GradeType">
-                <ScalarProperty Name="GradeDescription" ColumnName="GradeDescription" />
-                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LearnCourse">
-            <EntityTypeMapping TypeName="Project_WatervalModel.LearnCourse">
-              <MappingFragment StoreEntitySet="LearnCourse">
-                <ScalarProperty Name="Phasing_ID" ColumnName="Phasing_ID" />
+                <ScalarProperty Name="GradeType_ID" ColumnName="GradeType_ID" />
                 <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
-                <ScalarProperty Name="level" ColumnName="level" />
-                <ScalarProperty Name="LearnCourseCode" ColumnName="LearnCourseCode" />
-                <ScalarProperty Name="Definition" ColumnName="Definition" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="LearnCourse_ID" ColumnName="LearnCourse_ID" />
+                <ScalarProperty Name="GradeDescription" ColumnName="GradeDescription" />
+                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LearnGoal">
             <EntityTypeMapping TypeName="Project_WatervalModel.LearnGoal">
               <MappingFragment StoreEntitySet="LearnGoal">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
+                <ScalarProperty Name="PrevLearnGoal_ID" ColumnName="PrevLearnGoal_ID" />
+                <ScalarProperty Name="LearnGoal_ID" ColumnName="LearnGoal_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LearningTool">
             <EntityTypeMapping TypeName="Project_WatervalModel.LearningTool">
               <MappingFragment StoreEntitySet="LearningTool">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
+                <ScalarProperty Name="PrevLearnTool_ID" ColumnName="PrevLearnTool_ID" />
+                <ScalarProperty Name="LearnTool_ID" ColumnName="LearnTool_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LearnLine">
+            <EntityTypeMapping TypeName="Project_WatervalModel.LearnLine">
+              <MappingFragment StoreEntitySet="LearnLine">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="Definition" ColumnName="Definition" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PrevLearnLine_ID" ColumnName="PrevLearnLine_ID" />
+                <ScalarProperty Name="LearnLine_ID" ColumnName="LearnLine_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1096,13 +1415,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ModelActivity">
-            <EntityTypeMapping TypeName="Project_WatervalModel.ModelActivity">
-              <MappingFragment StoreEntitySet="ModelActivity">
+          <EntitySetMapping Name="ModelWithWorkform">
+            <EntityTypeMapping TypeName="Project_WatervalModel.ModelWithWorkform">
+              <MappingFragment StoreEntitySet="ModelWithWorkform">
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
                 <ScalarProperty Name="Workload" ColumnName="Workload" />
                 <ScalarProperty Name="Frequency" ColumnName="Frequency" />
-                <ScalarProperty Name="Activity_ID" ColumnName="Activity_ID" />
+                <ScalarProperty Name="Workform_ID" ColumnName="Workform_ID" />
                 <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1110,38 +1429,33 @@
           <EntitySetMapping Name="Module">
             <EntityTypeMapping TypeName="Project_WatervalModel.Module">
               <MappingFragment StoreEntitySet="Module">
+                <ScalarProperty Name="Account_ID" ColumnName="Account_ID" />
                 <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
-                <ScalarProperty Name="ModuleYear_ID" ColumnName="ModuleYear_ID" />
-                <ScalarProperty Name="LearnCourse_ID" ColumnName="LearnCourse_ID" />
-                <ScalarProperty Name="Theme_ID" ColumnName="Theme_ID" />
-                <ScalarProperty Name="Competence_ID" ColumnName="Competence_ID" />
                 <ScalarProperty Name="Foreknowledge" ColumnName="Foreknowledge" />
                 <ScalarProperty Name="Definition_Long" ColumnName="Definition_Long" />
                 <ScalarProperty Name="Definition_Short" ColumnName="Definition_Short" />
-                <ScalarProperty Name="Organization" ColumnName="Organization" />
-                <ScalarProperty Name="GradeType" ColumnName="GradeType" />
-                <ScalarProperty Name="Workload" ColumnName="Workload" />
                 <ScalarProperty Name="Entry_Level" ColumnName="Entry_Level" />
-                <ScalarProperty Name="Method" ColumnName="Method" />
-                <ScalarProperty Name="EC" ColumnName="EC" />
-                <ScalarProperty Name="Course_Code" ColumnName="Course_Code" />
+                <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PrevModule_ID" ColumnName="PrevModule_ID" />
                 <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ModuleHistory">
-            <EntityTypeMapping TypeName="Project_WatervalModel.ModuleHistory">
-              <MappingFragment StoreEntitySet="ModuleHistory">
-                <ScalarProperty Name="ModuleYear_ID" ColumnName="ModuleYear_ID" />
+          <EntitySetMapping Name="ModuleStudyPhasingBlock">
+            <EntityTypeMapping TypeName="Project_WatervalModel.ModuleStudyPhasingBlock">
+              <MappingFragment StoreEntitySet="ModuleStudyPhasingBlock">
+                <ScalarProperty Name="Block_ID" ColumnName="Block_ID" />
+                <ScalarProperty Name="Phasing_ID" ColumnName="Phasing_ID" />
+                <ScalarProperty Name="Study_ID" ColumnName="Study_ID" />
+                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Phasing">
             <EntityTypeMapping TypeName="Project_WatervalModel.Phasing">
               <MappingFragment StoreEntitySet="Phasing">
-                <ScalarProperty Name="Block_ID" ColumnName="Block_ID" />
                 <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -1154,9 +1468,21 @@
               <MappingFragment StoreEntitySet="Program">
                 <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
-                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
                 <ScalarProperty Name="Cohort" ColumnName="Cohort" />
                 <ScalarProperty Name="Program_ID" ColumnName="Program_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Study">
+            <EntityTypeMapping TypeName="Project_WatervalModel.Study">
+              <MappingFragment StoreEntitySet="Study">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="level" ColumnName="level" />
+                <ScalarProperty Name="StudyCode" ColumnName="StudyCode" />
+                <ScalarProperty Name="Definition" ColumnName="Definition" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Study_ID" ColumnName="Study_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1178,6 +1504,7 @@
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="Definition" ColumnName="Definition" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PrevTheme_ID" ColumnName="PrevTheme_ID" />
                 <ScalarProperty Name="Theme_ID" ColumnName="Theme_ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1185,18 +1512,81 @@
           <EntitySetMapping Name="WeekSchedule">
             <EntityTypeMapping TypeName="Project_WatervalModel.WeekSchedule">
               <MappingFragment StoreEntitySet="WeekSchedule">
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="WeekNr" ColumnName="WeekNr" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PrevModule_ID" ColumnName="PrevModule_ID" />
+                <ScalarProperty Name="Weekschedule_ID" ColumnName="Weekschedule_ID" />
                 <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Workform">
+            <EntityTypeMapping TypeName="Project_WatervalModel.Workform">
+              <MappingFragment StoreEntitySet="Workform">
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="PrevWorkform_ID" ColumnName="PrevWorkform_ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Workform_ID" ColumnName="Workform_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AccountRoleWithAccountLaw" TypeName="Project_WatervalModel.AccountRoleWithAccountLaw" StoreEntitySet="AccountRoleWithAccountLaw">
+            <EndProperty Name="AccountRole">
+              <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+            </EndProperty>
+            <EndProperty Name="AccountLaw">
+              <ScalarProperty Name="Law_ID" ColumnName="Law_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ModelWithStudy" TypeName="Project_WatervalModel.ModelWithStudy" StoreEntitySet="ModelWithStudy">
+            <EndProperty Name="Study">
+              <ScalarProperty Name="Study_ID" ColumnName="Study_ID" />
+            </EndProperty>
+            <EndProperty Name="Module">
+              <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ModuleWithLearnGoal" TypeName="Project_WatervalModel.ModuleWithLearnGoal" StoreEntitySet="ModuleWithLearnGoal">
+            <EndProperty Name="Module">
+              <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
+            </EndProperty>
+            <EndProperty Name="LearnGoal">
+              <ScalarProperty Name="LearnGoal_ID" ColumnName="LearnGoal_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ModuleWithLearningTool" TypeName="Project_WatervalModel.ModuleWithLearningTool" StoreEntitySet="ModuleWithLearningTool">
+            <EndProperty Name="Module">
+              <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
+            </EndProperty>
+            <EndProperty Name="LearningTool">
+              <ScalarProperty Name="LearnTool_ID" ColumnName="LearnTool_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ModuleWithLearnLine" TypeName="Project_WatervalModel.ModuleWithLearnLine" StoreEntitySet="ModuleWithLearnLine">
+            <EndProperty Name="Module">
+              <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
+            </EndProperty>
+            <EndProperty Name="LearnLine">
+              <ScalarProperty Name="LearnLine_ID" ColumnName="LearnLine_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
           <AssociationSetMapping Name="ModuleWithTheme" TypeName="Project_WatervalModel.ModuleWithTheme" StoreEntitySet="ModuleWithTheme">
             <EndProperty Name="Theme">
               <ScalarProperty Name="Theme_ID" ColumnName="Theme_ID" />
             </EndProperty>
             <EndProperty Name="Module">
               <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ProgramWithStudy" TypeName="Project_WatervalModel.ProgramWithStudy" StoreEntitySet="ProgramWithStudy">
+            <EndProperty Name="Study">
+              <ScalarProperty Name="Study_ID" ColumnName="Study_ID" />
+            </EndProperty>
+            <EndProperty Name="Program">
+              <ScalarProperty Name="Program_ID" ColumnName="Program_ID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

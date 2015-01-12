@@ -16,7 +16,7 @@ namespace DomainModel.Models
     {
         public Block()
         {
-            this.Phasing = new HashSet<Phasing>();
+            this.ModuleStudyPhasingBlock = new HashSet<ModuleStudyPhasingBlock>();
         }
     
         public int Block_ID { get; set; }
@@ -24,6 +24,6 @@ namespace DomainModel.Models
         public bool isDeleted { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
     
-        public virtual ICollection<Phasing> Phasing { get; set; }
+        public virtual ICollection<ModuleStudyPhasingBlock> ModuleStudyPhasingBlock { get; set; }
     }
 }

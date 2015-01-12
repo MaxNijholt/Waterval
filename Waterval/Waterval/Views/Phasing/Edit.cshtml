@@ -1,0 +1,23 @@
+﻿@model DomainModel.Models.Phasing
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/css")
+<h2>Fase aanpassen</h2>
+
+@using(Html.BeginForm("Edit", "Phasing", new { ReturnUrl = ViewBag.ReturnUrl },
+			FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+{
+	@Html.ValidationSummary(true)
+	<fieldset>
+		<legend></legend>
+		@Html.HiddenFor(model => model.Phasing_ID)
+		@Html.Partial("_CreateOrEdit", Model)
+
+		<p>
+			<input type="submit" value="Fasering aanpassen" class="btn btn-success" /> |
+			@Html.ActionLink("Terug naar Index", "Index")
+		</p>
+	</fieldset>
+
+}

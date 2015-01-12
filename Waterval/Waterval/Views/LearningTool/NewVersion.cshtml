@@ -1,0 +1,36 @@
+﻿@model DomainModel.Models.LearningTool
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<h2>Leermiddel aanpassen</h2>
+
+@using (Html.BeginForm("NewVersion", "LearningTool", new { ReturnUrl = ViewBag.ReturnUrl },
+            FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+
+        @Html.HiddenFor(model => model.PrevLearnTool_ID)
+        @Html.Partial("_CreateOrEdit", Model)
+
+        <p>
+            <input type="submit" value="Competentie aanpassen" class="btn btn-success" /> |
+            @Html.ActionLink("Terug naar Index", "Index")
+        </p>
+    </fieldset>
+
+}
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+
+

@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -50,9 +54,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BlockProcess.cs" />
-    <Compile Include="BlokTest.cs" />
+    <Compile Include="Processors\BlockProcess.cs" />
+    <Compile Include="Processors\LearnToolProcessor.cs" />
+    <Compile Include="Tests\BlokTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\TestLearnTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
@@ -63,6 +69,9 @@
       <Project>{14a5c760-fc5f-42dc-9bfe-b5b7f29dc5dc}</Project>
       <Name>RepositoryModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
