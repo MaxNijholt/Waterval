@@ -211,12 +211,12 @@
                         <th>Cohort</th>
                     </tr>
 
-                    @foreach (var i in Model.Program.Where(c => c.isDeleted == false))
+                    @*@foreach (var i in Model.Program.Where(c => c.isDeleted == false))
                     {
                         <tr>
                             <td>@Html.ActionLink(i.Cohort, "../Program/Details", new { id = i.Program_ID })</td>
                         </tr>
-                    }
+                    }*@
 
                 </table>
             </div>
@@ -227,12 +227,12 @@
                     <tr>
                         <th>Onderwerp</th>
                     </tr>
-                    @foreach (var i in Model.Study.Where(c => c.isDeleted == false))
+                    @*@foreach (var i in Model.Study.Where(c => c.isDeleted == false))
                     {
                         <tr>
                             <td>@Html.ActionLink(i.Title, "../Study/Details", new { id = i.Study_ID })</td>
                         </tr>
-                    }
+                    }*@
 
                 </table>
             </div>
@@ -269,7 +269,7 @@
                     {
                         <tr>
                             <td>@Html.ActionLink(i.Competence.Title, "../Competence/Details", new { id = i.Competence_ID })</td>
-                            <td>@Html.DisplayFor(model => i.Level1)</td>
+                            <td>@Html.DisplayFor(model => i.Competence.Definition_Short)</td>
                         </tr>
                     }
                 </table>
@@ -279,7 +279,7 @@
         </fieldset>
 
         <p>
-            @Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Aanpassen", "Edit", null, new { id = Model.Module_ID }, new { @class = "btn btn-warning" })
             <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />|
             @Html.ActionLink("Terug naar Index", "Index")
         </p>

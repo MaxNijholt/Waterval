@@ -3,17 +3,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Create", "Module", new { ReturnUrl = ViewBag.ReturnUrl },
+@using (Html.BeginForm("toNewVersion", "Module", new { ReturnUrl = ViewBag.ReturnUrl },
             FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
 {
 
     @Html.ValidationSummary(true)
 
+
     <fieldset>
         <legend></legend>
-        @Html.Partial("_CreateOrEdit", null)
+        @Html.HiddenFor(model => model.PrevModule_ID)
+        @Html.Partial("_CreateOrEdit", Model)
         <p>
-            <input type="submit" value="Module opslaan" name="btn_Save" class="btn btn-success" /> |
+            <input type="submit" value="Module opslaan" class="btn btn-success" /> |
             @Html.ActionLink("Terug naar Index", "Index")
         </p>
     </fieldset>
@@ -23,7 +25,7 @@
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
-<script src="~/Scripts/ScriptModule.js"></script>
-
-
+        <script src="~/Scripts/ScriptModule.js"></script>
 }
+
+
