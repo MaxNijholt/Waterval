@@ -12,14 +12,16 @@ namespace DomainModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class GradeType
+    public partial class ModuleStudyPhasingBlock
     {
         public int Module_ID { get; set; }
-        public string GradeDescription { get; set; }
-        public bool isDeleted { get; set; }
-        public Nullable<System.DateTime> DeleteDate { get; set; }
-        public int GradeType_ID { get; set; }
+        public int Study_ID { get; set; }
+        public int Phasing_ID { get; set; }
+        public int Block_ID { get; set; }
     
+        public virtual Block Block { get; set; }
         public virtual Module Module { get; set; }
+        public virtual Phasing Phasing { get; set; }
+        public virtual Study Study { get; set; }
     }
 }

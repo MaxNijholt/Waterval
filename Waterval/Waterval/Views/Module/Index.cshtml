@@ -25,6 +25,7 @@
                     <th>@Html.ActionLink( "Ingangsniveau", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
                     <th>Aanpassen</th>
                     <th>Verwijderen</th>
+                    <th>Nieuwe Versie</th>
                 </tr>
             </thead>
             @foreach (var item in Model)
@@ -37,6 +38,7 @@
                     <td>@item.Entry_Level</td>
                     <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Module_ID }, new { @class = "btn btn-warning" })</td>
                     <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Module_ID" class="btn btn-avans"></td>
+                    <td>@Html.ActionLink("Nieuwe versie", "toNewVersion", new { id = item.Module_ID }, new { @class = "btn btn-avans" })</td>
                 </tr>
             }
         </table>

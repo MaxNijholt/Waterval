@@ -16,7 +16,7 @@ namespace DomainModel.Models
     {
         public Program()
         {
-            this.Module = new HashSet<Module>();
+            this.Study = new HashSet<Study>();
         }
     
         public int Program_ID { get; set; }
@@ -24,6 +24,6 @@ namespace DomainModel.Models
         public bool isDeleted { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
     
-        public virtual ICollection<Module> Module { get; set; }
+        public virtual ICollection<Study> Study { get; set; }
     }
 }

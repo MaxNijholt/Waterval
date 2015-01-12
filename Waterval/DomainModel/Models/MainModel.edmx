@@ -70,18 +70,15 @@
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="GradeType">
           <Key>
-            <PropertyRef Name="Module_ID" />
-            <PropertyRef Name="GradeDescription" />
-            <PropertyRef Name="isDeleted" />
+            <PropertyRef Name="GradeType_ID" />
           </Key>
           <Property Name="Module_ID" Type="int" Nullable="false" />
           <Property Name="GradeDescription" Type="nvarchar" MaxLength="900" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
+          <Property Name="GradeType_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="LearnGoal">
           <Key>
@@ -123,14 +120,6 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <Property Name="Module_ID" Type="int" Nullable="false" />
           <Property Name="Level" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
-        <EntityType Name="ModelWithProgram">
-          <Key>
-            <PropertyRef Name="Module_ID" />
-            <PropertyRef Name="Program_ID" />
-          </Key>
-          <Property Name="Module_ID" Type="int" Nullable="false" />
-          <Property Name="Program_ID" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="ModelWithStudy">
           <Key>
             <PropertyRef Name="Module_ID" />
@@ -145,7 +134,6 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             <PropertyRef Name="Workform_ID" />
           </Key>
           <Property Name="Module_ID" Type="int" Nullable="false" />
-          <Property Name="PrevModule_ID" Type="int" />
           <Property Name="Workform_ID" Type="int" Nullable="false" />
           <Property Name="Frequency" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Workload" Type="int" Nullable="false" />
@@ -166,6 +154,18 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
           <Property Name="Account_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="ModuleStudyPhasingBlock">
+          <Key>
+            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="Study_ID" />
+            <PropertyRef Name="Phasing_ID" />
+            <PropertyRef Name="Block_ID" />
+          </Key>
+          <Property Name="Module_ID" Type="int" Nullable="false" />
+          <Property Name="Study_ID" Type="int" Nullable="false" />
+          <Property Name="Phasing_ID" Type="int" Nullable="false" />
+          <Property Name="Block_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ModuleWithLearnGoal">
           <Key>
@@ -208,14 +208,6 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
         </EntityType>
-        <EntityType Name="PhasingWithBlock">
-          <Key>
-            <PropertyRef Name="Phasing_ID" />
-            <PropertyRef Name="Block_ID" />
-          </Key>
-          <Property Name="Phasing_ID" Type="int" Nullable="false" />
-          <Property Name="Block_ID" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Program">
           <Key>
             <PropertyRef Name="Program_ID" />
@@ -224,6 +216,14 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <Property Name="Cohort" Type="nvarchar" MaxLength="10" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
+        </EntityType>
+        <EntityType Name="ProgramWithStudy">
+          <Key>
+            <PropertyRef Name="Program_ID" />
+            <PropertyRef Name="Study_ID" />
+          </Key>
+          <Property Name="Program_ID" Type="int" Nullable="false" />
+          <Property Name="Study_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Study">
           <Key>
@@ -236,14 +236,6 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <Property Name="level" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
-        </EntityType>
-        <EntityType Name="StudyWithPhasing">
-          <Key>
-            <PropertyRef Name="Study_ID" />
-            <PropertyRef Name="Phasing_ID" />
-          </Key>
-          <Property Name="Study_ID" Type="int" Nullable="false" />
-          <Property Name="Phasing_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -268,14 +260,15 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
         </EntityType>
         <EntityType Name="WeekSchedule">
           <Key>
-            <PropertyRef Name="WeekNr" />
+            <PropertyRef Name="Weekschedule_ID" />
           </Key>
           <Property Name="Module_ID" Type="int" Nullable="false" />
-          <Property Name="WeekNr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Weekschedule_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PrevModule_ID" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="900" Nullable="false" />
           <Property Name="isDeleted" Type="bit" Nullable="false" />
           <Property Name="DeleteDate" Type="date" />
+          <Property Name="WeekNr" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Workform">
           <Key>
@@ -371,18 +364,6 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModelWith__Modul__4CC05EF3">
-          <End Role="Module" Type="Self.Module" Multiplicity="1" />
-          <End Role="ModelWithProgram" Type="Self.ModelWithProgram" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Module">
-              <PropertyRef Name="Module_ID" />
-            </Principal>
-            <Dependent Role="ModelWithProgram">
-              <PropertyRef Name="Module_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__ModelWith__Modul__536D5C82">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="ModelWithStudy" Type="Self.ModelWithStudy" Multiplicity="*" />
@@ -392,18 +373,6 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             </Principal>
             <Dependent Role="ModelWithStudy">
               <PropertyRef Name="Module_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ModelWith__Progr__4BCC3ABA">
-          <End Role="Program" Type="Self.Program" Multiplicity="1" />
-          <End Role="ModelWithProgram" Type="Self.ModelWithProgram" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Program">
-              <PropertyRef Name="Program_ID" />
-            </Principal>
-            <Dependent Role="ModelWithProgram">
-              <PropertyRef Name="Program_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -428,6 +397,54 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             </Principal>
             <Dependent Role="ModelWithWorkform">
               <PropertyRef Name="Workform_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleStu__Block__75C27486">
+          <End Role="Block" Type="Self.Block" Multiplicity="1" />
+          <End Role="ModuleStudyPhasingBlock" Type="Self.ModuleStudyPhasingBlock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Block">
+              <PropertyRef Name="Block_ID" />
+            </Principal>
+            <Dependent Role="ModuleStudyPhasingBlock">
+              <PropertyRef Name="Block_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleStu__Modul__72E607DB">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ModuleStudyPhasingBlock" Type="Self.ModuleStudyPhasingBlock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Module_ID" />
+            </Principal>
+            <Dependent Role="ModuleStudyPhasingBlock">
+              <PropertyRef Name="Module_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleStu__Phasi__74CE504D">
+          <End Role="Phasing" Type="Self.Phasing" Multiplicity="1" />
+          <End Role="ModuleStudyPhasingBlock" Type="Self.ModuleStudyPhasingBlock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phasing">
+              <PropertyRef Name="Phasing_ID" />
+            </Principal>
+            <Dependent Role="ModuleStudyPhasingBlock">
+              <PropertyRef Name="Phasing_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleStu__Study__73DA2C14">
+          <End Role="Study" Type="Self.Study" Multiplicity="1" />
+          <End Role="ModuleStudyPhasingBlock" Type="Self.ModuleStudyPhasingBlock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Study">
+              <PropertyRef Name="Study_ID" />
+            </Principal>
+            <Dependent Role="ModuleStudyPhasingBlock">
+              <PropertyRef Name="Study_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -491,18 +508,6 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModuleWit__Modul__38B96646">
-          <End Role="Module" Type="Self.Module" Multiplicity="1" />
-          <End Role="ModuleWithTheme" Type="Self.ModuleWithTheme" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Module">
-              <PropertyRef Name="Module_ID" />
-            </Principal>
-            <Dependent Role="ModuleWithTheme">
-              <PropertyRef Name="Module_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__ModuleWit__Modul__3F6663D5">
           <End Role="Module" Type="Self.Module" Multiplicity="1" />
           <End Role="ModuleWithLearnLine" Type="Self.ModuleWithLearnLine" Multiplicity="*" />
@@ -515,7 +520,19 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ModuleWit__Theme__39AD8A7F">
+        <Association Name="FK__ModuleWit__Modul__7C6F7215">
+          <End Role="Module" Type="Self.Module" Multiplicity="1" />
+          <End Role="ModuleWithTheme" Type="Self.ModuleWithTheme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Module_ID" />
+            </Principal>
+            <Dependent Role="ModuleWithTheme">
+              <PropertyRef Name="Module_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleWit__Theme__7D63964E">
           <End Role="Theme" Type="Self.Theme" Multiplicity="1" />
           <End Role="ModuleWithTheme" Type="Self.ModuleWithTheme" Multiplicity="*" />
           <ReferentialConstraint>
@@ -527,50 +544,26 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PhasingWi__Block__5FD33367">
-          <End Role="Block" Type="Self.Block" Multiplicity="1" />
-          <End Role="PhasingWithBlock" Type="Self.PhasingWithBlock" Multiplicity="*" />
+        <Association Name="FK__ProgramWi__Progr__789EE131">
+          <End Role="Program" Type="Self.Program" Multiplicity="1" />
+          <End Role="ProgramWithStudy" Type="Self.ProgramWithStudy" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Block">
-              <PropertyRef Name="Block_ID" />
+            <Principal Role="Program">
+              <PropertyRef Name="Program_ID" />
             </Principal>
-            <Dependent Role="PhasingWithBlock">
-              <PropertyRef Name="Block_ID" />
+            <Dependent Role="ProgramWithStudy">
+              <PropertyRef Name="Program_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PhasingWi__Phasi__60C757A0">
-          <End Role="Phasing" Type="Self.Phasing" Multiplicity="1" />
-          <End Role="PhasingWithBlock" Type="Self.PhasingWithBlock" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Phasing">
-              <PropertyRef Name="Phasing_ID" />
-            </Principal>
-            <Dependent Role="PhasingWithBlock">
-              <PropertyRef Name="Phasing_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudyWith__Phasi__5A1A5A11">
-          <End Role="Phasing" Type="Self.Phasing" Multiplicity="1" />
-          <End Role="StudyWithPhasing" Type="Self.StudyWithPhasing" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Phasing">
-              <PropertyRef Name="Phasing_ID" />
-            </Principal>
-            <Dependent Role="StudyWithPhasing">
-              <PropertyRef Name="Phasing_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StudyWith__Study__592635D8">
+        <Association Name="FK__ProgramWi__Study__7993056A">
           <End Role="Study" Type="Self.Study" Multiplicity="1" />
-          <End Role="StudyWithPhasing" Type="Self.StudyWithPhasing" Multiplicity="*" />
+          <End Role="ProgramWithStudy" Type="Self.ProgramWithStudy" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Study">
               <PropertyRef Name="Study_ID" />
             </Principal>
-            <Dependent Role="StudyWithPhasing">
+            <Dependent Role="ProgramWithStudy">
               <PropertyRef Name="Study_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -619,35 +612,27 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <EntitySet Name="AssignmentCode" EntityType="Self.AssignmentCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Block" EntityType="Self.Block" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Competence" EntityType="Self.Competence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GradeType" EntityType="Self.GradeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LearnGoal" EntityType="Self.LearnGoal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LearningTool" EntityType="Self.LearningTool" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LearnLine" EntityType="Self.LearnLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Level" EntityType="Self.Level" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ModelWithProgram" EntityType="Self.ModelWithProgram" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModelWithStudy" EntityType="Self.ModelWithStudy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModelWithWorkform" EntityType="Self.ModelWithWorkform" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleStudyPhasingBlock" EntityType="Self.ModuleStudyPhasingBlock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModuleWithLearnGoal" EntityType="Self.ModuleWithLearnGoal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModuleWithLearningTool" EntityType="Self.ModuleWithLearningTool" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModuleWithLearnLine" EntityType="Self.ModuleWithLearnLine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModuleWithTheme" EntityType="Self.ModuleWithTheme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Phasing" EntityType="Self.Phasing" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PhasingWithBlock" EntityType="Self.PhasingWithBlock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProgramWithStudy" EntityType="Self.ProgramWithStudy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Study" EntityType="Self.Study" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="StudyWithPhasing" EntityType="Self.StudyWithPhasing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Theme" EntityType="Self.Theme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeekSchedule" EntityType="Self.WeekSchedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workform" EntityType="Self.Workform" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="GradeType" EntityType="Self.GradeType" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [GradeType].[Module_ID] AS [Module_ID], 
-    [GradeType].[GradeDescription] AS [GradeDescription], 
-    [GradeType].[isDeleted] AS [isDeleted], 
-    [GradeType].[DeleteDate] AS [DeleteDate]
-    FROM [dbo].[GradeType] AS [GradeType]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__AccountRo__Law_I__1293BD5E" Association="Self.FK__AccountRo__Law_I__1293BD5E">
             <End Role="AccountLaw" EntitySet="AccountLaw" />
             <End Role="AccountRoleWithAccountLaw" EntitySet="AccountRoleWithAccountLaw" />
@@ -676,17 +661,9 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             <End Role="Module" EntitySet="Module" />
             <End Role="ModelWithWorkform" EntitySet="ModelWithWorkform" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModelWith__Modul__4CC05EF3" Association="Self.FK__ModelWith__Modul__4CC05EF3">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="ModelWithProgram" EntitySet="ModelWithProgram" />
-          </AssociationSet>
           <AssociationSet Name="FK__ModelWith__Modul__536D5C82" Association="Self.FK__ModelWith__Modul__536D5C82">
             <End Role="Module" EntitySet="Module" />
             <End Role="ModelWithStudy" EntitySet="ModelWithStudy" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ModelWith__Progr__4BCC3ABA" Association="Self.FK__ModelWith__Progr__4BCC3ABA">
-            <End Role="Program" EntitySet="Program" />
-            <End Role="ModelWithProgram" EntitySet="ModelWithProgram" />
           </AssociationSet>
           <AssociationSet Name="FK__ModelWith__Study__52793849" Association="Self.FK__ModelWith__Study__52793849">
             <End Role="Study" EntitySet="Study" />
@@ -695,6 +672,22 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <AssociationSet Name="FK__ModelWith__Workf__451F3D2B" Association="Self.FK__ModelWith__Workf__451F3D2B">
             <End Role="Workform" EntitySet="Workform" />
             <End Role="ModelWithWorkform" EntitySet="ModelWithWorkform" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleStu__Block__75C27486" Association="Self.FK__ModuleStu__Block__75C27486">
+            <End Role="Block" EntitySet="Block" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleStu__Modul__72E607DB" Association="Self.FK__ModuleStu__Modul__72E607DB">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleStu__Phasi__74CE504D" Association="Self.FK__ModuleStu__Phasi__74CE504D">
+            <End Role="Phasing" EntitySet="Phasing" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleStu__Study__73DA2C14" Association="Self.FK__ModuleStu__Study__73DA2C14">
+            <End Role="Study" EntitySet="Study" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
           </AssociationSet>
           <AssociationSet Name="FK__ModuleWit__Learn__2A6B46EF" Association="Self.FK__ModuleWit__Learn__2A6B46EF">
             <End Role="LearnGoal" EntitySet="LearnGoal" />
@@ -716,33 +709,25 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             <End Role="Module" EntitySet="Module" />
             <End Role="ModuleWithLearningTool" EntitySet="ModuleWithLearningTool" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModuleWit__Modul__38B96646" Association="Self.FK__ModuleWit__Modul__38B96646">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="ModuleWithTheme" EntitySet="ModuleWithTheme" />
-          </AssociationSet>
           <AssociationSet Name="FK__ModuleWit__Modul__3F6663D5" Association="Self.FK__ModuleWit__Modul__3F6663D5">
             <End Role="Module" EntitySet="Module" />
             <End Role="ModuleWithLearnLine" EntitySet="ModuleWithLearnLine" />
           </AssociationSet>
-          <AssociationSet Name="FK__ModuleWit__Theme__39AD8A7F" Association="Self.FK__ModuleWit__Theme__39AD8A7F">
+          <AssociationSet Name="FK__ModuleWit__Modul__7C6F7215" Association="Self.FK__ModuleWit__Modul__7C6F7215">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModuleWithTheme" EntitySet="ModuleWithTheme" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleWit__Theme__7D63964E" Association="Self.FK__ModuleWit__Theme__7D63964E">
             <End Role="Theme" EntitySet="Theme" />
             <End Role="ModuleWithTheme" EntitySet="ModuleWithTheme" />
           </AssociationSet>
-          <AssociationSet Name="FK__PhasingWi__Block__5FD33367" Association="Self.FK__PhasingWi__Block__5FD33367">
-            <End Role="Block" EntitySet="Block" />
-            <End Role="PhasingWithBlock" EntitySet="PhasingWithBlock" />
+          <AssociationSet Name="FK__ProgramWi__Progr__789EE131" Association="Self.FK__ProgramWi__Progr__789EE131">
+            <End Role="Program" EntitySet="Program" />
+            <End Role="ProgramWithStudy" EntitySet="ProgramWithStudy" />
           </AssociationSet>
-          <AssociationSet Name="FK__PhasingWi__Phasi__60C757A0" Association="Self.FK__PhasingWi__Phasi__60C757A0">
-            <End Role="Phasing" EntitySet="Phasing" />
-            <End Role="PhasingWithBlock" EntitySet="PhasingWithBlock" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudyWith__Phasi__5A1A5A11" Association="Self.FK__StudyWith__Phasi__5A1A5A11">
-            <End Role="Phasing" EntitySet="Phasing" />
-            <End Role="StudyWithPhasing" EntitySet="StudyWithPhasing" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StudyWith__Study__592635D8" Association="Self.FK__StudyWith__Study__592635D8">
+          <AssociationSet Name="FK__ProgramWi__Study__7993056A" Association="Self.FK__ProgramWi__Study__7993056A">
             <End Role="Study" EntitySet="Study" />
-            <End Role="StudyWithPhasing" EntitySet="StudyWithPhasing" />
+            <End Role="ProgramWithStudy" EntitySet="ProgramWithStudy" />
           </AssociationSet>
           <AssociationSet Name="FK__WeekSched__Modul__6D2D2E85" Association="Self.FK__WeekSched__Modul__6D2D2E85">
             <End Role="Module" EntitySet="Module" />
@@ -768,12 +753,14 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <EntitySet Name="AssignmentCode" EntityType="Project_WatervalModel.AssignmentCode" />
           <EntitySet Name="Block" EntityType="Project_WatervalModel.Block" />
           <EntitySet Name="Competence" EntityType="Project_WatervalModel.Competence" />
+          <EntitySet Name="GradeType" EntityType="Project_WatervalModel.GradeType" />
           <EntitySet Name="LearnGoal" EntityType="Project_WatervalModel.LearnGoal" />
           <EntitySet Name="LearningTool" EntityType="Project_WatervalModel.LearningTool" />
           <EntitySet Name="LearnLine" EntityType="Project_WatervalModel.LearnLine" />
           <EntitySet Name="Level" EntityType="Project_WatervalModel.Level" />
           <EntitySet Name="ModelWithWorkform" EntityType="Project_WatervalModel.ModelWithWorkform" />
           <EntitySet Name="Module" EntityType="Project_WatervalModel.Module" />
+          <EntitySet Name="ModuleStudyPhasingBlock" EntityType="Project_WatervalModel.ModuleStudyPhasingBlock" />
           <EntitySet Name="Phasing" EntityType="Project_WatervalModel.Phasing" />
           <EntitySet Name="Program" EntityType="Project_WatervalModel.Program" />
           <EntitySet Name="Study" EntityType="Project_WatervalModel.Study" />
@@ -781,7 +768,6 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <EntitySet Name="Theme" EntityType="Project_WatervalModel.Theme" />
           <EntitySet Name="WeekSchedule" EntityType="Project_WatervalModel.WeekSchedule" />
           <EntitySet Name="Workform" EntityType="Project_WatervalModel.Workform" />
-          <EntitySet Name="GradeType" EntityType="Project_WatervalModel.GradeType" />
           <AssociationSet Name="FK_dbo_Account_dbo_AccountRole_Role_ID" Association="Project_WatervalModel.FK_dbo_Account_dbo_AccountRole_Role_ID">
             <End Role="AccountRole" EntitySet="AccountRole" />
             <End Role="Account" EntitySet="Account" />
@@ -794,9 +780,17 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             <End Role="Module" EntitySet="Module" />
             <End Role="AssignmentCode" EntitySet="AssignmentCode" />
           </AssociationSet>
+          <AssociationSet Name="FK__ModuleStu__Block__75C27486" Association="Project_WatervalModel.FK__ModuleStu__Block__75C27486">
+            <End Role="Block" EntitySet="Block" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
+          </AssociationSet>
           <AssociationSet Name="FK__Level__Competenc__1E05700A" Association="Project_WatervalModel.FK__Level__Competenc__1E05700A">
             <End Role="Competence" EntitySet="Competence" />
             <End Role="Level" EntitySet="Level" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GradeType__Modul__68687968" Association="Project_WatervalModel.FK__GradeType__Modul__68687968">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="GradeType" EntitySet="GradeType" />
           </AssociationSet>
           <AssociationSet Name="FK__Level__Module_ID__1EF99443" Association="Project_WatervalModel.FK__Level__Module_ID__1EF99443">
             <End Role="Module" EntitySet="Module" />
@@ -810,21 +804,25 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             <End Role="Workform" EntitySet="Workform" />
             <End Role="ModelWithWorkform" EntitySet="ModelWithWorkform" />
           </AssociationSet>
-          <AssociationSet Name="FK__GradeType__Modul__68687968" Association="Project_WatervalModel.FK__GradeType__Modul__68687968">
+          <AssociationSet Name="FK__ModuleStu__Modul__72E607DB" Association="Project_WatervalModel.FK__ModuleStu__Modul__72E607DB">
             <End Role="Module" EntitySet="Module" />
-            <End Role="GradeType" EntitySet="GradeType" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
           </AssociationSet>
           <AssociationSet Name="FK__WeekSched__Modul__6D2D2E85" Association="Project_WatervalModel.FK__WeekSched__Modul__6D2D2E85">
             <End Role="Module" EntitySet="Module" />
             <End Role="WeekSchedule" EntitySet="WeekSchedule" />
           </AssociationSet>
+          <AssociationSet Name="FK__ModuleStu__Phasi__74CE504D" Association="Project_WatervalModel.FK__ModuleStu__Phasi__74CE504D">
+            <End Role="Phasing" EntitySet="Phasing" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModuleStu__Study__73DA2C14" Association="Project_WatervalModel.FK__ModuleStu__Study__73DA2C14">
+            <End Role="Study" EntitySet="Study" />
+            <End Role="ModuleStudyPhasingBlock" EntitySet="ModuleStudyPhasingBlock" />
+          </AssociationSet>
           <AssociationSet Name="AccountRoleWithAccountLaw" Association="Project_WatervalModel.AccountRoleWithAccountLaw">
             <End Role="AccountLaw" EntitySet="AccountLaw" />
             <End Role="AccountRole" EntitySet="AccountRole" />
-          </AssociationSet>
-          <AssociationSet Name="ModelWithProgram" Association="Project_WatervalModel.ModelWithProgram">
-            <End Role="Module" EntitySet="Module" />
-            <End Role="Program" EntitySet="Program" />
           </AssociationSet>
           <AssociationSet Name="ModelWithStudy" Association="Project_WatervalModel.ModelWithStudy">
             <End Role="Module" EntitySet="Module" />
@@ -846,12 +844,8 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             <End Role="Module" EntitySet="Module" />
             <End Role="Theme" EntitySet="Theme" />
           </AssociationSet>
-          <AssociationSet Name="PhasingWithBlock" Association="Project_WatervalModel.PhasingWithBlock">
-            <End Role="Block" EntitySet="Block" />
-            <End Role="Phasing" EntitySet="Phasing" />
-          </AssociationSet>
-          <AssociationSet Name="StudyWithPhasing" Association="Project_WatervalModel.StudyWithPhasing">
-            <End Role="Phasing" EntitySet="Phasing" />
+          <AssociationSet Name="ProgramWithStudy" Association="Project_WatervalModel.ProgramWithStudy">
+            <End Role="Program" EntitySet="Program" />
             <End Role="Study" EntitySet="Study" />
           </AssociationSet>
         </EntityContainer>
@@ -905,7 +899,7 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Phasing" Relationship="Project_WatervalModel.PhasingWithBlock" FromRole="Block" ToRole="Phasing" />
+          <NavigationProperty Name="ModuleStudyPhasingBlock" Relationship="Project_WatervalModel.FK__ModuleStu__Block__75C27486" FromRole="Block" ToRole="ModuleStudyPhasingBlock" />
         </EntityType>
         <EntityType Name="Competence">
           <Key>
@@ -919,6 +913,17 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Level" Relationship="Project_WatervalModel.FK__Level__Competenc__1E05700A" FromRole="Competence" ToRole="Level" />
+        </EntityType>
+        <EntityType Name="GradeType">
+          <Key>
+            <PropertyRef Name="GradeType_ID" />
+          </Key>
+          <Property Name="Module_ID" Type="Int32" Nullable="false" />
+          <Property Name="GradeDescription" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
+          <Property Name="GradeType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__GradeType__Modul__68687968" FromRole="GradeType" ToRole="Module" />
         </EntityType>
         <EntityType Name="LearnGoal">
           <Key>
@@ -971,7 +976,6 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             <PropertyRef Name="Workform_ID" />
           </Key>
           <Property Name="Module_ID" Type="Int32" Nullable="false" />
-          <Property Name="PrevModule_ID" Type="Int32" />
           <Property Name="Workform_ID" Type="Int32" Nullable="false" />
           <Property Name="Frequency" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Workload" Type="Int32" Nullable="false" />
@@ -996,16 +1000,32 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <Property Name="Account_ID" Type="Int32" />
           <NavigationProperty Name="Account" Relationship="Project_WatervalModel.FK_dbo_Module_dbo_Account_Account_ID" FromRole="Module" ToRole="Account" />
           <NavigationProperty Name="AssignmentCode" Relationship="Project_WatervalModel.FK__Assignmen__Modul__24B26D99" FromRole="Module" ToRole="AssignmentCode" />
+          <NavigationProperty Name="GradeType" Relationship="Project_WatervalModel.FK__GradeType__Modul__68687968" FromRole="Module" ToRole="GradeType" />
           <NavigationProperty Name="Level" Relationship="Project_WatervalModel.FK__Level__Module_ID__1EF99443" FromRole="Module" ToRole="Level" />
           <NavigationProperty Name="ModelWithWorkform" Relationship="Project_WatervalModel.FK__ModelWith__Modul__46136164" FromRole="Module" ToRole="ModelWithWorkform" />
-          <NavigationProperty Name="GradeType" Relationship="Project_WatervalModel.FK__GradeType__Modul__68687968" FromRole="Module" ToRole="GradeType" />
+          <NavigationProperty Name="ModuleStudyPhasingBlock" Relationship="Project_WatervalModel.FK__ModuleStu__Modul__72E607DB" FromRole="Module" ToRole="ModuleStudyPhasingBlock" />
           <NavigationProperty Name="WeekSchedule" Relationship="Project_WatervalModel.FK__WeekSched__Modul__6D2D2E85" FromRole="Module" ToRole="WeekSchedule" />
-          <NavigationProperty Name="Program" Relationship="Project_WatervalModel.ModelWithProgram" FromRole="Module" ToRole="Program" />
           <NavigationProperty Name="Study" Relationship="Project_WatervalModel.ModelWithStudy" FromRole="Module" ToRole="Study" />
           <NavigationProperty Name="LearnGoal" Relationship="Project_WatervalModel.ModuleWithLearnGoal" FromRole="Module" ToRole="LearnGoal" />
           <NavigationProperty Name="LearningTool" Relationship="Project_WatervalModel.ModuleWithLearningTool" FromRole="Module" ToRole="LearningTool" />
           <NavigationProperty Name="LearnLine" Relationship="Project_WatervalModel.ModuleWithLearnLine" FromRole="Module" ToRole="LearnLine" />
           <NavigationProperty Name="Theme" Relationship="Project_WatervalModel.ModuleWithTheme" FromRole="Module" ToRole="Theme" />
+        </EntityType>
+        <EntityType Name="ModuleStudyPhasingBlock">
+          <Key>
+            <PropertyRef Name="Module_ID" />
+            <PropertyRef Name="Study_ID" />
+            <PropertyRef Name="Phasing_ID" />
+            <PropertyRef Name="Block_ID" />
+          </Key>
+          <Property Name="Module_ID" Type="Int32" Nullable="false" />
+          <Property Name="Study_ID" Type="Int32" Nullable="false" />
+          <Property Name="Phasing_ID" Type="Int32" Nullable="false" />
+          <Property Name="Block_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Block" Relationship="Project_WatervalModel.FK__ModuleStu__Block__75C27486" FromRole="ModuleStudyPhasingBlock" ToRole="Block" />
+          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__ModuleStu__Modul__72E607DB" FromRole="ModuleStudyPhasingBlock" ToRole="Module" />
+          <NavigationProperty Name="Phasing" Relationship="Project_WatervalModel.FK__ModuleStu__Phasi__74CE504D" FromRole="ModuleStudyPhasingBlock" ToRole="Phasing" />
+          <NavigationProperty Name="Study" Relationship="Project_WatervalModel.FK__ModuleStu__Study__73DA2C14" FromRole="ModuleStudyPhasingBlock" ToRole="Study" />
         </EntityType>
         <EntityType Name="Phasing">
           <Key>
@@ -1015,8 +1035,7 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Block" Relationship="Project_WatervalModel.PhasingWithBlock" FromRole="Phasing" ToRole="Block" />
-          <NavigationProperty Name="Study" Relationship="Project_WatervalModel.StudyWithPhasing" FromRole="Phasing" ToRole="Study" />
+          <NavigationProperty Name="ModuleStudyPhasingBlock" Relationship="Project_WatervalModel.FK__ModuleStu__Phasi__74CE504D" FromRole="Phasing" ToRole="ModuleStudyPhasingBlock" />
         </EntityType>
         <EntityType Name="Program">
           <Key>
@@ -1026,7 +1045,7 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <Property Name="Cohort" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.ModelWithProgram" FromRole="Program" ToRole="Module" />
+          <NavigationProperty Name="Study" Relationship="Project_WatervalModel.ProgramWithStudy" FromRole="Program" ToRole="Study" />
         </EntityType>
         <EntityType Name="Study">
           <Key>
@@ -1039,8 +1058,9 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <Property Name="level" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ModuleStudyPhasingBlock" Relationship="Project_WatervalModel.FK__ModuleStu__Study__73DA2C14" FromRole="Study" ToRole="ModuleStudyPhasingBlock" />
           <NavigationProperty Name="Module" Relationship="Project_WatervalModel.ModelWithStudy" FromRole="Study" ToRole="Module" />
-          <NavigationProperty Name="Phasing" Relationship="Project_WatervalModel.StudyWithPhasing" FromRole="Study" ToRole="Phasing" />
+          <NavigationProperty Name="Program" Relationship="Project_WatervalModel.ProgramWithStudy" FromRole="Study" ToRole="Program" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1066,14 +1086,15 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
         </EntityType>
         <EntityType Name="WeekSchedule">
           <Key>
-            <PropertyRef Name="WeekNr" />
+            <PropertyRef Name="Weekschedule_ID" />
           </Key>
           <Property Name="Module_ID" Type="Int32" Nullable="false" />
-          <Property Name="WeekNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Weekschedule_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PrevModule_ID" Type="Int32" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
+          <Property Name="WeekNr" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__WeekSched__Modul__6D2D2E85" FromRole="WeekSchedule" ToRole="Module" />
         </EntityType>
         <EntityType Name="Workform">
@@ -1086,18 +1107,6 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <Property Name="isDeleted" Type="Boolean" Nullable="false" />
           <Property Name="DeleteDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="ModelWithWorkform" Relationship="Project_WatervalModel.FK__ModelWith__Workf__451F3D2B" FromRole="Workform" ToRole="ModelWithWorkform" />
-        </EntityType>
-        <EntityType Name="GradeType">
-          <Key>
-            <PropertyRef Name="Module_ID" />
-            <PropertyRef Name="GradeDescription" />
-            <PropertyRef Name="isDeleted" />
-          </Key>
-          <Property Name="Module_ID" Type="Int32" Nullable="false" />
-          <Property Name="GradeDescription" Type="String" Nullable="false" MaxLength="900" FixedLength="false" Unicode="true" />
-          <Property Name="isDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="DeleteDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Module" Relationship="Project_WatervalModel.FK__GradeType__Modul__68687968" FromRole="GradeType" ToRole="Module" />
         </EntityType>
         <Association Name="FK_dbo_Account_dbo_AccountRole_Role_ID">
           <End Type="Project_WatervalModel.AccountRole" Role="AccountRole" Multiplicity="1" />
@@ -1135,6 +1144,18 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ModuleStu__Block__75C27486">
+          <End Type="Project_WatervalModel.Block" Role="Block" Multiplicity="1" />
+          <End Type="Project_WatervalModel.ModuleStudyPhasingBlock" Role="ModuleStudyPhasingBlock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Block">
+              <PropertyRef Name="Block_ID" />
+            </Principal>
+            <Dependent Role="ModuleStudyPhasingBlock">
+              <PropertyRef Name="Block_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Level__Competenc__1E05700A">
           <End Type="Project_WatervalModel.Competence" Role="Competence" Multiplicity="1" />
           <End Type="Project_WatervalModel.Level" Role="Level" Multiplicity="*" />
@@ -1144,6 +1165,18 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             </Principal>
             <Dependent Role="Level">
               <PropertyRef Name="Competence_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GradeType__Modul__68687968">
+          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
+          <End Type="Project_WatervalModel.GradeType" Role="GradeType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Module_ID" />
+            </Principal>
+            <Dependent Role="GradeType">
+              <PropertyRef Name="Module_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1183,14 +1216,14 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GradeType__Modul__68687968">
+        <Association Name="FK__ModuleStu__Modul__72E607DB">
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="1" />
-          <End Type="Project_WatervalModel.GradeType" Role="GradeType" Multiplicity="*" />
+          <End Type="Project_WatervalModel.ModuleStudyPhasingBlock" Role="ModuleStudyPhasingBlock" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Module">
               <PropertyRef Name="Module_ID" />
             </Principal>
-            <Dependent Role="GradeType">
+            <Dependent Role="ModuleStudyPhasingBlock">
               <PropertyRef Name="Module_ID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1207,13 +1240,33 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ModuleStu__Phasi__74CE504D">
+          <End Type="Project_WatervalModel.Phasing" Role="Phasing" Multiplicity="1" />
+          <End Type="Project_WatervalModel.ModuleStudyPhasingBlock" Role="ModuleStudyPhasingBlock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phasing">
+              <PropertyRef Name="Phasing_ID" />
+            </Principal>
+            <Dependent Role="ModuleStudyPhasingBlock">
+              <PropertyRef Name="Phasing_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModuleStu__Study__73DA2C14">
+          <End Type="Project_WatervalModel.Study" Role="Study" Multiplicity="1" />
+          <End Type="Project_WatervalModel.ModuleStudyPhasingBlock" Role="ModuleStudyPhasingBlock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Study">
+              <PropertyRef Name="Study_ID" />
+            </Principal>
+            <Dependent Role="ModuleStudyPhasingBlock">
+              <PropertyRef Name="Study_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="AccountRoleWithAccountLaw">
           <End Type="Project_WatervalModel.AccountLaw" Role="AccountLaw" Multiplicity="*" />
           <End Type="Project_WatervalModel.AccountRole" Role="AccountRole" Multiplicity="*" />
-        </Association>
-        <Association Name="ModelWithProgram">
-          <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="*" />
-          <End Type="Project_WatervalModel.Program" Role="Program" Multiplicity="*" />
         </Association>
         <Association Name="ModelWithStudy">
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="*" />
@@ -1235,12 +1288,8 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <End Type="Project_WatervalModel.Module" Role="Module" Multiplicity="*" />
           <End Type="Project_WatervalModel.Theme" Role="Theme" Multiplicity="*" />
         </Association>
-        <Association Name="PhasingWithBlock">
-          <End Type="Project_WatervalModel.Block" Role="Block" Multiplicity="*" />
-          <End Type="Project_WatervalModel.Phasing" Role="Phasing" Multiplicity="*" />
-        </Association>
-        <Association Name="StudyWithPhasing">
-          <End Type="Project_WatervalModel.Phasing" Role="Phasing" Multiplicity="*" />
+        <Association Name="ProgramWithStudy">
+          <End Type="Project_WatervalModel.Program" Role="Program" Multiplicity="*" />
           <End Type="Project_WatervalModel.Study" Role="Study" Multiplicity="*" />
         </Association>
         </Schema>
@@ -1312,6 +1361,17 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="GradeType">
+            <EntityTypeMapping TypeName="Project_WatervalModel.GradeType">
+              <MappingFragment StoreEntitySet="GradeType">
+                <ScalarProperty Name="GradeType_ID" ColumnName="GradeType_ID" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="GradeDescription" ColumnName="GradeDescription" />
+                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="LearnGoal">
             <EntityTypeMapping TypeName="Project_WatervalModel.LearnGoal">
               <MappingFragment StoreEntitySet="LearnGoal">
@@ -1362,7 +1422,6 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
                 <ScalarProperty Name="Workload" ColumnName="Workload" />
                 <ScalarProperty Name="Frequency" ColumnName="Frequency" />
                 <ScalarProperty Name="Workform_ID" ColumnName="Workform_ID" />
-                <ScalarProperty Name="PrevModule_ID" ColumnName="PrevModule_ID" />
                 <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1380,6 +1439,16 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
                 <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="PrevModule_ID" ColumnName="PrevModule_ID" />
+                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleStudyPhasingBlock">
+            <EntityTypeMapping TypeName="Project_WatervalModel.ModuleStudyPhasingBlock">
+              <MappingFragment StoreEntitySet="ModuleStudyPhasingBlock">
+                <ScalarProperty Name="Block_ID" ColumnName="Block_ID" />
+                <ScalarProperty Name="Phasing_ID" ColumnName="Phasing_ID" />
+                <ScalarProperty Name="Study_ID" ColumnName="Study_ID" />
                 <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1443,11 +1512,12 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
           <EntitySetMapping Name="WeekSchedule">
             <EntityTypeMapping TypeName="Project_WatervalModel.WeekSchedule">
               <MappingFragment StoreEntitySet="WeekSchedule">
+                <ScalarProperty Name="WeekNr" ColumnName="WeekNr" />
                 <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PrevModule_ID" ColumnName="PrevModule_ID" />
-                <ScalarProperty Name="WeekNr" ColumnName="WeekNr" />
+                <ScalarProperty Name="Weekschedule_ID" ColumnName="Weekschedule_ID" />
                 <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1463,30 +1533,12 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GradeType">
-            <EntityTypeMapping TypeName="Project_WatervalModel.GradeType">
-              <MappingFragment StoreEntitySet="GradeType">
-                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
-                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
-                <ScalarProperty Name="GradeDescription" ColumnName="GradeDescription" />
-                <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <AssociationSetMapping Name="AccountRoleWithAccountLaw" TypeName="Project_WatervalModel.AccountRoleWithAccountLaw" StoreEntitySet="AccountRoleWithAccountLaw">
             <EndProperty Name="AccountRole">
               <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
             </EndProperty>
             <EndProperty Name="AccountLaw">
               <ScalarProperty Name="Law_ID" ColumnName="Law_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="ModelWithProgram" TypeName="Project_WatervalModel.ModelWithProgram" StoreEntitySet="ModelWithProgram">
-            <EndProperty Name="Program">
-              <ScalarProperty Name="Program_ID" ColumnName="Program_ID" />
-            </EndProperty>
-            <EndProperty Name="Module">
-              <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="ModelWithStudy" TypeName="Project_WatervalModel.ModelWithStudy" StoreEntitySet="ModelWithStudy">
@@ -1529,20 +1581,12 @@ warning 6002: The table/view '42IN06SOg.dbo.GradeType' does not have a primary k
               <ScalarProperty Name="Module_ID" ColumnName="Module_ID" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="PhasingWithBlock" TypeName="Project_WatervalModel.PhasingWithBlock" StoreEntitySet="PhasingWithBlock">
-            <EndProperty Name="Phasing">
-              <ScalarProperty Name="Phasing_ID" ColumnName="Phasing_ID" />
-            </EndProperty>
-            <EndProperty Name="Block">
-              <ScalarProperty Name="Block_ID" ColumnName="Block_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="StudyWithPhasing" TypeName="Project_WatervalModel.StudyWithPhasing" StoreEntitySet="StudyWithPhasing">
+          <AssociationSetMapping Name="ProgramWithStudy" TypeName="Project_WatervalModel.ProgramWithStudy" StoreEntitySet="ProgramWithStudy">
             <EndProperty Name="Study">
               <ScalarProperty Name="Study_ID" ColumnName="Study_ID" />
             </EndProperty>
-            <EndProperty Name="Phasing">
-              <ScalarProperty Name="Phasing_ID" ColumnName="Phasing_ID" />
+            <EndProperty Name="Program">
+              <ScalarProperty Name="Program_ID" ColumnName="Program_ID" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

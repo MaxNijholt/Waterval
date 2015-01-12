@@ -15,7 +15,6 @@ namespace DomainModel.Models
     public partial class ModelWithWorkform
     {
         public int Module_ID { get; set; }
-        public Nullable<int> PrevModule_ID { get; set; }
         public int Workform_ID { get; set; }
         public string Frequency { get; set; }
         public int Workload { get; set; }
