@@ -160,8 +160,16 @@ namespace MvcApplication1.Controllers
                 //We go back to the index.
                 return RedirectToAction("Index");
             }
-            catch
+            catch (DbEntityValidationException dbEx)
             {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+
 
                 foreach (var item in module.ModelWithWorkform)
                     item.Workform = workformRepository.Get(item.Workform_ID);
@@ -324,7 +332,7 @@ namespace MvcApplication1.Controllers
             model.LearningTool = module.LearningTool;
             model.LearnGoal = module.LearnGoal;
             model.GradeType = module.GradeType;
-            model.AssignmentCode = module.AssignmentCode; 
+            model.AssignmentCode = module.AssignmentCode;
 
             @ViewBag.LearnLineList = GetLearnLines(module);
             @ViewBag.ThemeList = GetThemes(module);
@@ -395,7 +403,7 @@ namespace MvcApplication1.Controllers
                     item.Module = moduleRepository.Get(item.Module_ID);
                 foreach (var item in module.Level)
                     item.Competence = competenceRepository.Get(item.Competence_ID);
-                
+
 
                 return View(module);
             }
@@ -525,7 +533,7 @@ namespace MvcApplication1.Controllers
 
             if (module != null)
                 foreach (AssignmentCode mwf in module.AssignmentCode)
-                     assignmentcodes.Remove(assignmentcodes.Where(b => b.Module_ID == mwf.Module_ID).FirstOrDefault());
+                    assignmentcodes.Remove(assignmentcodes.Where(b => b.Module_ID == mwf.Module_ID).FirstOrDefault());
 
             return assignmentcodes.Where(m => m.isDeleted == false).ToList();
         }
