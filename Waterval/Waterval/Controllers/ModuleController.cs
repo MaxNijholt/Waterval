@@ -109,6 +109,9 @@ namespace MvcApplication1.Controllers
 
             @ViewBag.WorkformList = GetWorkForms(module);
             @ViewBag.GradeTypes = GetGradeTypes(module);
+            @ViewBag.WeekSchedule = GetWeekschedule(module);
+            @ViewBag.AssignmentCode = GetAssignmentcode(module);
+
 
             return View(module);
         }
@@ -126,7 +129,8 @@ namespace MvcApplication1.Controllers
             //@ViewBag.StudyList = GetStudy(module);
             @ViewBag.WorkformList = GetWorkForms(module);
             @ViewBag.GradeTypes = GetGradeTypes(module);
-
+            @ViewBag.WeekSchedule = GetWeekschedule(module);
+            @ViewBag.AssignmentCode = GetAssignmentcode(module);
             try
             {
 
@@ -163,7 +167,10 @@ namespace MvcApplication1.Controllers
                     item.Workform = workformRepository.Get(item.Workform_ID);
                 foreach (var item in module.GradeType)
                     item.Module = moduleRepository.Get(item.Module_ID);
-
+                foreach (var item in module.WeekSchedule)
+                    item.Module = moduleRepository.Get(item.Module_ID);
+                foreach (var item in module.AssignmentCode)
+                    item.Module = moduleRepository.Get(item.Module_ID);
                 foreach (var item in module.Level)
                     item.Competence = competenceRepository.Get(item.Competence_ID);
 
@@ -205,6 +212,8 @@ namespace MvcApplication1.Controllers
             //@ViewBag.StudyList = GetStudy(module);
             @ViewBag.WorkformList = GetWorkForms(module);
             @ViewBag.GradeTypes = GetGradeTypes(module);
+            @ViewBag.WeekSchedule = GetWeekschedule(module);
+            @ViewBag.AssignmentCode = GetAssignmentcode(module);
 
             @ViewBag.NewID = newVersion(id);
 
@@ -226,6 +235,8 @@ namespace MvcApplication1.Controllers
             //@ViewBag.StudyList = GetStudy(module);
             @ViewBag.WorkformList = GetWorkForms(module);
             @ViewBag.GradeTypes = GetGradeTypes(module);
+            @ViewBag.WeekSchedule = GetWeekschedule(module);
+            @ViewBag.AssignmentCode = GetAssignmentcode(module);
 
             foreach (var item in module.ModelWithWorkform)
                 item.Workform = workformRepository.Get(item.Workform_ID);
@@ -244,7 +255,8 @@ namespace MvcApplication1.Controllers
                 //@ViewBag.StudyList = GetStudy(module).Where(m => m.isDeleted = false);
                 @ViewBag.WorkformList = GetWorkForms(module).Where(m => m.isDeleted = false);
                 @ViewBag.GradeTypes = GetGradeTypes(module).Where(m => m.isDeleted = false);
-
+                @ViewBag.WeekSchedule = GetWeekschedule(module).Where(m => m.isDeleted = false);
+                @ViewBag.AssignmentCode = GetAssignmentcode(module).Where(m => m.isDeleted = false);
 
 
                 //if we update the model and somethign went wrong we send an error messge back
@@ -255,7 +267,9 @@ namespace MvcApplication1.Controllers
                 //We delete all of the levels from this competence. 
                 moduleRepository.CompentenceAndModulesDelete(module.Module_ID);
                 moduleRepository.WorkformAndModulesDelete(module.Module_ID);
-
+                moduleRepository.AssignmentcodeAndModulesDelete(module.Module_ID);
+                moduleRepository.WeekSchedulesAndModulesDelete(module.Module_ID);
+                moduleRepository.GradetypesAndModulesDelete(module.Module_ID);
 
                 foreach (var item in module.Level)
                     moduleRepository.CompentenceAndModules(id, item.Competence_ID, item.Level1);
@@ -321,6 +335,9 @@ namespace MvcApplication1.Controllers
             //@ViewBag.StudyList = GetStudy(module);
             @ViewBag.WorkformList = GetWorkForms(module);
             @ViewBag.GradeTypes = GetGradeTypes(module);
+            @ViewBag.WeekSchedule = GetWeekschedule(module);
+            @ViewBag.AssignmentCode = GetAssignmentcode(module);
+
 
             @ViewBag.NewID = newVersion(id);
 
@@ -376,9 +393,9 @@ namespace MvcApplication1.Controllers
                     item.Workform = workformRepository.Get(item.Workform_ID);
                 foreach (var item in module.GradeType)
                     item.Module = moduleRepository.Get(item.Module_ID);
-
                 foreach (var item in module.Level)
                     item.Competence = competenceRepository.Get(item.Competence_ID);
+                
 
                 return View(module);
             }
@@ -489,6 +506,28 @@ namespace MvcApplication1.Controllers
                     gradetypes.Remove(gradetypes.Where(b => b.Module_ID == mwf.Module_ID).FirstOrDefault());
 
             return gradetypes.Where(m => m.isDeleted == false).ToList();
+        }
+
+        private List<Module> GetWeekschedule(Module module)
+        {
+            List<Module> weekschedules = moduleRepository.GetAll();
+
+            if (module != null)
+                foreach (WeekSchedule mwf in module.WeekSchedule)
+                    weekschedules.Remove(weekschedules.Where(b => b.Module_ID == mwf.Module_ID).FirstOrDefault());
+
+            return weekschedules.Where(m => m.isDeleted == false).ToList();
+        }
+
+        private List<Module> GetAssignmentcode(Module module)
+        {
+            List<Module> assignmentcodes = moduleRepository.GetAll();
+
+            if (module != null)
+                foreach (AssignmentCode mwf in module.AssignmentCode)
+                     assignmentcodes.Remove(assignmentcodes.Where(b => b.Module_ID == mwf.Module_ID).FirstOrDefault());
+
+            return assignmentcodes.Where(m => m.isDeleted == false).ToList();
         }
 
     }

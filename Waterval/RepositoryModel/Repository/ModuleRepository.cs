@@ -21,6 +21,7 @@ namespace RepositoryModel.Repository
 
         public List<DomainModel.Models.Module> GetAll()
         {
+         
             return dbContext.Module.ToList();
         }
 
@@ -224,9 +225,9 @@ namespace RepositoryModel.Repository
             dbContext.SaveChanges();
         }
 
-        public void GradetypesAndModulesDelete(string description)
+        public void GradetypesAndModulesDelete(int module_id)
         {
-            var itemsToDelete = dbContext.GradeType.Where(x => x.GradeDescription == description );
+            var itemsToDelete = dbContext.GradeType.Where(x => x.Module_ID == module_id);
             dbContext.GradeType.RemoveRange(itemsToDelete);
             dbContext.SaveChanges();
         }
@@ -246,9 +247,9 @@ namespace RepositoryModel.Repository
             dbContext.SaveChanges();
         }
 
-        public void WeekSchedulesAndModulesDelete(string description)
+        public void WeekSchedulesAndModulesDelete(int module_id)
         {
-            var itemsToDelete = dbContext.WeekSchedule.Where(x => x.Description == description);
+            var itemsToDelete = dbContext.WeekSchedule.Where(x => x.Module_ID == module_id);
             dbContext.WeekSchedule.RemoveRange(itemsToDelete);
             dbContext.SaveChanges();
         }
@@ -268,9 +269,9 @@ namespace RepositoryModel.Repository
             dbContext.SaveChanges();
         }
 
-        public void AssignmentcodeAndModulesDelete(string description)
+        public void AssignmentcodeAndModulesDelete(int module_id)
         {
-            var itemsToDelete = dbContext.AssignmentCode.Where(x => x.Description == description);
+            var itemsToDelete = dbContext.AssignmentCode.Where(x => x.Module_ID == module_id);
             dbContext.AssignmentCode.RemoveRange(itemsToDelete);
             dbContext.SaveChanges();
         }
