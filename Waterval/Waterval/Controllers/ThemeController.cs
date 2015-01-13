@@ -13,9 +13,11 @@ namespace Waterval.Controllers
 	{
 		private ThemeRepository themeRepository;
 		private SearchRepository search;
+        private ModuleRepository moduleRepository;
 		public ThemeController()
 		{
 			themeRepository = new ThemeRepository();
+            moduleRepository = new ModuleRepository();
 			search = new SearchRepository( );
 		}
 
@@ -58,6 +60,9 @@ namespace Waterval.Controllers
 		public ActionResult Create()
 		{
 			Theme theme = new Theme();
+            @ViewBag.ModuleList = GetModules(theme);
+
+
 			return View(theme);
 		}
 		[HttpPost]
@@ -74,15 +79,19 @@ namespace Waterval.Controllers
 			}
 		}
 
+       
+
 		public ActionResult Edit(int id)
 		{
 			var model = themeRepository.Get(id);
+            @ViewBag.ModuleList = GetModules(model);
 			return View(model);
 		}
 
 		[HttpPost]
 		public ActionResult Edit(int id, Theme theme)
 		{
+            @ViewBag.ModuleList = GetModules(theme);
 			try
 			{
 				if(themeRepository.Update(theme) == null)
@@ -102,5 +111,16 @@ namespace Waterval.Controllers
 			themeRepository.Delete(theme.Theme_ID);
 			return View();
 		}
+
+        private List<Module> GetModules(Theme theme)
+        {
+            List<Module> modules = moduleRepository.GetAll();
+
+        /*    if (theme != null && theme.Module != null)
+                foreach (Module modul in theme.Module)
+                    modules.Remove(modules.Where(b => b.Module_ID == modul.Module_ID).First());
+            */
+            return modules.Where(m => m.isDeleted == false).ToList();
+        }
 	}
 }

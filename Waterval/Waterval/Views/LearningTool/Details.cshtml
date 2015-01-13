@@ -20,6 +20,29 @@
         </tr>
     </table>
 
+    <p>Word gebruikt Bij modules: </p>
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <tr>
+                <th>Vakcode</th>
+                <th>Module</th>
+                <th>Omschrijving</th>
+            </tr>
+        </tbody>
+        @foreach (var item in Model.Module)
+        {
+            <tr>
+                <td>@Html.ActionLink(@item.CourseCode.ToString(), "Details", "Module", new { id = item.Module_ID }, null)</td>
+                <td>@item.Title</td>
+                <td>@item.Definition_Short</td>
+            </tr>
+        }
+    </table>
+
+
+    
+   
+
     <hr />
 
     <p>

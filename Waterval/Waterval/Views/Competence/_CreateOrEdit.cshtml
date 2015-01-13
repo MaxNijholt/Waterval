@@ -121,17 +121,17 @@
                 {
                     if (item.Module.isDeleted) { continue; }
                     <tr id="@item.Module_ID">
-                     <td>
-                            @item.Module.CourseCode <input type="text" id="@item.Module_ID" class="hidden" />
+                        <td>
+                      @Html.ActionLink(item.Module.CourseCode.ToString(), "Details", "Module", new { id = item.Module_ID }, null) <input type="text" id="@item.Module_ID" class="form-control hidden" />
                     </td>
                     <td>@item.Module.Title</td>
                     <td>@item.Module.Definition_Short</td>
                         @{string test = "Level" + item.Module_ID;}
                     <td><input type="number" class="form-control" id="Level[@index].Level1" name="Level[@index].Level1" value="@item.Level1" />
-                        <input type="number" id="Level[@index].Module_ID" name="Level[@index].Module_ID" class="form-control" value="@item.Module_ID" />
+                        <input type="number" id="Level[@index].Module_ID" name="Level[@index].Module_ID" class="form-control hidden" value="@item.Module_ID" />
                         
                         </td>
-                    <td><input type="button" value="Verwijderen" id="btn_deleteMod" data-id="@item.Module_ID" class="btn btn-danger" />
+                    <td><input type="button" value="-" id="btn_deleteMod" data-id="@item.Module_ID" class="btn btn-avans" />
                         @{index++; }
                 </tr>
                 }
@@ -162,7 +162,10 @@
                     @foreach (Module item in @ViewBag.ModuleList)
                     {
                         <tr id="@item.Module_ID">
-                            <td id="CourseCode">@item.CourseCode</td>
+
+
+                            <td id="CourseCode">
+                           @Html.ActionLink(@item.CourseCode.ToString(), "Details", "Module", new { id = item.Module_ID }, null)</td>
                             <td>@item.Title</td>
                             <td>@item.Definition_Short</td>
                             <td><input type="button" value="+" id="btn_addMod" data-id="@item.Module_ID" class="btn btn-avans" /></td>

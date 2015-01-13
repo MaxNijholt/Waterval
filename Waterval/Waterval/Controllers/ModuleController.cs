@@ -47,7 +47,7 @@ namespace MvcApplication1.Controllers
 
         }
 
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10, int id=0)
         {
 
             ViewBag.CurrentSort = sortOrder;
@@ -65,7 +65,7 @@ namespace MvcApplication1.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var modules = moduleRepository.GetAll();
+            var modules = (id ==0) ? moduleRepository.GetAll(): moduleRepository.GetWithCompetence(id) ;
             if (!String.IsNullOrEmpty(searchString))
             {
                 modules = search.GetModulesWith(searchString);

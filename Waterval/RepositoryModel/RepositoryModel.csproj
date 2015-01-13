@@ -42,6 +42,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Rotativa">
+      <HintPath>..\packages\Rotativa.1.6.1\lib\net40\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -59,7 +62,9 @@
     <Compile Include="DummyRepository\DPhasingRepository.cs" />
     <Compile Include="IRepository\IGradeTypeRepository.cs" />
     <Compile Include="IRepository\IPhasingRepository.cs" />
+    <Compile Include="IRepository\IProgramRepository.cs" />
     <Compile Include="IRepository\ISearchRepository.cs" />
+    <Compile Include="IRepository\IStudyRepository.cs" />
     <Compile Include="IRepository\IThemeRepository.cs" />
     <Compile Include="IRepository\IWorkformRepository.cs" />
     <Compile Include="IRepository\ICompetenceRepository.cs" />
@@ -74,6 +79,8 @@
     <Compile Include="Repository\LearningToolRepository.cs" />
     <Compile Include="Repository\LearnLineRepository.cs" />
     <Compile Include="Repository\ModuleRepository.cs" />
+    <Compile Include="Repository\ProgramRepository.cs" />
+    <Compile Include="Repository\StudyRepository.cs" />
     <Compile Include="Repository\ThemeRepository.cs" />
     <Compile Include="Repository\PhasingRepository.cs" />
     <Compile Include="Repository\SearchRepository.cs" />
@@ -87,9 +94,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="App_Browsers\qt.browser" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="NuGet.exe" />
+    <Content Include="Rotativa\libeay32.dll" />
+    <Content Include="Rotativa\libgcc_s_dw2-1.dll" />
+    <Content Include="Rotativa\mingwm10.dll" />
+    <Content Include="Rotativa\README.txt" />
+    <Content Include="Rotativa\ssleay32.dll" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

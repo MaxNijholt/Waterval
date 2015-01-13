@@ -26,10 +26,37 @@ namespace RepositoryModel.Repository
 		}
 		public DomainModel.Models.Theme Create(DomainModel.Models.Theme theme)
 		{
+            AddLinkingsTheme(theme);
 			dbContext.Theme.Add(theme);
 			dbContext.SaveChanges();
 			return theme;
 		}
+
+
+        public void AddLinkingsTheme(Theme theme)
+        {
+
+            List<Module> modules = new List<Module>();
+
+            for (int index = 0; index < theme.Module.Count; index++)
+            {
+                modules.Add(dbContext.Module.Find(theme.Module.ElementAt(index).Module_ID));
+            }
+
+            theme.Module = modules;
+
+        }
+
+        public void UpdateLinkingsTheme(Theme theme)
+        {
+
+            for (int index = 0; index < theme.Module.Count; index++)
+            {
+                theme.Module.Remove(dbContext.Module.Find(theme.Module.ElementAt(index).Module_ID));
+            }
+        }
+
+
 		public DomainModel.Models.Theme Update(DomainModel.Models.Theme update)
 		{
 			Theme theme = dbContext.Theme.SingleOrDefault(b => b.Theme_ID == update.Theme_ID);
@@ -38,6 +65,15 @@ namespace RepositoryModel.Repository
 
 			theme.Definition = update.Definition;
 			theme.Title = update.Title;
+
+            if (theme.Module.Count == 0 && update.Module.Count > 0)
+            {
+                AddLinkingsTheme(update);
+                theme.Module = update.Module;
+            }
+            else
+                UpdateLinkingsTheme(theme);
+
 			dbContext.SaveChanges();
 			return theme;
 		}

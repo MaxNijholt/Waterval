@@ -276,7 +276,12 @@ namespace RepositoryModel.Repository
             dbContext.SaveChanges();
         }
 
-    
 
+
+
+        public List<Module> GetWithCompetence(int id)
+        {
+            return dbContext.Level.Where(c => c.Competence_ID == id).Select(a => a.Module).ToList();
+        }
     }
 }

@@ -116,6 +116,9 @@
     <Reference Include="RestSharp">
       <HintPath>..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
     </Reference>
+    <Reference Include="Rotativa">
+      <HintPath>..\packages\Rotativa.1.6.1\lib\net40\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -194,6 +197,8 @@
     <Compile Include="Controllers\LearningToolController.cs" />
     <Compile Include="Controllers\LearnLineController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="Controllers\ProgramController.cs" />
+    <Compile Include="Controllers\StudyController.cs" />
     <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Controllers\PhasingController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -230,9 +235,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Resources\av-logo.png" />
     <None Include="Resources\Avans_logo [Omgezet].png" />
     <None Include="Resources\logo.png" />
+    <Content Include="NuGet.exe" />
+    <Content Include="Rotativa\libeay32.dll" />
+    <Content Include="Rotativa\libgcc_s_dw2-1.dll" />
+    <Content Include="Rotativa\mingwm10.dll" />
+    <Content Include="Rotativa\README.txt" />
+    <Content Include="Rotativa\ssleay32.dll" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -254,6 +267,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ThemeScript.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -339,6 +353,16 @@
     <Content Include="Views\Module\_CreateOrEdit.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Study\Create.cshtml" />
+    <Content Include="Views\Study\Details.cshtml" />
+    <Content Include="Views\Study\Edit.cshtml" />
+    <Content Include="Views\Study\Index.cshtml" />
+    <Content Include="Views\Study\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Program\Create.cshtml" />
+    <Content Include="Views\Program\Details.cshtml" />
+    <Content Include="Views\Program\Edit.cshtml" />
+    <Content Include="Views\Program\Index.cshtml" />
+    <Content Include="Views\Program\_CreateOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
