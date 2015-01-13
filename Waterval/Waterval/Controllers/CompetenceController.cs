@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace Waterval.Controllers
 {
@@ -13,7 +14,8 @@ namespace Waterval.Controllers
     {
         // GET: /Compententie/
         private CompetenceRepository compenteceRepository;
-        private ModuleRepository moduleRepository;
+		private ModuleRepository moduleRepository;
+		private SearchRepository search;
 
         /// <summary>
         /// Initialize this controller
@@ -21,17 +23,48 @@ namespace Waterval.Controllers
         public CompetenceController()
         {
             compenteceRepository = new CompetenceRepository();
-            moduleRepository = new ModuleRepository();
+			moduleRepository = new ModuleRepository( );
+			search = new SearchRepository( );
         }
 
         /// <summary>
         /// Return a view with a collection of the competence in the database that are not deleted.
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index()
-        {
-            return View(compenteceRepository.GetAll().Where(b => b.isDeleted == false));
-        }
+		//public ActionResult Index()
+		//{
+		//	return View(compenteceRepository.GetAll().Where(b => b.isDeleted == false));
+		//}
+
+		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10 ) {
+			ViewBag.CurrentSort = sortOrder;
+			ViewBag.ResultAmount = pagesize;
+			ViewBag.NameSortParm = String.IsNullOrEmpty( sortOrder ) ? "Titel" : "";
+
+			if ( searchString != null ) {
+				page = 1;
+			} else {
+				searchString = currentFilter;
+			}
+
+			ViewBag.CurrentFilter = searchString;
+
+			var competences = this.compenteceRepository.GetAll( ).Where( m => m.isDeleted == false );
+			if ( !String.IsNullOrEmpty( searchString ) ) {
+				competences = search.GetCompetencesWith( searchString );
+			}
+			switch ( sortOrder ) {
+				case "Titel":
+				competences = competences.OrderBy( b => b.Title ).ToList( );
+				break;
+				default:
+				competences = competences.OrderByDescending( b => b.Title ).ToList( );
+				break;
+			}
+			int pageSize = pagesize;
+			int pageNumber = ( page ?? 1 );
+			return View( competences.ToPagedList( pageNumber, pageSize ) );
+		}
 
         /// <summary>
         //Creates a view with a competence that contains also of of the modules.

@@ -8,8 +8,8 @@
 <h2>Competentie aanpassen: @Model.Title</h2>
 
 @using (Html.BeginForm("Edit", "Competence", new { ReturnUrl = ViewBag.ReturnUrl },
-            FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
-{
+            FormMethod.Post, new { @class = "form-horizontal", @role = "form" })) {
+    ViewBag.WhatAmI = "Create";
     @Html.ValidationSummary(true)
     <fieldset>
 

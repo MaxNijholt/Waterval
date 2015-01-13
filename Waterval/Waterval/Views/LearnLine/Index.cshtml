@@ -9,13 +9,17 @@
 <div class="container">
     <h2>Leerlijnen</h2>
     @using ( Html.BeginForm( "Index", "LearnLine", FormMethod.Get ) ) {
-        <p>
-            Zoeken op Titel: @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string )
-            <input type="submit" value="Search" />
-        </p>
+        
+    <div class="input-group input-group-lg">
+        @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in leerlijnen", @class = "form-control" } )
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+    </div>
     }
     <div class="container">
-        <input class="form-control" type="text" placeholder="Search..." id="searchTerm" onkeyup="doSearch('indexTable')" />
         <table class="table table-striped table-bordered" id="indexTable">
             <caption></caption>
             <thead>

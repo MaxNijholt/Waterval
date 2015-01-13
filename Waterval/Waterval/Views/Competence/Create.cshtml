@@ -6,6 +6,7 @@
 @using (Html.BeginForm("Create", "Competence", new { ReturnUrl = ViewBag.ReturnUrl },
             FormMethod.Post, new { @class = "form-horizontal", @role = "form", id = "MainForm" }))
 {
+    ViewBag.WhatAmI = "Create";
     
     @Html.ValidationSummary(true)
 

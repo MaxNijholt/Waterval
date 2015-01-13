@@ -18,7 +18,7 @@ namespace RepositoryModel.Repository
         }
         public List<DomainModel.Models.LearnLine> GetAll()
         {
-            return dbContext.LearnLine.Where(b => b.isDeleted == false).ToList();
+            return dbContext.LearnLine.ToList();
         }
 
         public DomainModel.Models.LearnLine Get(int learnLine_id)
