@@ -7,18 +7,18 @@
 
 <h2>Leerdoel aanpassen:</h2>
 
-@using (Html.BeginForm("Edit", "LearnGoal", new { ReturnUrl = ViewBag.ReturnUrl },
+@using (Html.BeginForm("ToNewVersion", "LearnGoal", new { ReturnUrl = ViewBag.ReturnUrl },
             FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
 {
     @Html.ValidationSummary(true)
     <fieldset>
 
         <legend></legend>
-        @Html.HiddenFor(model => model.LearnGoal_ID)
+        @Html.HiddenFor(model => model.PrevLearnGoal_ID)
         @Html.Partial("_CreateOrEdit", Model)
 
         <p>
-            <input type="submit" value="Leerdoel aanpassen" class="btn btn-success" /> |
+            <input type="submit" value="Nieuwer versie" class="btn btn-success" /> |
             @Html.ActionLink("Terug naar Index", "Index")
         </p>
     </fieldset>

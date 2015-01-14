@@ -50,5 +50,11 @@ namespace RepositoryModel.Repository
             dbContext.SaveChanges();
             return learnGoal;
         }
+
+        public LearnGoal GetNewVersion(int id)
+        {
+            LearnGoal newGoal = dbContext.LearnGoal.Where(c => c.PrevLearnGoal_ID == id).SingleOrDefault();
+            return newGoal;
+        }
     }
 }

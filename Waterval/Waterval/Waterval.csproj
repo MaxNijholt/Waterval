@@ -291,6 +291,7 @@
     <Content Include="Views\LearnGoal\Edit.cshtml" />
     <Content Include="Views\LearnGoal\_CreateOrEdit.cshtml" />
     <Content Include="Views\LearnGoal\ToNewVersion.cshtml" />
+    <Content Include="Views\LearnGoal\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
