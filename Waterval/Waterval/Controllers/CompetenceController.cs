@@ -269,7 +269,7 @@ namespace Waterval.Controllers
 
         public ActionResult GeneratePDF(int id)
         {
-            return new Rotativa.ActionAsPdf("Details", new {id = id });
+            return new Rotativa.ActionAsPdf("Details", new { id = id });
         }
 
     }
