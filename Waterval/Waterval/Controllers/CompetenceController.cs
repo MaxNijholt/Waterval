@@ -234,5 +234,10 @@ namespace Waterval.Controllers
             return (newer != null) ? newer.Competence_ID : -1;
         }
 
+        public ActionResult GeneratePDF(int id)
+        {
+            return new Rotativa.ActionAsPdf("Details", new {id = id });
+        }
+
     }
 }

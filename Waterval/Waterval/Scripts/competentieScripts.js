@@ -67,7 +67,7 @@ $(document).on('click', '#btn_addMod', function () {
     var hiddenfield = '<input type="number" id="Level[' + (index - 1) + '].Module_ID" name="Level[' + (index - 1) + '].Module_ID" class="form-control hidden" value=' + id + ' /></td>'
 
     //Add a delete button to the table, cause it looks nice....
-    var buttonDelete = '<td><input type="button" value="-" id="btn_deleteMod" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
+    var buttonDelete = '<td><input type="button" value="-" id="btn_deleteMod" data-id="' + id + '" class="btn btn-avans"/></td></tr>';
 
     //We add this row to the ModTable.
     $('#ModTable').append(coursecode + coursetitle + coursedefi + inputfield + hiddenfield + buttonDelete);

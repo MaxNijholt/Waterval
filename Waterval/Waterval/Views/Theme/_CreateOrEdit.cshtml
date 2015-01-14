@@ -20,4 +20,77 @@
 		@Html.ValidationMessageFor(model => model.Definition)
 	</div>
 </div>
+
+
+<br /><br />
+<table class="table table-bordered table-striped table-responsive" id="ModTable">
+    <thead>
+        <tr>
+            <th width="20%">Vakcode</th>
+            <th width="20%">Title</th>
+            <th width="50%">Omschrijving</th>
+          
+            <th>Verwijderen</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @{int index = 0;}
+        @foreach (var item in Model.Module)
+        {
+            if (item.isDeleted || item.Title == null) { continue; }
+            <tr id="@item.Module_ID">
+                <td>
+                    @Html.ActionLink(item.CourseCode.ToString(), "Details", "Module", new { id = item.Module_ID }, null) 
+                    <input type="number" id="Level[@index].Module_ID" name="Level[@index].Module_ID" class="form-control hidden" value="@item.Module_ID" />
+                </td>
+                <td>@item.Title</td>
+                <td>@item.Definition_Short</td>
+                <td>
+                    <input type="button" value="-" id="btn_deleteMod" data-id="@item.Module_ID" class="btn btn-avans" />
+                    @{index++; }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<input type="button" value="Module Toevoegen" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseMod">
+
+<br />
+<br />
+<div id="collapseMod" class="panel-collapse collapse open">
+
+    <input type="text" class="form-control" placeholder="Module..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTable')" style:size="10" />
+
+
+    <table class="table table-bordered table-striped" id="TableMod">
+        <thead>
+            <tr>
+
+                <th>Vakcode</th>
+                <th>Title</th>
+                <th>Omschrijving</th>
+                <th>Toevoegen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Laat alle modules zien die nog niet zijn verwerkt -->
+            @foreach (Module item in @ViewBag.ModuleList)
+            {
+                <tr id="@item.Module_ID">
+
+
+                    <td id="CourseCode">
+                        @Html.ActionLink(@item.CourseCode.ToString(), "Details", "Module", new { id = item.Module_ID }, null)
+                    </td>
+                    <td>@item.Title</td>
+                    <td>@item.Definition_Short</td>
+                    <td><input type="button" value="+" id="btn_addMod" data-id="@item.Module_ID" class="btn btn-avans" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
 @Html.Partial("~/Views/Shared/_Alert.cshtml")

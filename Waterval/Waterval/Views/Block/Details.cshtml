@@ -16,7 +16,43 @@
             <td>@Html.DisplayFor(model => model.Title)</td>
         </tr>
     </table>
-    @Html.ActionLink("Aanpassen", "Edit", new { id = Model.Block_ID }, new { @class = "btn btn-warning" })| <!--TODO: new { id = item.BlokID } op locatie van null-->
-    @Html.ActionLink("Verwijderen", "Delete", new { id = Model.Block_ID }, new { @class = "btn btn-danger" })| <!--TODO: new { id = item.BlokID } op locatie van null-->
-    @Html.ActionLink("Terug naar Index", "Index")
+    @foreach (var stud in Model.ModuleStudyPhasingBlock.Select(b => new { Study_ID = b.Study_ID, Study_Name = b.Study.Title }).Distinct())
+    {
+        <input type="button" value="@stud.Study_Name" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target='#@stud.Study_ID'>
+            <br />    <br />
+    <div>
+        <div id=@stud.Study_ID class="panel-collapse collapse in">
+
+            @Html.ActionLink(stud.Study_Name, "Details", "Study", new { id = stud.Study_ID }, null)
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Module</th>
+                    <th>Fasering</th>
+                </tr>
+
+                @foreach (var item in Model.ModuleStudyPhasingBlock.Where(s => s.Study_ID == stud.Study_ID))
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.Module.Title, "Details", "Module",new { id= item.Module_ID } , null)
+                         
+                        </td>
+                        <td>
+                            @Html.ActionLink(item.Phasing.Title, "Details", "Phasing", new { id = item.Phasing_ID }, null)
+                        </td>
+
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+        
+        <br />
+    }
+ 
+
+
+@Html.ActionLink("Aanpassen", "Edit", new { id = Model.Block_ID }, new { @class = "btn btn-warning" })| <!--TODO: new { id = item.BlokID } op locatie van null-->
+@Html.ActionLink("Verwijderen", "Delete", new { id = Model.Block_ID }, new { @class = "btn btn-danger" })| <!--TODO: new { id = item.BlokID } op locatie van null-->
+@Html.ActionLink("Terug naar Index", "Index")
 </div>

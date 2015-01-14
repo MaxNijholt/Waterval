@@ -54,7 +54,7 @@
         @foreach (var item in Model.Level)
         {
             <tr>
-                <td>@Html.ActionLink(@item.Module.CourseCode.ToString(), "Edit", "Module", new { id = item.Module_ID })</td>
+                <td>@Html.ActionLink(@item.Module.CourseCode.ToString(), "Details", "Module", new { id = item.Module_ID }, null)</td>
                 <td>@item.Module.Title</td>
                 <td>@item.Module.Definition_Short</td>
                 <td>@item.Level1</td>
@@ -81,7 +81,7 @@
 
     <p>
         @Html.ActionLink("Aanpassen", "Edit", new { id = Model.Competence_ID }, new { @class = "btn btn-warning" })
-
+        @Html.ActionLink("Geneer PDF", "GeneratePDF", new { id = Model.Competence_ID }, new { @class = "btn btn-avans" })
         @Html.ActionLink("Terug naar Index", "Index")
     </p>
 </div>
