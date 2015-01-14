@@ -1,0 +1,41 @@
+﻿@model DomainModel.Models.LearnGoal
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+    
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Titel</th>
+         
+        </tr>
+        <tr>
+            <td>@Html.DisplayFor(model => model.Description)</td>
+        </tr>
+    </table>
+
+
+    <table class="table table-bordered table-striped">
+
+        <tr>
+            <th>VakCode</th>
+            <th>Titel</th>
+            <th>Omschrijving</th>
+        </tr>
+        @foreach (var item in Model.Module)
+        {
+            <tr>
+                <td>@Html.ActionLink(@item.CourseCode, "Details","Module", new { id = item.Module_ID },null)</td>
+                <td>@item.Title</td>
+                <td>@item.Definition_Short</td>
+            </tr>
+        }
+    </table>
+ @Html.ActionLink("Aanpassen", "Edit", new { id = Model.LearnGoal_ID }, new { @class = "btn btn-warning" })
+
+    @Html.ActionLink("Terug naar Index", "Index")
+</div>
