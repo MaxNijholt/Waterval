@@ -31,7 +31,7 @@ namespace Waterval.Controllers
             client = new RestClient
             {
                 BaseUrl = new Uri("https://publicapi.avans.nl/oauth/"),
-                Authenticator = OAuth1Authenticator.ForRequestToken(CONSUMER_KEY, CONSUMER_SECRET, "http://localhost:1063/OAuth/OAuth")
+                Authenticator = OAuth1Authenticator.ForRequestToken(CONSUMER_KEY, CONSUMER_SECRET, "http://localhost:6969/OAuth/OAuth")
             };
             var requestTokenRequest             = new RestRequest("request_token");
             var requestTokenResponse            = client.Execute(requestTokenRequest);
@@ -87,6 +87,12 @@ namespace Waterval.Controllers
             //    "Email : " + email
             //);
             //return Content(linkResponse.Content);
+        }
+
+        public static bool IsUserInRole(string role) {
+            if (!System.Web.HttpContext.Current.Request.IsAuthenticated) return false;
+            if (role.Equals("Admin")) return true;
+            return false;
         }
 
         public ActionResult LogOut()
