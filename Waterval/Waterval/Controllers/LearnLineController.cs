@@ -35,7 +35,7 @@ namespace MvcApplication1.Controllers
 
 			ViewBag.CurrentFilter = searchString;
 
-			var learnLines = learnLineRepository.GetAll( );
+			var learnLines = learnLineRepository.GetAll( ).Where( m => m.isDeleted == false );
 			if ( !String.IsNullOrEmpty( searchString ) ) {
 				learnLines = search.GetLearnLinesWith( searchString );
 			}

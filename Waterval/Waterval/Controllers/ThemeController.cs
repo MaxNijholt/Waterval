@@ -34,7 +34,7 @@ namespace Waterval.Controllers
 
 			ViewBag.CurrentFilter = searchString;
 
-			var themes = themeRepository.GetAll( );
+			var themes = themeRepository.GetAll( ).Where( m => m.isDeleted == false );
 			if ( !String.IsNullOrEmpty( searchString ) ) {
 				themes = search.GetThemesWith( searchString );
 			}

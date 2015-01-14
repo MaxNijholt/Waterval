@@ -34,7 +34,7 @@ namespace Waterval.Controllers {
 
 			ViewBag.CurrentFilter = searchString;
 
-			var blocks = BlockRepository.GetAll( );
+			var blocks = BlockRepository.GetAll( ).Where( m => m.isDeleted == false );
 			if ( !String.IsNullOrEmpty( searchString ) ) {
 				blocks = search.GetBlocksWith( searchString );
 			}

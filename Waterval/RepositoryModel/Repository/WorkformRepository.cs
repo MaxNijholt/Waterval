@@ -17,8 +17,6 @@ namespace RepositoryModel.Repository
         }
         public List<Workform> GetAll()
         {
-
-
             return dbContext.Workform.ToList();
         }
 

@@ -18,7 +18,7 @@ namespace RepositoryModel.Repository
 		}
 		public List<DomainModel.Models.Phasing> GetAll()
 		{
-			return dbContext.Phasing.Where(p => p.isDeleted == false).ToList();
+			return dbContext.Phasing.ToList();
 		}
 
 		public DomainModel.Models.Phasing Get(int phasing_id)

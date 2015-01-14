@@ -15,10 +15,12 @@
 <div class="container">
     <h2>Blok Overzicht</h2>
     @using ( Html.BeginForm( "Index", "Block", FormMethod.Get ) ) {
-        <p>
-            Zoeken op Titel: @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string )
-            <input type="submit" value="Search" />
-        </p>
+        @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in blokken", @class = "form-control" } )
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
     }
 
     <table class="table table-bordered table-striped">
@@ -53,22 +55,20 @@
     @Html.PagedListPager( Model, page => Url.Action( "Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } ) )
 
+@section Scripts {
+    <script>
+        $('input[type="button"]').click(function (e) {
+            var title = $(this).attr('data-name');
+            var id = $(this).attr('data-id');
 
-    @section Scripts {
-        <script>
-            $('input[type="button"]').click(function (e) {
-                var title = $(this).attr('data-name');
-                var id = $(this).attr('data-id');
+            if (confirm('Gegevens van ' + title + ' verwijderen?')) {
+                var url = "/Block/Delete";
 
-                if (confirm('Gegevens van ' + title + ' verwijderen?')) {
-                    var url = "/Blok/Delete";
-
-                    $.post(url, { Block_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
-                        $("#msg").html(data);
-                    });
-                    $(this).closest('tr').remove()
-                }
-            })
-        </script>
-    }
-
+                $.post(url, { Block_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
+                    $("#msg").html(data);
+                });
+                $(this).closest('tr').remove()
+            }
+        })
+    </script>
+}

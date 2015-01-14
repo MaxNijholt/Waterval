@@ -18,7 +18,7 @@ namespace RepositoryModel.Repository
         }
         public List<DomainModel.Models.Theme> GetAll()
         {
-            return dbContext.Theme.Where(b => b.isDeleted == false).ToList();
+            return dbContext.Theme.ToList();
         }
 		public DomainModel.Models.Theme Get(int theme_id)
 		{

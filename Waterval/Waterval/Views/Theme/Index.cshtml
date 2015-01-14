@@ -9,10 +9,12 @@
 <div class="container">
 	<h2>Thema Overzicht</h2>
 	@using ( Html.BeginForm( "Index", "Theme", FormMethod.Get ) ) {
-        <p>
-            Zoeken op Titel: @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string )
-            <input type="submit" value="Search" />
-        </p>
+        @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in thema's", @class = "form-control" } )
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
     }
 	<table class="table table-bordered table-striped">
 		<tr>

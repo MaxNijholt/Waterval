@@ -14,7 +14,7 @@ namespace RepositoryModel.Repository {
 		}
 
 		public List<Block> GetAll ( ) {
-			return dbContext.Block.Where( b => b.isDeleted == false ).ToList( );
+			return dbContext.Block.ToList( );
 
 		}
 
