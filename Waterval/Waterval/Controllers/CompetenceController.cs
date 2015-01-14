@@ -36,7 +36,7 @@ namespace Waterval.Controllers
 		//	return View(compenteceRepository.GetAll().Where(b => b.isDeleted == false));
 		//}
 
-		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10 ) {
+		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10, bool isPDF =false) {
 			ViewBag.CurrentSort = sortOrder;
 			ViewBag.ResultAmount = pagesize;
 			ViewBag.NameSortParm = String.IsNullOrEmpty( sortOrder ) ? "Titel" : "";
@@ -50,6 +50,10 @@ namespace Waterval.Controllers
 			ViewBag.CurrentFilter = searchString;
 
 			var competences = this.compenteceRepository.GetAll( ).Where( m => m.isDeleted == false );
+
+            if (isPDF)
+                pagesize = competences.Count();
+
 			if ( !String.IsNullOrEmpty( searchString ) ) {
 				competences = search.GetCompetencesWith( searchString );
 			}
@@ -63,6 +67,7 @@ namespace Waterval.Controllers
 			}
 			int pageSize = pagesize;
 			int pageNumber = ( page ?? 1 );
+            @ViewBag.isPDF = isPDF;
 			return View( competences.ToPagedList( pageNumber, pageSize ) );
 		}
 
@@ -270,6 +275,11 @@ namespace Waterval.Controllers
         public ActionResult GeneratePDF(int id)
         {
             return new Rotativa.ActionAsPdf("Details", new { id = id });
+        }
+
+        public ActionResult GeneratePDFList()
+        {
+            return new Rotativa.ActionAsPdf("Index", new { isPDF = true });
         }
 
     }
