@@ -41,10 +41,16 @@ namespace Waterval.Models
             set;
         }
 
+        public List<Study> Studies
+        {
+            get;
+            set;
+        }
+
         public int TotalCount 
         {
             set { _totalCount = value; }
-            get { return Blocks.Count + LearnLines.Count + Modules.Count + Compentences.Count + Themes.Count; }
+            get { return Blocks.Count + LearnLines.Count + Modules.Count + Compentences.Count + Themes.Count + Studies.Count; }
         }
 
     }

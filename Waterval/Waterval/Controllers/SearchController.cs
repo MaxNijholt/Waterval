@@ -29,7 +29,8 @@ namespace Waterval.Controllers
                 LearnLines = searchRepo.GetLearnLinesWith(SearchText),
                 Modules = searchRepo.GetModulesWith(SearchText),
                 Themes = searchRepo.GetThemesWith(SearchText),
-                Compentences = searchRepo.GetCompetencesWith(SearchText)
+                Compentences = searchRepo.GetCompetencesWith(SearchText),
+                Studies = searchRepo.GetStudiesWith(SearchText)
             };
             return View(sl);
 		}

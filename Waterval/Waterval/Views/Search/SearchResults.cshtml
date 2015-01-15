@@ -24,6 +24,10 @@
                 document.getElementById("themes").disabled = true;
                 document.getElementById("themes").setAttribute("disabled", "disabled");
             }
+            if (document.getElementById("studies").innerHTML == "Opleidingen (0)") {
+                document.getElementById("studies").disabled = true;
+                document.getElementById("studies").setAttribute("disabled", "disabled");
+            }
         }
         window.onload = buttonDisabler;
     </script>
@@ -55,6 +59,7 @@
             <li><a id="learnlines" href="#tab4default" data-toggle="tab">Leerlijnen (@Model.LearnLines.Count)</a></li>
             <li><a id="competences" href="#tab5default" data-toggle="tab">Competenties (@Model.Compentences.Count)</a></li>
             <li><a id="themes" href="#tab6default" data-toggle="tab">Thema's (@Model.Themes.Count)</a></li>
+            <li><a id="studies" href="#tab7default" data-toggle="tab">Studierichtingen (@Model.Studies.Count)</a></li>
         </ul>
     </div>
     <div class="panel-body">
@@ -119,6 +124,17 @@
                             </td>
                             <td>
                                 @Html.ActionLink(Model.Themes.ElementAt(i).Title, "../Thema/Details", new { id = Model.Themes.ElementAt(i).Theme_ID }) <span style="float:right;">Thema</span>
+                            </td>
+                        </tr>
+                    }
+                    <!-- Study results -->
+                    @for (int i = 0; i < Model.Studies.Count; i++) {
+                        <tr>
+                            <td>
+                                @(i + 1 + Model.Modules.Count + Model.Blocks.Count + Model.LearnLines.Count + Model.Compentences.Count + Model.Themes.Count)
+                            </td>
+                            <td>
+                                @Html.ActionLink(Model.Studies.ElementAt(i).Title, "../Study/Details", new { id = Model.Studies.ElementAt(i).Study_ID }) <span style="float:right;">Studierichting</span>
                             </td>
                         </tr>
                     }
@@ -219,6 +235,26 @@
                             </td>
                             <td width="100%">
                                 @Html.ActionLink(Model.Themes.ElementAt(i).Title, "../Thema/Details", new { id = Model.Themes.ElementAt(i).Theme_ID })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="tab-pane fade" id="tab7default">
+                <!-- Study results -->
+                <table class="table table-bordered">
+                    <tr>
+                        <th>#</th>
+                        <th>Studierichting</th>
+                    </tr>
+
+                    @for (int i = 0; i < Model.Studies.Count; i++) {
+                        <tr>
+                            <td>
+                                @(i + 1)
+                            </td>
+                            <td width="100%">
+                                @Html.ActionLink(Model.Studies.ElementAt(i).Title, "../Study/Details", new { id = Model.Studies.ElementAt(i).Study_ID })
                             </td>
                         </tr>
                     }

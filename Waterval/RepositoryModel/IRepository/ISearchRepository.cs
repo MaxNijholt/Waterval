@@ -12,5 +12,6 @@ namespace RepositoryModel.IRepository {
 		 List<Module> GetModulesWith ( String find );
 		 List<LearnLine> GetLearnLinesWith ( String find );
 		 List<Theme> GetThemesWith ( String find );
+         List<Study> GetStudiesWith(string find);
 	}
 }
