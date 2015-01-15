@@ -13,16 +13,19 @@
 
 
 <div class="container">
+<<<<<<< HEAD
 	<h2>Blok Overzicht</h2>
-	@using(Html.BeginForm("Index", "Block", FormMethod.Get))
-	{
-		@Html.TextBox("SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in blokken", @class = "form-control" })
-		<span class="input-group-btn">
-			<button class="btn btn-default" type="submit">
-				<span class="glyphicon glyphicon-search"></span>
-			</button>
-		</span>
-	}
+	 @using ( Html.BeginForm( "Index", "Block", FormMethod.Get ) ) {
+        <div class="input-group input-group">
+            @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in blokken", @class = "form-control" } )
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+    }
+    <br/>
 
 	<table class="table table-bordered table-striped">
 		<tr>
@@ -35,7 +38,6 @@
 			{
 				<th>Verwijderen</th>
 			}
-
 		</tr>
 		<tr>
 
