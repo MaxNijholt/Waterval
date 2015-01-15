@@ -57,6 +57,7 @@
     <Compile Include="DummyRepository\DModuleRepository.cs" />
     <Compile Include="DummyRepository\DThemeRepository.cs" />
     <Compile Include="DummyRepository\DPhasingRepository.cs" />
+    <Compile Include="IRepository\IAccountRepository.cs" />
     <Compile Include="IRepository\IGradeTypeRepository.cs" />
     <Compile Include="IRepository\IPhasingRepository.cs" />
     <Compile Include="IRepository\IProgramRepository.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="IRepository\ILearningToolRepository.cs" />
     <Compile Include="IRepository\ILearnLineRepository.cs" />
     <Compile Include="IRepository\IModuleRepository.cs" />
+    <Compile Include="Repository\AccountRepository.cs" />
     <Compile Include="Repository\GradeTypeRepository.cs" />
     <Compile Include="Repository\BlockRepository.cs" />
     <Compile Include="IRepository\IBlockRepository.cs" />

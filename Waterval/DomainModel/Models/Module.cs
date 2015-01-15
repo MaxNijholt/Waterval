@@ -27,7 +27,6 @@ namespace DomainModel.Models
             this.LearningTool = new HashSet<LearningTool>();
             this.LearnLine = new HashSet<LearnLine>();
             this.Theme = new HashSet<Theme>();
-         
         }
     
         public int Module_ID { get; set; }
