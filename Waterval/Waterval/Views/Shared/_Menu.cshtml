@@ -31,28 +31,33 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
-                @using (Html.BeginForm("SearchResults", "Search")) 
-                {
-                    <div id="custom-search-input" style="width:325px;">
-                        <div class="input-group">
-                            <input type="text" class="search-query form-control" name="SearchText" id="SearchText" placeholder="Zoeken" />
-                            <span class="input-group-btn">
-                                <button class="btn btn-danger" type="submit" id="Search">
-                                    <span class=" glyphicon glyphicon-search"></span>
-                                </button>
-                            </span>
+                <li>
+                    @using (Html.BeginForm("SearchResults", "Search"))
+                    {
+                        <div style="width:325px;">
+                            <div class="input-group">
+                                <input type="text" class="search-query form-control" name="SearchText" id="SearchText" placeholder="Zoeken" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger" type="submit" id="Search">
+                                        <span class=" glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                }
-            
-                <!-- TODO: If user is logged int then show user name with a dropdown.
-                    Else Just the login button-->
-                    @if (User.Identity.IsAuthenticated) {
-                        <li>@Html.ActionLink("Uitloggen", "LogOut", "OAuth")</li>
                     }
-                    else {
-                        <li>@Html.ActionLink("Inloggen", "Index", "OAuth")</li>
+                </li>
+                <li>
+                    <!-- TODO: If user is logged int then show user name with a dropdown. Else Just the login button-->
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("Uitloggen", "LogOut", "OAuth")
                     }
+                    else
+                    {
+                        @Html.ActionLink("Inloggen", "Index", "OAuth")
+                    }
+                </li>
+                
                     
                  <!--
                              <li class="dropdown">
