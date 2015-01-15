@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<DomainModel.Models.Workform>
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @Styles.Render("~/Content/css")
@@ -10,64 +10,66 @@
 
 
 <div class="container">
-    <h2>Werkvormen Overzicht</h2>
-    @using ( Html.BeginForm( "Index", "Workform", FormMethod.Get ) ) {
-    <div class="input-group input-group">
-        @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in werkvormen", @class = "form-control" } )
-        <span class="input-group-btn">
-            <button class="btn btn-default" type="submit">
-                <span class="glyphicon glyphicon-search"></span>
-            </button>
-        </span>
-    </div>
-    }
-    <br />
+	<h2>Werkvorm Overzicht</h2>
+	<table class="table table-bordered table-striped">
+		<tr>
+			<th>Omschrijving</th>
+			@if(Waterval.Controllers.OAuthController.IsUserInRole("EditWorkForm"))
+			{
+				<th>Aanpassen</th>
+			}
+			@if(Waterval.Controllers.OAuthController.IsUserInRole("DeleteWorkform"))
+			{
+				<th>Verwijderen</th>
+			}
+			@if(Waterval.Controllers.OAuthController.IsUserInRole("toNewVersion"))
+			{
+				<th>Versie beheer</th>
+			}
+		</tr>
+		<tr>
+			@foreach(var item in Model)
+			{
+			<tr>
+				<td>@Html.ActionLink(item.Description, "Details", new { id = item.Workform_ID })</td>
+				@if(Waterval.Controllers.OAuthController.IsUserInRole("EditWorkform"))
+				{
+					<td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Workform_ID }, new { @class = "btn btn-warning" })</td>
+				}
+				@if(Waterval.Controllers.OAuthController.IsUserInRole("DeleteWorkform"))
+				{
+					<td>
+						<input type="button" value="Verwijderen" data-name="@item.Description" data-id="@item.Workform_ID" class="btn btn-danger">
+					</td>
+				}
+				@if(Waterval.Controllers.OAuthController.IsUserInRole("toNewVersion"))
+				{
+					<td>@Html.ActionLink("Nieuwe versie", "toNewVersion", new { id = item.Workform_ID }, new { @class = "btn btn-avans" })</td>
+				}
+			</tr>
+			}
+		</table>
+	@if(Waterval.Controllers.OAuthController.IsUserInRole("CreateWorkform"))
+	{
+		@Html.ActionLink("Nieuwe werkvorm", "Create", null, new { @class = "btn btn-success" })
+	}
+	</div>
 
-    <table class="table table-bordered table-striped">
-        <tr>
-            <th>Omschrijving</th>
-            <th>Aanpassen</th>
-            <th>Verwijderen</th>
-            <th>Nieuwe versie</th>
-        </tr>
-        <tr>
+	@section Scripts {
+		<script>
+			$('input[type="button"]').click(function (e) {
+				var title = $(this).attr('data-name');
+				var id = $(this).attr('data-id');
 
-            @foreach (var item in Model)
-            {
-            <tr>
+				if (confirm('Gegevens van ' + title + ' verwijderen?')) {
+					var url = "/Workform/Delete";
 
-                <td>
-                    @Html.ActionLink(item.Description, "Details", new { id = item.Workform_ID })
-                </td>
-
-                <td>
-                    @Html.ActionLink("Aanpassen", "Edit", new { id = item.Workform_ID }, new { @class = "btn btn-warning" })
-                </td>
-                <td>
-                    <input type="button" value="Verwijderen" data-name="@item.Description" data-id="@item.Workform_ID" class="btn btn-danger">
-                </td>
-                <td>@Html.ActionLink("Nieuwe versie", "toNewVersion", new { id = item.Workform_ID }, new { @class = "btn btn-avans" })</td>
-            </tr>
-            }
-        </table>
-
-        @Html.ActionLink("Nieuwe werkvorm", "Create", null, new { @class = "btn btn-success" })
-    </div>
-
-    @section Scripts {
-        <script>
-            $('input[type="button"]').click(function (e) {
-                var title = $(this).attr('data-name');
-                var id = $(this).attr('data-id');
-
-                if (confirm('Gegevens van ' + title + ' verwijderen?')) {
-                    var url = "/Workform/Delete";
-
-                    $.post(url, { Workform_ID: id, Description: title }, function (data) {
-                        $("#msg").html(data);
-                    });
-                    $(this).closest('tr').remove()
-                }
-            })
-        </script>
-    }
+					$.post(url, { Workform_ID: id, Description: title }, function (data) {
+						$("#msg").html(data);
+					});
+					$(this).closest('tr').remove()
+				}
+			})
+		</script>
+	}
+>>>>>>> feature/Auth_WorkForm
