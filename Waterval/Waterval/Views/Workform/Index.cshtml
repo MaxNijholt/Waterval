@@ -10,15 +10,25 @@
 
 
 <div class="container">
-    <h2>Werkvorm Overzicht</h2>
-    <input type="text" class="form-control" placeholder="filter blokken...">
+    <h2>Werkvormen Overzicht</h2>
+    @using ( Html.BeginForm( "Index", "Workform", FormMethod.Get ) ) {
+    <div class="input-group input-group">
+        @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in werkvormen", @class = "form-control" } )
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+    </div>
+    }
+    <br />
 
     <table class="table table-bordered table-striped">
         <tr>
             <th>Omschrijving</th>
-
             <th>Aanpassen</th>
             <th>Verwijderen</th>
+            <th>Nieuwe versie</th>
         </tr>
         <tr>
 
@@ -34,14 +44,14 @@
                     @Html.ActionLink("Aanpassen", "Edit", new { id = item.Workform_ID }, new { @class = "btn btn-warning" })
                 </td>
                 <td>
-                    <input type="button" value="Verwijderen" data-name="@item.Description" data-id="@item.Workform_ID" class="btn btn-avans">
+                    <input type="button" value="Verwijderen" data-name="@item.Description" data-id="@item.Workform_ID" class="btn btn-danger">
                 </td>
                 <td>@Html.ActionLink("Nieuwe versie", "toNewVersion", new { id = item.Workform_ID }, new { @class = "btn btn-avans" })</td>
             </tr>
             }
         </table>
 
-        @Html.ActionLink("Nieuw Blok", "Create", null, new { @class = "btn btn-success" })
+        @Html.ActionLink("Nieuwe werkvorm", "Create", null, new { @class = "btn btn-success" })
     </div>
 
     @section Scripts {
