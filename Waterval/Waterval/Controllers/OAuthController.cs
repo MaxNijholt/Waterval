@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using DomainModel.Models;
+using Newtonsoft.Json.Linq;
+using RepositoryModel.IRepository;
+using RepositoryModel.Repository;
 using RestSharp;
 using RestSharp.Authenticators;
 using System;
@@ -68,9 +71,28 @@ namespace Waterval.Controllers
             string username = (string) obj["id"];
             bool employee = (bool) obj["employee"];
 
+            /* 
+             * VERANDEREN NAAR EMPLOYEE INPLAATSVAN !EMPLOYEE
+             */
             if (!string.IsNullOrEmpty(username) && !employee) {
+                IAccountRepository accounts = new AccountRepository();
+                Account acc = accounts.Get(username);
+                if (acc != null && acc.isActive)
+                    return RedirectToAction("Index", "Home");
+                if (acc == null)
+                {
+                    accounts.Create(new Account
+                    {
+                        Username = username,
+                        isActive = true,
+                        AccountRole = accounts.GetAcountRoles("TestController")
+                    });
+                }
+
                 FormsAuthentication.SetAuthCookie(username, false);
             }
+
+            
 
             return RedirectToAction("Index", "Home");
             //USERNAME = obj["id"].ToString();

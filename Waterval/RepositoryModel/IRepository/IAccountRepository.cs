@@ -10,10 +10,12 @@ namespace RepositoryModel.IRepository {
     public interface IAccountRepository {
 
         List<Account>   GetAll();
-        Account         Get(int accountId);
+        Account         Get(string name);
         Account         Create(Account account);
         Account         Update(Account account);
         void            Delete(Account account);
+        List<AccountRole> GetAllAccountRoles();
+        AccountRole GetAcountRoles(string name);
 
     }
 
