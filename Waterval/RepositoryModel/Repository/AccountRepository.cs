@@ -56,6 +56,11 @@ namespace RepositoryModel.Repository {
         {
             return dbContext.AccountRole.SingleOrDefault(a => a.RoleName == name);
         }
+        public List<AccountLaw> GetAllLawsThatBelongToThatAccount(string name)
+        {
+            Account acc = dbContext.Account.SingleOrDefault(a => a.Username == name);
+            return acc.AccountRole.AccountLaw.ToList();
+        }
     }
 
 }

@@ -77,7 +77,7 @@ namespace Waterval.Controllers
             if (!string.IsNullOrEmpty(username) && !employee) {
                 IAccountRepository accounts = new AccountRepository();
                 Account acc = accounts.Get(username);
-                if (acc != null && acc.isActive)
+                if (acc != null && !acc.isActive)
                     return RedirectToAction("Index", "Home");
                 if (acc == null)
                 {
@@ -88,7 +88,6 @@ namespace Waterval.Controllers
                         AccountRole = accounts.GetAcountRoles("TestController")
                     });
                 }
-
                 FormsAuthentication.SetAuthCookie(username, false);
             }
 
