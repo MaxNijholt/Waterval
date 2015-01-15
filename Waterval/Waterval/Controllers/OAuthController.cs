@@ -85,7 +85,7 @@ namespace Waterval.Controllers
                     {
                         Username = username,
                         isActive = true,
-                        AccountRole = accounts.GetAcountRoles("TestController")
+                        AccountRole = accounts.GetAcountRoles("Default")
                     });
                 }
                 FormsAuthentication.SetAuthCookie(username, false);
