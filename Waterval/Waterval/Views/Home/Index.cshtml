@@ -7,33 +7,35 @@
 
 @Styles.Render("~/Content/css")
 
-@Html.Partial("_Search")
+@*@Html.Partial("_Search")*@
 
 <div class="jumbotron">
     <h1>Waterval</h1>
-    <p class="lead">Onze website voor het project</p>
-    <p><a href="https://bb.avans.nl/webapps/blackboard/execute/announcement?method=search&context=course_entry&course_id=_82768_1&handle=announcements_entry&mode=view" class="btn btn-primary btn-lg">To Course &raquo;</a></p>
+    <p class="lead">Deze site is het resultaat van ons project. Onderstaande knop verwijst door naar BlackBoard. </p>
+    <p>Voor een volledige kijk op de site dient worden ingelogd met een Avans account.</p>
+    <p><a href="https://bb.avans.nl/webapps/blackboard/execute/announcement?method=search&context=course_entry&course_id=_82768_1&handle=announcements_entry&mode=view" class="btn btn-primary btn-lg">Naar Course op BlackBoard&raquo;</a></p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
         <h2>Leerlijnen</h2>
         <p>
-           ...
+           Door middel van deze knop kun je snel naar de Leerlijnen. Hierbij kan je door de leerlijnen zoeken en browsen.
         </p>
-        <p>@Html.ActionLink("Leerlijn", "Index", "Leerlijn",null, new { @class = "btn btn-default" })</p>
+        <p>@Html.ActionLink("Leerlijn", "Index", "LeanLine",null, new { @class = "btn btn-default" })</p>
     </div>
     <div class="col-md-4">
         <h2>Compententie</h2>
         <p>
-            ...
+            Door deze snelkoppeling kan men snel de verschillende competenties inzien. 
         </p>
-        <p>@Html.ActionLink("Compententie", "Index", "Compententie", null, new { @class = "btn btn-default" })</p>
+        <br />
+        <p>@Html.ActionLink("Compententie", "Index", "Competence", null, new { @class = "btn btn-default" })</p>
     </div>
     <div class="col-md-4">
         <h2>Module</h2>
         <p>
-            ...
+            Onder modules zal de grote variatie aan modules die Avans Hogeschool aanbied in te zien zijn.
         </p>
         <p>@Html.ActionLink("Module", "Index", "Module", null, new { @class = "btn btn-default" })</p>
     </div>
