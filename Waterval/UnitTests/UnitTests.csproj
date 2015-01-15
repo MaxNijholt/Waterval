@@ -54,12 +54,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Processors\BlockProcess.cs" />
-    <Compile Include="Processors\LearnToolProcessor.cs" />
     <Compile Include="Tests\BlokTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\CompetenceTest.cs" />
-    <Compile Include="Tests\TestLearnTool.cs" />
+    <Compile Include="Tests\WorkformTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
