@@ -52,7 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DummyRepository\DBlockRepository.cs" />
+    <Compile Include="DummyRepository\DummyBlockRepository.cs" />
     <Compile Include="DummyRepository\DummyCompetenceRepository.cs" />
     <Compile Include="DummyRepository\DLearningToolRepository.cs" />
     <Compile Include="DummyRepository\DModuleRepository.cs" />

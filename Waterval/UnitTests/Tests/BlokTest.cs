@@ -11,16 +11,33 @@ namespace UnitTests
     public class BlokTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void GetAll()
         {
-            // Arrange
-            BlockProcessor processor = new BlockProcessor(new DBlockRepository());
+          
+        }
 
-            // Act
-            List<Block> currentSeries = processor.GetCurrentBlock();
+        [TestMethod]
+        public void GetByID()
+        {
 
-            // Assert
-            Assert.AreEqual(currentSeries.Count(), 8);
+        }
+
+        [TestMethod]
+        public void Create()
+        {
+
+        }
+
+        [TestMethod]
+        public void Delete()
+        {
+
+        }
+
+        [TestMethod]
+        public void Edit()
+        {
+
         }
     }
 }
