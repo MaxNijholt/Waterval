@@ -290,17 +290,16 @@
                         <table class="table table-bordered table-striped">
                             <tr>
                                 <th>Studiericting</th>
-                                <th>Block</th>
+                                <th>Blok</th>
                                 <th>Fasering</th>
-
-
                             </tr>
-                            @foreach (var i in Model.Study.Where(c => c.isDeleted == false))
+
+                            @foreach (var i in Model.ModuleStudyPhasingBlock.Where(c => c.Study.isDeleted == false))
                             {
                             <tr>
-                            <td>@Html.ActionLink(i.Title, "../Study/Details", new { id = i.Study_ID })</td>
-                            <td>Blokken</td>
-                            <td>Faseringen</td>
+                            <td>@Html.ActionLink(i.Study.Title, "../Study/Details", new { id = i.Study_ID })</td>
+                            <td>@Html.ActionLink(i.Block.Title, "../Block/Details", new { id = i.Block_ID })</td>
+                            <td>@Html.ActionLink(i.Phasing.Title, "../Phasing/Details", new { id = i.Phasing_ID })</td>
 
                             </tr>
                             }

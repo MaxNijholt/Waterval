@@ -493,24 +493,32 @@ $(document).on('click', '#btn_addStudy', function () {
             return false;
         }
     })
-
     var index = $("#StudyTable tr").length;
+
     //We create a tr that has an id and we combine a td next to it.
     var study = '<tr id="' + id + '"><td>' + tablevalue[0] + '</td>';
+
     //maak van class="form-control hidden"
     //In de entity module hebben we learnline zitten. 
     //We maken hier dus een learnline "aan" zodat ons model het herkent. Dus eig zeggen we hier gewoon Module.LearnLine[0].LearnLine_ID
     //Hierdoor herkent het model de learnline en kunne we deze meesturen. 
     //De de rest van de code moet je zelf even toeveogen en aanpassen naar wens. 
-    var hiddenfield = '<td><input type="number" id="Study[' + (index - 1) + '].Stuy_ID" name="Study[' + (index - 1) + '].Study_ID" class="form-control" value=' + id + ' /></td>'
+    var inputfieldb = '<td><input type="number" class="form-control" id="ModuleStudyPhasingBlock[' + (index - 1) + '].Block_ID" name="ModuleStudyPhasingBlock[' + (index - 1) + '].Block_ID" value="0" min="1" max="16" />';
+    var hiddenfieldb = '<input type="number" id="ModuleStudyPhasingBlock[' + (index - 1) + '].Study_ID" name="ModuleStudyPhasingBlock[' + (index - 1) + '].Study_ID" class="form-control hidden" value=' + id + ' min="1" max="16" /></td>';
+
+    var inputfieldp = '<td><input type="number" class="form-control" id="ModuleStudyPhasingBlock[' + (index - 1) + '].Phasing_ID" name="ModuleStudyPhasingBlock[' + (index - 1) + '].Phasing_ID" value="0" />';
+    var hiddenfieldp = '<input type="number" id="ModuleStudyPhasingBlock[' + (index - 1) + '].Study_ID" name="ModuleStudyPhasingBlock[' + (index - 1) + '].Study_ID" class="form-control hidden" value=' + id + ' /></td>';
+
     var buttonDelete = '<td><input type="button" value="-" id="btn_deleteStudy" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
     //We add this row to the ModTable.
-    $('#StudyTable').append(study + hiddenfield + buttonDelete);
+    $('#StudyTable').append(study inputfieldb +hiddenfieldb + inputfieldp + hiddenfieldp + buttonDelete);
 
     //We remove the row have choosen in TableMod;
     $(this).closest('tr').remove();
 });
+
+
 
 //This code gets called whenever one of the delete functions gets pressed.
 //We will get a confirm dialog and choosing yes will remove the data and clean up the table.
@@ -551,9 +559,35 @@ $(document).on('click', '#btn_deleteStudy', function () {
         //Make an index 0 for adding the correct index to the Module attribute
         var index = 0;
 
+        //Loop through the table
+        //If the row contains an id
+        //Loop through the row and find all inputs that are of the number type.
+        //If the input ends with ID then fill if for the Module 
+        //else it fills for th elevel.
+        //Then we up 1 the index.
+        $('#ModTable tr').each(function () {
+            if ($(this).attr('id') != null) {
+                $(this).find("input[type=number]").each(function () {
+                    if ($(this).attr('name').match("ID$")) {
+                        $(this).attr('name', 'ModuleStudyPhasingBlock[' + (index) + '].Study_ID')
+                        $(this).attr('id', 'ModuleStudyPhasingBlock[' + (index) + '].Study_ID')
+                        $(this).attr('name', 'ModuleStudyPhasingBlock[' + (index) + '].Study_ID')
+                        $(this).attr('id', 'ModuleStudyPhasingBlock[' + (index) + '].Study_ID')
+                    }
+                    else {
+                        $(this).attr('name', 'ModuleStudyPhasingBlock[' + (index) + '].Block_ID')
+                        $(this).attr('id', 'ModuleStudyPhasingBlock[' + (index) + '].Block_ID')
+                        $(this).attr('name', 'ModuleStudyPhasingBlock[' + (index) + '].Phasing_ID')
+                        $(this).attr('id', 'ModuleStudyPhasingBlock[' + (index) + '].Phasing_ID')
+                    }
+                });
+                index += 1;
+            }
+        });
+
     }
 });
-//END PROGRAM
+//END Study
 
 
 

@@ -265,6 +265,29 @@ namespace RepositoryModel.Repository
 
         }
 
+
+        public void StudyBlockPhasingAndModules(int module_id, int study_id, int block_id, int phasing_id)
+        {
+
+            if (dbContext.ModuleStudyPhasingBlock.Any(l => l.Module_ID == module_id && l.Study_ID == study_id && l.Block_ID == block_id && l.Phasing_ID == phasing_id))
+                return;
+
+            ModuleStudyPhasingBlock model = new ModuleStudyPhasingBlock();
+            model.Phasing_ID = phasing_id;
+            model.Module_ID = module_id;
+            model.Study_ID = study_id;
+            model.Block_ID = block_id;
+            dbContext.ModuleStudyPhasingBlock.Add(model);
+            dbContext.SaveChanges();
+        }
+
+        public void StudyBlockPhasingAndModulesDelete(int module_id)
+        {
+            var itemsToDelete = dbContext.ModuleStudyPhasingBlock.Where(x => x.Module_ID == module_id);
+            dbContext.ModuleStudyPhasingBlock.RemoveRange(itemsToDelete);
+            dbContext.SaveChanges();
+        }
+
         public void CompentenceAndModules(int module_id, int competence_id, string level)
         {
 

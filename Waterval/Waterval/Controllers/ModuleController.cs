@@ -109,19 +109,9 @@ namespace MvcApplication1.Controllers
             @ViewBag.GradeTypes = GetGradeTypes(module);
             @ViewBag.WeekSchedule = GetWeekschedule(module);
             @ViewBag.AssignmentCode = GetAssignmentcode(module);
+            @ViewBag.GetBlocks = blockRepository.GetAll();
+            @ViewBag.GetPhasings = phasingRepository.GetAll(); 
 
-            List<SelectListItem> items = new List<SelectListItem>();
-
-            foreach (var item in blockRepository.GetAll()){
-                items.Add(new SelectListItem { Text = item.Title, Value = item.Block_ID.ToString() });
-            }
-            ViewData["block"] = items;
-
-            @ViewBag.Test = studyRepository.GetAll();
-
-            ViewBag.Study_ID = new SelectList(studyRepository.GetAll(), "Study_ID", "Title");
-            ViewBag.Phasing_ID = new SelectList(phasingRepository.GetAll(), "Phasing_ID", "Title");
-            ViewBag.Block_ID = new SelectList(blockRepository.GetAll(), "Block_ID", "Title");
 
             return View(module);
         }
@@ -167,9 +157,10 @@ namespace MvcApplication1.Controllers
                 foreach (var item in module.AssignmentCode)
                     moduleRepository.AssignmentcodeAndModules(id, item.Description, item.EC);
 
-               // ViewBag.Block_ID = new SelectList(blockRepository.GetAll(), "Block_ID", "Title", 1);
-               // ViewBag.Study_ID = new SelectList(studyRepository.GetAll(), "Study_ID", "Title", module.Study.Select(a=>a.Study_ID));
-               // ViewBag.Phasing_ID = new SelectList(phasingRepository.GetAll(), "Phasing_ID", "Title", module.ModuleStudyPhasingBlock);
+                foreach (var item in module.ModuleStudyPhasingBlock)
+                    moduleRepository.StudyBlockPhasingAndModules(id, item.Study_ID, item.Block_ID, item.Phasing_ID);
+
+                //    moduleRepository.StudyBlockPhasingAndModules(id, studies, blocks, phasings);
                 
                 //We go back to the index.
                 return RedirectToAction("Index");
@@ -195,6 +186,8 @@ namespace MvcApplication1.Controllers
                     item.Module = moduleRepository.Get(item.Module_ID);
                 foreach (var item in module.Level)
                     item.Competence = competenceRepository.Get(item.Competence_ID);
+                foreach (var item in module.ModuleStudyPhasingBlock)
+                   item.Module =  moduleRepository.Get(item.Module_ID);
 
                 //Did something go wrong we return the view with the model.
                 return View(module);
@@ -258,9 +251,6 @@ namespace MvcApplication1.Controllers
             @ViewBag.WeekSchedule = GetWeekschedule(module);
             @ViewBag.AssignmentCode = GetAssignmentcode(module);
 
-            foreach (var item in module.ModelWithWorkform)
-                item.Workform = workformRepository.Get(item.Workform_ID);
-
             try
             {
                 //Get a list of modules based on this learnline, workform, gradetype. 
@@ -304,6 +294,8 @@ namespace MvcApplication1.Controllers
                 foreach (var item in module.AssignmentCode)
                     moduleRepository.AssignmentcodeAndModules(id, item.Description, item.EC);
 
+                foreach (var item in module.ModuleStudyPhasingBlock)
+                    moduleRepository.StudyBlockPhasingAndModules(id, item.Study_ID, item.Block_ID, item.Phasing_ID);
 
                 return RedirectToAction("Index");
             }
@@ -396,6 +388,9 @@ namespace MvcApplication1.Controllers
                 foreach (var item in module.AssignmentCode)
                     moduleRepository.AssignmentcodeAndModules(newestID, item.Description, item.EC);
 
+                foreach (var item in module.ModuleStudyPhasingBlock)
+                    moduleRepository.StudyBlockPhasingAndModules(id, item.Study_ID, item.Block_ID, item.Phasing_ID);
+
                 module.Module_ID = newestID;
 
                 moduleRepository.LinkingsOfModule(module);
@@ -413,6 +408,8 @@ namespace MvcApplication1.Controllers
                     item.Module = moduleRepository.Get(item.Module_ID);
                 foreach (var item in module.Level)
                     item.Competence = competenceRepository.Get(item.Competence_ID);
+                foreach (var item in module.ModuleStudyPhasingBlock)
+                   item.Module =  moduleRepository.Get(item.Module_ID);
 
                 return View(module);
             }
