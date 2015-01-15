@@ -55,7 +55,7 @@ namespace Waterval.Controllers {
 			Block model = BlockRepository.Get( id );
 			return View( model );
 		}
-
+	[Authorize(Roles="CreateBlock")]
 		public ActionResult Create ( ) {
 			Block block = new Block( );
 			return View( block );
@@ -72,6 +72,7 @@ namespace Waterval.Controllers {
 				return View( block );
 			}
 		}
+		[Authorize(Roles="EditBlock")]
 		public ActionResult Edit ( int id ) {
 			var model = BlockRepository.Get( id );
 			return View( model );
@@ -90,7 +91,7 @@ namespace Waterval.Controllers {
 			}
 		}
 
-		[HttpPost]
+		[Authorize(Roles="DeleteBlock")]
 		public ActionResult Delete ( Block blok ) {
 
 			BlockRepository.Delete( blok.Block_ID );

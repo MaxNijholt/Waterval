@@ -4,71 +4,81 @@
 
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Styles.Render( "~/Content/css" )
+@Styles.Render("~/Content/css")
 
 
 
 
 <div class="container">
-    <h2>Blok Overzicht</h2>
-    @using ( Html.BeginForm( "Index", "Block", FormMethod.Get ) ) {
-        @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in blokken", @class = "form-control" } )
-        <span class="input-group-btn">
-            <button class="btn btn-default" type="submit">
-                <span class="glyphicon glyphicon-search"></span>
-            </button>
-        </span>
-    }
+	<h2>Blok Overzicht</h2>
+	@using(Html.BeginForm("Index", "Block", FormMethod.Get))
+	{
+		@Html.TextBox("SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in blokken", @class = "form-control" })
+		<span class="input-group-btn">
+			<button class="btn btn-default" type="submit">
+				<span class="glyphicon glyphicon-search"></span>
+			</button>
+		</span>
+	}
 
-    <table class="table table-bordered table-striped">
-        <tr>
-            <th>@Html.ActionLink( "Titel", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
+	<table class="table table-bordered table-striped">
+		<tr>
+			<th>@Html.ActionLink("Titel", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
+			@if(Waterval.Controllers.OAuthController.IsUserInRole("EditBlock"))
+			{
+				<th>Aanpassen</th>
+			}
+			@if(Waterval.Controllers.OAuthController.IsUserInRole("DeleteBlock"))
+			{
+				<th>Verwijderen</th>
+			}
 
-            <th>Aanpassen</th>
-            <th>Verwijderen</th>
-        </tr>
-        <tr>
+		</tr>
+		<tr>
 
-            @foreach ( var item in Model ) {
-            <tr>
-                <td>
-                    @Html.ActionLink( item.Title, "Details", new { id = item.Block_ID } )
-                </td>
-                <td>
-                    @Html.ActionLink( "Aanpassen", "Edit", new { id = item.Block_ID }, new { @class = "btn btn-warning" } )
-                </td>
-                <td>
-                    <input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Block_ID" class="btn btn-avans">
-                </td>
-            </tr>
-            }
-        </table>
+			@foreach(var item in Model)
+			{
+			<tr>
+				<td>@Html.ActionLink(item.Title, "Details", new { id = item.Block_ID })</td>
+				@if(Waterval.Controllers.OAuthController.IsUserInRole("EditBlock"))
+				{
+					<td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Block_ID }, new { @class = "btn btn-warning" })</td>
+				}
+				@if(Waterval.Controllers.OAuthController.IsUserInRole("DeleteBlock"))
+				{
+					<td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Block_ID" class="btn btn-avans"></td>
+				}
+			</tr>
+			}
+		</table>
+		@if(Waterval.Controllers.OAuthController.IsUserInRole("CreateBlock"))
+		{
+			@Html.ActionLink("Nieuw Blok", "Create", null, new { @class = "btn btn-success" })
+		}
+	</div>
+	<br />
+	Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-        @Html.ActionLink( "Nieuw Blok", "Create", null, new { @class = "btn btn-success" } )
-    </div>
-    <br />
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+	@Html.PagedListPager(Model, page => Url.Action("Index",
+	new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
-    @Html.PagedListPager( Model, page => Url.Action( "Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } ) )
+	@section Scripts {
+		<script>
+			$('input[type="button"]').click(function (e) {
+				var title = $(this).attr('data-name');
+				var id = $(this).attr('data-id');
 
-@section Scripts {
-    <script>
-        $('input[type="button"]').click(function (e) {
-            var title = $(this).attr('data-name');
-            var id = $(this).attr('data-id');
+				if (confirm('Gegevens van ' + title + ' verwijderen?')) {
+					var url = "/Block/Delete";
 
-            if (confirm('Gegevens van ' + title + ' verwijderen?')) {
-                var url = "/Block/Delete";
-
-                $.post(url, { Block_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
-                    $("#msg").html(data);
-                });
-                $(this).closest('tr').remove()
-            }
-        })
-    </script>
-}
+					$.post(url, { Block_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
+						$("#msg").html(data);
+					});
+					$(this).closest('tr').remove()
+				}
+			})
+		</script>
+	}

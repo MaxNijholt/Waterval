@@ -1,58 +1,64 @@
 ﻿@model DomainModel.Models.Block
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @Styles.Render("~/Content/css")
 
 <div class="container">
-    <h2>Blok Details: @Html.DisplayFor(model => model.Title)</h2>
+	<h2>Blok Details: @Html.DisplayFor(model => model.Title)</h2>
 
-    <table class="table table-bordered table-striped">
-        <tr>
-            <th>Titel</th>
-        </tr>
-        <tr>
-            <td>@Html.DisplayFor(model => model.Title)</td>
-        </tr>
-    </table>
-    @foreach (var stud in Model.ModuleStudyPhasingBlock.Select(b => new { Study_ID = b.Study_ID, Study_Name = b.Study.Title }).Distinct())
-    {
-        <input type="button" value="@stud.Study_Name" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target='#@stud.Study_ID'>
-            <br />    <br />
-    <div>
-        <div id=@stud.Study_ID class="panel-collapse collapse in">
+	<table class="table table-bordered table-striped">
+		<tr>
+			<th>Titel</th>
+		</tr>
+		<tr>
+			<td>@Html.DisplayFor(model => model.Title)</td>
+		</tr>
+	</table>
+	@foreach(var stud in Model.ModuleStudyPhasingBlock.Select(b => new { Study_ID = b.Study_ID, Study_Name = b.Study.Title }).Distinct())
+	{
+		<input type="button" value="@stud.Study_Name" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target='#@stud.Study_ID'>
+		<br />    <br />
+		<div>
+			<div id=@stud.Study_ID class="panel-collapse collapse in">
 
-            @Html.ActionLink(stud.Study_Name, "Details", "Study", new { id = stud.Study_ID }, null)
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <th>Module</th>
-                    <th>Studierichting</th>
-                </tr>
+				@Html.ActionLink(stud.Study_Name, "Details", "Study", new { id = stud.Study_ID }, null)
+				<table class="table table-bordered table-striped">
+					<tr>
+						<th>Module</th>
+						<th>Studierichting</th>
+					</tr>
 
-                @foreach (var item in Model.ModuleStudyPhasingBlock.Where(s => s.Study_ID == stud.Study_ID))
-                {
-                    <tr>
-                        <td>
-                            @Html.ActionLink(item.Module.Title, "Details", "Module",new { id= item.Module_ID } , null)
-                         
-                        </td>
-                        <td>
-                            @Html.ActionLink(item.Study.Title, "Details", "Phasing", new { id = item.Phasing_ID }, null)
-                        </td>
+					@foreach(var item in Model.ModuleStudyPhasingBlock.Where(s => s.Study_ID == stud.Study_ID))
+					{
+						<tr>
+							<td>
+								@Html.ActionLink(item.Module.Title, "Details", "Module", new { id = item.Module_ID }, null)
 
-                    </tr>
-                }
-            </table>
-        </div>
-    </div>
-        
-        <br />
-    }
- 
+							</td>
+							<td>
+								@Html.ActionLink(item.Study.Title, "Details", "Phasing", new { id = item.Phasing_ID }, null)
+							</td>
+
+						</tr>
+					}
+				</table>
+			</div>
+		</div>
+
+		<br />
+	}
 
 
-@Html.ActionLink("Aanpassen", "Edit", new { id = Model.Block_ID }, new { @class = "btn btn-warning" })| <!--TODO: new { id = item.BlokID } op locatie van null-->
-@Html.ActionLink("Verwijderen", "Delete", new { id = Model.Block_ID }, new { @class = "btn btn-danger" })| <!--TODO: new { id = item.BlokID } op locatie van null-->
-@Html.ActionLink("Terug naar Index", "Index")
+	@if(Waterval.Controllers.OAuthController.IsUserInRole("EditBlock"))
+	{
+		@Html.ActionLink("Aanpassen", "Edit", new { id = Model.Block_ID }, new { @class = "btn btn-warning" })
+	}
+	@if(Waterval.Controllers.OAuthController.IsUserInRole("DeleteBlock"))
+	{
+		@Html.ActionLink("Verwijderen", "Delete", new { id = Model.Block_ID }, new { @class = "btn btn-danger" })
+	}
+
+	@Html.ActionLink("Terug naar Index", "Index")
 </div>
