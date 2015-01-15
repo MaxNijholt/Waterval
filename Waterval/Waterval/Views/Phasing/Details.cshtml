@@ -15,11 +15,43 @@
 			</tr>
 		</thead>
 		<tr>
-			@Model.Title
+            <td>@Model.Title</td>
 		</tr>
 	</table>
 
+    @foreach (var stud in Model.ModuleStudyPhasingBlock.Select(b => new { Block_ID = b.Block_ID, Block_Name = b.Block.Title }).Distinct())
+    {
+        <input type="button" value="@stud.Block_Name" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target='#@stud.Block_ID'>
+        <br />    <br />
+        <div>
+            <div id=@stud.Block_ID class="panel-collapse collapse in">
 
+                @Html.ActionLink(stud.Block_Name, "Details", "Block", new { id = stud.Block_ID }, null)
+                <table class="table table-bordered table-striped">
+                    <tr>
+                        <th>Module</th>
+                        <th>Studierichting</th>
+                    </tr>
+
+                    @foreach (var item in Model.ModuleStudyPhasingBlock.Where(s => s.Block_ID == stud.Block_ID))
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(item.Module.Title, "Details", "Module", new { id = item.Module_ID }, null)
+
+                            </td>
+                            <td>
+                                @Html.ActionLink(item.Study.Title, "Details", "Phasing", new { id = item.Phasing_ID }, null)
+                            </td>
+
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+        <br />
+    }
 
 
 
