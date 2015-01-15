@@ -23,8 +23,6 @@ namespace Waterval.Controllers
         public static string            ACCESS_TOKEN;
         public static string            ACCESS_SECRET;
 
-        public static string            USERNAME;
-
         // Fields
         public static RestClient        client;
         private static string           requestSecret;
@@ -112,7 +110,14 @@ namespace Waterval.Controllers
 
         public static bool IsUserInRole(string role) {
             if (!System.Web.HttpContext.Current.Request.IsAuthenticated) return false;
-            if (role.Equals("Admin")) return true;
+            List<AccountLaw> acc = new AccountRepository().GetAllLawsThatBelongToThatAccount(System.Web.HttpContext.Current.User.Identity.Name);
+            foreach (AccountLaw al in acc)
+            {
+                if (al.LawName.Equals(role))
+                {
+                    return true;
+                }
+            }
             return false;
         }
 
