@@ -20,8 +20,8 @@ namespace RepositoryModel.Repository {
             return dbContext.Account.ToList();
         }
 
-        public Account Get(int accountId) {
-            return dbContext.Account.Find(accountId);
+        public Account Get(string name) {
+            return dbContext.Account.SingleOrDefault(a => a.Username == name);
         }
 
         public Account Create(Account account) {
@@ -32,13 +32,34 @@ namespace RepositoryModel.Repository {
         }
 
         public Account Update(Account account) {
-            // Add to database
-            throw new NotImplementedException();
+            Account a = dbContext.Account.SingleOrDefault(b => b.Account_ID == account.Account_ID);
+            if (a == null) return null;
+            a.Username = account.Username;
+            a.isActive = account.isActive;
+            return account;
         }
 
         public void Delete(Account account) {
-            // Add to database
-            throw new NotImplementedException();
+            Account a = dbContext.Account.SingleOrDefault(b => b.Account_ID == account.Account_ID);
+
+            a.isActive = false;
+
+            dbContext.SaveChanges();
+        }
+
+        public List<AccountRole> GetAllAccountRoles()
+        {
+            return dbContext.AccountRole.ToList();
+        }
+
+        public AccountRole GetAcountRoles(string name)
+        {
+            return dbContext.AccountRole.SingleOrDefault(a => a.RoleName == name);
+        }
+        public List<AccountLaw> GetAllLawsThatBelongToThatAccount(string name)
+        {
+            Account acc = dbContext.Account.SingleOrDefault(a => a.Username == name);
+            return acc.AccountRole.AccountLaw.ToList();
         }
     }
 

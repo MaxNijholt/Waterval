@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using DomainModel.Models;
+using Newtonsoft.Json.Linq;
+using RepositoryModel.IRepository;
+using RepositoryModel.Repository;
 using RestSharp;
 using RestSharp.Authenticators;
 using System;
@@ -19,8 +22,6 @@ namespace Waterval.Controllers
 
         public static string            ACCESS_TOKEN;
         public static string            ACCESS_SECRET;
-
-        public static string            USERNAME;
 
         // Fields
         public static RestClient        client;
@@ -68,9 +69,27 @@ namespace Waterval.Controllers
             string username = (string) obj["id"];
             bool employee = (bool) obj["employee"];
 
+            /* 
+             * VERANDEREN NAAR EMPLOYEE INPLAATSVAN !EMPLOYEE
+             */
             if (!string.IsNullOrEmpty(username) && !employee) {
+                IAccountRepository accounts = new AccountRepository();
+                Account acc = accounts.Get(username);
+                if (acc != null && !acc.isActive)
+                    return RedirectToAction("Index", "Home");
+                if (acc == null)
+                {
+                    accounts.Create(new Account
+                    {
+                        Username = username,
+                        isActive = true,
+                        AccountRole = accounts.GetAcountRoles("Default")
+                    });
+                }
                 FormsAuthentication.SetAuthCookie(username, false);
             }
+
+            
 
             return RedirectToAction("Index", "Home");
             //USERNAME = obj["id"].ToString();
@@ -91,7 +110,14 @@ namespace Waterval.Controllers
 
         public static bool IsUserInRole(string role) {
             if (!System.Web.HttpContext.Current.Request.IsAuthenticated) return false;
-            if (role.Equals("Admin")) return true;
+            List<AccountLaw> acc = new AccountRepository().GetAllLawsThatBelongToThatAccount(System.Web.HttpContext.Current.User.Identity.Name);
+            foreach (AccountLaw al in acc)
+            {
+                if (al.LawName.Equals(role))
+                {
+                    return true;
+                }
+            }
             return false;
         }
 
