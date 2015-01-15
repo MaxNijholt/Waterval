@@ -39,7 +39,7 @@
                     <td>@Html.ActionLink(item.Title, "Details", new { id = item.LearnLine_ID })</td>
                     <td>@item.Definition</td>
                     <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.LearnLine_ID }, new { @class = "btn btn-warning" })</td>
-                    <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.LearnLine_ID" class="btn btn-avans"></td>
+                    <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.LearnLine_ID" class="btn btn-danger"></td>
                 </tr>   }
 
 

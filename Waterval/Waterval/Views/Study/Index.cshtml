@@ -25,7 +25,7 @@
                     <td>@item.Definition</td>
                     <td>@Html.ActionLink("Open Modules", "Index", "Module", new { id = item.Study_ID }, new { @class = "btn btn-avans" })</td>
                     <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Study_ID }, new { @class = "btn btn-warning" })</td>
-                    <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Study_ID" class="btn btn-avans"></td>
+                    <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Study_ID" class="btn btn-danger"></td>
                 </tr>
             }
         </table>

@@ -23,7 +23,7 @@
                     <td>@Html.ActionLink(item.Cohort, "Details", new { id = item.Program_ID })</td>
                     <td>@Html.ActionLink("Open Modules", "Index", "Module", new { id = item.Program_ID }, new { @class = "btn btn-avans" })</td>
                     <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Program_ID }, new { @class = "btn btn-warning" })</td>
-                    <td><input type="button" value="Verwijderen" data-name="@item.Cohort" data-id="@item.Program_ID" class="btn btn-avans"></td>
+                    <td><input type="button" value="Verwijderen" data-name="@item.Cohort" data-id="@item.Program_ID" class="btn btn-danger"></td>
                 </tr>
             }
         </table>

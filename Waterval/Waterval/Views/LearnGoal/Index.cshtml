@@ -15,8 +15,8 @@
                 <tr>
                     <th>Omschrijving</th>
                     <th>Aanpassen</th>
-                    <th>Nieuwe Versie</th>
                     <th>Verwijderen</th>
+                    <th>Nieuwe Versie</th>
                 </tr>
             </thead>
             @foreach (var item in Model)
@@ -26,8 +26,8 @@
                     @Html.ActionLink(@item.Description, "Details", new { id = item.LearnGoal_ID }, null)
                    </td>
                     <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.LearnGoal_ID }, new { @class = "btn btn-warning" })</td>
+                    <td><input type="button" value="Verwijderen" data-name="@item.Description" data-id="@item.LearnGoal_ID" class="btn btn-danger"></td>
                     <td>@Html.ActionLink("Nieuwe versie", "ToNewVersion", new { id = item.LearnGoal_ID }, new { @class = "btn btn-avans" })</td>
-                    <td><input type="button" value="Verwijderen" data-name="@item.Description" data-id="@item.LearnGoal_ID" class="btn btn-avans"></td>
 
                 </tr>   }
 
