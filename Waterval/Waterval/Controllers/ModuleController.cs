@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using PagedList;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using System.ComponentModel.DataAnnotations;
 
 namespace MvcApplication1.Controllers
 {
@@ -22,14 +23,11 @@ namespace MvcApplication1.Controllers
         private ThemeRepository themeRepository;
         private CompetenceRepository competenceRepository;
         private LearningToolRepository learningtoolRepository;
-        //private LearnGoalRepository learngoalRepository;
-
-        //private ProgramRepository programRepository;
-        //private StudyRepository studyRepository;
-
-
-
+        private LearnGoalRepository learngoalRepository;
+        private StudyRepository studyRepository;
+        private BlockRepository blockRepository;
         private WorkformRepository workformRepository;
+        private PhasingRepository phasingRepository;
 
 
         public ModuleController()
@@ -41,9 +39,10 @@ namespace MvcApplication1.Controllers
             competenceRepository = new CompetenceRepository();
             workformRepository = new WorkformRepository();
             learningtoolRepository = new LearningToolRepository();
-            //learngoalRepository = new LearnGoalRepository();
-            //programRepository = new ProgramRepository();
-            //studyRepository = new StudyRepository();
+            learngoalRepository = new LearnGoalRepository();
+            studyRepository = new StudyRepository();
+            blockRepository = new BlockRepository();
+            phasingRepository = new PhasingRepository();
 
         }
 
@@ -100,18 +99,29 @@ namespace MvcApplication1.Controllers
 
             @ViewBag.LearnLineList = GetLearnLines(module);
             @ViewBag.ThemeList = GetThemes(module);
-            //@ViewBag.LearnGoalList = GetLearnGoals(module);
+            @ViewBag.LearnGoalList = GetLearnGoals(module);
             @ViewBag.LearningToolList = GetLearningTools(module);
 
             @ViewBag.CompetenceList = GetCompetence(module);
-            //@ViewBag.ProgramList = GetProgram(module);
-            //@ViewBag.StudyList = GetStudy(module);
+            @ViewBag.StudyList = GetStudy(module);
 
             @ViewBag.WorkformList = GetWorkForms(module);
             @ViewBag.GradeTypes = GetGradeTypes(module);
             @ViewBag.WeekSchedule = GetWeekschedule(module);
             @ViewBag.AssignmentCode = GetAssignmentcode(module);
 
+            List<SelectListItem> items = new List<SelectListItem>();
+
+            foreach (var item in blockRepository.GetAll()){
+                items.Add(new SelectListItem { Text = item.Title, Value = item.Block_ID.ToString() });
+            }
+            ViewData["block"] = items;
+
+            @ViewBag.Test = studyRepository.GetAll();
+
+            ViewBag.Study_ID = new SelectList(studyRepository.GetAll(), "Study_ID", "Title");
+            ViewBag.Phasing_ID = new SelectList(phasingRepository.GetAll(), "Phasing_ID", "Title");
+            ViewBag.Block_ID = new SelectList(blockRepository.GetAll(), "Block_ID", "Title");
 
             return View(module);
         }
@@ -121,16 +131,16 @@ namespace MvcApplication1.Controllers
         {
             @ViewBag.LearnLineList = GetLearnLines(module);
             @ViewBag.ThemeList = GetThemes(module);
-            //@ViewBag.LearnGoalList = GetLearnGoals(module);
+            @ViewBag.LearnGoalList = GetLearnGoals(module);
             @ViewBag.LearningToolList = GetLearningTools(module);
 
             @ViewBag.CompetenceList = GetCompetence(module);
-            //@ViewBag.ProgramList = GetProgram(module);
-            //@ViewBag.StudyList = GetStudy(module);
+            @ViewBag.StudyList = GetStudy(module);
             @ViewBag.WorkformList = GetWorkForms(module);
             @ViewBag.GradeTypes = GetGradeTypes(module);
             @ViewBag.WeekSchedule = GetWeekschedule(module);
             @ViewBag.AssignmentCode = GetAssignmentcode(module);
+
             try
             {
 
@@ -157,6 +167,10 @@ namespace MvcApplication1.Controllers
                 foreach (var item in module.AssignmentCode)
                     moduleRepository.AssignmentcodeAndModules(id, item.Description, item.EC);
 
+               // ViewBag.Block_ID = new SelectList(blockRepository.GetAll(), "Block_ID", "Title", 1);
+               // ViewBag.Study_ID = new SelectList(studyRepository.GetAll(), "Study_ID", "Title", module.Study.Select(a=>a.Study_ID));
+               // ViewBag.Phasing_ID = new SelectList(phasingRepository.GetAll(), "Phasing_ID", "Title", module.ModuleStudyPhasingBlock);
+                
                 //We go back to the index.
                 return RedirectToAction("Index");
             }
@@ -212,12 +226,11 @@ namespace MvcApplication1.Controllers
 
             @ViewBag.LearnLineList = GetLearnLines(module);
             @ViewBag.ThemeList = GetThemes(module);
-            //@ViewBag.LearnGoalList = GetLearnGoals(module);
+            @ViewBag.LearnGoalList = GetLearnGoals(module);
             @ViewBag.LearningToolList = GetLearningTools(module);
 
             @ViewBag.CompetenceList = GetCompetence(module);
-            //@ViewBag.ProgramList = GetProgram(module);
-            //@ViewBag.StudyList = GetStudy(module);
+            @ViewBag.StudyList = GetStudy(module);
             @ViewBag.WorkformList = GetWorkForms(module);
             @ViewBag.GradeTypes = GetGradeTypes(module);
             @ViewBag.WeekSchedule = GetWeekschedule(module);
@@ -235,12 +248,11 @@ namespace MvcApplication1.Controllers
 
             @ViewBag.LearnLineList = GetLearnLines(module);
             @ViewBag.ThemeList = GetThemes(module);
-            //@ViewBag.LearnGoalList = GetLearnGoals(module);
+            @ViewBag.LearnGoalList = GetLearnGoals(module);
             @ViewBag.LearningToolList = GetLearningTools(module);
 
             @ViewBag.CompetenceList = GetCompetence(module);
-            //@ViewBag.ProgramList = GetProgram(module);
-            //@ViewBag.StudyList = GetStudy(module);
+            @ViewBag.StudyList = GetStudy(module);
             @ViewBag.WorkformList = GetWorkForms(module);
             @ViewBag.GradeTypes = GetGradeTypes(module);
             @ViewBag.WeekSchedule = GetWeekschedule(module);
@@ -255,12 +267,10 @@ namespace MvcApplication1.Controllers
                 @ViewBag.LearnLineList = GetLearnLines(module).Where(m => m.isDeleted = false);
                 @ViewBag.ThemeList = GetThemes(module).Where(m => m.isDeleted = false);
                 @ViewBag.LearningToolList = GetLearningTools(module).Where(m => m.isDeleted = false);
-
-                //  @ViewBag.LearnGoalList = GetLearnGoals(module).Where(m => m.isDeleted = false);
+                @ViewBag.LearnGoalList = GetLearnGoals(module).Where(m => m.isDeleted = false);
 
                 @ViewBag.CompetenceList = GetCompetence(module).Where(m => m.isDeleted = false);
-                //@ViewBag.ProgramList = GetProgram(module).Where(m => m.isDeleted = false);
-                //@ViewBag.StudyList = GetStudy(module).Where(m => m.isDeleted = false);
+                @ViewBag.StudyList = GetStudy(module).Where(m => m.isDeleted = false);
                 @ViewBag.WorkformList = GetWorkForms(module).Where(m => m.isDeleted = false);
                 @ViewBag.GradeTypes = GetGradeTypes(module).Where(m => m.isDeleted = false);
                 @ViewBag.WeekSchedule = GetWeekschedule(module).Where(m => m.isDeleted = false);
@@ -336,11 +346,10 @@ namespace MvcApplication1.Controllers
 
             @ViewBag.LearnLineList = GetLearnLines(module);
             @ViewBag.ThemeList = GetThemes(module);
-            //@ViewBag.LearnGoalList = GetLearnGoals(module);
+            @ViewBag.LearnGoalList = GetLearnGoals(module);
             @ViewBag.LearningToolList = GetLearningTools(module);
             @ViewBag.CompetenceList = GetCompetence(module);
-            //@ViewBag.ProgramList = GetProgram(module);
-            //@ViewBag.StudyList = GetStudy(module);
+            @ViewBag.StudyList = GetStudy(module);
             @ViewBag.WorkformList = GetWorkForms(module);
             @ViewBag.GradeTypes = GetGradeTypes(module);
             @ViewBag.WeekSchedule = GetWeekschedule(module);
@@ -357,13 +366,14 @@ namespace MvcApplication1.Controllers
         {
             @ViewBag.LearnLineList = GetLearnLines(module);
             @ViewBag.ThemeList = GetThemes(module);
-            //@ViewBag.LearnGoalList = GetLearnGoals(module);
-
+            @ViewBag.LearnGoalList = GetLearnGoals(module);
+            @ViewBag.LearningToolList = GetLearningTools(module);
             @ViewBag.CompetenceList = GetCompetence(module);
-            //@ViewBag.ProgramList = GetProgram(module);
-            //@ViewBag.StudyList = GetStudy(module);
+            @ViewBag.StudyList = GetStudy(module);
             @ViewBag.WorkformList = GetWorkForms(module);
             @ViewBag.GradeTypes = GetGradeTypes(module);
+            @ViewBag.WeekSchedule = GetWeekschedule(module);
+            @ViewBag.AssignmentCode = GetAssignmentcode(module);
 
             try
             {
@@ -388,7 +398,7 @@ namespace MvcApplication1.Controllers
 
                 module.Module_ID = newestID;
 
-                moduleRepository.AddLinkingsModule(module);
+                moduleRepository.LinkingsOfModule(module);
 
 
                 moduleRepository.Delete(id);
@@ -403,7 +413,6 @@ namespace MvcApplication1.Controllers
                     item.Module = moduleRepository.Get(item.Module_ID);
                 foreach (var item in module.Level)
                     item.Competence = competenceRepository.Get(item.Competence_ID);
-
 
                 return View(module);
             }
@@ -461,16 +470,16 @@ namespace MvcApplication1.Controllers
             return competences.Where(m => m.isDeleted == false).ToList();
         }
 
-        //private List<LearnGoal> GetLearnGoals(Module module)
-        //{
-        //    List<LearnGoal> learngoals = learngoalRepository.GetAll();
+        private List<LearnGoal> GetLearnGoals(Module module)
+        {
+            List<LearnGoal> learngoals = learngoalRepository.GetAll();
 
-        //    if (module != null)
-        //        foreach (LearnGoal t in module.LearnGoal)
-        //            learngoals.Remove(learngoals.Where(b => b.LearnGoal_ID == t.LearnGoal_ID).First());
+            if (module != null)
+                foreach (LearnGoal t in module.LearnGoal)
+                    learngoals.Remove(learngoals.Where(b => b.LearnGoal_ID == t.LearnGoal_ID).First());
 
-        //    return learngoals.Where(m => m.isDeleted == false).ToList();
-        //}
+            return learngoals.Where(m => m.isDeleted == false).ToList();
+        }
 
         private List<LearningTool> GetLearningTools(Module module)
         {
@@ -483,27 +492,16 @@ namespace MvcApplication1.Controllers
             return learningtools.Where(m => m.isDeleted == false).ToList();
         }
 
-        //private List<Program> GetProgram(Module module)
-        //{
-        //    List<Program> programs = programRepository.GetAll();
+        private List<Study> GetStudy(Module module)
+        {
+            List<Study> studies = studyRepository.GetAll();
 
-        //    if (module != null)
-        //        foreach (Program lnl in module.Program)
-        //            programs.Remove(programs.Where(b => b.Program_ID == lnl.Program_ID).First());
+            if (module != null)
+                foreach (Study lnl in module.Study)
+                    studies.Remove(studies.Where(b => b.Study_ID == lnl.Study_ID).First());
 
-        //    return programs.Where(m => m.isDeleted == false).ToList();
-        //}
-
-        //private List<Study> GetStudy(Module module)
-        //{
-        //    List<Study> studies = studyRepository.GetAll();
-
-        //    if (module != null)
-        //        foreach (Study lnl in module.Study)
-        //            studies.Remove(studies.Where(b => b.Study_ID == lnl.Study_ID).First());
-
-        //    return studies.Where(m => m.isDeleted == false).ToList();
-        //}
+            return studies.Where(m => m.isDeleted == false).ToList();
+        }
 
         private List<Module> GetGradeTypes(Module module)
         {

@@ -525,7 +525,9 @@
         </div>
     </div>
 </div>
+
 <hr />
+
 <div class="form-group">
     <div class="container">
         <p>
@@ -650,17 +652,19 @@
         </div>
     </div>
 </div>
+
 <hr />
+
 <div class="form-group">
     <div class="container">
         <p>
             @Html.Label("Studierichting Toevoegen", new { @class = "control-label" })
         </p>
-        <div id="ValidationMesStudy" class="alert alert-danger hidden">
+        <div id="ValidationMesStudya" class="alert alert-danger hidden">
             Minstens een studierichting verplicht
         </div>
         <br /><br />
-        <table class="table table-bordered table-striped table-responsive" id="StudyTable">
+        <table class="table table-bordered table-striped table-responsive" id="StudyaTable">
             <thead>
                 <tr>
                     <th width="20%">Onderwerp</th>
@@ -683,12 +687,12 @@
                     }*@
             </tbody>
         </table>
-        <input type="button" value="Studierichting Toevoegen" name="btn_collapseStudy" class="btn btn-avans" data-toggle="collapse" data-target="#collapseStudy">
+        <input type="button" value="Studierichting Toevoegen" name="btn_collapseStudya" class="btn btn-avans" data-toggle="collapse" data-target="#collapseStudya">
         <br />
         <br />
-        <div id="collapseStudy" class="panel-collapse collapse open">
-            <input type="text" class="form-control" placeholder="Studierichting..." name="TempValue" id="searchTerm" onkeyup="doSearch('StudyTable')" style:size="10" />
-            <table class="table table-bordered table-striped" id="TableStudy">
+        <div id="collapseStudya" class="panel-collapse collapse open">
+            <input type="text" class="form-control" placeholder="Studierichting..." name="TempValue" id="searchTerm" onkeyup="doSearch('StudyaTable')" style:size="10" />
+            <table class="table table-bordered table-striped" id="TableStudya">
                 <thead>
                     <tr>
                         <th>Onderwerp</th>
@@ -696,7 +700,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Laat alle modules zien die nog niet zijn verwerkt -->
+                    Laat alle modules zien die nog niet zijn verwerkt
                     @*@foreach (Study item in @ViewBag.StudyList)
                         {
                             <tr id="@item.Study_ID">
@@ -708,6 +712,176 @@
             </table>
         </div>
     </div>
+
+
+
+
+
+@*@Html.DropDownListFor(model => model.Module_ID, new SelectList(
+              Model.Title,
+              "id",
+              "name",
+              Model.Module_ID))*@
+
+    @*@Html.DropDownListFor(m => m.Study.Select(s=>s.Study_ID),
+                new SelectList(Model.Study,
+                               "Study_ID", "Title",
+                               Model.Study.First().Study_ID))*@
+
+   @Html.DropDownList("Blokken", ViewData["block"] as List<SelectListItem>)
+@Html.DropDownListFor(m => m.Study, new SelectList(Model.Study, "Value", "Text"))
+        @Html.ValidationMessageFor(model => model.ModuleStudyPhasingBlock.FirstOrDefault().Study_ID)
+
+    @Html.DropDownList("Block_ID", "[Select]")
+    @Html.ValidationMessageFor(model => model.ModuleStudyPhasingBlock.FirstOrDefault().Block_ID)
+    @Html.DropDownList("Study_ID", "[Select]")
+    @Html.ValidationMessageFor(model => model.ModuleStudyPhasingBlock.FirstOrDefault().Study_ID)
+    @Html.DropDownList("Phasing_ID", "[Select]")
+    @Html.ValidationMessageFor(model => model.ModuleStudyPhasingBlock.FirstOrDefault().Phasing_ID)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="form-group">
+        <div class="container">
+            <p>
+                @Html.Label("TEST STUDYBLOCKPHASING Toevoegen", new { @class = "control-label" })
+            </p>
+            <div id="ValidationMesStudy" class="alert alert-danger hidden">
+                Minstens een studierichting, blok en fasering verplicht
+            </div>
+            <br /><br />
+            <table class="table table-bordered table-striped table-responsive" id="StudyTable">
+                <thead>
+                    <tr>
+                        <th width="40%">Studierichting</th>
+                        <th width="10%">Blok</th>
+                        <th width="10%">Fasering</th>
+                        <th>Verwijderen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ModuleStudyPhasingBlock)
+                    {
+                        if (item.Study.isDeleted) { continue; }
+                        <tr id="@item.Study_ID">
+                            <td>
+                                @item.Study.Definition <input type="text" id="@item.Study_ID" class="hidden" />
+                            </td>
+                            <td>
+                                @Html.DropDownList("Blokken", ViewData["block"] as List<SelectListItem>)
+                            </td>
+                            <td>
+                                <input type="button" value="Verwijderen" id="btn_deleteStudy" data-id="@item.Study_ID" class="btn btn-danger" />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <input type="button" value="Studierichting Toevoegen" name="btn_collapseStudy" class="btn btn-avans" data-toggle="collapse" data-target="#collapseStudy">
+            <br />
+            <br />
+            <div id="collapseStudy" class="panel-collapse collapse open">
+                <input type="text" class="form-control" placeholder="Studierichting..." name="TempValue" id="searchTerm" onkeyup="doSearch('StudyTable')" style:size="10" />
+                <table class="table table-bordered table-striped" id="TableStudy">
+                    <thead>
+                        <tr>
+                            <th>Onderwerp</th>
+                            <th>Toevoegen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Laat alle modules zien die nog niet zijn verwerkt -->
+                        @foreach (Study item in @ViewBag.StudyList)
+                        {
+                            <tr id="@item.Study_ID">
+                                <td id="Title">@item.Title</td>
+                                <td><input type="button" value="+" id="btn_addStudy" data-id="@item.Study_ID" class="btn btn-avans" /></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="container">
         @if (Model.PrevModule_ID != null)
         {

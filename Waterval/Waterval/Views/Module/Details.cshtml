@@ -68,68 +68,72 @@
         </table>
 
 
-        <div class="container">
-            <p>Leerdoelen</p>
-            <input type="button" value="Leerdoelen tonen" name="btn_collapseLearnGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseLearnGoal">
+        <input type="button" value="Alles tonen" name="btn_collapseAll" class="btn btn-avans" data-toggle="collapse" data-target="#collapseAll">
 
-            <div id="collapseLearnGoal" class="panel-collapse collapse open">
+        <div id="collapseAll" class="panel-collapse collapse open">
+            <br />
+            <div class="container">
+                <p>Leerdoelen</p>
+                <input type="button" value="Leerdoelen tonen" name="btn_collapseLearnGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseLearnGoal">
 
-                <table class="table table-bordered table-striped">
-                    <tr>
-                        <th>Doel</th>
-                    </tr>
-                    @foreach (var x in Model.LearnGoal.Where(c => c.isDeleted == false))
-                    {
+                <div id="collapseLearnGoal" class="panel-collapse collapse open">
+
+                    <table class="table table-bordered table-striped">
                         <tr>
-                            <td>@Html.DisplayFor(model => x.Description)</td>
+                            <th>Doel</th>
                         </tr>
-                    }
-                </table>
+                        @foreach (var x in Model.LearnGoal.Where(c => c.isDeleted == false))
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(model => x.Description)</td>
+                            </tr>
+                        }
+                    </table>
                 </div>
             </div>
 
 
-        <div class="container">
-            <p>Leermiddelen</p>
-            <input type="button" value="Leermiddelen tonen" name="btn_collapseLearnTool" class="btn btn-avans" data-toggle="collapse" data-target="#collapseLearnTool">
+            <div class="container">
+                <p>Leermiddelen</p>
+                <input type="button" value="Leermiddelen tonen" name="btn_collapseLearnTool" class="btn btn-avans" data-toggle="collapse" data-target="#collapseLearnTool">
 
-            <div id="collapseLearnTool" class="panel-collapse collapse open">
+                <div id="collapseLearnTool" class="panel-collapse collapse open">
 
-                <table class="table table-bordered table-striped">
-                    <tr>
-                        <th>Leermiddel</th>
-                    </tr>
-                    @foreach (var x in Model.LearningTool.Where(c => c.isDeleted == false))
-                    {
+                    <table class="table table-bordered table-striped">
                         <tr>
-                            <td>@Html.DisplayFor(model => x.Description)</td>
+                            <th>Leermiddel</th>
                         </tr>
-                    }
+                        @foreach (var x in Model.LearningTool.Where(c => c.isDeleted == false))
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(model => x.Description)</td>
+                            </tr>
+                        }
 
-                </table>
+                    </table>
                 </div>
             </div>
 
-        <div class="container">
-            <p>Weekplanning</p>
-            <input type="button" value="Weekplanning tonen" name="btn_collapseWeekSchedule" class="btn btn-avans" data-toggle="collapse" data-target="#collapseWeekSchedule">
+            <div class="container">
+                <p>Weekplanning</p>
+                <input type="button" value="Weekplanning tonen" name="btn_collapseWeekSchedule" class="btn btn-avans" data-toggle="collapse" data-target="#collapseWeekSchedule">
 
-            <div id="collapseWeekSchedule" class="panel-collapse collapse open">
-                <table class="table table-bordered table-striped">
-                    <tr>
-                        <th>Weeknr</th>
-                        <th>Onderwerp</th>
-                    </tr>
-                    @foreach (var i in Model.WeekSchedule.Where(c => c.isDeleted == false))
-                    {
+                <div id="collapseWeekSchedule" class="panel-collapse collapse open">
+                    <table class="table table-bordered table-striped">
                         <tr>
-                            <td>@Html.DisplayFor(model => i.WeekNr)</td>
-                            <td>@Html.DisplayFor(model => i.Description)</td>
+                            <th>Weeknr</th>
+                            <th>Onderwerp</th>
                         </tr>
-                    }
+                        @foreach (var i in Model.WeekSchedule.Where(c => c.isDeleted == false))
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(model => i.WeekNr)</td>
+                                <td>@Html.DisplayFor(model => i.Description)</td>
+                            </tr>
+                        }
 
-                </table>
-            </div>
+                    </table>
+                </div>
             </div>
 
 
@@ -151,7 +155,7 @@
                         }
                     </table>
                 </div>
-                </div>
+            </div>
 
 
             <div class="container">
@@ -167,15 +171,15 @@
 
                         @foreach (var i in Model.AssignmentCode.Where(c => c.isDeleted == false))
                         {
-                        <tr>
-                            <td>@Html.DisplayFor(model => i.Description)</td>
-                            <td>@Html.DisplayFor(model => i.EC)</td>
-                        </tr>
+                            <tr>
+                                <td>@Html.DisplayFor(model => i.Description)</td>
+                                <td>@Html.DisplayFor(model => i.EC)</td>
+                            </tr>
                         }
 
                     </table>
                 </div>
-                </div>
+            </div>
 
             <div class="container">
                 <p>Werkvorm</p>
@@ -193,18 +197,18 @@
 
                         @foreach (var i in Model.ModelWithWorkform.Where(c => c.Workform.isDeleted == false))
                         {
-                        <tr>
-                            <td>@Html.DisplayFor(model => i.Workform.Description)</td>
-                            <td>@Html.DisplayFor(model => i.Duration) Weken</td>
-                            <td>@Html.DisplayFor(model => i.Frequency)</td>
-                            <td>@Html.DisplayFor(model => i.Workload)</td>
+                            <tr>
+                                <td>@Html.DisplayFor(model => i.Workform.Description)</td>
+                                <td>@Html.DisplayFor(model => i.Duration) Weken</td>
+                                <td>@Html.DisplayFor(model => i.Frequency)</td>
+                                <td>@Html.DisplayFor(model => i.Workload)</td>
 
-                        </tr>
+                            </tr>
                         }
 
                     </table>
-                    </div>
                 </div>
+            </div>
 
 
             <div class="container">
@@ -221,88 +225,96 @@
 
                         @foreach (var i in Model.LearnLine.Where(c => c.isDeleted == false))
                         {
-                        <tr>
-                            <td>@Html.ActionLink(i.Title, "../Leerlijn/Details", new { id = i.LearnLine_ID })</td>
+                            <tr>
+                                <td>@Html.ActionLink(i.Title, "../Leerlijn/Details", new { id = i.LearnLine_ID })</td>
 
-                            <td>@Html.DisplayFor(model => i.Definition)</td>
-                        </tr>
+                                <td>@Html.DisplayFor(model => i.Definition)</td>
+                            </tr>
                         }
 
                     </table>
                 </div>
-                </div>
-
-
-        <div class="container">
-            <p>Thema's</p>
-            <input type="button" value="Thema's tonen" name="btn_collapseTheme" class="btn btn-avans" data-toggle="collapse" data-target="#collapseTheme">
-
-            <div id="collapseTheme" class="panel-collapse collapse open">
-                <table class="table table-bordered table-striped">
-                    <tr>
-                        <th>Naam</th>
-                        <th>Omschrijving</th>
-                    </tr>
-
-                    @foreach (var i in Model.Theme.Where(c => c.isDeleted == false))
-                    {
-                    <tr>
-                        <td>@Html.ActionLink(i.Title, "../Theme/Details", new { id = i.Theme_ID })</td>
-                        <td>@Html.DisplayFor(model => i.Definition)</td>
-                    </tr>
-                    }
-
-                </table>
             </div>
-            </div>
-
-        <div class="container">
-            <p>Compententie's</p>
-            <input type="button" value="Compententie's tonen" name="btn_collapseCompetence" class="btn btn-avans" data-toggle="collapse" data-target="#collapseCompetence">
-
-            <div id="collapseCompetence" class="panel-collapse collapse open">
-                <table class="table table-bordered table-striped">
-                    <tr>
-                        <th>Titel</th>
-                        <th>Omschrijving</th>
-                    </tr>
-                    @foreach (var i in Model.Level.Where(c => c.Competence.isDeleted == false))
-                    {
-                    <tr>
-                        <td>@Html.ActionLink(i.Competence.Title, "../Competence/Details", new { id = i.Competence_ID })</td>
-                        <td>@Html.DisplayFor(model => i.Competence.Definition_Short)</td>
-                    </tr>
-                    }
-                </table>
-
-            </div>
-
 
 
             <div class="container">
-                <p>Studierichting</p>
-                <input type="button" value="Studierichting tonen" name="btn_collapseStudy" class="btn btn-avans" data-toggle="collapse" data-target="#collapseStudy">
+                <p>Thema's</p>
+                <input type="button" value="Thema's tonen" name="btn_collapseTheme" class="btn btn-avans" data-toggle="collapse" data-target="#collapseTheme">
 
-                <div id="collapseStudy" class="panel-collapse collapse open">
+                <div id="collapseTheme" class="panel-collapse collapse open">
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <th>Onderwerp</th>
+                            <th>Naam</th>
+                            <th>Omschrijving</th>
                         </tr>
-                        @*@foreach (var i in Model.Study.Where(c => c.isDeleted == false))
+
+                        @foreach (var i in Model.Theme.Where(c => c.isDeleted == false))
                         {
-                        <tr>
-                        <td>@Html.ActionLink(i.Title, "../Study/Details", new { id = i.Study_ID })</td>
-                        </tr>
-                        }*@
+                            <tr>
+                                <td>@Html.ActionLink(i.Title, "../Theme/Details", new { id = i.Theme_ID })</td>
+                                <td>@Html.DisplayFor(model => i.Definition)</td>
+                            </tr>
+                        }
 
                     </table>
+                </div>
+            </div>
+
+            <div class="container">
+                <p>Compententie's</p>
+                <input type="button" value="Compententie's tonen" name="btn_collapseCompetence" class="btn btn-avans" data-toggle="collapse" data-target="#collapseCompetence">
+
+                <div id="collapseCompetence" class="panel-collapse collapse open">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <th>Titel</th>
+                            <th>Omschrijving</th>
+                        </tr>
+                        @foreach (var i in Model.Level.Where(c => c.Competence.isDeleted == false))
+                        {
+                            <tr>
+                                <td>@Html.ActionLink(i.Competence.Title, "../Competence/Details", new { id = i.Competence_ID })</td>
+                                <td>@Html.DisplayFor(model => i.Competence.Definition_Short)</td>
+                            </tr>
+                        }
+                    </table>
+
+                </div>
+                </div>
+
+                <div class="container">
+                    <p>Studierichting</p>
+                    <input type="button" value="Studierichting tonen" name="btn_collapseStudy" class="btn btn-avans" data-toggle="collapse" data-target="#collapseStudy">
+
+                    <div id="collapseStudy" class="panel-collapse collapse open">
+                        <table class="table table-bordered table-striped">
+                            <tr>
+                                <th>Studiericting</th>
+                                <th>Block</th>
+                                <th>Fasering</th>
+
+
+                            </tr>
+                            @foreach (var i in Model.Study.Where(c => c.isDeleted == false))
+                            {
+                            <tr>
+                            <td>@Html.ActionLink(i.Title, "../Study/Details", new { id = i.Study_ID })</td>
+                            <td>Blokken</td>
+                            <td>Faseringen</td>
+
+                            </tr>
+                            }
+
+                        </table>
                     </div>
                 </div>
 
+            <br />
+
+        </div>
 
 
-
-        </fieldset>
+</fieldset>
 
         <p>
             @Html.ActionLink("Aanpassen", "Edit", null, new { id = Model.Module_ID }, new { @class = "btn btn-warning" })

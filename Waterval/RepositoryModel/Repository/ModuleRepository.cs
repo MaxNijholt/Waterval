@@ -33,7 +33,7 @@ namespace RepositoryModel.Repository
         public DomainModel.Models.Module Create(DomainModel.Models.Module module)
         {
 
-            AddLinkingsModule(module);
+            LinkingsOfModule(module);
 
             dbContext.Module.Add(module);
             dbContext.SaveChanges();
@@ -53,7 +53,7 @@ namespace RepositoryModel.Repository
             module.Foreknowledge = update.Foreknowledge;
             module.Account_ID = update.Account_ID;
 
-            UpdateLinkingsModule(update);
+            LinkingsOfModule(update);
 
             dbContext.SaveChanges();
             return module;
@@ -81,6 +81,107 @@ namespace RepositoryModel.Repository
             return newModule;
         }
 
+        public void LinkingsOfModule(Module module)
+        {
+            List<LearnLine> learnlines = new List<LearnLine>();
+
+            if (learnlines == null)
+            {
+                for (int index = 0; index < module.LearnLine.Count; index++)
+                {
+                    learnlines.Add(dbContext.LearnLine.Find(module.LearnLine.ElementAt(index).LearnLine_ID));
+                }
+
+                module.LearnLine = learnlines;
+            }
+            else
+            {
+                for (int index = 0; index < module.LearnLine.Count; index++)
+                {
+                    module.LearnLine.Remove(dbContext.LearnLine.Find(module.LearnLine.ElementAt(index).LearnLine_ID));
+                }
+            }
+
+            List<Theme> themes = new List<Theme>();
+
+            if (themes == null)
+            {
+                for (int index = 0; index < module.Theme.Count; index++)
+                {
+                    themes.Add(dbContext.Theme.Find(module.Theme.ElementAt(index).Theme_ID));
+                }
+
+                module.Theme = themes;
+            }
+            else
+            {
+                for (int index = 0; index < module.Theme.Count; index++)
+                {
+                    module.Theme.Remove(dbContext.Theme.Find(module.Theme.ElementAt(index).Theme_ID));
+                }
+            }
+
+            List<LearningTool> learningtools = new List<LearningTool>();
+
+            if (learningtools == null)
+            {
+
+                for (int index = 0; index < module.LearningTool.Count; index++)
+                {
+                    learningtools.Add(dbContext.LearningTool.Find(module.LearningTool.ElementAt(index).LearnTool_ID));
+                }
+
+                module.LearningTool = learningtools;
+            }
+            else
+            {
+                for (int index = 0; index < module.LearningTool.Count; index++)
+                {
+                    module.LearningTool.Remove(dbContext.LearningTool.Find(module.LearningTool.ElementAt(index).LearnTool_ID));
+                }
+            }
+
+            List<LearnGoal> learngoal = new List<LearnGoal>();
+
+            if (learngoal == null)
+            {
+
+                for (int index = 0; index < module.LearnGoal.Count; index++)
+                {
+                    learngoal.Add(dbContext.LearnGoal.Find(module.LearnGoal.ElementAt(index).LearnGoal_ID));
+                }
+
+                module.LearnGoal = learngoal;
+            }
+            else
+            {
+                for (int index = 0; index < module.LearnGoal.Count; index++)
+                {
+                    module.LearnGoal.Remove(dbContext.LearnGoal.Find(module.LearnGoal.ElementAt(index).LearnGoal_ID));
+                }
+            }
+
+            List<ModelWithWorkform> moduleWorkforms = new List<ModelWithWorkform>();
+
+            if (moduleWorkforms == null)
+            {
+                for (int index = 0; index < module.ModelWithWorkform.Count; index++)
+                {
+                    moduleWorkforms.Add(dbContext.ModelWithWorkform.Find(module.ModelWithWorkform.ElementAt(index).Workform_ID));
+                }
+
+                module.ModelWithWorkform = moduleWorkforms;
+            }
+            else
+            {
+                for (int index = 0; index < module.ModelWithWorkform.Count; index++)
+                {
+                    module.ModelWithWorkform.Remove(dbContext.ModelWithWorkform.Find(module.ModelWithWorkform.ElementAt(index).Workform_ID));
+                }
+            }
+
+
+        }
 
         public void AddLinkingsModule(Module module)   {
 
@@ -137,7 +238,6 @@ namespace RepositoryModel.Repository
 
         public void UpdateLinkingsModule(Module module)
         {
-
             for (int index = 0; index < module.LearnLine.Count; index++)
             {
                 module.LearnLine.Remove(dbContext.LearnLine.Find(module.LearnLine.ElementAt(index).LearnLine_ID));
@@ -148,7 +248,6 @@ namespace RepositoryModel.Repository
                 module.Theme.Remove(dbContext.Theme.Find(module.Theme.ElementAt(index).Theme_ID));
             }
 
-
             for (int index = 0; index < module.LearningTool.Count; index++)
             {
                 module.LearningTool.Remove(dbContext.LearningTool.Find(module.LearningTool.ElementAt(index).LearnTool_ID));
@@ -158,7 +257,6 @@ namespace RepositoryModel.Repository
             {
                 module.LearnGoal.Remove(dbContext.LearnGoal.Find(module.LearnGoal.ElementAt(index).LearnGoal_ID));
             }
-
 
             for (int index = 0; index < module.ModelWithWorkform.Count; index++)
             {
