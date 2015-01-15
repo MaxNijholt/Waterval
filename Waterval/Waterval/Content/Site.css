@@ -96,7 +96,7 @@
 /* Navbar Custom voor ons*/
 /* Navbar kleur en border*/
 .navbar-inverse {
-    border-color: #080808;
+    border-color: #FF0000;
     background-color: #FF0033 !important;
 }
 
@@ -117,12 +117,12 @@
 
     /* Text in het Menu*/
     .navbar-inverse .navbar-nav > li > a {
-        color: #ffffff;
+        color: #fff;
     }
 
         .navbar-inverse .navbar-nav > li > a:hover,
         .navbar-inverse .navbar-nav > li > a:focus {
-            color: #000000;
+            color: #00ffff;
             background-color: transparent;
         }
 
@@ -162,7 +162,7 @@
     .navbar-inverse .navbar-nav > .open > a:hover,
     .navbar-inverse .navbar-nav > .open > a:focus {
         color: #ffffff;
-        background-color: #080808;
+        background-color: #E51919;
     }
 
     .navbar-inverse .navbar-nav > .dropdown > a:hover .caret {
