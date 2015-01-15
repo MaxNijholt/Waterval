@@ -29,7 +29,7 @@
                 </li>-->
 
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right paddingright">
 
                 <li>
                     @using (Html.BeginForm("SearchResults", "Search"))
@@ -46,17 +46,31 @@
                         </div>
                     }
                 </li>
-                <li>
-                    <!-- TODO: If user is logged int then show user name with a dropdown. Else Just the login button-->
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        @Html.ActionLink("Uitloggen", "LogOut", "OAuth")
-                    }
-                    else
-                    {
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            @User.Identity.Name
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                @Html.ActionLink("Account", "Index", "Account")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Uitloggen", "LogOut", "OAuth")
+                            </li>
+                        </ul>
+                    </li>
+                }
+                else {
+                    <li>
                         @Html.ActionLink("Inloggen", "Index", "OAuth")
-                    }
-                </li>
+                    </li>
+                }
+                
+
+                    
                 
                     
                  <!--
