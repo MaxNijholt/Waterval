@@ -23,9 +23,9 @@ namespace RepositoryModel
 
         }
 
-        public List<GradeType> Get(int id)
+        public GradeType Get(int id)
         {
-            return dbContext.GradeType.Where(g => g.Module_ID == id).ToList();
+			return dbContext.GradeType.FirstOrDefault(g => g.Module_ID == id);
         }
 
         public GradeType Create(GradeType gradetype)

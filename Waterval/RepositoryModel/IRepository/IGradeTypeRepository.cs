@@ -10,7 +10,7 @@ namespace RepositoryModel
     public interface IGradeTypeRepository
     {
         List<GradeType> GetAll();
-        List<GradeType> Get(int gradetype_id);
+        GradeType Get(int gradetype_id);
         GradeType Create(GradeType gradetype);
         void Delete(int gradetype_id);
    
