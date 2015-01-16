@@ -5,53 +5,67 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Styles.Render("~/Content/css")
-    <h2>Compententies</h2>
-    <div class="container">
-        @if ( !ViewBag.isPDF ) {
-            <div class="input-group input-group">
-                @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in compenties", @class = "form-control" } )
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-            </div>
-
-        }
-        <table class="table table-striped table-bordered" id="indexTable">
-            <caption></caption>
-            <thead>
-                <tr>
-                    <th>@Html.ActionLink( "Titel", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
-                    <th>Omschrijving Kort</th>
-                    @if ( !ViewBag.isPDF ) {
-                        <th>Zie Modules</th>
-                        <th>Aanpassen</th>
-                        <th>Verwijderen</th>
-                        <th>Nieuwe Versie</th>
-                        <th>PDF</th>
-                    }
-                </tr>
-            </thead>
-            @foreach ( var item in Model ) {
-
-
-                <tr>
-                    <td>@Html.ActionLink( item.Title, "Details", new { id = item.Competence_ID } )</td>
-                    <td>@item.Definition_Short</td>
-                    @if ( !ViewBag.isPDF ) {
-                        <td>@Html.ActionLink( "Open Modules", "Index", "Module", new { id = item.Competence_ID }, new { @class = "btn btn-avans" } )</td>
-                        <td>@Html.ActionLink( "Aanpassen", "Edit", new { id = item.Competence_ID }, new { @class = "btn btn-warning" } )</td>
-                        <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Competence_ID" class="btn btn-danger"></td>
-                        <td>@Html.ActionLink( "Nieuwe versie", "toNewVersion", new { id = item.Competence_ID }, new { @class = "btn btn-avans" } )</td>
-                        <td>@Html.ActionLink( "Genereer PDF", "GeneratePDF", new { id = item.Competence_ID }, new { @class = "btn btn-avans" } )</td>}
-                </tr>   }
-
-
-        </table>
+@Styles.Render( "~/Content/css" )
+<h2>Compententies</h2>
+<div class="container">
     @if ( !ViewBag.isPDF ) {
-        @Html.ActionLink( "Nieuwe Compententie", "Create", null, new { @class = "btn btn-success" } )
+        <div class="input-group input-group">
+            @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in compenties", @class = "form-control" } )
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+
+    }
+    <table class="table table-striped table-bordered" id="indexTable">
+        <caption></caption>
+        <thead>
+            <tr>
+                <th>@Html.ActionLink( "Titel", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
+                <th>Omschrijving Kort</th>
+                @if ( !ViewBag.isPDF ) {
+                    <th>Zie Modules</th>
+                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditCompetence" ) ) {
+                        <th>Aanpassen</th>
+                    }
+                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "RemoveCompetence" ) ) {
+                        <th>Verwijderen</th>
+                    }
+                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "toNewVersionCompetence" ) ) {
+                        <th>Nieuwe Versie</th>
+                    }
+                    <th>PDF</th>
+                }
+            </tr>
+        </thead>
+        @foreach ( var item in Model ) {
+
+
+            <tr>
+                <td>@Html.ActionLink( item.Title, "Details", new { id = item.Competence_ID } )</td>
+                <td>@item.Definition_Short</td>
+                @if ( !ViewBag.isPDF ) {
+
+                    <td>@Html.ActionLink( "Open Modules", "Index", "Module", new { id = item.Competence_ID }, new { @class = "btn btn-avans" } )</td>
+                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditCompetence" ) ) {
+                        <td>@Html.ActionLink( "Aanpassen", "Edit", new { id = item.Competence_ID }, new { @class = "btn btn-warning" } )</td>
+                    }
+                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "RemoveCompetence" ) ) {
+                        <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Competence_ID" class="btn btn-danger"></td>
+                    }@if ( Waterval.Controllers.OAuthController.IsUserInRole( "toNewVersion" ) ) {
+                        <td>@Html.ActionLink( "Nieuwe versie", "toNewVersion", new { id = item.Competence_ID }, new { @class = "btn btn-avans" } )</td>
+                    }
+                    <td>@Html.ActionLink( "Genereer PDF", "GeneratePDF", new { id = item.Competence_ID }, new { @class = "btn btn-avans" } )</td>}
+            </tr>   }
+
+
+    </table>
+    @if ( !ViewBag.isPDF ) {
+        @if ( Waterval.Controllers.OAuthController.IsUserInRole( "CreateCompetence" ) ) {
+            @Html.ActionLink( "Nieuwe Compententie", "Create", null, new { @class = "btn btn-success" } )
+        }
         @Html.ActionLink( "PDF All", "GeneratePDFList", null, new { @class = "btn btn-Avans", target = "_blank" } )
     }
 

@@ -28,7 +28,7 @@ namespace Waterval.Controllers
             Program model = ProgramRepository.Get(id);
             return View(model);
         }
-
+		[Authorize( Roles = "CreateProgram" )]
         public ActionResult Create()
         {
             Program program = new Program();
@@ -49,6 +49,7 @@ namespace Waterval.Controllers
                 return View(program);
             }
         }
+		[Authorize( Roles = "EditProgram" )]
         public ActionResult Edit(int id)
         {
             var model = ProgramRepository.Get(id);
@@ -72,7 +73,8 @@ namespace Waterval.Controllers
             }
         }
 
-        [HttpPost]
+
+		[Authorize( Roles = "DeleteProgram" )]
         public ActionResult Delete(Program program)
         {
 

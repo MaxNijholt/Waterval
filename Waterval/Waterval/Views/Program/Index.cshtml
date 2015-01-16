@@ -13,8 +13,13 @@
                 <tr>
                     <th>Opleiding</th>
                     <th>Zie Modules</th>
+                    
+                @if(Waterval.Controllers.OAuthController.IsUserInRole("EditProgram")) {
                     <th>Aanpassen</th>
+                }
+                @if(Waterval.Controllers.OAuthController.IsUserInRole("DeleteProgram")) {
                     <th>Verwijderen</th>
+                }
                 </tr>
             </thead>
             @foreach (var item in Model)
@@ -22,13 +27,19 @@
                 <tr>
                     <td>@Html.ActionLink(item.Cohort, "Details", new { id = item.Program_ID })</td>
                     <td>@Html.ActionLink("Open Modules", "Index", "Module", new { id = item.Program_ID }, new { @class = "btn btn-avans" })</td>
+@if(Waterval.Controllers.OAuthController.IsUserInRole("EditProgram")) {
                     <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Program_ID }, new { @class = "btn btn-warning" })</td>
+}
+@if(Waterval.Controllers.OAuthController.IsUserInRole("DeleteProgram")) {
                     <td><input type="button" value="Verwijderen" data-name="@item.Cohort" data-id="@item.Program_ID" class="btn btn-danger"></td>
+}
                 </tr>
             }
         </table>
     </div>
+@if(Waterval.Controllers.OAuthController.IsUserInRole("CreateProgram")) {
     @Html.ActionLink("Nieuwe Opleiding", "Create", null, new { @class = "btn btn-success" })
+}
 
 </div>
 

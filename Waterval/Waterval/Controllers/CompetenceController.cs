@@ -76,7 +76,8 @@ namespace Waterval.Controllers
         //A NewID variable gets set on -1.
         //The view gets returned
         /// </summary>
-        /// <returns></returns>
+		/// <returns></returns>
+		[Authorize( Roles = "CreateCompetence" )]
         public ActionResult Create()
         {
             Competence comp = new Competence();
@@ -130,7 +131,8 @@ namespace Waterval.Controllers
         //  Updates the competence to a delete state.
         /// </summary>
         /// <param name="compentence">The competence that needs to get deleted.</param>
-        /// <returns>The view</returns>
+		/// <returns>The view</returns>
+		[Authorize( Roles = "DeleteCompetence" )]
         public ActionResult Delete(Competence compentence)
         {
             compenteceRepository.Delete(compentence.Competence_ID);
@@ -141,7 +143,8 @@ namespace Waterval.Controllers
         /// Calls the create view with a model
         /// </summary>
         /// <param name="id">the id of the competence that needs to get edit.</param>
-        /// <returns></returns>
+		/// <returns></returns>
+		[Authorize( Roles = "EditCompetence" )]
         public ActionResult Edit(int id)
         {
             var model = compenteceRepository.Get(id);
@@ -200,7 +203,8 @@ namespace Waterval.Controllers
         /// Opens a view for making a new version
         /// </summary>
         /// <param name="id">The id of the competence that we want to use as a base.</param>
-        /// <returns></returns>
+		/// <returns></returns>
+		[Authorize( Roles = "toNewVersionCompetence" )]
         public ActionResult toNewVersion(int id)
         {
             Competence competence = compenteceRepository.Get(id);
@@ -266,6 +270,7 @@ namespace Waterval.Controllers
             return modules.Where(m => m.isDeleted == false).ToList();
         }
 
+		[Authorize( Roles = "toNewVersionCompetence" )]
         private int newVersion(int id)
         {
             Competence newer = compenteceRepository.GetNewVersion(id);

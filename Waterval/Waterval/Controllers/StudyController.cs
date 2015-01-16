@@ -32,6 +32,7 @@ namespace Waterval.Controllers
             return View(model);
         }
 
+		[Authorize( Roles = "CreateStudy" )]
         public ActionResult Create()
         {
             Study study = new Study();
@@ -52,6 +53,7 @@ namespace Waterval.Controllers
                 return View(study);
             }
         }
+		[Authorize( Roles = "EditStudy" )]
         public ActionResult Edit(int id)
         {
             var model = studyRepository.Get(id);
@@ -75,7 +77,7 @@ namespace Waterval.Controllers
             }
         }
 
-        [HttpPost]
+		[Authorize( Roles = "DeleteStudy" )]
         public ActionResult Delete(Study study)
         {
 

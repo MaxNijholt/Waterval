@@ -54,6 +54,7 @@ namespace MvcApplication1.Controllers
 			return View( learnLines.ToPagedList( pageNumber, pageSize ) );
 		}
 
+		[Authorize( Roles = "CreateLearnLine" )]
         public ActionResult Create()
         {
             LearnLine leer = new LearnLine();
@@ -74,12 +75,14 @@ namespace MvcApplication1.Controllers
                 return View(LearnLine);
             }
         }
+		[Authorize( Roles = "DeleteLearnLine" )]
         public ActionResult Delete(LearnLine learnLine)
         {
 
             learnLineRepository.Delete(learnLine.LearnLine_ID);
             return View();
         }
+		[Authorize( Roles = "EditLearnLine" )]
         public ActionResult Edit(int id)
         {
             var model = learnLineRepository.Get(id);

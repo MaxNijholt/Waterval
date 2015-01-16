@@ -24,6 +24,7 @@ namespace Waterval.Controllers
             return View(learnGoalRepository.GetAll().Where(x => x.isDeleted == false));
         }
 
+		[Authorize( Roles = "CreateLearnGoal" )]
         public ActionResult Create()
         {
             LearnGoal leer = new LearnGoal();
@@ -44,12 +45,14 @@ namespace Waterval.Controllers
                 return View(LearnGoal);
             }
         }
+		[Authorize( Roles = "DeleteLearnGoal" )]
         public ActionResult Delete(LearnGoal learnGoal)
         {
 
             learnGoalRepository.Delete(learnGoal.LearnGoal_ID);
             return View();
         }
+		[Authorize( Roles = "EditLearnGoal" )]
         public ActionResult Edit(int id)
         {
             var model = learnGoalRepository.Get(id);
@@ -80,12 +83,14 @@ namespace Waterval.Controllers
             return View(model);
         }
 
+		[Authorize( Roles = "toNewVersionLearnGoal" )]
         private int newVersion(int id)
         {
             LearnGoal newer = learnGoalRepository.GetNewVersion(id);
             return (newer != null) ? newer.LearnGoal_ID : -1;
         }
 
+		[Authorize( Roles = "toNewVersionLearnGoal" )]
         public ActionResult ToNewVersion(int id)
         {
             LearnGoal learngoal = learnGoalRepository.Get(id);

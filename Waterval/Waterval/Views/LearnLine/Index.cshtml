@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Styles.Render("~/Content/css")
+@Styles.Render( "~/Content/css" )
 <div class="container">
     <h2>Leerlijnen</h2>
     <div class="container">
@@ -26,24 +26,31 @@
                 <tr>
                     <th>@Html.ActionLink( "Titel", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
                     <th>Omschrijving</th>
-                    <th>Aanpassen</th>
-                    <th>Verwijderen</th>
+                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditLearnLine" ) ) {
+                        <th>Aanpassen</th>
+                    }
+                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteLearnLine" ) ) {
+                        <th>Verwijderen</th>
+                    }
                 </tr>
             </thead>
             @foreach ( var item in Model ) {
                 <tr>
                     <td>@Html.ActionLink( item.Title, "Details", new { id = item.LearnLine_ID } )</td>
                     <td>@item.Definition</td>
-                    <td>@Html.ActionLink( "Aanpassen", "Edit", new { id = item.LearnLine_ID }, new { @class = "btn btn-warning" } )</td>
-                    <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.LearnLine_ID" class="btn btn-danger"></td>
+                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditLearnLine" ) ) {
+                        <td>@Html.ActionLink( "Aanpassen", "Edit", new { id = item.LearnLine_ID }, new { @class = "btn btn-warning" } )</td>
+                    }
+                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteLearnLine" ) ) {
+                        <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.LearnLine_ID" class="btn btn-danger"></td>
+                    }
                 </tr>
             }
         </table>
-        @Html.ActionLink( "Nieuwe Leerlijn", "Create", null, new { @class = "btn btn-success" } )
+        @if ( Waterval.Controllers.OAuthController.IsUserInRole( "CreateLearnLine" ) ) {
+            @Html.ActionLink( "Nieuwe Leerlijn", "Create", null, new { @class = "btn btn-success" } )
+        }
     </div>
-
-
-
     <br />
     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 

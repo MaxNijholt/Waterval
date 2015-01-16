@@ -1,25 +1,25 @@
 ﻿@model DomainModel.Models.Theme
 
 @{
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Styles.Render("~/Content/css")
+@Styles.Render( "~/Content/css" )
 
 <div class="container">
-	<h2>Thema Details: @Html.DisplayFor(model => model.Title)</h2>
+    <h2>Thema Details: @Html.DisplayFor( model => model.Title )</h2>
 
-	<table class="table table-bordered table-striped">
-		<tr>
-			<th>Naam</th>
-			<th>Omschrijving</th>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Naam</th>
+            <th>Omschrijving</th>
 
-		</tr>
-		<tr>
-			<td>@Html.DisplayFor(model => model.Title)</td>
-			<td>@Html.DisplayFor(model => model.Definition)</td>
-		</tr>
-	</table>
+        </tr>
+        <tr>
+            <td>@Html.DisplayFor( model => model.Title )</td>
+            <td>@Html.DisplayFor( model => model.Definition )</td>
+        </tr>
+    </table>
 
     <p>Behoort toe aan modules:</p>
     <table class="table table-bordered table-striped">
@@ -30,18 +30,20 @@
                 <th>Omschrijving</th>
             </tr>
         </tbody>
-        @foreach (var item in Model.Module)
-        {
+        @foreach ( var item in Model.Module ) {
             <tr>
-                <td>@Html.ActionLink(@item.CourseCode.ToString(), "Details", "Module", new { id = item.Module_ID }, null)</td>
+                <td>@Html.ActionLink( @item.CourseCode.ToString( ), "Details", "Module", new { id = item.Module_ID }, null )</td>
                 <td>@item.Title</td>
                 <td>@item.Definition_Short</td>
             </tr>
         }
     </table>
 
-
-	@Html.ActionLink("Aanpassen", "Edit", new { id = Model.Theme_ID }, new { @class = "btn btn-warning" })
-	<br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />|
-	@Html.ActionLink("Terug naar Index", "Index")
+    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditTheme" ) ) {
+        @Html.ActionLink( "Aanpassen", "Edit", new { id = Model.Theme_ID }, new { @class = "btn btn-warning" } )
+    }
+    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteTheme" ) ) {
+        <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />
+    }|
+    @Html.ActionLink( "Terug naar Index", "Index" )
 </div>

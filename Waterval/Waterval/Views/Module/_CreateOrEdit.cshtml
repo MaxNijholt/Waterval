@@ -215,31 +215,10 @@
                 }
             </tbody>
         </table>
-        @* <input type="button" value="Test Toevoegen" name="btn_collapseGoalg" class="btn btn-avans" data-toggle="collapse" data-target="#collapseModg">*@
         <input type="button" value="Weekplanning Toevoegen" id="btn_addModw" data-id="@Model.Module_ID" class="btn btn-avans" />
         <br />
         <br />
-        @*<div id="collapseModg" class="panel-collapse collapse open">
 
-            <input type="text" class="form-control" placeholder="Test..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTableg')" style:size="10" />
-
-
-            <table class="table table-bordered table-striped" id="TableModg">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Toevoegen</th>
-                    </tr>
-                </thead>
-                <tbody>*@
-        <!-- Laat alle modules zien die nog niet zijn verwerkt -->
-        @*<tr id="@Model.Module_ID">
-                <td id="Module_ID">SHIT</td>
-                <td><input type="button" value="+" id="btn_addModg" data-id="@Model.Module_ID" class="btn btn-avans" /></td>
-            </tr>*@
-        @*</tbody>
-                </table>
-            </div>*@
     </div>
 </div>
 
@@ -293,27 +272,7 @@
         <input type="button" value="Beoordeling Toevoegen" id="btn_addModg" data-id="@Model.Module_ID" class="btn btn-avans" />
         <br />
         <br />
-        @*<div id="collapseModg" class="panel-collapse collapse open">
 
-            <input type="text" class="form-control" placeholder="Test..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTableg')" style:size="10" />
-
-
-            <table class="table table-bordered table-striped" id="TableModg">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Toevoegen</th>
-                    </tr>
-                </thead>
-                <tbody>*@
-        <!-- Laat alle modules zien die nog niet zijn verwerkt -->
-        @*<tr id="@Model.Module_ID">
-                <td id="Module_ID">SHIT</td>
-                <td><input type="button" value="+" id="btn_addModg" data-id="@Model.Module_ID" class="btn btn-avans" /></td>
-            </tr>*@
-        @*</tbody>
-                </table>
-            </div>*@
     </div>
 </div>
 <hr />
@@ -442,30 +401,12 @@
         <input type="button" value="Toetscode Toevoegen" id="btn_addModt" data-id="@Model.Module_ID" class="btn btn-avans" />
         <br />
         <br />
-        @*<div id="collapseModg" class="panel-collapse collapse open">
 
-            <input type="text" class="form-control" placeholder="Test..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTableg')" style:size="10" />
-
-
-            <table class="table table-bordered table-striped" id="TableModg">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Toevoegen</th>
-                    </tr>
-                </thead>
-                <tbody>*@
-        <!-- Laat alle modules zien die nog niet zijn verwerkt -->
-        @*<tr id="@Model.Module_ID">
-                <td id="Module_ID">SHIT</td>
-                <td><input type="button" value="+" id="btn_addModg" data-id="@Model.Module_ID" class="btn btn-avans" /></td>
-            </tr>*@
-        @*</tbody>
-                </table>
-            </div>*@
     </div>
 </div>
+
 <hr />
+
 <div class="form-group">
     <div class="container">
         <p>
@@ -525,7 +466,9 @@
         </div>
     </div>
 </div>
+
 <hr />
+
 <div class="form-group">
     <div class="container">
         <p>
@@ -584,7 +527,9 @@
         </div>
     </div>
 </div>
+
 <hr />
+
 <div class="form-group">
     <div class="container">
         <p>
@@ -650,64 +595,117 @@
         </div>
     </div>
 </div>
+
 <hr />
-<div class="form-group">
-    <div class="container">
-        <p>
-            @Html.Label("Studierichting Toevoegen", new { @class = "control-label" })
-        </p>
-        <div id="ValidationMesStudy" class="alert alert-danger hidden">
-            Minstens een studierichting verplicht
-        </div>
-        <br /><br />
-        <table class="table table-bordered table-striped table-responsive" id="StudyTable">
-            <thead>
-                <tr>
-                    <th width="20%">Onderwerp</th>
-                    <th>Verwijderen</th>
-                </tr>
-            </thead>
-            <tbody>
-                @*@foreach (var item in Model.Study)
+
+
+@*<select id="studies" name="studies">
+
+        @foreach (var item in ViewBag.GetStudies)
+        {
+            <option value="@item.Study_ID">@item.Title</option>
+        }
+    </select>
+
+    <select id="blocks" name="blocks">
+
+        @foreach (var item in ViewBag.GetBlocks)
+        {
+            <option value="@item.Block_ID">@item.Title</option>
+        }
+    </select>
+
+    <select id="phasings" name="phasings">
+
+        @foreach (var item in ViewBag.GetPhasings)
+        {
+            <option value="@item.Phasing_ID">@item.Title</option>
+        }
+    </select>*@
+
+
+    <div class="form-group">
+        <div class="container">
+            <p>
+                @Html.Label("Study Toevoegen met blok en fasering", new { @class = "control-label" })
+            </p>
+            Er zijn 16 blokken beschikbaar per studierichting.
+            De volgende faseringen zijn beschikbaar op volgende Id's:
+            <br />
+            @foreach (Phasing item in @ViewBag.GetPhasings)
+            {
+                @(item.Phasing_ID + " - " + @item.Title)
+                <br />
+
+            }
+            <div id="ValidationMesStudy" class="alert alert-danger hidden">
+                Minstens een studierichting, blok en fasering verplicht.
+            </div>
+            <br /><br />
+            <table class="table table-bordered table-striped table-responsive" id="StudyTable">
+                <thead>
+                    <tr>
+                        <th width="40%">Studierichting</th>
+                        <th width="10%">Blok</th>
+                        <th width="10%">Fasering</th>
+                        <th>Verwijderen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ModuleStudyPhasingBlock)
                     {
-                        if (item.isDeleted) { continue; }
+                        if (item.Study.isDeleted) { continue; }
                         <tr id="@item.Study_ID">
                             <td>
-                                @item.Title <input type="text" id="@item.Study_ID" class="hidden" />
+                                @item.Study.Definition <input type="text" id="@item.Study_ID" class="hidden" />
                             </td>
-
+                            @{string testStudy = "ModuleStudyPhasingBlock" + item.Study_ID;}
+                            <td>
+                                    <input type="number" class="form-control" id="ModuleStudyPhasingBlock[@index].Block_ID" name="ModuleStudyPhasingBlock[@index].Block_ID" value="@item.Block_ID" min="1" max="16" />
+                                    <input type="number" id="ModuleStudyPhasingBlock[@index].Study_ID" name="ModuleStudyPhasingBlock[@index].Study_ID" class="form-control hidden" value="@item.Study_ID" min="1" max="16" />
+                                </td>
+                            <td>
+                                <input type="number" class="form-control" id="ModuleStudyPhasingBlock[@index].Phasing_ID" name="ModuleStudyPhasingBlock[@index].Phasing_ID" value="@item.Phasing_ID" />
+                                <input type="number" id="ModuleStudyPhasingBlock[@index].Study_ID" name="ModuleStudyPhasingBlock[@index].Study_ID" class="form-control hidden" value="@item.Study_ID" />
+                            </td>
                             <td>
                                 <input type="button" value="Verwijderen" id="btn_deleteStudy" data-id="@item.Study_ID" class="btn btn-danger" />
                             </td>
                         </tr>
-                    }*@
-            </tbody>
-        </table>
-        <input type="button" value="Studierichting Toevoegen" name="btn_collapseStudy" class="btn btn-avans" data-toggle="collapse" data-target="#collapseStudy">
-        <br />
-        <br />
-        <div id="collapseStudy" class="panel-collapse collapse open">
-            <input type="text" class="form-control" placeholder="Studierichting..." name="TempValue" id="searchTerm" onkeyup="doSearch('StudyTable')" style:size="10" />
-            <table class="table table-bordered table-striped" id="TableStudy">
-                <thead>
-                    <tr>
-                        <th>Onderwerp</th>
-                        <th>Toevoegen</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Laat alle modules zien die nog niet zijn verwerkt -->
-                    @*@foreach (Study item in @ViewBag.StudyList)
+                    }
+                </tbody>
+            </table>
+            <input type="button" value="Studierichting Toevoegen" name="btn_collapseStudy" class="btn btn-avans" data-toggle="collapse" data-target="#collapseStudy">
+            <br />
+            <br />
+            <div id="collapseStudy" class="panel-collapse collapse open">
+                <input type="text" class="form-control" placeholder="Studierichting..." name="TempValue" id="searchTerm" onkeyup="doSearch('StudyTable')" style:size="10" />
+                <table class="table table-bordered table-striped" id="TableStudy">
+                    <thead>
+                        <tr>
+                            <th>Onderwerp</th>
+                            <th>Toevoegen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Laat alle modules zien die nog niet zijn verwerkt -->
+                        @foreach (Study item in @ViewBag.StudyList)
                         {
                             <tr id="@item.Study_ID">
                                 <td id="Title">@item.Title</td>
                                 <td><input type="button" value="+" id="btn_addStudy" data-id="@item.Study_ID" class="btn btn-avans" /></td>
                             </tr>
-                        }*@
-                </tbody>
-            </table>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
+
+
+
+
     <div class="container">
         @if (Model.PrevModule_ID != null)
         {
@@ -722,11 +720,11 @@
             </div>
         }
     </div>
-</div>
 
 
-<hr />
-@Html.Partial("~/Views/Shared/_Alert.cshtml")
+
+    <hr />
+    @Html.Partial("~/Views/Shared/_Alert.cshtml")
 
 
 

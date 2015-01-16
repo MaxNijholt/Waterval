@@ -8,535 +8,495 @@ using System.Web.Mvc;
 using PagedList;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using System.ComponentModel.DataAnnotations;
+
+namespace MvcApplication1.Controllers {
+	public class ModuleController : Controller {
+		//
+		// GET: /Module/
+		private ModuleRepository moduleRepository;
+		private SearchRepository search;
+
+		private LearnLineRepository learnLineRepository;
+		private ThemeRepository themeRepository;
+		private CompetenceRepository competenceRepository;
+		private LearningToolRepository learningtoolRepository;
+		private LearnGoalRepository learngoalRepository;
+		private StudyRepository studyRepository;
+		private BlockRepository blockRepository;
+		private WorkformRepository workformRepository;
+		private PhasingRepository phasingRepository;
+
+
+		public ModuleController ( ) {
+			moduleRepository = new ModuleRepository( );
+			search = new SearchRepository( );
+			learnLineRepository = new LearnLineRepository( );
+			themeRepository = new ThemeRepository( );
+			competenceRepository = new CompetenceRepository( );
+			workformRepository = new WorkformRepository( );
+			learningtoolRepository = new LearningToolRepository( );
+			learngoalRepository = new LearnGoalRepository( );
+			studyRepository = new StudyRepository( );
+			blockRepository = new BlockRepository( );
+			phasingRepository = new PhasingRepository( );
+
+		}
+
+		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10, int id = 0 ) {
+
+			ViewBag.CurrentSort = sortOrder;
+			ViewBag.ResultAmount = pagesize;
+			ViewBag.NameSortParm = String.IsNullOrEmpty( sortOrder ) ? "Title" : "";
+
+			if ( searchString != null ) {
+				page = 1;
+			} else {
+				searchString = currentFilter;
+			}
+
+			ViewBag.CurrentFilter = searchString;
+
+			var modules = ( id == 0 ) ? moduleRepository.GetAll( ) : moduleRepository.GetWithCompetence( id );
+			if ( !String.IsNullOrEmpty( searchString ) ) {
+				modules = search.GetModulesWith( searchString );
+			}
+			switch ( sortOrder ) {
+				case "Title":
+				modules = modules.OrderBy( b => b.Title ).ToList( );
+				break;
+				case "Vakcode":
+				modules = modules.OrderBy( b => b.CourseCode ).ToList( );
+				break;
+				case "EC":
+				modules = modules.OrderBy( b => b.AssignmentCode.Sum( s => s.EC ) ).ToList( );
+				break;
+				case "Ingangsniveau":
+				modules = modules.OrderBy( b => b.Entry_Level ).ToList( );
+				break;
+				default:
+				modules = modules.OrderByDescending( b => b.Title ).ToList( );
+				break;
+			}
+			int pageSize = pagesize;
+			int pageNumber = ( page ?? 1 );
+			return View( modules.ToPagedList( pageNumber, pageSize ) );
+		}
+
+		[Authorize( Roles = "CreateModule" )]
+		public ActionResult Create ( ) {
+			Module module = new Module( );
+
+			@ViewBag.LearnLineList = GetLearnLines( module );
+			@ViewBag.ThemeList = GetThemes( module );
+			@ViewBag.LearnGoalList = GetLearnGoals( module );
+			@ViewBag.LearningToolList = GetLearningTools( module );
+
+			@ViewBag.CompetenceList = GetCompetence( module );
+			@ViewBag.StudyList = GetStudy( module );
+
+			@ViewBag.WorkformList = GetWorkForms( module );
+			@ViewBag.GradeTypes = GetGradeTypes( module );
+			@ViewBag.WeekSchedule = GetWeekschedule( module );
+			@ViewBag.AssignmentCode = GetAssignmentcode( module );
+			@ViewBag.GetBlocks = blockRepository.GetAll( );
+			@ViewBag.GetPhasings = phasingRepository.GetAll( );
+
+
+			return View( module );
+		}
+
+		[ValidateInput( true ), HttpPost]
+		public ActionResult Create ( Module module ) {
+			@ViewBag.LearnLineList = GetLearnLines( module );
+			@ViewBag.ThemeList = GetThemes( module );
+			@ViewBag.LearnGoalList = GetLearnGoals( module );
+			@ViewBag.LearningToolList = GetLearningTools( module );
+			@ViewBag.CompetenceList = GetCompetence( module );
+			@ViewBag.StudyList = GetStudy( module );
+			@ViewBag.WorkformList = GetWorkForms( module );
+			@ViewBag.GradeTypes = GetGradeTypes( module );
+			@ViewBag.WeekSchedule = GetWeekschedule( module );
+			@ViewBag.AssignmentCode = GetAssignmentcode( module );
 
-namespace MvcApplication1.Controllers
-{
-    public class ModuleController : Controller
-    {
-        //
-        // GET: /Module/
-        private ModuleRepository moduleRepository;
-        private SearchRepository search;
-
-        private LearnLineRepository learnLineRepository;
-        private ThemeRepository themeRepository;
-        private CompetenceRepository competenceRepository;
-        private LearningToolRepository learningtoolRepository;
-        //private LearnGoalRepository learngoalRepository;
-
-        //private ProgramRepository programRepository;
-        //private StudyRepository studyRepository;
-
-
-
-        private WorkformRepository workformRepository;
-
-
-        public ModuleController()
-        {
-            moduleRepository = new ModuleRepository();
-            search = new SearchRepository();
-            learnLineRepository = new LearnLineRepository();
-            themeRepository = new ThemeRepository();
-            competenceRepository = new CompetenceRepository();
-            workformRepository = new WorkformRepository();
-            learningtoolRepository = new LearningToolRepository();
-            //learngoalRepository = new LearnGoalRepository();
-            //programRepository = new ProgramRepository();
-            //studyRepository = new StudyRepository();
-
-        }
-
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10, int id=0)
-        {
-
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.ResultAmount = pagesize;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Title" : "";
-
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
-            var modules = (id ==0) ? moduleRepository.GetAll(): moduleRepository.GetWithCompetence(id) ;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                modules = search.GetModulesWith(searchString);
-            }
-            switch (sortOrder)
-            {
-                case "Title":
-                    modules = modules.OrderBy(b => b.Title).ToList();
-                    break;
-                case "Vakcode":
-                    modules = modules.OrderBy(b => b.CourseCode).ToList();
-                    break;
-                case "EC":
-                    modules = modules.OrderBy(b => b.AssignmentCode.Sum(s => s.EC)).ToList();
-                    break;
-                case "Ingangsniveau":
-                    modules = modules.OrderBy(b => b.Entry_Level).ToList();
-                    break;
-                default:
-                    modules = modules.OrderByDescending(b => b.Title).ToList();
-                    break;
-            }
-            int pageSize = pagesize;
-            int pageNumber = (page ?? 1);
-            return View(modules.ToPagedList(pageNumber, pageSize));
-        }
-
-
-        public ActionResult Create()
-        {
-            Module module = new Module();
-
-            @ViewBag.LearnLineList = GetLearnLines(module);
-            @ViewBag.ThemeList = GetThemes(module);
-            //@ViewBag.LearnGoalList = GetLearnGoals(module);
-            @ViewBag.LearningToolList = GetLearningTools(module);
-
-            @ViewBag.CompetenceList = GetCompetence(module);
-            //@ViewBag.ProgramList = GetProgram(module);
-            //@ViewBag.StudyList = GetStudy(module);
-
-            @ViewBag.WorkformList = GetWorkForms(module);
-            @ViewBag.GradeTypes = GetGradeTypes(module);
-            @ViewBag.WeekSchedule = GetWeekschedule(module);
-            @ViewBag.AssignmentCode = GetAssignmentcode(module);
+			try {
 
+				@ViewBag.NewID = newVersion( module.Module_ID );
 
-            return View(module);
-        }
+				//We create a new module and we store the id of it in a variabele
+				var id = moduleRepository.Create( module ).Module_ID;
 
-        [ValidateInput(true), HttpPost]
-        public ActionResult Create(Module module)
-        {
-            @ViewBag.LearnLineList = GetLearnLines(module);
-            @ViewBag.ThemeList = GetThemes(module);
-            //@ViewBag.LearnGoalList = GetLearnGoals(module);
-            @ViewBag.LearningToolList = GetLearningTools(module);
-
-            @ViewBag.CompetenceList = GetCompetence(module);
-            //@ViewBag.ProgramList = GetProgram(module);
-            //@ViewBag.StudyList = GetStudy(module);
-            @ViewBag.WorkformList = GetWorkForms(module);
-            @ViewBag.GradeTypes = GetGradeTypes(module);
-            @ViewBag.WeekSchedule = GetWeekschedule(module);
-            @ViewBag.AssignmentCode = GetAssignmentcode(module);
-            try
-            {
+				//We save the combination
 
-                @ViewBag.NewID = newVersion(module.Module_ID);
+				//WERKENDE
+				foreach ( var item in module.Level )
+					moduleRepository.CompentenceAndModules( id, item.Competence_ID, item.Level1 );
 
-                //We create a new module and we store the id of it in a variabele
-                var id = moduleRepository.Create(module).Module_ID;
+				foreach ( var item in module.ModelWithWorkform )
+					moduleRepository.WorkformAndModules( id, item.Workform_ID, item.Duration, item.Frequency, item.Workload );
 
-                //We save the combination
+				foreach ( var item in module.GradeType )
+					moduleRepository.GradetypesAndModules( id, item.GradeDescription );
 
-                //WERKENDE
-                foreach (var item in module.Level)
-                    moduleRepository.CompentenceAndModules(id, item.Competence_ID, item.Level1);
-
-                foreach (var item in module.ModelWithWorkform)
-                    moduleRepository.WorkformAndModules(id, item.Workform_ID, item.Duration, item.Frequency, item.Workload);
-
-                foreach (var item in module.GradeType)
-                    moduleRepository.GradetypesAndModules(id, item.GradeDescription);
-
-                foreach (var item in module.WeekSchedule)
-                    moduleRepository.WeekSchedulesAndModules(id, item.Description, item.WeekNr);
-
-                foreach (var item in module.AssignmentCode)
-                    moduleRepository.AssignmentcodeAndModules(id, item.Description, item.EC);
-
-                //We go back to the index.
-                return RedirectToAction("Index");
-            }
-            catch (DbEntityValidationException dbEx)
-            {
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
-                    }
-                }
-
-
-                foreach (var item in module.ModelWithWorkform)
-                    item.Workform = workformRepository.Get(item.Workform_ID);
-                foreach (var item in module.GradeType)
-                    item.Module = moduleRepository.Get(item.Module_ID);
-                foreach (var item in module.WeekSchedule)
-                    item.Module = moduleRepository.Get(item.Module_ID);
-                foreach (var item in module.AssignmentCode)
-                    item.Module = moduleRepository.Get(item.Module_ID);
-                foreach (var item in module.Level)
-                    item.Competence = competenceRepository.Get(item.Competence_ID);
-
-                //Did something go wrong we return the view with the model.
-                return View(module);
-            }
-
-        }
-
+				foreach ( var item in module.WeekSchedule )
+					moduleRepository.WeekSchedulesAndModules( id, item.Description, item.WeekNr );
 
-        public ActionResult Details(int id)
-        {
-            Module module = moduleRepository.Get(id);
+				foreach ( var item in module.AssignmentCode )
+					moduleRepository.AssignmentcodeAndModules( id, item.Description, item.EC );
 
-            @ViewBag.NewID = newVersion(id);
+				foreach ( var item in module.ModuleStudyPhasingBlock )
+					moduleRepository.StudyBlockPhasingAndModules( id, item.Study_ID, item.Block_ID, item.Phasing_ID );
+
+				//    moduleRepository.StudyBlockPhasingAndModules(id, studies, blocks, phasings);
 
-            return View(module);
-        }
+				//We go back to the index.
+				return RedirectToAction( "Index" );
+			}
+			catch ( DbEntityValidationException dbEx ) {
+				foreach ( var validationErrors in dbEx.EntityValidationErrors ) {
+					foreach ( var validationError in validationErrors.ValidationErrors ) {
+						Trace.TraceInformation( "Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage );
+					}
+				}
 
-        public ActionResult Delete(Module module)
-        {
 
-            moduleRepository.Delete(module.Module_ID);
-            return View();
-        }
+				foreach ( var item in module.ModelWithWorkform )
+					item.Workform = workformRepository.Get( item.Workform_ID );
+				foreach ( var item in module.GradeType )
+					item.Module = moduleRepository.Get( item.Module_ID );
+				foreach ( var item in module.WeekSchedule )
+					item.Module = moduleRepository.Get( item.Module_ID );
+				foreach ( var item in module.AssignmentCode )
+					item.Module = moduleRepository.Get( item.Module_ID );
+				foreach ( var item in module.Level )
+					item.Competence = competenceRepository.Get( item.Competence_ID );
+				foreach ( var item in module.ModuleStudyPhasingBlock )
+					item.Module = moduleRepository.Get( item.Module_ID );
 
-        public ActionResult Edit(int id)
-        {
+				//Did something go wrong we return the view with the model.
+				return View( module );
+			}
 
-            Module module = moduleRepository.Get(id);
+		}
 
-            @ViewBag.LearnLineList = GetLearnLines(module);
-            @ViewBag.ThemeList = GetThemes(module);
-            //@ViewBag.LearnGoalList = GetLearnGoals(module);
-            @ViewBag.LearningToolList = GetLearningTools(module);
 
-            @ViewBag.CompetenceList = GetCompetence(module);
-            //@ViewBag.ProgramList = GetProgram(module);
-            //@ViewBag.StudyList = GetStudy(module);
-            @ViewBag.WorkformList = GetWorkForms(module);
-            @ViewBag.GradeTypes = GetGradeTypes(module);
-            @ViewBag.WeekSchedule = GetWeekschedule(module);
-            @ViewBag.AssignmentCode = GetAssignmentcode(module);
+		public ActionResult Details ( int id ) {
+			Module module = moduleRepository.Get( id );
 
-            @ViewBag.NewID = newVersion(id);
+			@ViewBag.NewID = newVersion( id );
 
-            return View(module);
-        }
+			return View( module );
+		}
 
-        [HttpPost]
-        public ActionResult Edit(int id, Module module)
-        {
-
-
-            @ViewBag.LearnLineList = GetLearnLines(module);
-            @ViewBag.ThemeList = GetThemes(module);
-            //@ViewBag.LearnGoalList = GetLearnGoals(module);
-            @ViewBag.LearningToolList = GetLearningTools(module);
-
-            @ViewBag.CompetenceList = GetCompetence(module);
-            //@ViewBag.ProgramList = GetProgram(module);
-            //@ViewBag.StudyList = GetStudy(module);
-            @ViewBag.WorkformList = GetWorkForms(module);
-            @ViewBag.GradeTypes = GetGradeTypes(module);
-            @ViewBag.WeekSchedule = GetWeekschedule(module);
-            @ViewBag.AssignmentCode = GetAssignmentcode(module);
-
-            foreach (var item in module.ModelWithWorkform)
-                item.Workform = workformRepository.Get(item.Workform_ID);
-
-            try
-            {
-                //Get a list of modules based on this learnline, workform, gradetype. 
-                @ViewBag.LearnLineList = GetLearnLines(module).Where(m => m.isDeleted = false);
-                @ViewBag.ThemeList = GetThemes(module).Where(m => m.isDeleted = false);
-                @ViewBag.LearningToolList = GetLearningTools(module).Where(m => m.isDeleted = false);
-
-                //  @ViewBag.LearnGoalList = GetLearnGoals(module).Where(m => m.isDeleted = false);
-
-                @ViewBag.CompetenceList = GetCompetence(module).Where(m => m.isDeleted = false);
-                //@ViewBag.ProgramList = GetProgram(module).Where(m => m.isDeleted = false);
-                //@ViewBag.StudyList = GetStudy(module).Where(m => m.isDeleted = false);
-                @ViewBag.WorkformList = GetWorkForms(module).Where(m => m.isDeleted = false);
-                @ViewBag.GradeTypes = GetGradeTypes(module).Where(m => m.isDeleted = false);
-                @ViewBag.WeekSchedule = GetWeekschedule(module).Where(m => m.isDeleted = false);
-                @ViewBag.AssignmentCode = GetAssignmentcode(module).Where(m => m.isDeleted = false);
-
-
-                //if we update the model and somethign went wrong we send an error messge back
-                if (moduleRepository.Update(module) == null)
-                    return View(module).ViewBag.Error = "Er is iets fout gegaan.";
-
-
-                //We delete all of the levels from this competence. 
-                moduleRepository.CompentenceAndModulesDelete(module.Module_ID);
-                moduleRepository.WorkformAndModulesDelete(module.Module_ID);
-                moduleRepository.AssignmentcodeAndModulesDelete(module.Module_ID);
-                moduleRepository.WeekSchedulesAndModulesDelete(module.Module_ID);
-                moduleRepository.GradetypesAndModulesDelete(module.Module_ID);
-
-                foreach (var item in module.Level)
-                    moduleRepository.CompentenceAndModules(id, item.Competence_ID, item.Level1);
-
-                foreach (var item in module.ModelWithWorkform)
-                    moduleRepository.WorkformAndModules(id, item.Workform_ID, item.Duration, item.Frequency, item.Workload);
-
-                foreach (var item in module.WeekSchedule)
-                    moduleRepository.WeekSchedulesAndModules(id, item.Description, item.WeekNr);
-
-                foreach (var item in module.GradeType)
-                    moduleRepository.GradetypesAndModules(id, item.GradeDescription);
+		[Authorize( Roles = "DeleteModule" )]
+		public ActionResult Delete ( Module module ) {
 
-                foreach (var item in module.AssignmentCode)
-                    moduleRepository.AssignmentcodeAndModules(id, item.Description, item.EC);
+			moduleRepository.Delete( module.Module_ID );
+			return View( );
+		}
 
+		[Authorize( Roles = "EditModule" )]
+		public ActionResult Edit ( int id ) {
 
-                return RedirectToAction("Index");
-            }
+			Module module = moduleRepository.Get( id );
 
-            catch
-            {
-                return View(module);
-            }
-
-        }
+			@ViewBag.LearnLineList = GetLearnLines( module );
+			@ViewBag.ThemeList = GetThemes( module );
+			@ViewBag.LearnGoalList = GetLearnGoals( module );
+			@ViewBag.LearningToolList = GetLearningTools( module );
 
+			@ViewBag.CompetenceList = GetCompetence( module );
+			@ViewBag.StudyList = GetStudy( module );
+			@ViewBag.WorkformList = GetWorkForms( module );
+			@ViewBag.GradeTypes = GetGradeTypes( module );
+			@ViewBag.WeekSchedule = GetWeekschedule( module );
+			@ViewBag.AssignmentCode = GetAssignmentcode( module );
 
+			@ViewBag.NewID = newVersion( id );
 
+			return View( module );
+		}
 
-        //TODO moet aangepast worden met koppelingen
-        public ActionResult toNewVersion(int id)
-        {
-            Module module = moduleRepository.Get(id);
+		[HttpPost]
+		public ActionResult Edit ( int id, Module module ) {
 
-            var model = new Module();
-            model.PrevModule_ID = module.PrevModule_ID;
-            model.Title = module.Title;
-            model.CourseCode = module.CourseCode;
-            model.Entry_Level = module.Entry_Level;
-            model.Definition_Short = module.Definition_Long;
-            model.Definition_Long = module.Definition_Long;
-            model.Foreknowledge = module.Foreknowledge;
-            model.Account_ID = module.Account_ID;
-            //+ koppelingen nog
-            model.Theme = module.Theme;
-            model.WeekSchedule = module.WeekSchedule;
-            model.Study = module.Study;
-            model.ModelWithWorkform = module.ModelWithWorkform;
-            model.Level = module.Level;
-            model.LearnLine = module.LearnLine;
-            model.LearningTool = module.LearningTool;
-            model.LearnGoal = module.LearnGoal;
-            model.GradeType = module.GradeType;
-            model.AssignmentCode = module.AssignmentCode;
 
-            @ViewBag.LearnLineList = GetLearnLines(module);
-            @ViewBag.ThemeList = GetThemes(module);
-            //@ViewBag.LearnGoalList = GetLearnGoals(module);
-            @ViewBag.LearningToolList = GetLearningTools(module);
-            @ViewBag.CompetenceList = GetCompetence(module);
-            //@ViewBag.ProgramList = GetProgram(module);
-            //@ViewBag.StudyList = GetStudy(module);
-            @ViewBag.WorkformList = GetWorkForms(module);
-            @ViewBag.GradeTypes = GetGradeTypes(module);
-            @ViewBag.WeekSchedule = GetWeekschedule(module);
-            @ViewBag.AssignmentCode = GetAssignmentcode(module);
+			@ViewBag.LearnLineList = GetLearnLines( module );
+			@ViewBag.ThemeList = GetThemes( module );
+			@ViewBag.LearnGoalList = GetLearnGoals( module );
+			@ViewBag.LearningToolList = GetLearningTools( module );
+
+			@ViewBag.CompetenceList = GetCompetence( module );
+			@ViewBag.StudyList = GetStudy( module );
+			@ViewBag.WorkformList = GetWorkForms( module );
+			@ViewBag.GradeTypes = GetGradeTypes( module );
+			@ViewBag.WeekSchedule = GetWeekschedule( module );
+			@ViewBag.AssignmentCode = GetAssignmentcode( module );
 
+			try {
+				//Get a list of modules based on this learnline, workform, gradetype. 
+				@ViewBag.LearnLineList = GetLearnLines( module ).Where( m => m.isDeleted = false );
+				@ViewBag.ThemeList = GetThemes( module ).Where( m => m.isDeleted = false );
+				@ViewBag.LearningToolList = GetLearningTools( module ).Where( m => m.isDeleted = false );
+				@ViewBag.LearnGoalList = GetLearnGoals( module ).Where( m => m.isDeleted = false );
+
+				@ViewBag.CompetenceList = GetCompetence( module ).Where( m => m.isDeleted = false );
+				@ViewBag.StudyList = GetStudy( module ).Where( m => m.isDeleted = false );
+				@ViewBag.WorkformList = GetWorkForms( module ).Where( m => m.isDeleted = false );
+				@ViewBag.GradeTypes = GetGradeTypes( module ).Where( m => m.isDeleted = false );
+				@ViewBag.WeekSchedule = GetWeekschedule( module ).Where( m => m.isDeleted = false );
+				@ViewBag.AssignmentCode = GetAssignmentcode( module ).Where( m => m.isDeleted = false );
+
+
+				//if we update the model and somethign went wrong we send an error messge back
+				if ( moduleRepository.Update( module ) == null )
+					return View( module ).ViewBag.Error = "Er is iets fout gegaan.";
+
+
+				//We delete all of the levels from this competence. 
+				moduleRepository.CompentenceAndModulesDelete( module.Module_ID );
+				moduleRepository.WorkformAndModulesDelete( module.Module_ID );
+				moduleRepository.AssignmentcodeAndModulesDelete( module.Module_ID );
+				moduleRepository.WeekSchedulesAndModulesDelete( module.Module_ID );
+				moduleRepository.GradetypesAndModulesDelete( module.Module_ID );
+
+				foreach ( var item in module.Level )
+					moduleRepository.CompentenceAndModules( id, item.Competence_ID, item.Level1 );
+
+				foreach ( var item in module.ModelWithWorkform )
+					moduleRepository.WorkformAndModules( id, item.Workform_ID, item.Duration, item.Frequency, item.Workload );
+
+				foreach ( var item in module.WeekSchedule )
+					moduleRepository.WeekSchedulesAndModules( id, item.Description, item.WeekNr );
 
-            @ViewBag.NewID = newVersion(id);
+				foreach ( var item in module.GradeType )
+					moduleRepository.GradetypesAndModules( id, item.GradeDescription );
 
-            return View(model);
-        }
+				foreach ( var item in module.AssignmentCode )
+					moduleRepository.AssignmentcodeAndModules( id, item.Description, item.EC );
 
-        [ValidateInput(true), HttpPost]
-        public ActionResult toNewVersion(int id, Module module)
-        {
-            @ViewBag.LearnLineList = GetLearnLines(module);
-            @ViewBag.ThemeList = GetThemes(module);
-            //@ViewBag.LearnGoalList = GetLearnGoals(module);
+				foreach ( var item in module.ModuleStudyPhasingBlock )
+					moduleRepository.StudyBlockPhasingAndModules( id, item.Study_ID, item.Block_ID, item.Phasing_ID );
 
-            @ViewBag.CompetenceList = GetCompetence(module);
-            //@ViewBag.ProgramList = GetProgram(module);
-            //@ViewBag.StudyList = GetStudy(module);
-            @ViewBag.WorkformList = GetWorkForms(module);
-            @ViewBag.GradeTypes = GetGradeTypes(module);
+				return RedirectToAction( "Index" );
+			}
 
-            try
-            {
-                @ViewBag.NewID = newVersion(id);
+			catch {
+				return View( module );
+			}
 
-                int newestID = moduleRepository.Create(module).Module_ID;
+		}
 
-                foreach (var item in module.Level)
-                    moduleRepository.CompentenceAndModules(newestID, item.Competence_ID, item.Level1);
 
-                foreach (var item in module.ModelWithWorkform)
-                    moduleRepository.WorkformAndModules(newestID, item.Workform_ID, item.Duration, item.Frequency, item.Workload);
 
-                foreach (var item in module.GradeType)
-                    moduleRepository.GradetypesAndModules(newestID, item.GradeDescription);
 
-                foreach (var item in module.WeekSchedule)
-                    moduleRepository.WeekSchedulesAndModules(newestID, item.Description, item.WeekNr);
+		[Authorize( Roles = "toNewVersionModule" )]
+		//TODO moet aangepast worden met koppelingen
+		public ActionResult toNewVersion ( int id ) {
+			Module module = moduleRepository.Get( id );
 
-                foreach (var item in module.AssignmentCode)
-                    moduleRepository.AssignmentcodeAndModules(newestID, item.Description, item.EC);
+			var model = new Module( );
+			model.PrevModule_ID = module.PrevModule_ID;
+			model.Title = module.Title;
+			model.CourseCode = module.CourseCode;
+			model.Entry_Level = module.Entry_Level;
+			model.Definition_Short = module.Definition_Long;
+			model.Definition_Long = module.Definition_Long;
+			model.Foreknowledge = module.Foreknowledge;
+			model.Account_ID = module.Account_ID;
+			//+ koppelingen nog
+			model.Theme = module.Theme;
+			model.WeekSchedule = module.WeekSchedule;
+			model.Study = module.Study;
+			model.ModelWithWorkform = module.ModelWithWorkform;
+			model.Level = module.Level;
+			model.LearnLine = module.LearnLine;
+			model.LearningTool = module.LearningTool;
+			model.LearnGoal = module.LearnGoal;
+			model.GradeType = module.GradeType;
+			model.AssignmentCode = module.AssignmentCode;
 
-                module.Module_ID = newestID;
+			@ViewBag.LearnLineList = GetLearnLines( module );
+			@ViewBag.ThemeList = GetThemes( module );
+			@ViewBag.LearnGoalList = GetLearnGoals( module );
+			@ViewBag.LearningToolList = GetLearningTools( module );
+			@ViewBag.CompetenceList = GetCompetence( module );
+			@ViewBag.StudyList = GetStudy( module );
+			@ViewBag.WorkformList = GetWorkForms( module );
+			@ViewBag.GradeTypes = GetGradeTypes( module );
+			@ViewBag.WeekSchedule = GetWeekschedule( module );
+			@ViewBag.AssignmentCode = GetAssignmentcode( module );
 
-                moduleRepository.AddLinkingsModule(module);
 
+			@ViewBag.NewID = newVersion( id );
 
-                moduleRepository.Delete(id);
-                return RedirectToAction("Index");
-            }
-            catch
-            {
+			return View( model );
+		}
 
-                foreach (var item in module.ModelWithWorkform)
-                    item.Workform = workformRepository.Get(item.Workform_ID);
-                foreach (var item in module.GradeType)
-                    item.Module = moduleRepository.Get(item.Module_ID);
-                foreach (var item in module.Level)
-                    item.Competence = competenceRepository.Get(item.Competence_ID);
+		[ValidateInput( true ), HttpPost]
+		public ActionResult toNewVersion ( int id, Module module ) {
+			@ViewBag.LearnLineList = GetLearnLines( module );
+			@ViewBag.ThemeList = GetThemes( module );
+			@ViewBag.LearnGoalList = GetLearnGoals( module );
+			@ViewBag.LearningToolList = GetLearningTools( module );
+			@ViewBag.CompetenceList = GetCompetence( module );
+			@ViewBag.StudyList = GetStudy( module );
+			@ViewBag.WorkformList = GetWorkForms( module );
+			@ViewBag.GradeTypes = GetGradeTypes( module );
+			@ViewBag.WeekSchedule = GetWeekschedule( module );
+			@ViewBag.AssignmentCode = GetAssignmentcode( module );
 
+			try {
+				@ViewBag.NewID = newVersion( id );
 
-                return View(module);
-            }
-        }
+				int newestID = moduleRepository.Create( module ).Module_ID;
 
+				foreach ( var item in module.Level )
+					moduleRepository.CompentenceAndModules( newestID, item.Competence_ID, item.Level1 );
 
-        private int newVersion(int id)
-        {
-            Module newer = moduleRepository.GetNewVersion(id);
-            return (newer != null) ? newer.Module_ID : -1;
-        }
+				foreach ( var item in module.ModelWithWorkform )
+					moduleRepository.WorkformAndModules( newestID, item.Workform_ID, item.Duration, item.Frequency, item.Workload );
 
-        private List<LearnLine> GetLearnLines(Module module)
-        {
-            List<LearnLine> learnLines = learnLineRepository.GetAll();
+				foreach ( var item in module.GradeType )
+					moduleRepository.GradetypesAndModules( newestID, item.GradeDescription );
 
-            if (module != null)
-                foreach (LearnLine lnl in module.LearnLine)
-                    learnLines.Remove(learnLines.Where(b => b.LearnLine_ID == lnl.LearnLine_ID).First());
+				foreach ( var item in module.WeekSchedule )
+					moduleRepository.WeekSchedulesAndModules( newestID, item.Description, item.WeekNr );
 
-            return learnLines.Where(m => m.isDeleted == false).ToList();
-        }
+				foreach ( var item in module.AssignmentCode )
+					moduleRepository.AssignmentcodeAndModules( newestID, item.Description, item.EC );
 
-        private List<Theme> GetThemes(Module module)
-        {
-            List<Theme> themes = themeRepository.GetAll();
+				foreach ( var item in module.ModuleStudyPhasingBlock )
+					moduleRepository.StudyBlockPhasingAndModules( id, item.Study_ID, item.Block_ID, item.Phasing_ID );
 
-            if (module != null)
-                foreach (Theme t in module.Theme)
-                    themes.Remove(themes.Where(b => b.Theme_ID == t.Theme_ID).First());
+				module.Module_ID = newestID;
 
-            return themes.Where(m => m.isDeleted == false).ToList();
-        }
+				moduleRepository.LinkingsOfModule( module );
 
-        private List<Workform> GetWorkForms(Module module)
-        {
-            List<Workform> workforms = workformRepository.GetAll();
 
-            if (module != null)
-                foreach (ModelWithWorkform mwf in module.ModelWithWorkform)
-                    workforms.Remove(workforms.Where(a => a.Workform_ID == mwf.Workform_ID).First());
+				moduleRepository.Delete( id );
+				return RedirectToAction( "Index" );
+			}
+			catch {
 
-            return workforms.Where(m => m.isDeleted == false).ToList();
-        }
+				foreach ( var item in module.ModelWithWorkform )
+					item.Workform = workformRepository.Get( item.Workform_ID );
+				foreach ( var item in module.GradeType )
+					item.Module = moduleRepository.Get( item.Module_ID );
+				foreach ( var item in module.Level )
+					item.Competence = competenceRepository.Get( item.Competence_ID );
+				foreach ( var item in module.ModuleStudyPhasingBlock )
+					item.Module = moduleRepository.Get( item.Module_ID );
 
-        private List<Competence> GetCompetence(Module module)
-        {
+				return View( module );
+			}
+		}
 
-            List<Competence> competences = competenceRepository.GetAll();
 
-            if (module != null)
-                foreach (Level lvl in module.Level)
-                    competences.Remove(competences.Where(b => b.Competence_ID == lvl.Competence_ID).FirstOrDefault());
+		[Authorize( Roles = "toNewVersionModule" )]
+		private int newVersion ( int id ) {
+			Module newer = moduleRepository.GetNewVersion( id );
+			return ( newer != null ) ? newer.Module_ID : -1;
+		}
 
-            return competences.Where(m => m.isDeleted == false).ToList();
-        }
+		private List<LearnLine> GetLearnLines ( Module module ) {
+			List<LearnLine> learnLines = learnLineRepository.GetAll( );
 
-        //private List<LearnGoal> GetLearnGoals(Module module)
-        //{
-        //    List<LearnGoal> learngoals = learngoalRepository.GetAll();
+			if ( module != null )
+				foreach ( LearnLine lnl in module.LearnLine )
+					learnLines.Remove( learnLines.Where( b => b.LearnLine_ID == lnl.LearnLine_ID ).First( ) );
 
-        //    if (module != null)
-        //        foreach (LearnGoal t in module.LearnGoal)
-        //            learngoals.Remove(learngoals.Where(b => b.LearnGoal_ID == t.LearnGoal_ID).First());
+			return learnLines.Where( m => m.isDeleted == false ).ToList( );
+		}
 
-        //    return learngoals.Where(m => m.isDeleted == false).ToList();
-        //}
+		private List<Theme> GetThemes ( Module module ) {
+			List<Theme> themes = themeRepository.GetAll( );
 
-        private List<LearningTool> GetLearningTools(Module module)
-        {
-            List<LearningTool> learningtools = learningtoolRepository.GetAll();
+			if ( module != null )
+				foreach ( Theme t in module.Theme )
+					themes.Remove( themes.Where( b => b.Theme_ID == t.Theme_ID ).First( ) );
 
-            if (module != null)
-                foreach (LearningTool t in module.LearningTool)
-                    learningtools.Remove(learningtools.Where(b => b.LearnTool_ID == t.LearnTool_ID).First());
+			return themes.Where( m => m.isDeleted == false ).ToList( );
+		}
 
-            return learningtools.Where(m => m.isDeleted == false).ToList();
-        }
+		private List<Workform> GetWorkForms ( Module module ) {
+			List<Workform> workforms = workformRepository.GetAll( );
 
-        //private List<Program> GetProgram(Module module)
-        //{
-        //    List<Program> programs = programRepository.GetAll();
+			if ( module != null )
+				foreach ( ModelWithWorkform mwf in module.ModelWithWorkform )
+					workforms.Remove( workforms.Where( a => a.Workform_ID == mwf.Workform_ID ).First( ) );
 
-        //    if (module != null)
-        //        foreach (Program lnl in module.Program)
-        //            programs.Remove(programs.Where(b => b.Program_ID == lnl.Program_ID).First());
+			return workforms.Where( m => m.isDeleted == false ).ToList( );
+		}
 
-        //    return programs.Where(m => m.isDeleted == false).ToList();
-        //}
+		private List<Competence> GetCompetence ( Module module ) {
+			List<Competence> competences = competenceRepository.GetAll( );
+			if ( module != null )
+				foreach ( Level lvl in module.Level )
+					competences.Remove( competences.Where( b => b.Competence_ID == lvl.Competence_ID ).FirstOrDefault( ) );
 
-        //private List<Study> GetStudy(Module module)
-        //{
-        //    List<Study> studies = studyRepository.GetAll();
+			return competences.Where( m => m.isDeleted == false ).ToList( );
+		}
 
-        //    if (module != null)
-        //        foreach (Study lnl in module.Study)
-        //            studies.Remove(studies.Where(b => b.Study_ID == lnl.Study_ID).First());
+		private List<LearnGoal> GetLearnGoals ( Module module ) {
+			List<LearnGoal> learngoals = learngoalRepository.GetAll( );
 
-        //    return studies.Where(m => m.isDeleted == false).ToList();
-        //}
+			if ( module != null )
+				foreach ( LearnGoal t in module.LearnGoal )
+					learngoals.Remove( learngoals.Where( b => b.LearnGoal_ID == t.LearnGoal_ID ).First( ) );
 
-        private List<Module> GetGradeTypes(Module module)
-        {
-            List<Module> gradetypes = moduleRepository.GetAll();
+			return learngoals.Where( m => m.isDeleted == false ).ToList( );
+		}
 
-            if (module != null)
-                foreach (GradeType mwf in module.GradeType)
-                    gradetypes.Remove(gradetypes.Where(b => b.Module_ID == mwf.Module_ID).FirstOrDefault());
+		private List<LearningTool> GetLearningTools ( Module module ) {
+			List<LearningTool> learningtools = learningtoolRepository.GetAll( );
 
-            return gradetypes.Where(m => m.isDeleted == false).ToList();
-        }
+			if ( module != null )
+				foreach ( LearningTool t in module.LearningTool )
+					learningtools.Remove( learningtools.Where( b => b.LearnTool_ID == t.LearnTool_ID ).First( ) );
 
-        private List<Module> GetWeekschedule(Module module)
-        {
-            List<Module> weekschedules = moduleRepository.GetAll();
+			return learningtools.Where( m => m.isDeleted == false ).ToList( );
+		}
 
-            if (module != null)
-                foreach (WeekSchedule mwf in module.WeekSchedule)
-                    weekschedules.Remove(weekschedules.Where(b => b.Module_ID == mwf.Module_ID).FirstOrDefault());
+		private List<Study> GetStudy ( Module module ) {
+			List<Study> studies = studyRepository.GetAll( );
 
-            return weekschedules.Where(m => m.isDeleted == false).ToList();
-        }
+			if ( module != null )
+				foreach ( Study lnl in module.Study )
+					studies.Remove( studies.Where( b => b.Study_ID == lnl.Study_ID ).First( ) );
 
-        private List<Module> GetAssignmentcode(Module module)
-        {
-            List<Module> assignmentcodes = moduleRepository.GetAll();
+			return studies.Where( m => m.isDeleted == false ).ToList( );
+		}
 
-            if (module != null)
-                foreach (AssignmentCode mwf in module.AssignmentCode)
-                    assignmentcodes.Remove(assignmentcodes.Where(b => b.Module_ID == mwf.Module_ID).FirstOrDefault());
+		private List<Module> GetGradeTypes ( Module module ) {
+			List<Module> gradetypes = moduleRepository.GetAll( );
 
-            return assignmentcodes.Where(m => m.isDeleted == false).ToList();
-        }
+			if ( module != null )
+				foreach ( GradeType mwf in module.GradeType )
+					gradetypes.Remove( gradetypes.Where( b => b.Module_ID == mwf.Module_ID ).FirstOrDefault( ) );
 
-    }
+			return gradetypes.Where( m => m.isDeleted == false ).ToList( );
+		}
+
+		private List<Module> GetWeekschedule ( Module module ) {
+			List<Module> weekschedules = moduleRepository.GetAll( );
+
+			if ( module != null )
+				foreach ( WeekSchedule mwf in module.WeekSchedule )
+					weekschedules.Remove( weekschedules.Where( b => b.Module_ID == mwf.Module_ID ).FirstOrDefault( ) );
+
+			return weekschedules.Where( m => m.isDeleted == false ).ToList( );
+		}
+
+		private List<Module> GetAssignmentcode ( Module module ) {
+			List<Module> assignmentcodes = moduleRepository.GetAll( );
+
+			if ( module != null )
+				foreach ( AssignmentCode mwf in module.AssignmentCode )
+					assignmentcodes.Remove( assignmentcodes.Where( b => b.Module_ID == mwf.Module_ID ).FirstOrDefault( ) );
+
+			return assignmentcodes.Where( m => m.isDeleted == false ).ToList( );
+		}
+
+	}
 }

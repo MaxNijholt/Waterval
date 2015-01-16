@@ -469,92 +469,6 @@ $(document).on('click', '#btn_deleteMod', function () {
 
 
 
-//PROGRAM
-$(document).on('click', '#btn_addProgram', function () {
-    var id = $(this).attr('data-id');
-
-    //This is an empty array that will be containing the values from the table row.
-    var tablevalue = [];
-    //Index[0] will contain omschrijving;
-
-
-    //We are going to loop through the rows from TableMod (Use it HTML ID) 
-    $("#TableProgram tr").each(function () {
-        //Here say if the id of this row is the same as the id  then we go in the statement.
-        if ($(this).attr('id') == id) {
-            //We will loop through all the td  in the tr.
-            //And we pust them to the tablevalue array.
-            //If we are done we return the function so the loop will cancel
-            $(this).children("td").each(function () {
-                tablevalue.push($(this).html());
-            })
-            return false;
-        }
-    })
-
-    var index = $("#ProgramTable tr").length;
-    //We create a tr that has an id and we combine a td next to it.
-    var program = '<tr id="' + id + '"><td>' + tablevalue[0] + '</td>';
-    //maak van class="form-control hidden"
-    //In de entity module hebben we learnline zitten. 
-    //We maken hier dus een learnline "aan" zodat ons model het herkent. Dus eig zeggen we hier gewoon Module.LearnLine[0].LearnLine_ID
-    //Hierdoor herkent het model de learnline en kunne we deze meesturen. 
-    //De de rest van de code moet je zelf even toeveogen en aanpassen naar wens. 
-    var hiddenfield = '<td><input type="number" id="Program[' + (index - 1) + '].Program_ID" name="Program[' + (index - 1) + '].Program_ID" class="form-control" value=' + id + ' /></td>'
-
-    var buttonDelete = '<td><input type="button" value="-" id="btn_deleteProgram" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
-
-    //We add this row to the ModTable.
-    $('#ProgramTable').append(program + hiddenfield + buttonDelete);
-
-    //We remove the row have choosen in TableMod;
-    $(this).closest('tr').remove();
-});
-
-//This code gets called whenever one of the delete functions gets pressed.
-//We will get a confirm dialog and choosing yes will remove the data and clean up the table.
-//After that fillDefinition gets called to fill the selectbox and the Definition_long
-$(document).on('click', '#btn_deleteProgram', function () {
-    //Als er bij het dialog op ok word gedrukt word deze code uitgevoerd.
-    if (confirm('Deze gegevens verwijderen?')) {
-        //data-id van de button ophalen. 
-        var id = $(this).attr('data-id');
-
-        //This is an empty array that will be containing the values from the table row.
-        //Index[0] will contain course code;
-        //Index[1] will contain course title;
-        //Index[2] will contain course coursedefination;
-        var tablevalue = [];
-
-        //We loop through the table
-        $("#ProgramTable tr").each(function () {
-            //IF the current  tr has an id, then loop through the td 
-            //and at those values to the array.
-            //if that happend exit the function
-            if ($(this).attr('id') == id) {
-                $(this).children("td").each(function () {
-                    tablevalue.push($(this).html());
-                })
-                return false;
-            }
-        })
-        //Build the new table
-        var program = '<tr id="' + id + '"><td>' + tablevalue[0] + '</td>';
-        var buttonAdd = '<td><input type="button" value="+" data-id="' + id + '" id="btn_addProgram" class="btn btn-avans"/></td></tr>';
-        //Add row to table
-        $('#TableProgram').append(program + buttonAdd);
-
-        //Remove the row for table
-        $(this).closest('tr').remove();
-
-        //Make an index 0 for adding the correct index to the Module attribute
-        var index = 0;
-
-    }
-});
-//END PROGRAM
-
-
 
 
 //Study
@@ -579,25 +493,31 @@ $(document).on('click', '#btn_addStudy', function () {
             return false;
         }
     })
-
     var index = $("#StudyTable tr").length;
+
     //We create a tr that has an id and we combine a td next to it.
     var study = '<tr id="' + id + '"><td>' + tablevalue[0] + '</td>';
+
     //maak van class="form-control hidden"
     //In de entity module hebben we learnline zitten. 
     //We maken hier dus een learnline "aan" zodat ons model het herkent. Dus eig zeggen we hier gewoon Module.LearnLine[0].LearnLine_ID
     //Hierdoor herkent het model de learnline en kunne we deze meesturen. 
     //De de rest van de code moet je zelf even toeveogen en aanpassen naar wens. 
-    var hiddenfield = '<td><input type="number" id="Study[' + (index - 1) + '].Stuy_ID" name="Study[' + (index - 1) + '].Study_ID" class="form-control" value=' + id + ' /></td>'
+    var inputfieldb = '<td><input type="number" class="form-control" id="ModuleStudyPhasingBlock[' + (index - 1) + '].Block_ID" name="ModuleStudyPhasingBlock[' + (index - 1) + '].Block_ID" value="0" min="1" max="16" />';
+    var hiddenfieldb = '<input type="number" id="ModuleStudyPhasingBlock[' + (index - 1) + '].Study_ID" name="ModuleStudyPhasingBlock[' + (index - 1) + '].Study_ID" class="form-control hidden" value=' + id + ' min="1" max="16" /></td>';
+
+    var inputfieldp = '<td><input type="number" class="form-control" id="ModuleStudyPhasingBlock[' + (index - 1) + '].Phasing_ID" name="ModuleStudyPhasingBlock[' + (index - 1) + '].Phasing_ID" value="0" />';
+    var hiddenfieldp = '<input type="number" id="ModuleStudyPhasingBlock[' + (index - 1) + '].Study_ID" name="ModuleStudyPhasingBlock[' + (index - 1) + '].Study_ID" class="form-control hidden" value=' + id + ' /></td>';
 
     var buttonDelete = '<td><input type="button" value="-" id="btn_deleteStudy" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
     //We add this row to the ModTable.
-    $('#ProgramTable').append(study + hiddenfield + buttonDelete);
+    $('#StudyTable').append(study + inputfieldb +hiddenfieldb + inputfieldp + hiddenfieldp + buttonDelete);
 
     //We remove the row have choosen in TableMod;
     $(this).closest('tr').remove();
 });
+
 
 //This code gets called whenever one of the delete functions gets pressed.
 //We will get a confirm dialog and choosing yes will remove the data and clean up the table.
@@ -630,7 +550,7 @@ $(document).on('click', '#btn_deleteStudy', function () {
         var study = '<tr id="' + id + '"><td>' + tablevalue[0] + '</td>';
         var buttonAdd = '<td><input type="button" value="+" data-id="' + id + '" id="btn_addStudy" class="btn btn-avans"/></td></tr>';
         //Add row to table
-        $('#TableProgram').append(study + buttonAdd);
+        $('#TableStudy').append(study + buttonAdd);
 
         //Remove the row for table
         $(this).closest('tr').remove();
@@ -638,9 +558,35 @@ $(document).on('click', '#btn_deleteStudy', function () {
         //Make an index 0 for adding the correct index to the Module attribute
         var index = 0;
 
+        //Loop through the table
+        //If the row contains an id
+        //Loop through the row and find all inputs that are of the number type.
+        //If the input ends with ID then fill if for the Module 
+        //else it fills for th elevel.
+        //Then we up 1 the index.
+        $('#ModTable tr').each(function () {
+            if ($(this).attr('id') != null) {
+                $(this).find("input[type=number]").each(function () {
+                    if ($(this).attr('name').match("ID$")) {
+                        $(this).attr('name', 'ModuleStudyPhasingBlock[' + (index) + '].Study_ID')
+                        $(this).attr('id', 'ModuleStudyPhasingBlock[' + (index) + '].Study_ID')
+                        $(this).attr('name', 'ModuleStudyPhasingBlock[' + (index) + '].Study_ID')
+                        $(this).attr('id', 'ModuleStudyPhasingBlock[' + (index) + '].Study_ID')
+                    }
+                    else {
+                        $(this).attr('name', 'ModuleStudyPhasingBlock[' + (index) + '].Block_ID')
+                        $(this).attr('id', 'ModuleStudyPhasingBlock[' + (index) + '].Block_ID')
+                        $(this).attr('name', 'ModuleStudyPhasingBlock[' + (index) + '].Phasing_ID')
+                        $(this).attr('id', 'ModuleStudyPhasingBlock[' + (index) + '].Phasing_ID')
+                    }
+                });
+                index += 1;
+            }
+        });
+
     }
 });
-//END PROGRAM
+//END Study
 
 
 
