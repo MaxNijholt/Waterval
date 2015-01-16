@@ -25,6 +25,23 @@ namespace RepositoryModel.Repository {
 			find = find.ToLower( );
 			return dbContext.Competence.Where( b => b.isDeleted == false && ( b.Title.ToLower( ).Contains( find ) || b.Definition_Long.ToLower( ).Contains( find ) || b.Definition_Short.ToLower( ).Contains( find ) ) ).ToList( );
 		}
+        public List<AccountRole> GetAccountRolesWith(String find)
+        {
+            find = find.ToLower();
+            return dbContext.AccountRole.Where(b => b.RoleName.ToLower( ).Contains( find ) || b.Description.ToLower( ).Contains( find )).ToList();
+        }
+
+        public List<AccountLaw> GetAccountLawsWith(String find)
+        {
+            find = find.ToLower();
+            return dbContext.AccountLaw.Where(b => b.LawName.ToLower().Contains(find)).ToList();
+        }
+
+        public List<Account> GetAccountsWith(String find)
+        {
+            find = find.ToLower();
+            return dbContext.Account.Where(b => b.isActive == true && b.Username.ToLower().Contains(find)).ToList();
+        }
 
 		public List<Module> GetModulesWith ( String find ) {
 			find = find.ToLower( );

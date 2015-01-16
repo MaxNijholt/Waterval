@@ -192,6 +192,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\AccountController.cs" />
+    <Compile Include="Controllers\AccountLawController.cs" />
+    <Compile Include="Controllers\AccountRoleController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlockController.cs" />
     <Compile Include="Controllers\CompetenceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -269,6 +272,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\RoleScript.js" />
     <Content Include="Scripts\ThemeScript.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -285,20 +289,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\LearnLine\OLD\Edit.cshtml" />
     <Content Include="Views\LearnLine\OLD\Details.cshtml" />
@@ -371,6 +361,18 @@
     <Content Include="Views\Program\Edit.cshtml" />
     <Content Include="Views\Program\Index.cshtml" />
     <Content Include="Views\Program\_CreateOrEdit.cshtml" />
+    <Content Include="Views\AccountLaw\Index.cshtml" />
+    <Content Include="Views\Account\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\AccountRole\_CreateOrEdit.cshtml" />
+    <Content Include="Views\AccountRole\Create.cshtml" />
+    <Content Include="Views\AccountRole\Details.cshtml" />
+    <Content Include="Views\AccountRole\Edit.cshtml" />
+    <Content Include="Views\AccountRole\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

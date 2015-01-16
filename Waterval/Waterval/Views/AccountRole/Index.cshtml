@@ -1,0 +1,46 @@
+﻿@model PagedList.IPagedList<DomainModel.Models.AccountRole>
+@using PagedList.Mvc;
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+	<h2>Rol Overzicht</h2>
+	@using (Html.BeginForm("Index", "AccountRole", FormMethod.Get))
+    {
+        @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in rollen", @class = "form-control" } )
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+    }
+	<table class="table table-bordered table-striped">
+		<tr>
+            <th>@Html.ActionLink( "Naam", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
+            <th>@Html.ActionLink( "Omschrijving", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
+			<th>Aanpassen</th>
+			<th>Verwijderen</th>
+		</tr>
+		@foreach(var item in Model)
+		{
+			<tr>
+				<td>@Html.ActionLink(item.RoleName, "Details", new { id = item.Role_ID })</td>
+				<td>@item.Description</td>
+				<td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Role_ID }, new { @class = "btn btn-warning" })</td>
+				<td><input type="button" value="Verwijderen" data-name="@item.RoleName" data-id="@item.Role_ID" class="btn btn-avans"></td>
+			</tr>
+		}
+	</table>
+
+	@Html.ActionLink("Nieuwe Rol", "Create", null, new { @class = "btn btn-success" })
+</div>
+
+<br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager( Model, page => Url.Action( "Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } ) )
+

@@ -37,8 +37,8 @@ namespace RepositoryModel.Repository {
         }
 
         public void Delete(Account account) {
-            // Add to database
-            throw new NotImplementedException();
+            account.isActive = false;
+            dbContext.SaveChanges();
         }
     }
 

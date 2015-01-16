@@ -44,16 +44,22 @@ namespace RepositoryModel.Repository
             }
 
             theme.Module = modules;
-
         }
 
-        public void UpdateLinkingsTheme(Theme theme)
+        public List<Module> UpdateLinkingsTheme(Theme theme)
         {
+            List<Module> test = new List<Module>();
+
+            int counter = 0;
 
             for (int index = 0; index < theme.Module.Count; index++)
             {
-                theme.Module.Remove(dbContext.Module.Find(theme.Module.ElementAt(index).Module_ID));
+                test.Add(dbContext.Module.Find(theme.Module.ElementAt(index).Module_ID));
+                counter++;
             }
+
+            return test;
+
         }
 
 
@@ -63,19 +69,18 @@ namespace RepositoryModel.Repository
 			if(theme == null)
 				return null;
 
-			theme.Definition = update.Definition;
-			theme.Title = update.Title;
+            Theme test = new Theme();
 
-            if (theme.Module.Count == 0 && update.Module.Count > 0)
-            {
-                AddLinkingsTheme(update);
-                theme.Module = update.Module;
-            }
-            else
-                UpdateLinkingsTheme(theme);
+            test.Theme_ID = theme.Theme_ID;
+			test.Definition = update.Definition;
+			test.Title = update.Title;
 
-			dbContext.SaveChanges();
-			return theme;
+            AddLinkingsTheme(test);
+
+            theme = test;
+
+            dbContext.SaveChanges();
+            return theme;
 		}
 		public void Delete(int theme_id)
 		{
