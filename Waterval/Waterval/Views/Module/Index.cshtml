@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Styles.Render("~/Content/css")
+@Styles.Render( "~/Content/css" )
 <div class="container">
     <h2>Module</h2>
     <div class="container">
@@ -20,7 +20,7 @@
                 </span>
             </div>
         }
-        <br/>
+        <br />
 
         <table class="table table-striped table-bordered table-responsive">
             <thead>
@@ -30,27 +30,38 @@
                     <th>@Html.ActionLink( "Vakcode", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
                     <th>@Html.ActionLink( "EC", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
                     <th>@Html.ActionLink( "Ingangsniveau", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
-                    <th>Aanpassen</th>
-                    <th>Verwijderen</th>
-                    <th>Nieuwe Versie</th>
+                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditModule" ) ) {
+                        <th>Aanpassen</th>
+                    }
+                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteModule" ) ) {
+                        <th>Verwijderen</th>
+                    }
+                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "toNewVersionModule" ) ) {
+                        <th>Nieuwe Versie</th>
+                    }
                 </tr>
             </thead>
-            @foreach (var item in Model)
-            {
+            @foreach ( var item in Model ) {
                 <tr>
-                    <td>@Html.ActionLink(item.Title, "Details", new { id = item.Module_ID })</td>
+                    <td>@Html.ActionLink( item.Title, "Details", new { id = item.Module_ID } )</td>
                     <td>@item.Definition_Short</td>
                     <td>@item.CourseCode</td>
-                    <td>@item.AssignmentCode.Sum(s => s.EC)</td>
-                    <td>@item.Entry_Level</td>
-                    <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Module_ID }, new { @class = "btn btn-warning" })</td>
-                    <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Module_ID" class="btn btn-danger"></td>
-                    <td>@Html.ActionLink("Nieuwe versie", "toNewVersion", new { id = item.Module_ID }, new { @class = "btn btn-avans" })</td>
+                    <td>@item.AssignmentCode.Sum( s => s.EC )</td>
+                    <td>@item.Entry_Level</td>@if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditModule" ) ) {
+                        <td>@Html.ActionLink( "Aanpassen", "Edit", new { id = item.Module_ID }, new { @class = "btn btn-warning" } )</td>
+                    }
+                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteModule" ) ) {
+                        <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Module_ID" class="btn btn-danger"></td>
+                    }
+                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "toNewVersionModule" ) ) {
+                        <td>@Html.ActionLink( "Nieuwe versie", "toNewVersion", new { id = item.Module_ID }, new { @class = "btn btn-avans" } )</td>
+                    }
                 </tr>
             }
         </table>
-    </div>
-    @Html.ActionLink("Nieuwe Module", "Create", null, new { @class = "btn btn-success" })
+    </div>@if ( Waterval.Controllers.OAuthController.IsUserInRole( "CreateModule" ) ) {
+        @Html.ActionLink( "Nieuwe Module", "Create", null, new { @class = "btn btn-success" } )
+    }
 
 </div>
 <br />
@@ -60,22 +71,22 @@
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } ) )
 
 
-@section Scripts {
-    <script>
-        $('input[type="button"]').click(function (e) {
-            var title = $(this).attr('data-name');
-            var id = $(this).attr('data-id');
+    @section Scripts {
+        <script>
+            $('input[type="button"]').click(function (e) {
+                var title = $(this).attr('data-name');
+                var id = $(this).attr('data-id');
 
-            if (confirm('Gegevens van ' + title + ' verwijderen?')) {
-                var url = "/Module/Delete";
+                if (confirm('Gegevens van ' + title + ' verwijderen?')) {
+                    var url = "/Module/Delete";
 
-                $.post(url, { Module_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
-                    $("#msg").html(data);
-                });
-                $(this).closest('tr').remove()
-            }
-        })
-    </script>
+                    $.post(url, { Module_ID: id, Title: title, isDeleted: false, DeleteDate: 0 }, function (data) {
+                        $("#msg").html(data);
+                    });
+                    $(this).closest('tr').remove()
+                }
+            })
+        </script>
 
-    <script src="~/Scripts/Filter.js"></script>
-}
+        <script src="~/Scripts/Filter.js"></script>
+    }
