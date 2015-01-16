@@ -1,0 +1,36 @@
+﻿@model IEnumerable<DomainModel.Models.Account>
+
+@{
+    ViewBag.Title = "Accounts";
+}
+
+<h2>Accounts</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Gebruiker
+        </th>
+        <th>
+            Actief
+        </th>
+        <th>
+            Huidige rol
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Username, "Edit", new { id=item.Account_ID })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountRole.RoleName)
+        </td>
+    </tr>
+}
+
+</table>

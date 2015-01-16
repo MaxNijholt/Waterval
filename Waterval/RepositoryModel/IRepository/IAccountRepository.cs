@@ -17,6 +17,9 @@ namespace RepositoryModel.IRepository {
         List<AccountRole> GetAllAccountRoles();
         AccountRole GetAcountRoles(string name);
 
+        Account         GetById(int id);
+
+        AccountRole GetAccountRoleById(int id);
 
         // New
         List<AccountLaw> GetAllLawsThatBelongToThatAccount(string name);

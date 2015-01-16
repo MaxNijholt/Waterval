@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -208,6 +208,7 @@
     <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Controllers\PhasingController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WorkformController.cs" />
     <Compile Include="Controllers\OAuthController.cs" />
     <Compile Include="Global.asax.cs">
@@ -363,17 +364,15 @@
     <Content Include="Views\Program\Index.cshtml" />
     <Content Include="Views\Program\_CreateOrEdit.cshtml" />
     <Content Include="Views\AccountLaw\Index.cshtml" />
-    <Content Include="Views\Account\_CreateOrEdit.cshtml" />
-    <Content Include="Views\Account\Create.cshtml" />
-    <Content Include="Views\Account\Delete.cshtml" />
-    <Content Include="Views\Account\Details.cshtml" />
-    <Content Include="Views\Account\Edit.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\AccountRole\_CreateOrEdit.cshtml" />
     <Content Include="Views\AccountRole\Create.cshtml" />
     <Content Include="Views\AccountRole\Details.cshtml" />
     <Content Include="Views\AccountRole\Edit.cshtml" />
     <Content Include="Views\AccountRole\Index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,26 @@
+﻿@model DomainModel.Models.Account
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Account</h2>
+
+<div>
+    <h4>@User.Identity.Name</h4>
+
+    <table class="table">
+        <tr>
+            <td>Gebruikersnaam</td>
+            <td>@Html.DisplayFor(model => model.Username)</td>
+        </tr>
+        <tr>
+            <td>Actief</td>
+            <td>@Html.DisplayFor(model => model.isActive)</td>
+        </tr>
+        <tr>
+            <td>Rol</td>
+            <td>@Html.DisplayFor(model => model.AccountRole.RoleName)</td>
+        </tr>
+    </table>
+</div>
