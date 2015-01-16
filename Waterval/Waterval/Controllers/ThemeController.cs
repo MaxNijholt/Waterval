@@ -57,6 +57,7 @@ namespace Waterval.Controllers
 			return View(theme);
 		}
 
+		[Authorize( Roles = "CreateTheme" )]
 		public ActionResult Create()
 		{
 			Theme theme = new Theme();
@@ -79,8 +80,9 @@ namespace Waterval.Controllers
 			}
 		}
 
-       
 
+
+		[Authorize( Roles = "EditTheme" )]
 		public ActionResult Edit(int id)
 		{
 			var model = themeRepository.Get(id);
@@ -106,6 +108,7 @@ namespace Waterval.Controllers
 			}
 		}
 
+		[Authorize( Roles = "DeleteTheme" )]
 		public ActionResult Delete(Theme theme)
 		{
 			themeRepository.Delete(theme.Theme_ID);

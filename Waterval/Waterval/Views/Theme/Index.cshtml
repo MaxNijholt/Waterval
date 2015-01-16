@@ -1,14 +1,14 @@
 ﻿@model PagedList.IPagedList<DomainModel.Models.Theme>
 @using PagedList.Mvc;
 @{
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Styles.Render("~/Content/css")
+@Styles.Render( "~/Content/css" )
 
 <div class="container">
-	<h2>Thema Overzicht</h2>
-	@using ( Html.BeginForm( "Index", "Theme", FormMethod.Get ) ) {
+    <h2>Thema Overzicht</h2>
+    @using ( Html.BeginForm( "Index", "Theme", FormMethod.Get ) ) {
         <div class="input-group input-group">
             @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in themas", @class = "form-control" } )
             <span class="input-group-btn">
@@ -19,25 +19,33 @@
         </div>
     }
     <br />
-	<table class="table table-bordered table-striped">
-		<tr>
+    <table class="table table-bordered table-striped">
+        <tr>
             <th>@Html.ActionLink( "Naam", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
             <th>@Html.ActionLink( "Omschrijving", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
-			<th>Aanpassen</th>
-			<th>Verwijderen</th>
-		</tr>
-		@foreach(var item in Model)
-		{
-			<tr>
-				<td>@Html.ActionLink(item.Title, "Details", new { id = item.Theme_ID })</td>
-				<td>@item.Definition</td>
-				<td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Theme_ID }, new { @class = "btn btn-warning" })</td>
-				<td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Theme_ID" class="btn btn-danger"></td>
-			</tr>
-		}
-	</table>
-
-	@Html.ActionLink("Nieuw Thema", "Create", null, new { @class = "btn btn-success" })
+            @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditTheme" ) ) {
+                <th>Aanpassen</th>
+            }
+            @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteTheme" ) ) {
+                <th>Verwijderen</th>
+            }
+        </tr>
+        @foreach ( var item in Model ) {
+            <tr>
+                <td>@Html.ActionLink( item.Title, "Details", new { id = item.Theme_ID } )</td>
+                <td>@item.Definition</td>
+                @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditTheme" ) ) {
+                    <td>@Html.ActionLink( "Aanpassen", "Edit", new { id = item.Theme_ID }, new { @class = "btn btn-warning" } )</td>
+                }
+                @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteTheme" ) ) {
+                    <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Theme_ID" class="btn btn-danger"></td>
+                }
+            </tr>
+        }
+    </table>
+    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "CreateTheme" ) ) {
+        @Html.ActionLink( "Nieuw Thema", "Create", null, new { @class = "btn btn-success" } )
+    }
 </div>
 
 <br />
