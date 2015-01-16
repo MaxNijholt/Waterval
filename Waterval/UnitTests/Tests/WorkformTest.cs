@@ -84,6 +84,5 @@ namespace UnitTests.Tests
             Assert.AreEqual(test.isDeleted, gWorkform.isDeleted);
             Assert.AreEqual(test.Description, gWorkform.Description);
         }
-
     }
 }

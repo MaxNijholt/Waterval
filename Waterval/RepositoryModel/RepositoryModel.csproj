@@ -56,8 +56,8 @@
     <Compile Include="DummyRepository\DummyCompetenceRepository.cs" />
     <Compile Include="DummyRepository\DLearningToolRepository.cs" />
     <Compile Include="DummyRepository\DModuleRepository.cs" />
-    <Compile Include="DummyRepository\DThemeRepository.cs" />
     <Compile Include="DummyRepository\DPhasingRepository.cs" />
+    <Compile Include="DummyRepository\DummyThemeRepository.cs" />
     <Compile Include="DummyRepository\DummyWorkformRepository.cs" />
     <Compile Include="IRepository\IAccountRepository.cs" />
     <Compile Include="IRepository\IGradeTypeRepository.cs" />

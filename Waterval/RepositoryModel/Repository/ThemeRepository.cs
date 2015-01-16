@@ -16,26 +16,23 @@ namespace RepositoryModel.Repository
         {
             dbContext = new DomainModel.Models.Project_WatervalEntities();
         }
-        public List<DomainModel.Models.Theme> GetAll()
+        public List<Theme> GetAll()
         {
             return dbContext.Theme.ToList();
         }
-		public DomainModel.Models.Theme Get(int theme_id)
+		public Theme Get(int theme_id)
 		{
 			return dbContext.Theme.Find(theme_id);
 		}
-		public DomainModel.Models.Theme Create(DomainModel.Models.Theme theme)
+		public Theme Create(Theme theme)
 		{
             AddLinkingsTheme(theme);
 			dbContext.Theme.Add(theme);
 			dbContext.SaveChanges();
 			return theme;
 		}
-
-
         public void AddLinkingsTheme(Theme theme)
         {
-
             List<Module> modules = new List<Module>();
 
             for (int index = 0; index < theme.Module.Count; index++)
@@ -44,9 +41,7 @@ namespace RepositoryModel.Repository
             }
 
             theme.Module = modules;
-
         }
-
         public void UpdateLinkingsTheme(Theme theme)
         {
 
@@ -55,9 +50,7 @@ namespace RepositoryModel.Repository
                 theme.Module.Remove(dbContext.Module.Find(theme.Module.ElementAt(index).Module_ID));
             }
         }
-
-
-		public DomainModel.Models.Theme Update(DomainModel.Models.Theme update)
+		public Theme Update(Theme update)
 		{
 			Theme theme = dbContext.Theme.SingleOrDefault(b => b.Theme_ID == update.Theme_ID);
 			if(theme == null)
