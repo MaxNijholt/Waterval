@@ -1,19 +1,20 @@
 ﻿@model DomainModel.Models.LearnGoal
 @{
+    ViewBag.Title = "Leerdoel Aanmaken";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @using (Html.BeginForm("Create", "LearnGoal", new { ReturnUrl = ViewBag.ReturnUrl },
             FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
 {
-
+    <h2>Nieuw Leerdoel Aanmaken</h2>
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend></legend>
         @Html.Partial("_CreateOrEdit", null)
         <p>
-            <input type="submit" value="Leerdoel opslaan" name="btn_Save" class="btn btn-success" /> |
+            <input type="submit" value="Nieuw Leerdoel Opslaan" name="btn_Save" class="btn btn-success" /> |
             @Html.ActionLink("Terug naar Index", "Index")
         </p>
     </fieldset>

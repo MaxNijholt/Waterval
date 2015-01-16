@@ -1,6 +1,6 @@
 ﻿@model DomainModel.Models.Block
 @{
-    ViewBag.Title = "Blok Aanpassen";
+    ViewBag.Title = @Html.DisplayFor(model => model.Title);
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Styles.Render("~/Content/css")

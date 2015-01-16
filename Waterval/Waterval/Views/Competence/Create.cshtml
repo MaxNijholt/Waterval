@@ -1,20 +1,22 @@
 ﻿@model DomainModel.Models.Competence
 @{
+    ViewBag.Title = "Competentie Aanmaken";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @using (Html.BeginForm("Create", "Competence", new { ReturnUrl = ViewBag.ReturnUrl },
             FormMethod.Post, new { @class = "form-horizontal", @role = "form", id = "MainForm" }))
 {
+    <h2>Nieuwe Competentie Aanmaken</h2>
     ViewBag.WhatAmI = "Create";
-    
+
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend></legend>
         @Html.Partial("_CreateOrEdit", null)
         <p>
-            <input type="submit" value="Compententie opslaan" name="btn_Save" class="btn btn-success" /> |
+            <input type="submit" value="Nieuwe Compententie Opslaan" name="btn_Save" class="btn btn-success" /> |
             @Html.ActionLink("Terug naar Index", "Index")
         </p>
 

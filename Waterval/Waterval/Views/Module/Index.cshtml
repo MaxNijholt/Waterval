@@ -7,7 +7,7 @@
 
 @Styles.Render("~/Content/css")
 <div class="container">
-    <h2>Module</h2>
+    <h2>Modules</h2>
     <div class="container">
         @using ( Html.BeginForm( "Index", "Module", FormMethod.Get ) ) {
 
@@ -54,7 +54,7 @@
 
 </div>
 <br />
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) van @Model.PageCount
 
     @Html.PagedListPager( Model, page => Url.Action( "Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } ) )

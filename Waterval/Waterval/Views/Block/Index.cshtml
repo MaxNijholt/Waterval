@@ -4,6 +4,7 @@
 
 
 @{
+    ViewBag.Title = "Blokken";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,7 +14,7 @@
 
 
 <div class="container">
-	<h2>Blok Overzicht</h2>
+	<h2>Blokken</h2>
 	 @using ( Html.BeginForm( "Index", "Block", FormMethod.Get ) ) {
         <div class="input-group input-group">
             @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in blokken", @class = "form-control" } )
@@ -61,7 +62,7 @@
 		}
 	</div>
 	<br />
-	Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+	Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) van @Model.PageCount
 
 	@Html.PagedListPager(Model, page => Url.Action("Index",
 	new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

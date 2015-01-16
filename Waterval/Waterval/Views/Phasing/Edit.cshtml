@@ -3,7 +3,7 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Styles.Render("~/Content/css")
-<h2>Fase aanpassen</h2>
+<h2>Fase Aanpassen: @Model.Title</h2>
 
 @using(Html.BeginForm("Edit", "Phasing", new { ReturnUrl = ViewBag.ReturnUrl },
 			FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
@@ -15,7 +15,7 @@
 		@Html.Partial("_CreateOrEdit", Model)
 
 		<p>
-			<input type="submit" value="Fasering aanpassen" class="btn btn-success" /> |
+            <input type="submit" value="Fase @Model.Title Aanpassen" class="btn btn-success" /> |
 			@Html.ActionLink("Terug naar Index", "Index")
 		</p>
 	</fieldset>

@@ -5,15 +5,17 @@
 
 @using (Html.BeginForm("Create", "Program", new { ReturnUrl = ViewBag.ReturnUrl },
             FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+            
 {
-
+    
     @Html.ValidationSummary(true)
-
+    <h2>Nieuwe Opleiding Toevoegen</h2>
     <fieldset>
+        
         <legend></legend>
         @Html.Partial("_CreateOrEdit", null)
         <p>
-            <input type="submit" value="Opleiding opslaan" name="btn_Save" class="btn btn-success" /> |
+            <input type="submit" value="Nieuwe Opleiding Opslaan" name="btn_Save" class="btn btn-success" /> |
             @Html.ActionLink("Terug naar Index", "Index")
         </p>
     </fieldset>

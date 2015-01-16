@@ -6,14 +6,14 @@
 @using (Html.BeginForm("Create", "Module", new { ReturnUrl = ViewBag.ReturnUrl },
             FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
 {
-
+    <h2>Nieuwe Module Toevoegen</h2>
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend></legend>
         @Html.Partial("_CreateOrEdit", null)
         <p>
-            <input type="submit" value="Module opslaan" name="btn_Save" class="btn btn-success" /> |
+            <input type="submit" value="Nieuwe Module Opslaan" name="btn_Save" class="btn btn-success" /> |
             @Html.ActionLink("Terug naar Index", "Index")
         </p>
     </fieldset>

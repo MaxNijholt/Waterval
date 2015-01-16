@@ -1,11 +1,12 @@
 ﻿@model DomainModel.Models.LearnGoal
 @{
+    ViewBag.Title = @Html.DisplayFor(model => model.Description);
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @Styles.Render("~/Content/css")
 
-<h2>Leerdoel aanpassen:</h2>
+<h2>Leerdoel aanpassen: @Model.Description</h2>
 
 @using (Html.BeginForm("Edit", "LearnGoal", new { ReturnUrl = ViewBag.ReturnUrl },
             FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
@@ -18,7 +19,7 @@
         @Html.Partial("_CreateOrEdit", Model)
 
         <p>
-            <input type="submit" value="Leerdoel aanpassen" class="btn btn-success" /> |
+            <input type="submit" value="Leerdoel @Model.Description Aanpassen" class="btn btn-success" /> |
             @Html.ActionLink("Terug naar Index", "Index")
         </p>
     </fieldset>

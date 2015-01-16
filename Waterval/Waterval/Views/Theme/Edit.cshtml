@@ -17,7 +17,7 @@
 			@Html.HiddenFor(model => model.Theme_ID)
 			@Html.Partial("_CreateOrEdit", Model)
 			<p>
-				<input type="submit" value="Thema opslaan" class="btn btn-success" /> |
+                <input type="submit" value="Thema @Html.DisplayFor(model => model.Title) Aanpassen" class="btn btn-success" /> |
 				@Html.ActionLink("Terug naar Index", "Index")
 			</p>
 		</fieldset>

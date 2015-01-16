@@ -1,16 +1,18 @@
 ﻿@model DomainModel.Models.LearnGoal
 
 @{
+    ViewBag.Title = @Html.DisplayFor(model => model.Description);
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @Styles.Render("~/Content/css")
 
 <div class="container">
+    <h2>Leerdoel Details: @Html.DisplayFor(model => model.Description)</h2>
     
     <table class="table table-bordered table-striped">
         <tr>
-            <th>Titel</th>
+            <th>Beschrijving</th>
          
         </tr>
         <tr>

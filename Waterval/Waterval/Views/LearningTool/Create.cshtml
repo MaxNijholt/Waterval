@@ -6,14 +6,14 @@
 @using (Html.BeginForm("Create", "LearningTool", new { ReturnUrl = ViewBag.ReturnUrl },
             FormMethod.Post, new { @class = "form-horizontal", @role = "form", id = "MainForm" }))
 {
-
+    <h2>Nieuw Leermiddel Toevoegen</h2>
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend></legend>
         @Html.Partial("_CreateOrEdit", null)
         <p>
-            <input type="submit" value="Leer Middel opslaan" name="btn_Save" class="btn btn-success" /> |
+            <input type="submit" value="Nieuw Leermiddel Opslaan" name="btn_Save" class="btn btn-success" /> |
             @Html.ActionLink("Terug naar Index", "Index")
         </p>
 
