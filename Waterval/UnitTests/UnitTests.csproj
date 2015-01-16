@@ -60,6 +60,7 @@
     <Compile Include="Tests\CompetenceTest.cs" />
     <Compile Include="Tests\GradeTypeTest.cs" />
     <Compile Include="Tests\PhasingTest.cs" />
+    <Compile Include="Tests\LearningToolTest.cs" />
     <Compile Include="Tests\ThemeTest.cs" />
     <Compile Include="Tests\WorkformTest.cs" />
   </ItemGroup>

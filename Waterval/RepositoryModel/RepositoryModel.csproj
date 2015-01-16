@@ -58,7 +58,7 @@
     <Compile Include="DummyRepository\DummyGradeTypeRepository.cs" />
     <Compile Include="DummyRepository\DummyPhasingRepository.cs" />
     <Compile Include="DummyRepository\DummyLearnGoalRepository.cs" />
-    <Compile Include="DummyRepository\DummyLearningTool.cs" />
+    <Compile Include="DummyRepository\DummyLearningToolRepository.cs" />
     <Compile Include="DummyRepository\DummyThemeRepository.cs" />
     <Compile Include="DummyRepository\DummyWorkformRepository.cs" />
     <Compile Include="DummyThemeRepository.cs" />
