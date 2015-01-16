@@ -14,7 +14,6 @@ namespace MvcApplication1.Controllers
         //
         // GET: /LearnLine/
 		private AccountRepository accountRepository;
-        private ModuleRepository moduleRepository;
 		private SearchRepository search;
 
         public AccountController()

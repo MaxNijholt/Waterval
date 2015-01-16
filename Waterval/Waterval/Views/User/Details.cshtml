@@ -4,23 +4,375 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Account</h2>
+<div class="jumbotron">
+    @{string name = User.Identity.Name;}
+    <h1>@(char.ToUpper(name[0]) + name.Substring(1))</h1>
+    <p class="lead">@Model.AccountRole.RoleName</p>
+</div>
 
-<div>
-    <h4>@User.Identity.Name</h4>
+<div class="row">
+    <!-- Blocks -->
+    <div class="col-lg-4">
+        <div class="panel panel-info" style="text-align:center;">
+            <div class="panel-heading">
+                <h1 class="panel-title">Blokken</h1>
+            </div>
+            <div class="panel-body">
+                @if (ViewBag.Actions.Contains("CreateBlock")) {
+                    <a href="@Url.Action("Create", "Block")" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Create", "Block")" class="btn btn-lg btn-success" disabled><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("EditBlock")) {
+                    <a href="@Url.Action("Index", "Block")" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Block")" class="btn btn-lg btn-info" disabled><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("DeleteBlock")) {
+                    <a href="@Url.Action("Index", "Block")" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Block")" class="btn btn-lg btn-danger" disabled><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- Competence -->
+    <div class="col-lg-4">
+        <div class="panel panel-info" style="text-align:center;">
+            <div class="panel-heading">
+                <h1 class="panel-title">Competenties</h1>
+            </div>
+            <div class="panel-body">
+                @if (ViewBag.Actions.Contains("CreateCompetence")) {
+                    <a href="@Url.Action("Create", "Competence")" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Create", "Competence")" class="btn btn-lg btn-success" disabled><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("EditCompetence")) {
+                    <a href="@Url.Action("Index", "Competence")" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Competence")" class="btn btn-lg btn-info" disabled><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("DeleteCompetence")) {
+                    <a href="@Url.Action("Index", "Competence")" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Competence")" class="btn btn-lg btn-danger" disabled><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- LearnGoal -->
+    <div class="col-lg-4">
+        <div class="panel panel-info" style="text-align:center;">
+            <div class="panel-heading">
+                <h1 class="panel-title">Leerlijnen</h1>
+            </div>
+            <div class="panel-body">
+                @if (ViewBag.Actions.Contains("CreateLearnLine")) {
+                    <a href="@Url.Action("Create", "LearnLine")" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Create", "LearnLine")" class="btn btn-lg btn-success" disabled><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("EditLearnLine")) {
+                    <a href="@Url.Action("Index", "LearnLine")" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "LearnLine")" class="btn btn-lg btn-info" disabled><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("DeleteLearnLine")) {
+                    <a href="@Url.Action("Index", "LearnLine")" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "LearnLine")" class="btn btn-lg btn-danger" disabled><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 
-    <table class="table">
-        <tr>
-            <td>Gebruikersnaam</td>
-            <td>@Html.DisplayFor(model => model.Username)</td>
-        </tr>
-        <tr>
-            <td>Actief</td>
-            <td>@Html.DisplayFor(model => model.isActive)</td>
-        </tr>
-        <tr>
-            <td>Rol</td>
-            <td>@Html.DisplayFor(model => model.AccountRole.RoleName)</td>
-        </tr>
-    </table>
+<div class="row">
+    <!-- Module -->
+    <div class="col-lg-4">
+        <div class="panel panel-info" style="text-align:center;">
+            <div class="panel-heading">
+                <h1 class="panel-title">Modules</h1>
+            </div>
+            <div class="panel-body">
+                @if (ViewBag.Actions.Contains("CreateModule")) {
+                    <a href="@Url.Action("Create", "Module")" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Create", "Module")" class="btn btn-lg btn-success" disabled><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("EditModule")) {
+                    <a href="@Url.Action("Index", "Module")" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Module")" class="btn btn-lg btn-info" disabled><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("DeleteModule")) {
+                    <a href="@Url.Action("Index", "Module")" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Module")" class="btn btn-lg btn-danger" disabled><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- Phasing -->
+    <div class="col-lg-4">
+        <div class="panel panel-info" style="text-align:center;">
+            <div class="panel-heading">
+                <h1 class="panel-title">Faseringen</h1>
+            </div>
+            <div class="panel-body">
+                @if (ViewBag.Actions.Contains("CreatePhasing")) {
+                    <a href="@Url.Action("Create", "Phasing")" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Create", "Phasing")" class="btn btn-lg btn-success" disabled><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("EditPhasing")) {
+                    <a href="@Url.Action("Index", "Phasing")" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Phasing")" class="btn btn-lg btn-info" disabled><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("DeletePhasing")) {
+                    <a href="@Url.Action("Index", "Phasing")" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Phasing")" class="btn btn-lg btn-danger" disabled><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- Program -->
+    <div class="col-lg-4">
+        <div class="panel panel-info" style="text-align:center;">
+            <div class="panel-heading">
+                <h1 class="panel-title">Opleidingen</h1>
+            </div>
+            <div class="panel-body">
+                @if (ViewBag.Actions.Contains("CreateProgram")) {
+                    <a href="@Url.Action("Create", "Program")" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Create", "Program")" class="btn btn-lg btn-success" disabled><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("EditProgram")) {
+                    <a href="@Url.Action("Index", "Phasing")" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Program")" class="btn btn-lg btn-info" disabled><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("DeleteProgram")) {
+                    <a href="@Url.Action("Index", "Program")" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Phasing")" class="btn btn-lg btn-danger" disabled><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Study -->
+    <div class="col-lg-4">
+        <div class="panel panel-info" style="text-align:center;">
+            <div class="panel-heading">
+                <h1 class="panel-title">Studierichtingen</h1>
+            </div>
+            <div class="panel-body">
+                @if (ViewBag.Actions.Contains("CreateStudy")) {
+                    <a href="@Url.Action("Create", "Study")" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Create", "Study")" class="btn btn-lg btn-success" disabled><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("EditStudy")) {
+                    <a href="@Url.Action("Index", "Study")" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Study")" class="btn btn-lg btn-info" disabled><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("DeleteStudy")) {
+                    <a href="@Url.Action("Index", "Study")" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Study")" class="btn btn-lg btn-danger" disabled><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- Theme -->
+    <div class="col-lg-4">
+        <div class="panel panel-info" style="text-align:center;">
+            <div class="panel-heading">
+                <h1 class="panel-title">Thema's</h1>
+            </div>
+            <div class="panel-body">
+                @if (ViewBag.Actions.Contains("CreateTheme")) {
+                    <a href="@Url.Action("Create", "Theme")" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Create", "Theme")" class="btn btn-lg btn-success" disabled><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("EditTheme")) {
+                    <a href="@Url.Action("Index", "Theme")" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Theme")" class="btn btn-lg btn-info" disabled><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("DeleteTheme")) {
+                    <a href="@Url.Action("Index", "Theme")" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Theme")" class="btn btn-lg btn-danger" disabled><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- Workform -->
+    <div class="col-lg-4">
+        <div class="panel panel-info" style="text-align:center;">
+            <div class="panel-heading">
+                <h1 class="panel-title">Werkvormen</h1>
+            </div>
+            <div class="panel-body">
+                @if (ViewBag.Actions.Contains("CreateWorkform")) {
+                    <a href="@Url.Action("Create", "Workform")" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Create", "Workform")" class="btn btn-lg btn-success" disabled><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("EditWorkform")) {
+                    <a href="@Url.Action("Index", "Workform")" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Workform")" class="btn btn-lg btn-info" disabled><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("DeleteWorkform")) {
+                    <a href="@Url.Action("Index", "Workform")" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "Workform")" class="btn btn-lg btn-danger" disabled><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- LearnGoal -->
+    <div class="col-lg-4">
+        <div class="panel panel-info" style="text-align:center;">
+            <div class="panel-heading">
+                <h1 class="panel-title">Leerdoelen</h1>
+            </div>
+            <div class="panel-body">
+                @if (ViewBag.Actions.Contains("CreateLearnGoal")) {
+                    <a href="@Url.Action("Create", "LearnGoal")" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Create", "LearnGoal")" class="btn btn-lg btn-success" disabled><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("EditLearnGoal")) {
+                    <a href="@Url.Action("Index", "LearnGoal")" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "LearnGoal")" class="btn btn-lg btn-info" disabled><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("DeleteLearnGoal")) {
+                    <a href="@Url.Action("Index", "LearnGoal")" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "LearnGoal")" class="btn btn-lg btn-danger" disabled><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- LearningTool -->
+    <div class="col-lg-4">
+        <div class="panel panel-info" style="text-align:center;">
+            <div class="panel-heading">
+                <h1 class="panel-title">Leermiddelen</h1>
+            </div>
+            <div class="panel-body">
+                @if (ViewBag.Actions.Contains("CreateLearningTool")) {
+                    <a href="@Url.Action("Create", "LearningTool")" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Create", "LearningTool")" class="btn btn-lg btn-success" disabled><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("EditLearningTool")) {
+                    <a href="@Url.Action("Index", "LearningTool")" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "LearningTool")" class="btn btn-lg btn-info" disabled><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("DeleteLearningTool")) {
+                    <a href="@Url.Action("Index", "LearningTool")" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "LearningTool")" class="btn btn-lg btn-danger" disabled><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- AccountRole -->
+    <div class="col-lg-4">
+        <div class="panel panel-info" style="text-align:center;">
+            <div class="panel-heading">
+                <h1 class="panel-title">Accountrollen</h1>
+            </div>
+            <div class="panel-body">
+                @if (ViewBag.Actions.Contains("CreateAccountRole")) {
+                    <a href="@Url.Action("Create", "AccountRole")" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Create", "AccountRole")" class="btn btn-lg btn-success" disabled><span class="glyphicon glyphicon-file" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("EditAccountRole")) {
+                    <a href="@Url.Action("Index", "AccountRole")" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "AccountRole")" class="btn btn-lg btn-info" disabled><span class="glyphicon glyphicon-pencil" style="font-size:30px;"></span></a>
+                }
+                @if (ViewBag.Actions.Contains("DeleteAccountRole")) {
+                    <a href="@Url.Action("Index", "AccountRole")" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "AccountRole")" class="btn btn-lg btn-danger" disabled><span class="glyphicon glyphicon-trash" style="font-size:30px;"></span></a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Account -->
+    <div class="col-lg-12">
+        <div class="panel panel-info" style="text-align:center;">
+            <div class="panel-heading">
+                <h1 class="panel-title">Accounts</h1>
+            </div>
+            <div class="panel-body">
+                @if (ViewBag.Actions.Contains("EditAccount")) {
+                    <a href="@Url.Action("Index", "User")" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-user" style="font-size:30px;"></span></a>
+                }
+                else {
+                    <a href="@Url.Action("Index", "User")" class="btn btn-lg btn-primary" disabled><span class="glyphicon glyphicon-user" style="font-size:30px;"></span></a>
+                }
+            </div>
+        </div>
+    </div>
 </div>

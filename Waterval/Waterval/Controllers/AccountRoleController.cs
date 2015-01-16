@@ -54,6 +54,7 @@ namespace MvcApplication1.Controllers
 			return View( accountRoles.ToPagedList( pageNumber, pageSize ) );
 		}
 
+        [Authorize(Roles="DeleteAccountRole")]
         public ActionResult Delete(AccountRole accountRole)
         {
 
@@ -74,6 +75,7 @@ namespace MvcApplication1.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "CreateAccountRole")]
         public ActionResult Create()
         {
             
@@ -99,7 +101,7 @@ namespace MvcApplication1.Controllers
         }
 
 
-
+        [Authorize(Roles = "EditAccountRole")]
         public ActionResult Edit(int id)
         {
             var model = accountRoleRepository.Get(id);

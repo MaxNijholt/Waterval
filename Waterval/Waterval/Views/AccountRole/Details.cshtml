@@ -37,7 +37,7 @@
     </table>
 
 
-	@Html.ActionLink("Aanpassen", "Edit", new { id = Model.Role_ID }, new { @class = "btn btn-warning" })
-	<br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />|
+	@if (Waterval.Controllers.OAuthController.IsUserInRole("EditAccountRole")) {@Html.ActionLink("Aanpassen", "Edit", new { id = Model.Role_ID }, new { @class = "btn btn-warning" })}
+	<br>@if (Waterval.Controllers.OAuthController.IsUserInRole("DeleteAccountRole")) {<input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />}|
 	@Html.ActionLink("Terug naar Index", "Index")
 </div>

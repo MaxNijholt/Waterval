@@ -1,6 +1,9 @@
 ﻿using DomainModel.Models;
+using Newtonsoft.Json.Linq;
 using RepositoryModel.IRepository;
 using RepositoryModel.Repository;
+using RestSharp;
+using RestSharp.Authenticators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +19,7 @@ namespace Waterval.Controllers {
             _accountRepository = new AccountRepository();
         }
 
+        [Authorize(Roles="EditAccount")]
         public ActionResult Index() {
             List<Account> accounts = _accountRepository.GetAll();
             return View(accounts);
@@ -25,14 +29,19 @@ namespace Waterval.Controllers {
         {
             List<Account> accounts = _accountRepository.GetAll();
             foreach (Account a in accounts) {
-                if (a.Username.Equals(User.Identity.Name))
-                {
+                if (a.Username.Equals(User.Identity.Name)) {
+                    List<string> temp = new List<string>();
+                    foreach (AccountLaw al in a.AccountRole.AccountLaw) {
+                        temp.Add(al.LawName);
+                    }
+                    ViewBag.Actions = temp;
                     return View(a);
                 }
             }
             return View();
         }
 
+        [Authorize(Roles = "EditAccount")]
         public ActionResult Edit(int id)
         {
             ViewBag.Roles = _accountRepository.GetAllAccountRoles();

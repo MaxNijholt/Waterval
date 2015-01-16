@@ -193,7 +193,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\AccountController.cs" />
     <Compile Include="AvansRoleManager.cs" />
-    <Compile Include="Controllers\AccountLawController.cs" />
     <Compile Include="Controllers\AccountRoleController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlockController.cs" />
@@ -363,7 +362,6 @@
     <Content Include="Views\Program\Edit.cshtml" />
     <Content Include="Views\Program\Index.cshtml" />
     <Content Include="Views\Program\_CreateOrEdit.cshtml" />
-    <Content Include="Views\AccountLaw\Index.cshtml" />
     <Content Include="Views\AccountRole\_CreateOrEdit.cshtml" />
     <Content Include="Views\AccountRole\Create.cshtml" />
     <Content Include="Views\AccountRole\Details.cshtml" />
