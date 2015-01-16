@@ -7,7 +7,7 @@
 @Styles.Render("~/Content/css")
 
 <div class="container">
-    <h2>Leerlijn Details: @Html.DisplayFor(Model => Model.Title)
+    <h2>Leerlijn Details: @Model.Title)
 </h2>
 
     <table class="table table-bordered table-striped">
@@ -17,11 +17,34 @@
          
         </tr>
         <tr>
-            <td>@Html.DisplayFor(Model => Model.Title)</td>
-            <td>@Html.DisplayFor(Model => Model.Definition)</td>
+            <td>@Model.Title)</td>
+            <td>@Model.Definition)</td>
         </tr>
     </table>
- @Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })</td>
+
+
+    <p>Behoort toe aan modules:</p>
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <tr>
+                <th>Vakcode</th>
+                <th>Module</th>
+                <th>Omschrijving</th>
+            </tr>
+        </tbody>
+        @foreach (var item in Model.Module)
+        {
+            <tr>
+                <td>@Html.ActionLink(@item.CourseCode.ToString(), "Details", "Module", new { id = item.Module_ID }, null)</td>
+                <td>@item.Title</td>
+                <td>@item.Definition_Short</td>
+            </tr>
+        }
+    </table>
+    <hr />
+    <hr />
+
+ @Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })
     <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />|
     @Html.ActionLink("Terug naar Index", "Index")
 </div>

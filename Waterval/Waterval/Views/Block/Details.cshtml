@@ -27,7 +27,7 @@
             <table class="table table-bordered table-striped">
                 <tr>
                     <th>Module</th>
-                    <th>Fasering</th>
+                    <th>Studierichting</th>
                 </tr>
 
                 @foreach (var item in Model.ModuleStudyPhasingBlock.Where(s => s.Study_ID == stud.Study_ID))
@@ -38,7 +38,7 @@
                          
                         </td>
                         <td>
-                            @Html.ActionLink(item.Phasing.Title, "Details", "Phasing", new { id = item.Phasing_ID }, null)
+                            @Html.ActionLink(item.Study.Title, "Details", "Phasing", new { id = item.Phasing_ID }, null)
                         </td>
 
                     </tr>

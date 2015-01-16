@@ -1,0 +1,43 @@
+﻿@model DomainModel.Models.AccountRole
+
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Content/css")
+
+<div class="container">
+	<h2>Rol Details: @Html.DisplayFor(model => model.RoleName)</h2>
+
+	<table class="table table-bordered table-striped">
+		<tr>
+			<th>Naam</th>
+			<th>Omschrijving</th>
+
+		</tr>
+		<tr>
+			<td>@Html.DisplayFor(model => model.RoleName)</td>
+			<td>@Html.DisplayFor(model => model.Description)</td>
+		</tr>
+	</table>
+
+    <p>De volgenende rechten horen bij deze rol:</p>
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <tr>
+                <th>Naam</th>
+            </tr>
+        </tbody>
+        @foreach (var item in Model.AccountLaw)
+        {
+            <tr>
+                <td>@item.LawName</td>
+            </tr>
+        }
+    </table>
+
+
+	@Html.ActionLink("Aanpassen", "Edit", new { id = Model.Role_ID }, new { @class = "btn btn-warning" })
+	<br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />|
+	@Html.ActionLink("Terug naar Index", "Index")
+</div>

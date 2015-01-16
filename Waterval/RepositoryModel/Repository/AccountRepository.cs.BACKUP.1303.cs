@@ -1,4 +1,4 @@
-using DomainModel.Models;
+﻿using DomainModel.Models;
 using RepositoryModel.IRepository;
 using System;
 using System.Collections.Generic;
@@ -40,6 +40,7 @@ namespace RepositoryModel.Repository {
         }
 
         public void Delete(Account account) {
+<<<<<<< HEAD
             Account a = dbContext.Account.SingleOrDefault(b => b.Account_ID == account.Account_ID);
 
             a.isActive = false;
@@ -60,6 +61,10 @@ namespace RepositoryModel.Repository {
         {
             Account acc = dbContext.Account.SingleOrDefault(a => a.Username == name);
             return acc.AccountRole.AccountLaw.ToList();
+=======
+            account.isActive = false;
+            dbContext.SaveChanges();
+>>>>>>> 79e28242added365ee4fbd9ce9bc25be4d194eb4
         }
     }
 

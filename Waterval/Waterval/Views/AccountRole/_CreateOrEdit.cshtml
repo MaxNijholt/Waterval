@@ -1,0 +1,80 @@
+﻿@model DomainModel.Models.AccountRole
+@using DomainModel.Models;
+
+
+@* TODO"Wat er daadwerkelijk komt te staan
+	This is a test for data This partial view defines form fields that will appear when creating and editing entities*@
+<div class="form-group">
+	@Html.LabelFor(model => model.RoleName, new { @class = "col-sm-2 control-label" })
+	
+	<div class="col-sm-10">
+		@Html.EditorFor(model => model.RoleName, new { @class = "form-control" })
+		@Html.ValidationMessageFor(model => model.RoleName)
+		
+	</div>
+</div>
+<div class="form-group">
+	@Html.LabelFor(model => model.Description, new { @class = "col-sm-2 control-label" })
+	<div class="col-sm-10">
+		@Html.EditorFor(model => model.Description, new { @class = "form-control" })
+		@Html.ValidationMessageFor(model => model.Description)
+	</div>
+</div>
+
+
+<br /><br />
+<table class="table table-bordered table-striped table-responsive" id="ModTable">
+    <thead>
+        <tr>
+            <th width="50%">Title</th>          
+            <th>Verwijderen</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @{int index = 0;}
+        @foreach (var item in Model.AccountLaw)
+        {
+            if (item.LawName == null) { continue; }
+            <tr id="@item.Law_ID">
+
+                <td>@item.LawName</td>
+                <td>
+                    <input type="button" value="-" id="btn_deleteMod" data-id="@item.Law_ID" class="btn btn-avans" />
+                    @{index++; }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<input type="button" value="Rechten Toevoegen" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseMod">
+
+<br />
+<br />
+<div id="collapseMod" class="panel-collapse collapse open">
+
+    <input type="text" class="form-control" placeholder="Rechten..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTable')" style:size="10" />
+
+
+    <table class="table table-bordered table-striped" id="TableMod">
+        <thead>
+            <tr>
+                <th>Naam</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Laat alle rechten zien die nog niet zijn verwerkt -->
+            @foreach (AccountLaw item in @ViewBag.LawList)
+            {
+                <tr id="@item.Law_ID">
+
+                    <td>@item.LawName</td>
+                    <td><input type="button" value="+" id="btn_addMod" data-id="@item.Law_ID" class="btn btn-avans" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@Html.Partial("~/Views/Shared/_Alert.cshtml")

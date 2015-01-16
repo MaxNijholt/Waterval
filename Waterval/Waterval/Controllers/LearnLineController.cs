@@ -14,12 +14,14 @@ namespace MvcApplication1.Controllers
         //
         // GET: /LearnLine/
 		private LearnLineRepository learnLineRepository;
+        private ModuleRepository moduleRepository;
 		private SearchRepository search;
 
         public LearnLineController()
         {
 			learnLineRepository = new LearnLineRepository( );
-			search = new SearchRepository( );
+            moduleRepository = new ModuleRepository();
+            search = new SearchRepository();
         }
 
 		public ActionResult Index ( string sortOrder, string currentFilter, string searchString, int? page, int pagesize = 10 ) {
@@ -82,6 +84,12 @@ namespace MvcApplication1.Controllers
         {
             var model = learnLineRepository.Get(id);
             return View(model);
+        }
+        private List<Module> GetModules(LearnLine learnline)
+        {
+            List<Module> modules = moduleRepository.GetAll();
+
+            return modules.Where(m => m.isDeleted == false).ToList();
         }
 
         [HttpPost]
