@@ -69,7 +69,7 @@ namespace MvcApplication1.Controllers
 
         public ActionResult Details(int id)
         {
-            Account model = accountRepository.Get(id);
+            Account model = accountRepository.GetAll().SingleOrDefault(m => m.Account_ID == id);
             return View(model);
         }
 
