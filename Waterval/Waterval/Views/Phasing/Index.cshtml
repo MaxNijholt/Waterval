@@ -1,41 +1,48 @@
 ﻿@model IEnumerable<DomainModel.Models.Phasing>
 
 @{
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Styles.Render("~/Content/css")
+@Styles.Render( "~/Content/css" )
 
 <div class="container">
-	<h2>Fasering Overzicht</h2>
-	<input type="text" class="form-control" placeholder="filter thema's...">
+    <h2>Fasering Overzicht</h2>
+    <input type="text" class="form-control" placeholder="filter thema's...">
 
-	<table class="table table-bordered table-striped">
-		<thead>
-			<tr>
-				<th>Naam</th>
-				<th>Aanpassen</th>
-				<th>Verwijderen</th>
-			</tr>
-		</thead>
-		@foreach(var item in Model)
-		{
-			<tr>
-				<td>@Html.ActionLink(item.Title, "Details", new { id = item.Phasing_ID})</td>
-
-				<td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Phasing_ID }, new { @class = "btn btn-warning" })</td>
-				<td>
-					<input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Phasing_ID" class="btn btn-danger">
-				</td>
-			</tr>
-		}
-	</table>
-
-	@Html.ActionLink("Nieuwe Fase", "Create", null, new { @class = "btn btn-success" })
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Naam</th>
+                @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditPhasing" ) ) {
+                    <th>Aanpassen</th>
+                }
+                @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeletePhasing" ) ) {
+                    <th>Verwijderen</th>
+                }
+            </tr>
+        </thead>
+        @foreach ( var item in Model ) {
+            <tr>
+                <td>@Html.ActionLink( item.Title, "Details", new { id = item.Phasing_ID } )</td>
+                @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditPhasing" ) ) {
+                    <td>@Html.ActionLink( "Aanpassen", "Edit", new { id = item.Phasing_ID }, new { @class = "btn btn-warning" } )</td>
+                }
+                @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeletePhasing" ) ) {
+                    <td>
+                        <input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Phasing_ID" class="btn btn-danger">
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "CreatePhasing" ) ) {
+        @Html.ActionLink( "Nieuwe Fase", "Create", null, new { @class = "btn btn-success" } )
+    }
 </div>
 
 @section Scripts {
-	<script>
+    <script>
         $('input[type="button"]').click(function (e) {
             var title = $(this).attr('data-name');
             var id = $(this).attr('data-id');
@@ -49,7 +56,7 @@
                 $(this).closest('tr').remove()
             }
         })
-	</script>
+    </script>
 
-	<script src="~/Scripts/Filter.js"></script>
+    <script src="~/Scripts/Filter.js"></script>
 }

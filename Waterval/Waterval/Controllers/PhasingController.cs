@@ -21,7 +21,7 @@ namespace Waterval.Controllers
 			return View(phasingRepository.GetAll());
 		}
 
-		[HttpGet]
+		[Authorize( Roles = "CreatePhasing" )]
 		public ActionResult Create()
 		{
 			Phasing phasing = new Phasing();
@@ -41,13 +41,15 @@ namespace Waterval.Controllers
 			}
 		}
 
+		[Authorize( Roles = "DeletePhasing" )]
 		public ActionResult Delete(Phasing phasing)
 		{
 			phasingRepository.Delete(phasing.Phasing_ID);
 			return View();
 		}
 
-		[HttpGet]
+
+		[Authorize( Roles = "EditPhasing" )]
 		public ActionResult Edit(int id)
 		{
 			var model = phasingRepository.Get(id);
