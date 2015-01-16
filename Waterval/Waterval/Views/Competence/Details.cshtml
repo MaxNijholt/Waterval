@@ -11,7 +11,7 @@
     <table class="table table-bordered table-striped">
         <tr>
             <th>Titel</th>
-            <th>Omschrijving kort</th>
+            <th>Beschrijving</th>
         </tr>
         <tr>
             <td>@Model.Title</td>
@@ -24,13 +24,12 @@
     <p>Doelen</p>
     <table class="table table-bordered table-striped">
         <thead>
-            <tr><th>Omschrijving lang</th></tr>
+            <tr><th>Omschrijving</th></tr>
         </thead>
         <tr>
             <td>
                 <ul>
-                    @foreach (string _string in Model.Definition_Long.Split('\n'))
-                    {
+                    @foreach ( string _string in Model.Definition_Long.Split( '\n' ) ) {
                         <li>@_string</li>
                     }
                 </ul>
@@ -50,10 +49,9 @@
                 <th>Niveau</th>
             </tr>
         </tbody>
-        @foreach (var item in Model.Level)
-        {
+        @foreach ( var item in Model.Level ) {
             <tr>
-                <td>@Html.ActionLink(@item.Module.CourseCode.ToString(), "Details", "Module", new { id = item.Module_ID }, null)</td>
+                <td>@Html.ActionLink( @item.Module.CourseCode.ToString( ), "Details", "Module", new { id = item.Module_ID }, null )</td>
                 <td>@item.Module.Title</td>
                 <td>@item.Module.Definition_Short</td>
                 <td>@item.Level1</td>
@@ -62,25 +60,25 @@
     </table>
     <hr />
     <p>
-        @if (Model.PrevCompetence_ID != null)
-        {
+        @if ( Model.PrevCompetence_ID != null ) {
 
-            @Html.ActionLink("Vorige versie", "Details", new { id = Model.PrevCompetence_ID }, new { @class = "btn btn-avans" })
+            @Html.ActionLink( "Vorige versie", "Details", new { id = Model.PrevCompetence_ID }, new { @class = "btn btn-avans" } )
 
         }
 
-        @if (@ViewBag.NewID > 0)
-        {
+        @if ( @ViewBag.NewID > 0 ) {
 
-            @Html.ActionLink("Nieuwere versie", "Details", new { id = @ViewBag.NewID }, new { @class = "btn btn-avans" })
+            @Html.ActionLink( "Nieuwere versie", "Details", new { id = @ViewBag.NewID }, new { @class = "btn btn-avans" } )
 
         }
     </p>
     <hr />
 
     <p>
-        @Html.ActionLink("Aanpassen", "Edit", new { id = Model.Competence_ID }, new { @class = "btn btn-warning" })
-        @Html.ActionLink("Geneer PDF", "GeneratePDF", new { id = Model.Competence_ID }, new { @class = "btn btn-avans" })
-        @Html.ActionLink("Terug naar Index", "Index")
+        @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditCompetence" ) ) {
+            @Html.ActionLink( "Aanpassen", "Edit", new { id = Model.Competence_ID }, new { @class = "btn btn-warning" } )
+        }
+        @Html.ActionLink( "Geneer PDF", "GeneratePDF", new { id = Model.Competence_ID }, new { @class = "btn btn-avans" } )
+        @Html.ActionLink( "Terug naar Index", "Index" )
     </p>
 </div>
