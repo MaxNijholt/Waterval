@@ -23,6 +23,7 @@ namespace Waterval.Controllers
             return View(learningtoolRepository.GetAll().Where(l => l.isDeleted == false));
         }
 
+		[Authorize( Roles = "CreateLearningTool" )]
         public ActionResult Create()
         {
             var model = new LearningTool();
@@ -57,6 +58,7 @@ namespace Waterval.Controllers
             }
         }
 
+		[Authorize( Roles = "DeleteLearningTool" )]
         public ActionResult Delete(LearningTool learningtool)
         {
             learningtoolRepository.Delete(learningtool.LearnTool_ID);
@@ -64,6 +66,7 @@ namespace Waterval.Controllers
         }
 
 
+		[Authorize( Roles = "EditLearningTool" )]
         public ActionResult Edit(int id)
         {
             var model = learningtoolRepository.Get(id);
@@ -77,15 +80,12 @@ namespace Waterval.Controllers
         [HttpPost]
         public ActionResult Edit(int id, LearningTool model)
         {
-            
-
             try
             {
 
                 //if we update the model and somethign went wrong we send an error messge back
                 if (learningtoolRepository.Update(model) == null)
                     return View(model).ViewBag.Error = "Er is iets fout gegaan.";
-
                 return RedirectToAction("Index");
             }
             catch
@@ -104,6 +104,7 @@ namespace Waterval.Controllers
         }
 
 
+		[Authorize( Roles = "toNewVersionLearningTool" )]
         public ActionResult NewVersion(int id)
         {
             LearningTool learningtool = learningtoolRepository.Get(id);
@@ -137,6 +138,7 @@ namespace Waterval.Controllers
                 return View(model);
             }
         }
+		[Authorize( Roles = "toNewVersionLearningTool" )]
         private int newVersion(int id)
         {
             LearningTool newer = learningtoolRepository.GetNewVersion(id);
