@@ -43,7 +43,7 @@ namespace RepositoryModel.DummyRepository
 		public Phasing Update(Phasing phasing)
         {
 			Phasing f = phasings.Where(x => x.Phasing_ID == phasing.Phasing_ID).First();
-            f.Title = f.Title;
+            f.Title = phasing.Title;
             return f;
         }
 

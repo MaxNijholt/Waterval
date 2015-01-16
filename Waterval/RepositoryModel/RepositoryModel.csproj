@@ -54,9 +54,10 @@
   <ItemGroup>
     <Compile Include="DummyRepository\DummyBlockRepository.cs" />
     <Compile Include="DummyRepository\DummyCompetenceRepository.cs" />
-    <Compile Include="DummyRepository\DLearningToolRepository.cs" />
     <Compile Include="DummyRepository\DModuleRepository.cs" />
+    <Compile Include="DummyRepository\DummyGradeTypeRepository.cs" />
     <Compile Include="DummyRepository\DummyPhasingRepository.cs" />
+    <Compile Include="DummyRepository\DummyLearnGoalRepository.cs" />
     <Compile Include="DummyRepository\DummyThemeRepository.cs" />
     <Compile Include="DummyRepository\DummyWorkformRepository.cs" />
     <Compile Include="IRepository\IAccountRepository.cs" />

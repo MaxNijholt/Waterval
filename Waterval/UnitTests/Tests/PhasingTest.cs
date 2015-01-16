@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace UnitTests.Tests
 {
     [TestClass]
-    public class ThemeTest
+    public class PhasingTest
     {
         DummyPhasingRepository phasingRep;
 
