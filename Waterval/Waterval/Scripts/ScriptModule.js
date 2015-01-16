@@ -512,12 +512,11 @@ $(document).on('click', '#btn_addStudy', function () {
     var buttonDelete = '<td><input type="button" value="-" id="btn_deleteStudy" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
     //We add this row to the ModTable.
-    $('#StudyTable').append(study inputfieldb +hiddenfieldb + inputfieldp + hiddenfieldp + buttonDelete);
+    $('#StudyTable').append(study + inputfieldb +hiddenfieldb + inputfieldp + hiddenfieldp + buttonDelete);
 
     //We remove the row have choosen in TableMod;
     $(this).closest('tr').remove();
 });
-
 
 
 //This code gets called whenever one of the delete functions gets pressed.

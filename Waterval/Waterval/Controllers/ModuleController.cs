@@ -123,7 +123,6 @@ namespace MvcApplication1.Controllers
             @ViewBag.ThemeList = GetThemes(module);
             @ViewBag.LearnGoalList = GetLearnGoals(module);
             @ViewBag.LearningToolList = GetLearningTools(module);
-
             @ViewBag.CompetenceList = GetCompetence(module);
             @ViewBag.StudyList = GetStudy(module);
             @ViewBag.WorkformList = GetWorkForms(module);
