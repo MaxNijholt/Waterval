@@ -79,11 +79,19 @@ namespace Waterval.Controllers
                     return RedirectToAction("Index", "Home");
                 if (acc == null)
                 {
+                    AccountRole defaultRole = accounts.GetAcountRoles("Default");
+                    if (defaultRole == null) {
+                        defaultRole = new AccountRole { 
+                            RoleName = "Default",
+                            Description = "Standaard rol met nul rechten"
+                        };
+                    }
+
                     accounts.Create(new Account
                     {
                         Username = username,
                         isActive = true,
-                        AccountRole = accounts.GetAcountRoles("Default")
+                        AccountRole = defaultRole
                     });
                 }
                 FormsAuthentication.SetAuthCookie(username, false);
