@@ -8,41 +8,41 @@ using System.Threading.Tasks;
 
 namespace RepositoryModel.DummyRepository
 {
-    public class DummyThemeRepository: IThemeRepository
+    public class DummyLearningToolRepository: ILearningToolRepository
     {
-        List<Theme> testThemes;
+        List<LearningTool> testLearningTools;
 
-        public DummyThemeRepository()
+        public DummyLearnToolRepository()
         {
             FillList();
         }
 
         public List<Theme> GetAll()
         {
-            return testThemes;
+            return testLearningTools;
         }
 
         public Theme Get(int theme_id)
         {
-            return testThemes.Where(x => x.Theme_ID == theme_id).First();
+            return testLearningTools.Where(x => x.Theme_ID == theme_id).First();
         }
 
         public Theme Create(Theme theme)
         {
-            testThemes.Add(theme);
+            testLearningTools.Add(theme);
             return theme;
         }
 
         public void Delete(int theme_id)
         {
-            Theme f = testThemes.Where(x => x.Theme_ID == theme_id).First();
+            Theme f = testLearningTools.Where(x => x.Theme_ID == theme_id).First();
             f.isDeleted = true;
             f.DeleteDate = DateTime.UtcNow;
         }
 
         public Theme Update(Theme theme)
         {
-            Theme f = testThemes.Where(x => x.Theme_ID == theme.Theme_ID).First();
+            Theme f = testLearningTools.Where(x => x.Theme_ID == theme.Theme_ID).First();
 
             f.Definition = theme.Definition;
 
@@ -51,10 +51,10 @@ namespace RepositoryModel.DummyRepository
 
         private void FillList()
         {
-            testThemes = new List<Theme>();
+            testLearningTools = new List<Theme>();
 
             for(int i = 1; i <= 10; i++)
-                testThemes.Add(new Theme{ Theme_ID = i, Definition  = "Theme " + i });
+                testLearningTools.Add(new Theme{ Theme_ID = i, Definition  = "Theme " + i });
         }
     }
 }

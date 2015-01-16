@@ -58,8 +58,10 @@
     <Compile Include="DummyRepository\DummyGradeTypeRepository.cs" />
     <Compile Include="DummyRepository\DummyPhasingRepository.cs" />
     <Compile Include="DummyRepository\DummyLearnGoalRepository.cs" />
+    <Compile Include="DummyRepository\DummyLearningTool.cs" />
     <Compile Include="DummyRepository\DummyThemeRepository.cs" />
     <Compile Include="DummyRepository\DummyWorkformRepository.cs" />
+    <Compile Include="DummyThemeRepository.cs" />
     <Compile Include="IRepository\IAccountRepository.cs" />
     <Compile Include="IRepository\IGradeTypeRepository.cs" />
     <Compile Include="IRepository\IPhasingRepository.cs" />
