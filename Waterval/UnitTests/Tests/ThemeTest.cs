@@ -44,7 +44,7 @@ namespace UnitTests.Tests
         {
             themeRep = new DummyThemeRepository();
 
-            themeRep.Create( new Theme { Theme_ID = 11, Definition = "Workform 11" });
+            themeRep.Create( new Theme { Theme_ID = 11, Definition = "Theme 11" });
 
             List<Theme> themes = themeRep.GetAll();
 
@@ -79,10 +79,10 @@ namespace UnitTests.Tests
 
             Theme gTheme = themeRep.Get(4);
 
-            Assert.AreEqual(test.Theme_ID, gTheme.Workform_ID);
+            Assert.AreEqual(test.Theme_ID, gTheme.Theme_ID);
             Assert.AreEqual(test.DeleteDate, gTheme.DeleteDate);
             Assert.AreEqual(test.isDeleted, gTheme.isDeleted);
-            Assert.AreEqual(test.Definition, gTheme.Description);
+            Assert.AreEqual(test.Definition, gTheme.Definition);
         }
     }
 }

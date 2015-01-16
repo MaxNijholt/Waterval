@@ -57,6 +57,7 @@
     <Compile Include="Tests\BlokTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\CompetenceTest.cs" />
+    <Compile Include="Tests\PhasingTest.cs" />
     <Compile Include="Tests\ThemeTest.cs" />
     <Compile Include="Tests\WorkformTest.cs" />
   </ItemGroup>

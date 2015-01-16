@@ -1,4 +1,5 @@
 ﻿using DomainModel.Models;
+using RepositoryModel.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RepositoryModel.DummyRepository
 {
-    public class DummyThemeRepository: IWorkformRepository
+    public class DummyThemeRepository: IThemeRepository
     {
         List<Theme> themes;
 
