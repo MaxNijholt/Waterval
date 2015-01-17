@@ -17,15 +17,15 @@ namespace Waterval.Controllers
     public class OAuthController : Controller
     {
         // Constants
-        private static string           CONSUMER_KEY     = "ac5baf7568250a03d1e8256b14eee24086fefef0";
-        private static string           CONSUMER_SECRET  = "992b60477da323868197dcbcb9f8526eb6c8405b";
+        public static string           CONSUMER_KEY     = "ac5baf7568250a03d1e8256b14eee24086fefef0";
+        public static string           CONSUMER_SECRET  = "992b60477da323868197dcbcb9f8526eb6c8405b";
 
         public static string            ACCESS_TOKEN;
         public static string            ACCESS_SECRET;
 
         // Fields
         public static RestClient        client;
-        private static string           requestSecret;
+        public static string           requestSecret;
 
         public ActionResult Index()
         {
@@ -79,11 +79,19 @@ namespace Waterval.Controllers
                     return RedirectToAction("Index", "Home");
                 if (acc == null)
                 {
+                    AccountRole defaultRole = accounts.GetAcountRoles("Default");
+                    if (defaultRole == null) {
+                        defaultRole = new AccountRole { 
+                            RoleName = "Default",
+                            Description = "Standaard rol met nul rechten"
+                        };
+                    }
+
                     accounts.Create(new Account
                     {
                         Username = username,
                         isActive = true,
-                        AccountRole = accounts.GetAcountRoles("Default")
+                        AccountRole = defaultRole
                     });
                 }
                 FormsAuthentication.SetAuthCookie(username, false);
