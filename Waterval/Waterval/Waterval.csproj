@@ -197,6 +197,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlockController.cs" />
     <Compile Include="Controllers\CompetenceController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LearnGoalController.cs" />
     <Compile Include="Controllers\LearningToolController.cs" />
@@ -278,7 +279,9 @@
     <Content Include="Scripts\RoleScript.js" />
     <Content Include="Scripts\ThemeScript.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -364,6 +367,7 @@
     <Content Include="Views\Program\Edit.cshtml" />
     <Content Include="Views\Program\Index.cshtml" />
     <Content Include="Views\Program\_CreateOrEdit.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\AccountRole\_CreateOrEdit.cshtml" />
     <Content Include="Views\AccountRole\Create.cshtml" />
     <Content Include="Views\AccountRole\Details.cshtml" />
@@ -373,6 +377,11 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+=======
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\Normal.cshtml" />
+    <Content Include="Views\Error\Gandalf.cshtml" />
+>>>>>>> feature/ErrorPages
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
