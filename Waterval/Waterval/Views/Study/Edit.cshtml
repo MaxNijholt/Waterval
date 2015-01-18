@@ -5,7 +5,7 @@
 
 @Styles.Render("~/Content/css")
 
-<h2>Opleiding aanpassen: @Model.Title</h2>
+<h2>Studierichting Aanpassen: @Model.Title</h2>
 
 @using (Html.BeginForm("Edit", "Study", new { ReturnUrl = ViewBag.ReturnUrl },
             FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
@@ -17,7 +17,7 @@
         @Html.Partial("_CreateOrEdit", Model)
 
         <p>
-            <input type="submit" value="Studierichting aanpassen" class="btn btn-success" /> |
+            <input type="submit" value="Studierichting @Model.Title Aanpassen" class="btn btn-success" /> |
             @Html.ActionLink("Terug naar Index", "Index")
         </p>
     </fieldset>

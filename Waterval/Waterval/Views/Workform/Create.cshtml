@@ -6,14 +6,14 @@
 @using (Html.BeginForm("Create", "Workform", new { ReturnUrl = ViewBag.ReturnUrl },
             FormMethod.Post, new { @class = "form-horizontal", @role = "form", id = "MainForm" }))
 {
-
+    <h2>Nieuwe Werkvorm Toevoegen</h2>
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend></legend>
         @Html.Partial("_CreateOrEdit", null)
         <p>
-            <input type="submit" value="Werkvorm opslaan" name="btn_Save" class="btn btn-success" /> |
+            <input type="submit" value="Nieuwe Werkvorm Opslaan" name="btn_Save" class="btn btn-success" /> |
             @Html.ActionLink("Terug naar Index", "Index")
         </p>
 

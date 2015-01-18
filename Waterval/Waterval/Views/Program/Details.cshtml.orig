@@ -1,4 +1,4 @@
-@model DomainModel.Models.Program
+﻿@model DomainModel.Models.Program
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,7 +6,11 @@
 
 @Styles.Render( "~/Content/css" )
 <div class="container">
+<<<<<<< HEAD
+    <h2>@Html.DisplayFor( model => model.Cohort )</h2>
+=======
     <h2>Opleiding Details: @Html.DisplayFor(model => model.Cohort)</h2>
+>>>>>>> feature/TheSecondSpellcheckening
     <fieldset>
         <table class="table table-striped table-bordered">
             <tr>
@@ -21,6 +25,7 @@
     </fieldset>
 
     <p>
+<<<<<<< HEAD
         @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditProgram" ) ) {
             @Html.ActionLink( "Aanpassen", "Edit", null, new { @class = "btn btn-warning" } )
         }
@@ -28,5 +33,10 @@
             <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />
         }|
         @Html.ActionLink( "Terug naar Index", "Index" )
+=======
+        @Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })
+         <input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /> | 
+        @Html.ActionLink("Terug naar Index", "Index")
+>>>>>>> feature/TheSecondSpellcheckening
     </p>
 </div>

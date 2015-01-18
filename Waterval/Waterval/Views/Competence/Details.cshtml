@@ -1,12 +1,13 @@
 ﻿@model DomainModel.Models.Competence
 @{
+    ViewBag.Title = @Html.DisplayFor(model => model.Title);
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 
 <div class="container">
-    <h2>Compententies Details:@Model.Title</h2>
+    <h2>Compententie Details:@Model.Title</h2>
 
     <table class="table table-bordered table-striped">
         <tr>

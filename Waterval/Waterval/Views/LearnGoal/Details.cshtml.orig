@@ -1,4 +1,4 @@
-@model DomainModel.Models.LearnGoal
+﻿@model DomainModel.Models.LearnGoal
 
 @{
     ViewBag.Title = @Html.DisplayFor(model => model.Description);
@@ -8,11 +8,20 @@
 @Styles.Render( "~/Content/css" )
 
 <div class="container">
+<<<<<<< HEAD
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Titel</th>
+
+=======
     <h2>Leerdoel Details: @Html.DisplayFor(model => model.Description)</h2>
     
     <table class="table table-bordered table-striped">
         <tr>
             <th>Beschrijving</th>
+         
+>>>>>>> feature/TheSecondSpellcheckening
         </tr>
         <tr>
             <td>@Html.DisplayFor( model => model.Description )</td>

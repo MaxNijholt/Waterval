@@ -1,9 +1,12 @@
 ﻿@model DomainModel.Models.Theme
+
 @{
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @Styles.Render("~/Content/css")
+
+
 
 <div class="container">
 	<h2>Thema Toevoegen</h2>
@@ -16,7 +19,7 @@
 			<legend></legend>
 			@Html.Partial("_CreateOrEdit", null)
 			<p>
-				<input type="submit" value="Thema aanmaken" class="btn btn-success" /> |
+				<input type="submit" value="Nieuw Thema Opslaan" class="btn btn-success" /> |
 				@Html.ActionLink("Terug naar Index", "Index")
 			</p>
 		</fieldset>
