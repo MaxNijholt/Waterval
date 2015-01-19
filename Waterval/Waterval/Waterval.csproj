@@ -379,6 +379,7 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\Normal.cshtml" />
     <Content Include="Views\Error\Gandalf.cshtml" />
+    <Content Include="Views\LearnLine\toNewVersion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
