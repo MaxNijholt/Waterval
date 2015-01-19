@@ -122,7 +122,7 @@ $(document).on('click', '#btn_addLearngoal', function () {
     var buttonDelete = '<td><input type="button" value="-" id="btn_deleteLearnGoal" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
     //We add this row to the ModTable.
-    $('#LearnLineTable').append(learngoal + hiddenfield + buttonDelete);
+    $('#LearnGoalTable').append(learngoal + hiddenfield + buttonDelete);
 
     //We remove the row have choosen in TableMod;
     $(this).closest('tr').remove();
@@ -629,10 +629,10 @@ $(document).on('click', '#btn_addModa', function () {
     //The ID and the Name needs to be same as the one you want to fill in the model.
     //The index is important to know what subitem in the model needs to get filled.
     var inputfield = '<td><input type="number" class="form-control" id="ModelWithWorkform[' + (indexes - 1) + '].Duration" name="ModelWithWorkform[' + (indexes - 1) + '].Duration" value="0" />'
-    var hiddenfield = '<input type="number" id="ModelWithWorkform[' + (indexes - 1) + '].Workform_ID" name="ModelWithWorkform[' + (indexes - 1) + '].Workform_ID" class="form-control hidden" value=' + id + ' /></td>'
+    //var hiddenfield = '<input type="number" id="ModelWithWorkform[' + (indexes - 1) + '].Workform_ID" name="ModelWithWorkform[' + (indexes - 1) + '].Workform_ID" class="form-control hidden" value=' + id + ' /></td>'
 
     var inputfieldF = '<td><input type="text" class="form-control" id="ModelWithWorkform[' + (indexes - 1) + '].Frequency" name="ModelWithWorkform[' + (indexes - 1) + '].Frequency" value="Frequentie.." />'
-    var hiddenfieldF = '<input type="text" id="ModelWithWorkform[' + (indexes - 1) + '].Workform_ID" name="ModelWithWorkform[' + (indexes - 1) + '].Workform_ID" class="form-control hidden" value=' + id + ' /></td>'
+    //var hiddenfieldF = '<input type="text" id="ModelWithWorkform[' + (indexes - 1) + '].Workform_ID" name="ModelWithWorkform[' + (indexes - 1) + '].Workform_ID" class="form-control hidden" value=' + id + ' /></td>'
 
     var inputfieldW = '<td><input type="number" class="form-control" id="ModelWithWorkform[' + (indexes - 1) + '].Workload" name="ModelWithWorkform[' + (indexes - 1) + '].Workload" value="0" />'
     var hiddenfieldW = '<input type="number" id="ModelWithWorkform[' + (indexes - 1) + '].Workform_ID" name="ModelWithWorkform[' + (indexes - 1) + '].Workform_ID" class="form-control hidden" value=' + id + ' /></td>'
@@ -641,7 +641,7 @@ $(document).on('click', '#btn_addModa', function () {
     var buttonDelete = '<td><input type="button" value="-" id="btn_deleteModa" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
     //We add this row to the ModTable.W
-    $('#ModTablea').append(modelworkform + inputfield + inputfieldF + inputfieldW + buttonDelete);
+    $('#ModTablea').append(modelworkform + inputfield + inputfieldF + inputfieldW + hiddenfieldW + buttonDelete);
 
     //We remove the row have choosen in TableMod;
     $(this).closest('tr').remove();
