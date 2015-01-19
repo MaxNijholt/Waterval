@@ -20,9 +20,27 @@
         </table>
     </fieldset>
 
+    <p>Behoort toe aan studierichtingen:</p>
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <tr>
+                <th>Titel</th>
+                <th>Omschrijving</th>
+            </tr>
+        </tbody>
+        @foreach (var item in Model.Study)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Definition</td>
+            </tr>
+        }
+    </table>
+
     <p>
-        @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditProgram" ) ) {
-            @Html.ActionLink( "Aanpassen", "Edit", null, new { @class = "btn btn-warning" } )
+        @if (Waterval.Controllers.OAuthController.IsUserInRole("EditProgram"))
+        {
+            @Html.ActionLink("Aanpassen", "Edit", new { id = Model.Program_ID }, new { @class = "btn btn-warning" })
         }
         @Html.ActionLink( "Terug naar Index", "Index" )
     </p>

@@ -11,10 +11,14 @@ namespace RepositoryModel.Repository
     public class ProgramRepository : IProgramRepository
     {
           Project_WatervalEntities dbContext;
+          List<Study> studys;
+
 
           public ProgramRepository()
         {
             dbContext = new DomainModel.Models.Project_WatervalEntities();
+            studys = new List<Study>();
+
         }
 
           public List<DomainModel.Models.Program> GetAll()
@@ -29,19 +33,40 @@ namespace RepositoryModel.Repository
 
         public Program Create(Program program)
         {
-            if (dbContext.Program.Any(o => o.Program_ID == program.Program_ID && !o.isDeleted))
-                return null;
+            if (program == null) return program;
+
+            addLinks(program);
+            program.Study = studys;
+
             dbContext.Program.Add(program);
             dbContext.SaveChanges();
             return program;
         }
 
-        public Program Update(Program update)
+
+        private void addLinks(Program program)
+        {
+            studys.Clear();
+
+            for (int index = 0; index < program.Study.Count; index++)
+            {
+                studys.Add(dbContext.Study.Find(program.Study.ElementAt(index).Study_ID));
+            }
+        }
+
+
+        public DomainModel.Models.Program Update(DomainModel.Models.Program update)
         {
 
             Program program = dbContext.Program.SingleOrDefault(b => b.Program_ID == update.Program_ID);
             if (program == null) return null;
+
             program.Cohort = update.Cohort;
+
+            addLinks(update);
+            program.Study.Clear();
+            program.Study = studys;
+
             dbContext.SaveChanges();
             return program;
         }
