@@ -308,9 +308,9 @@
         @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditModule" ) ) {
             @Html.ActionLink( "Aanpassen", "Edit", null, new { id = Model.Module_ID }, new { @class = "btn btn-warning" } )
         }
-        @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteModule" ) ) {
+        @*@if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteModule" ) ) {
             <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />
-        }|
+        }|*@
         @Html.ActionLink( "Terug naar Index", "Index" )
     </p>
 </div>

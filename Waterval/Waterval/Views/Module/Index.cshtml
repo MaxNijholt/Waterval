@@ -5,14 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Styles.Render( "~/Content/css" )
+@Styles.Render("~/Content/css")
+<h2>Modules</h2>
 <div class="container">
-    <h2>Modules</h2>
-    <div class="container">
-        @using ( Html.BeginForm( "Index", "Module", FormMethod.Get ) ) {
-
+    @using (Html.BeginForm("Index", "Module", FormMethod.Get))
+    {
+        if (!ViewBag.isPDF)
+        {
             <div class="input-group input-group">
-                @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in modules", @class = "form-control" } )
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in modules", @class = "form-control" })
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="submit">
                         <span class="glyphicon glyphicon-search"></span>
@@ -20,55 +21,77 @@
                 </span>
             </div>
         }
-        <br />
+    }
+    <br />
 
-        <table class="table table-striped table-bordered table-responsive">
-            <thead>
-                <tr>
-                    <th>@Html.ActionLink( "Titel", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
-                    <th>Beschrijving</th>
-                    <th>@Html.ActionLink( "Vakcode", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
-                    <th>@Html.ActionLink( "EC", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
-                    <th>@Html.ActionLink( "Ingangsniveau", "Index", new { sortOrder = ViewBag.NameSortParm } )</th>
-                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditModule" ) ) {
+    <table class="table table-striped table-bordered table-responsive">
+        <thead>
+            <tr>
+                <th>@Html.ActionLink("Titel", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
+                <th>Beschrijving</th>
+                <th>@Html.ActionLink("Vakcode", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
+                <th>@Html.ActionLink("EC", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
+                <th>@Html.ActionLink("Ingangsniveau", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
+                @if (!ViewBag.isPDF)
+                {
+                    if (Waterval.Controllers.OAuthController.IsUserInRole("EditModule"))
+                    {
                         <th>Aanpassen</th>
                     }
-                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteModule" ) ) {
+                    if (Waterval.Controllers.OAuthController.IsUserInRole("DeleteModule"))
+                    {
                         <th>Verwijderen</th>
                     }
-                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "toNewVersionModule" ) ) {
+                    if (Waterval.Controllers.OAuthController.IsUserInRole("toNewVersionModule"))
+                    {
                         <th>Nieuwe Versie</th>
                     }
-                </tr>
-            </thead>
-            @foreach ( var item in Model ) {
-                <tr>
-                    <td>@Html.ActionLink( item.Title, "Details", new { id = item.Module_ID } )</td>
-                    <td>@item.Definition_Short</td>
-                    <td>@item.CourseCode</td>
-                    <td>@item.AssignmentCode.Sum( s => s.EC )</td>
-                    <td>@item.Entry_Level</td>@if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditModule" ) ) {
-                        <td>@Html.ActionLink( "Aanpassen", "Edit", new { id = item.Module_ID }, new { @class = "btn btn-warning" } )</td>
+                    <th>PDF</th>
+
+                }
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(item.Title, "Details", new { id = item.Module_ID })</td>
+                <td>@item.Definition_Short</td>
+                <td>@item.CourseCode</td>
+                <td>@item.AssignmentCode.Sum(s => s.EC)</td>
+                <td>@item.Entry_Level</td>
+                @if (!ViewBag.isPDF)
+                {
+                    if (Waterval.Controllers.OAuthController.IsUserInRole("EditModule"))
+                    {
+                        <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.Module_ID }, new { @class = "btn btn-warning" })</td>
                     }
-                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteModule" ) ) {
+                    if (Waterval.Controllers.OAuthController.IsUserInRole("DeleteModule"))
+                    {
                         <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Module_ID" class="btn btn-danger"></td>
                     }
-                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "toNewVersionModule" ) ) {
-                        <td>@Html.ActionLink( "Nieuwe versie", "toNewVersion", new { id = item.Module_ID }, new { @class = "btn btn-avans" } )</td>
+                    if (Waterval.Controllers.OAuthController.IsUserInRole("toNewVersionModule"))
+                    {
+                        <td>@Html.ActionLink("Nieuwe versie", "toNewVersion", new { id = item.Module_ID }, new { @class = "btn btn-avans" })</td>
                     }
-                </tr>
-            }
-        </table>
-    </div>@if ( Waterval.Controllers.OAuthController.IsUserInRole( "CreateModule" ) ) {
-        @Html.ActionLink( "Nieuwe Module", "Create", null, new { @class = "btn btn-success" } )
-    }
+                    <td>@Html.ActionLink("Genereer PDF", "GeneratePDF", new { id = item.Module_ID }, new { @class = "btn btn-avans" })</td>}
+            </tr>
+        }
+    </table>
+    @if (!ViewBag.isPDF)
+    {
 
+        if (Waterval.Controllers.OAuthController.IsUserInRole("CreateModule"))
+        {
+            @Html.ActionLink("Nieuwe Module", "Create", null, new { @class = "btn btn-success" })
+        }
+        @Html.ActionLink("PDF All", "GeneratePDFList", null, new { @class = "btn btn-Avans", target = "_blank" })
+    }
 </div>
 <br />
     Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) van @Model.PageCount
 
-    @Html.PagedListPager( Model, page => Url.Action( "Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } ) )
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
 
     @section Scripts {
