@@ -61,13 +61,15 @@
     </table>
     <hr />
     <p>
-        @if ( Model.PrevCompetence_ID != null ) {
+        @if (Model.PrevCompetence_ID != null && Waterval.Controllers.OAuthController.IsUserInRole("EditCompetence"))
+        {
 
             @Html.ActionLink( "Vorige versie", "Details", new { id = Model.PrevCompetence_ID }, new { @class = "btn btn-avans" } )
 
         }
 
-        @if ( @ViewBag.NewID > 0 ) {
+        @if (@ViewBag.NewID > 0 && Waterval.Controllers.OAuthController.IsUserInRole("EditCompetence"))
+        {
 
             @Html.ActionLink( "Nieuwere versie", "Details", new { id = @ViewBag.NewID }, new { @class = "btn btn-avans" } )
 
