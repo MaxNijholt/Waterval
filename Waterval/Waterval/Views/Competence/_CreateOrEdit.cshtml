@@ -127,7 +127,7 @@
                     <td>@item.Module.Title</td>
                     <td>@item.Module.Definition_Short</td>
                         @{string test = "Level" + item.Module_ID;}
-                    <td><input type="number" class="form-control" id="Level[@index].Level1" name="Level[@index].Level1" value="@item.Level1" />
+                    <td><input type="number" class="form-control" id="Level[@index].Level1" name="Level[@index].Level1" value="@item.Level1" min="0" />
                         <input type="number" id="Level[@index].Module_ID" name="Level[@index].Module_ID" class="form-control hidden" value="@item.Module_ID" />
                         
                         </td>
