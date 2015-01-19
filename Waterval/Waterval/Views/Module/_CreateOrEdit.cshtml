@@ -561,8 +561,8 @@
                         </td>
                         @{string test = "Level" + item.Competence_ID;}
                         <td>
-                            <input type="number" class="form-control" id="Level[@index].Level1" name="Level[@index].Level1" value="@item.Level1" />
-                            <input type="number" id="Level[@index].Competence_ID" name="Level[@index].Competence_ID" class="form-control hidden" value="@item.Competence_ID" />
+							<input type="number" class="form-control" id="Level[@index].Level1" name="Level[@index].Level1" value="@item.Level1" min="0" />
+                            <input type="number" id="Level[@index].Competence_ID" name="Level[@index].Competence_ID" class="form-control hidden" value="@item.Competence_ID"  />
                         </td>
                         <td>
                             <input type="button" value="Verwijderen" id="btn_deleteMod" data-id="@item.Competence_ID" class="btn btn-danger" />
@@ -640,7 +640,7 @@
                         @{string testStudy = "ModuleStudyPhasingBlock" + item.Study_ID;}
                         <td>
                             <input type="number" class="form-control" id="ModuleStudyPhasingBlock[@index].Block_ID" name="ModuleStudyPhasingBlock[@index].Block_ID" value="@item.Block_ID" min="1" max="16" />
-                            <input type="number" id="ModuleStudyPhasingBlock[@index].Study_ID" name="ModuleStudyPhasingBlock[@index].Study_ID" class="form-control hidden" value="@item.Study_ID" min="1" max="16" />
+                            <input type="number" id="ModuleStudyPhasingBlock[@index].Study_ID" name="ModuleStudyPhasingBlock[@index].Study_ID" class="form-control hidden" value="@item.Study_ID" />
                         </td>
                         <td>
                             <input type="number" class="form-control" id="ModuleStudyPhasingBlock[@index].Phasing_ID" name="ModuleStudyPhasingBlock[@index].Phasing_ID" value="@item.Phasing_ID" />
