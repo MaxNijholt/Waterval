@@ -68,7 +68,8 @@ namespace RepositoryModel.Repository {
         }
 
         public void Delete(AccountRole accountRole) {
-            dbContext.AccountRole.Remove(accountRole);
+            AccountRole test = dbContext.AccountRole.SingleOrDefault(b => b.Role_ID == accountRole.Role_ID);
+            dbContext.AccountRole.Remove(test);
             dbContext.SaveChanges();
         }
     }

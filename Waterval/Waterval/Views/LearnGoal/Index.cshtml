@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<DomainModel.Models.LearnGoal>
 
+
 @{
     ViewBag.Title = "Leerdoelen";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,39 +9,53 @@
 @Styles.Render( "~/Content/css" )
 <div class="container">
     <h2>Leerdoelen</h2>
-    <div class="container">
-        <input class="form-control" type="text" placeholder="Search..." id="searchTerm" onkeyup="doSearch('indexTable')" />
-        <table class="table table-striped table-bordered" id="indexTable">
-            <caption></caption>
-            <thead>
-                <tr>
-                    <th>Omschrijving</th>
-                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditLearnGoal" ) ) {
-                        <th>Aanpassen</th>
-                    }
-                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteLearnGoal" ) ) {
-                        <th>Verwijderen</th>
-                    } @if ( Waterval.Controllers.OAuthController.IsUserInRole( "toNewVersionLearnGoal" ) ) {
-                        <th>Nieuwe Versie</th>
-                    }
-                </tr>
-            </thead>
-            @foreach ( var item in Model ) {
-                <tr>
-                    <td>
-                        @Html.ActionLink( @item.Description, "Details", new { id = item.LearnGoal_ID }, null )
-                    </td>@if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditLearnGoal" ) ) {
-                        <td>@Html.ActionLink( "Aanpassen", "Edit", new { id = item.LearnGoal_ID }, new { @class = "btn btn-warning" } )</td>}
-                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteLearnGoal" ) ) {
-                        <td><input type="button" value="Verwijderen" data-name="@item.Description" data-id="@item.LearnGoal_ID" class="btn btn-danger"></td>}
-                    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "toNewVersionLearnGoal" ) ) {
-                        <td>@Html.ActionLink( "Nieuwe versie", "ToNewVersion", new { id = item.LearnGoal_ID }, new { @class = "btn btn-avans" } )</td>}
+    @using (Html.BeginForm("Index", "LearnGoal", FormMethod.Get))
+    {
 
-                </tr>   }
+        <div class="input-group input-group">
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in leerdoelen...", @class = "form-control" })
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+    }
+    <br/>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Omschrijving</th>
+            @if (Waterval.Controllers.OAuthController.IsUserInRole("EditLearnGoal"))
+            {
+                <th>Aanpassen</th>
+            }
+            @if (Waterval.Controllers.OAuthController.IsUserInRole("DeleteLearnGoal"))
+            {
+                <th>Verwijderen</th>
+            } @if (Waterval.Controllers.OAuthController.IsUserInRole("toNewVersionLearnGoal"))
+            {
+                <th>Nieuwe Versie</th>
+            }
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(@item.Description, "Details", new { id = item.LearnGoal_ID }, null)
+                </td>@if (Waterval.Controllers.OAuthController.IsUserInRole("EditLearnGoal"))
+                {
+                    <td>@Html.ActionLink("Aanpassen", "Edit", new { id = item.LearnGoal_ID }, new { @class = "btn btn-warning" })</td>}
+                @if (Waterval.Controllers.OAuthController.IsUserInRole("DeleteLearnGoal"))
+                {
+                    <td><input type="button" value="Verwijderen" data-name="@item.Description" data-id="@item.LearnGoal_ID" class="btn btn-danger"></td>}
+                @if (Waterval.Controllers.OAuthController.IsUserInRole("toNewVersionLearnGoal"))
+                {
+                    <td>@Html.ActionLink("Nieuwe versie", "ToNewVersion", new { id = item.LearnGoal_ID }, new { @class = "btn btn-avans" })</td>}
+
+            </tr>   }
 
 
-        </table>
-    </div>
+    </table>
     @if ( Waterval.Controllers.OAuthController.IsUserInRole( "CreateLearnGoal" ) ) {
         @Html.ActionLink( "Nieuw Leerdoel", "Create", null, new { @class = "btn btn-success" } )}
 

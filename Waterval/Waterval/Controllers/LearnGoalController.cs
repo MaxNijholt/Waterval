@@ -64,6 +64,7 @@ namespace Waterval.Controllers
         {
             try
             {
+
                 if (learnGoalRepository.Update(learnGoal) == null)
                 {
                     return View(learnGoal).ViewBag.Error = "Er is iets fout gegaan.";
