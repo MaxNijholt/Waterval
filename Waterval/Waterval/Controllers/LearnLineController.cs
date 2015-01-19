@@ -111,7 +111,46 @@ namespace MvcApplication1.Controllers
                 return View(learnLine);
             }
         }
+        [Authorize(Roles = "toNewVersionLearnLine")]
+        public ActionResult toNewVersion(int id)
+        {
+            LearnLine learnLine = learnLineRepository.Get(id);
 
+            var model = new LearnLine();
+            model.PrevLearnLine_ID = id;
+            model.Definition = learnLine.Definition;
+
+            return View(model);
+        }
+
+        [ValidateInput(true), HttpPost]
+        public ActionResult toNewVersion(int id, LearnLine learnLine)
+        {
+
+            try
+            {
+                @ViewBag.NewID = newVersion(id);
+
+                if (string.IsNullOrEmpty(learnLine.Definition))
+                    return View(learnLine);
+
+                int newestID = learnLineRepository.Create(learnLine).LearnLine_ID;
+
+                learnLineRepository.Delete(id);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View(learnLine);
+            }
+        }
+
+        [Authorize(Roles = "toNewVersionCompetence")]
+        private int newVersion(int id)
+        {
+            LearnLine newer = learnLineRepository.GetNewVersion(id);
+            return (newer != null) ? newer.LearnLine_ID : -1;
+        }
 
         public ActionResult Details(int id)
         {

@@ -43,11 +43,10 @@
     </table>
     <hr />
     <hr />
-@if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditLearnLine" ) ) {
- @Html.ActionLink("Aanpassen", "Edit", null, new { @class = "btn btn-warning" })
+@if (Waterval.Controllers.OAuthController.IsUserInRole("EditLearnLine"))
+{
+    @Html.ActionLink("Aanpassen", "Edit", new { id = Model.LearnLine_ID }, new { @class = "btn btn-warning" })
 }
-@if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteLearnLine" ) ) {
-    <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />}
                                                                                               |
                                                               
     @Html.ActionLink("Terug naar Index", "Index")
