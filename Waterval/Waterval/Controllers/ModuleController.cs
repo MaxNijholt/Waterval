@@ -97,7 +97,6 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.ThemeList = GetThemes( module );
 			@ViewBag.LearnGoalList = GetLearnGoals( module );
 			@ViewBag.LearningToolList = GetLearningTools( module );
-            @ViewBag.WorkformVersion2 = GetWorkformVersion2(module);
 
 			@ViewBag.CompetenceList = GetCompetence( module );
 			@ViewBag.StudyList = GetStudy( module );
@@ -128,7 +127,6 @@ namespace MvcApplication1.Controllers {
             @ViewBag.GetBlocks = GetBlock(module);
             @ViewBag.GetPhasings = GetPhasings(module);
             @ViewBag.GetAccounts = accountRepository.GetAll();
-            @ViewBag.WorkformVersion2 = GetWorkformVersion2(module);
 
 
 			try {
@@ -144,11 +142,9 @@ namespace MvcApplication1.Controllers {
 				foreach ( var item in module.Level )
 					moduleRepository.CompentenceAndModules( id, item.Competence_ID, item.Level1 );
 
-                foreach (var item in module.ModelWithWorkform)
-                    moduleRepository.WorkformAndModulesVersion2(id, item.Workform_ID, item.Duration, item.Frequency, item.Workload);
-
+             
 				foreach ( var item in module.ModelWithWorkform )
-					moduleRepository.WorkformAndModules( id, item.Workform_ID, item.Duration, item.Frequency, item.Workload );
+					moduleRepository.WorkformAndModules( id, item.Workform.Workform_ID, item.Duration, item.Frequency, item.Workload );
 
 				foreach ( var item in module.GradeType )
 					moduleRepository.GradetypesAndModules( id, item.GradeDescription );
@@ -223,7 +219,6 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.ThemeList = GetThemes( module );
 			@ViewBag.LearnGoalList = GetLearnGoals( module );
 			@ViewBag.LearningToolList = GetLearningTools( module );
-            @ViewBag.WorkformVersion2 = GetWorkformVersion2(module);
 
 			@ViewBag.CompetenceList = GetCompetence( module );
 			@ViewBag.StudyList = GetStudy( module );
@@ -257,7 +252,6 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.WeekSchedule = GetWeekschedule( module );
 			@ViewBag.AssignmentCode = GetAssignmentcode( module );
             @ViewBag.GetAccounts = accountRepository.GetAll();
-            @ViewBag.WorkformVersion2 = GetWorkformVersion2(module);
 
 
 			try {
@@ -266,7 +260,6 @@ namespace MvcApplication1.Controllers {
 				@ViewBag.ThemeList = GetThemes( module ).Where( m => m.isDeleted = false );
 				@ViewBag.LearningToolList = GetLearningTools( module ).Where( m => m.isDeleted = false );
 				@ViewBag.LearnGoalList = GetLearnGoals( module ).Where( m => m.isDeleted = false );
-                @ViewBag.WorkformVersion2 = GetWorkformVersion2(module).Where(m => m.isDeleted = false);
 				@ViewBag.CompetenceList = GetCompetence( module ).Where( m => m.isDeleted = false );
 				@ViewBag.StudyList = GetStudy( module ).Where( m => m.isDeleted = false );
 				@ViewBag.WorkformList = GetWorkForms( module ).Where( m => m.isDeleted = false );
@@ -288,14 +281,11 @@ namespace MvcApplication1.Controllers {
 				moduleRepository.WeekSchedulesAndModulesDelete( module.Module_ID );
 				moduleRepository.GradetypesAndModulesDelete( module.Module_ID );
                 moduleRepository.StudyBlockPhasingAndModulesDelete(module.Module_ID);
-                moduleRepository.WorkformAndModulesDeleteVersion2(module.Module_ID);
 
                 module.Account_ID = account_id;
 
 
-                foreach (var item in module.ModelWithWorkform)
-                    moduleRepository.WorkformAndModulesVersion2(id, item.Workform_ID, item.Duration, item.Frequency, item.Workload);
-
+           
 				foreach ( var item in module.Level )
 					moduleRepository.CompentenceAndModules( id, item.Competence_ID, item.Level1 );
 
@@ -365,7 +355,6 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.AssignmentCode = GetAssignmentcode( module );
             @ViewBag.GetBlocks = GetBlock(module);
             @ViewBag.GetPhasings = GetPhasings(module);
-            @ViewBag.WorkformVersion2 = GetWorkformVersion2(module);
 
 
 			@ViewBag.NewID = newVersion( id );
@@ -387,16 +376,13 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.AssignmentCode = GetAssignmentcode( module );
             @ViewBag.GetBlocks = GetBlock(module);
             @ViewBag.GetPhasings = GetPhasings(module);
-            @ViewBag.WorkformVersion2 = GetWorkformVersion2(module);
 
 			try {
 				@ViewBag.NewID = newVersion( id );
 
 				int newestID = moduleRepository.Create( module ).Module_ID;
 
-                foreach (var item in module.ModelWithWorkform)
-                    moduleRepository.WorkformAndModulesVersion2(newestID, item.Workform_ID, item.Duration, item.Frequency, item.Workload);
-
+            
 				foreach ( var item in module.Level )
 					moduleRepository.CompentenceAndModules( newestID, item.Competence_ID, item.Level1 );
 
@@ -487,16 +473,6 @@ namespace MvcApplication1.Controllers {
 
 			return competences.Where( m => m.isDeleted == false ).ToList( );
 		}
-
-        private List<Workform> GetWorkformVersion2(Module module)
-        {
-            List<Workform> workforms = workformRepository.GetAll();
-            if (module != null)
-                foreach (ModelWithWorkform wf in module.ModelWithWorkform)
-                    workforms.Remove(workforms.Where(b => b.Workform_ID == wf.Workform_ID).FirstOrDefault());
-
-            return workforms.Where(m => m.isDeleted == false).ToList();
-        }
 
 		private List<LearnGoal> GetLearnGoals ( Module module ) {
 			List<LearnGoal> learngoals = learngoalRepository.GetAll( );

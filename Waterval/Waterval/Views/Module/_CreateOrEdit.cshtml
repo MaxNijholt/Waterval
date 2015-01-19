@@ -324,7 +324,7 @@
                             <input type="number" id="ModelWithWorkform[@indexa].Workform_ID" name="ModelWithWorkform[@indexa].Workform_ID" class="form-control hidden" value="@itemw.Workform_ID" />
                         </td>
                         <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteModa" data-id="@item.Workform_ID" class="btn btn-danger" />
+                            <input type="button" value="Verwijderen" id="btn_deleteModa" data-id="@itemw.Workform_ID" class="btn btn-danger" />
                             @{indexa++; }
                     </tr>
                 }
@@ -357,99 +357,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-<div class="form-group">
-    <div class="container">
-        <p>
-            @Html.Label("Werkvorm Versie 2 test Toevoegen", new { @class = "control-label" })
-        </p>
-        <div id="ValidationMesModwv" class="alert alert-danger hidden">
-            Minstens een werkvorm verplicht
-        </div>
-        <br /><br />
-        <table class="table table-bordered table-striped table-responsive" id="ModTablewv">
-            <thead>
-                <tr>
-                    <th width="50%">Onderwerp</th>
-                    <th width="10%">Duur</th>
-                    <th width="10%">Frequentie</th>
-                    <th width="10%">Studiebelasting</th>
-                    <th>Verwijderen</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{int indexwv = 0;}
-                @foreach (var itemwv in Model.ModelWithWorkform)
-                {
-                    if (itemwv.Workform.isDeleted) { continue; }
-                    <tr id="@itemwv.Workform_ID">
-                        <td>
-                            @itemwv.Workform.Description <input type="text" id="@itemwv.Workform_ID" class="hidden" />
-                        </td>
-                        @{string testwv = "ModelWithWorkform" + itemwv.Workform_ID;}
-                        <td>
-                            <input type="number" class="form-control" id="ModelWithWorkform[@indexwv].Duration" name="ModelWithWorkform[@indexwv].Duration" value="@itemwv.Duration" />
-                            <input type="number" id="ModelWithWorkform[@indexwv].Workform_ID" name="ModelWithWorkform[@indexwv].Workform_ID" class="form-control hidden" value="@itemwv.Workform_ID" />
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="ModelWithWorkform[@indexwv].Frequency" name="ModelWithWorkform[@indexwv].Frequency" value="@itemwv.Frequency" />
-                            <input type="number" id="ModelWithWorkform[@indexwv].Workform_ID" name="ModelWithWorkform[@indexwv].Workform_ID" class="form-control hidden" value="@itemwv.Workform_ID" />
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="ModelWithWorkform[@indexwv].Workload" name="ModelWithWorkform[@indexwv].Workload" value="@itemwv.Workload" />
-                            <input type="number" id="ModelWithWorkform[@indexwv].Workform_ID" name="ModelWithWorkform[@indexwv].Workform_ID" class="form-control hidden" value="@itemwv.Workform_ID" />
-                        </td>
-                        <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteModwv" data-id="@itemwv.Workform_ID" class="btn btn-danger" />
-                            @{indexwv++; }
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <input type="button" value="Werkvorm versie2 Toevoegen" name="btn_collapseGoalwv" class="btn btn-avans" data-toggle="collapse" data-target="#collapseModwv">
-        <br />
-        <br />
-        <div id="collapseMod" class="panel-collapse collapse open">
-            <input type="text" class="form-control" placeholder="Werkvorm..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTablewv')" style:size="10" />
-
-            <table class="table table-bordered table-striped" id="TableModwv">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Toevoegen</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Laat alle modules zien die nog niet zijn verwerkt -->
-                    @foreach (Workform item in @ViewBag.WorkformVersion2)
-                    {
-                        <tr id="@item.Workform_ID">
-                            <td id="descriptionwv">@item.Description</td>
-                            <td><input type="button" value="+" id="btn_addModwv" data-id="@item.Workform_ID" class="btn btn-avans" /></td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <hr />

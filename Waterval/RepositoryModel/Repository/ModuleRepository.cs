@@ -274,29 +274,6 @@ namespace RepositoryModel.Repository
             dbContext.SaveChanges();
         }
 
-        public void WorkformAndModulesVersion2(int module_id, int workform_id, int duration, string frequency, int workload)
-        {
-
-            if (dbContext.ModelWithWorkform.Any(l => l.Module_ID == module_id && l.Workform_ID == workform_id))
-                return;
-
-            ModelWithWorkform model = new ModelWithWorkform();
-            model.Workform_ID = workform_id;
-            model.Module_ID = module_id;
-            model.Duration = duration;
-            model.Frequency = frequency;
-            model.Workload = workload;
-            dbContext.ModelWithWorkform.Add(model);
-            dbContext.SaveChanges();
-        }
-
-        public void WorkformAndModulesDeleteVersion2(int module_id)
-        {
-            var itemsToDelete = dbContext.ModelWithWorkform.Where(x => x.Module_ID == module_id);
-            dbContext.ModelWithWorkform.RemoveRange(itemsToDelete);
-            dbContext.SaveChanges();
-        }
-
         public void WorkformAndModules(int module_id, int workform_id, int duration, string frequency, int workload)
         {
 
