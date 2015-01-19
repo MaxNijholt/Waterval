@@ -23,7 +23,7 @@
     <table class="table table-bordered table-striped">
 
         <tr>
-            <th>VakCode</th>
+            <th>Vakcode</th>
             <th>Titel</th>
             <th>Omschrijving</th>
         </tr>
@@ -35,9 +35,33 @@
             </tr>
         }
     </table>
+
+    <hr/>
+
+    <p>
+        @if (Model.PrevLearnGoal_ID != null)
+        {
+
+            @Html.ActionLink("Vorige versie", "Details", new { id = Model.PrevLearnGoal_ID }, new { @class = "btn btn-avans" })
+
+        }
+
+        @if (@ViewBag.NewID > 0)
+        {
+
+            @Html.ActionLink("Nieuwere versie", "Details", new { id = @ViewBag.NewID }, new { @class = "btn btn-avans" })
+
+        }
+    </p>
+    <hr/>
+
     @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditLearnGoal" ) ) {
         @Html.ActionLink( "Aanpassen", "Edit", new { id = Model.LearnGoal_ID }, new { @class = "btn btn-warning" } )
     }
+    @if (Waterval.Controllers.OAuthController.IsUserInRole("DeleteLearnGal"))
+    {
+        @Html.ActionLink("Verwijderen", "Delete", new { id = Model.LearnGoal_ID }, new { @class = "btn btn-danger" })
+    }|
 
     @Html.ActionLink( "Terug naar Index", "Index" )
 </div>
