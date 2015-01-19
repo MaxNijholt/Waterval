@@ -12,7 +12,6 @@
             <thead>
                 <tr>
                     <th>Opleiding</th>
-                    <th>Zie Modules</th>
                     
                 @if(Waterval.Controllers.OAuthController.IsUserInRole("EditProgram")) {
                     <th>Aanpassen</th>
@@ -26,7 +25,6 @@
             {
                 <tr>
                     <td>@Html.ActionLink(item.Cohort, "Details", new { id = item.Program_ID })</td>
-                    <td>@Html.ActionLink("Open Modules", "Index", "Module", new { id = item.Program_ID }, new { @class = "btn btn-avans" })</td>
 @if(Waterval.Controllers.OAuthController.IsUserInRole("EditProgram")) {
                     <td>@Html.ActionLink( "Aanpassen", "Edit", new { id = item.Program_ID }, new { @class = "btn btn-warning" } )</td>
 }
