@@ -41,9 +41,6 @@
 
     @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditTheme" ) ) {
         @Html.ActionLink( "Aanpassen", "Edit", new { id = Model.Theme_ID }, new { @class = "btn btn-warning" } )
-    }
-    @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteTheme" ) ) {
-        <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />
-    }|
+    } |
     @Html.ActionLink( "Terug naar Index", "Index" )
 </div>
