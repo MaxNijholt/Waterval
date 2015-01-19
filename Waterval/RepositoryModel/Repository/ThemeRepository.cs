@@ -69,15 +69,13 @@ namespace RepositoryModel.Repository
 			if(theme == null)
 				return null;
 
-            Theme test = new Theme();
+			theme.Definition = update.Definition;
+			theme.Title = update.Title;
 
-            test.Theme_ID = theme.Theme_ID;
-			test.Definition = update.Definition;
-			test.Title = update.Title;
-
-            AddLinkingsTheme(test);
-
-            theme = test;
+            for (int index = 0; index < update.Module.Count; index++)
+            {
+                theme.Module.Add(dbContext.Module.Find(update.Module.ElementAt(index).Module_ID));
+            }
 
             dbContext.SaveChanges();
             return theme;
