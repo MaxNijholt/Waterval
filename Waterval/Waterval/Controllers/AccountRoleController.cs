@@ -105,14 +105,14 @@ namespace MvcApplication1.Controllers
         public ActionResult Edit(int id)
         {
             var model = accountRoleRepository.Get(id);
-            @ViewBag.LawList = GetLaws(model);
+            @ViewBag.LawList = GetlawsThatAreEditedRight(model);
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Edit(int id, AccountRole role)
         {
-            @ViewBag.LawList = GetLaws(role);
+            @ViewBag.LawList = GetlawsThatAreEditedRight(role);
             try
             {
                 if (accountRoleRepository.Update(role) == null)
@@ -125,6 +125,27 @@ namespace MvcApplication1.Controllers
             {
                 return View(role);
             }
+        }
+
+        private List<AccountLaw> GetlawsThatAreEditedRight(AccountRole role)
+        {
+            List<AccountLaw> temp = new List<AccountLaw>();
+            List<AccountLaw> laws = accountLawRepository.GetAll();
+            foreach (AccountLaw m in role.AccountLaw)
+            {
+                foreach (AccountLaw a in laws)
+                {
+                    if (m.Law_ID == a.Law_ID)
+                    {
+                        temp.Add(a);
+                    }
+                }
+            }
+            foreach (AccountLaw d in temp)
+            {
+                laws.Remove(d);
+            }
+            return laws;
         }
 
     }
