@@ -107,7 +107,7 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.AssignmentCode = GetAssignmentcode( module );
             @ViewBag.GetBlocks = GetBlock(module);
             @ViewBag.GetPhasings = GetPhasings(module);
-            @ViewBag.GetAccounts = accountRepository.GetAll();
+            @ViewBag.GetAccounts = accountRepository.GetAll().Where(a => a.isActive == true);
 
 			return View( module );
 		}
@@ -126,7 +126,6 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.AssignmentCode = GetAssignmentcode( module );
             @ViewBag.GetBlocks = GetBlock(module);
             @ViewBag.GetPhasings = GetPhasings(module);
-            @ViewBag.GetAccounts = accountRepository.GetAll().Where(a => a.isActive = false);
 
 
 			try {
@@ -228,7 +227,7 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.AssignmentCode = GetAssignmentcode( module );
             @ViewBag.GetBlocks = GetBlock(module);
             @ViewBag.GetPhasings = GetPhasings(module);
-            @ViewBag.GetAccounts = accountRepository.GetAll().Where(a => a.isActive = false);
+            @ViewBag.GetAccounts = accountRepository.GetAll().Where(a => a.isActive == true);
 
 			@ViewBag.NewID = newVersion( id );
 
@@ -251,7 +250,7 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.GradeTypes = GetGradeTypes( module );
 			@ViewBag.WeekSchedule = GetWeekschedule( module );
 			@ViewBag.AssignmentCode = GetAssignmentcode( module );
-            @ViewBag.GetAccounts = accountRepository.GetAll().Where(a => a.isActive = false);
+            @ViewBag.GetAccounts = accountRepository.GetAll();
 
 
 			try {
@@ -284,7 +283,8 @@ namespace MvcApplication1.Controllers {
 
                 module.Account_ID = account_id;
 
-
+                moduleRepository.UpdateLinkingsModule(module);
+                moduleRepository.AddLinkingsModule(module);
            
 				foreach ( var item in module.Level )
 					moduleRepository.CompentenceAndModules( id, item.Competence_ID, item.Level1 );
@@ -355,6 +355,7 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.AssignmentCode = GetAssignmentcode( module );
             @ViewBag.GetBlocks = GetBlock(module);
             @ViewBag.GetPhasings = GetPhasings(module);
+            @ViewBag.GetAccounts = accountRepository.GetAll().Where(a => a.isActive == true);
 
 
 			@ViewBag.NewID = newVersion( id );
@@ -376,7 +377,7 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.AssignmentCode = GetAssignmentcode( module );
             @ViewBag.GetBlocks = GetBlock(module);
             @ViewBag.GetPhasings = GetPhasings(module);
-            @ViewBag.GetAccounts = accountRepository.GetAll().Where(a => a.isActive = false);
+            @ViewBag.GetAccounts = accountRepository.GetAll();
 
 			try {
 				@ViewBag.NewID = newVersion( id );
