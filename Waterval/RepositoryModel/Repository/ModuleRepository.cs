@@ -44,6 +44,7 @@ namespace RepositoryModel.Repository
         {
             Module module = dbContext.Module.SingleOrDefault(b => b.Module_ID == update.Module_ID);
             if (module == null) return null;
+
             module.Title = update.Title;
             module.PrevModule_ID = update.PrevModule_ID;
             module.CourseCode = update.CourseCode;
@@ -53,10 +54,71 @@ namespace RepositoryModel.Repository
             module.Foreknowledge = update.Foreknowledge;
             module.Account_ID = update.Account_ID;
 
-            UpdateLinkingsModule(module);
-            AddLinkingsModule(update);
 
-            dbContext.SaveChanges();
+           
+            for (int index = 0; index < update.LearnLine.Count; index++)
+            {
+                module.LearnLine.Add(dbContext.LearnLine.Find(update.LearnLine.ElementAt(index).LearnLine_ID));
+            }
+
+            for (int index = 0; index < update.LearnGoal.Count; index++)
+            {
+                module.LearnGoal.Add(dbContext.LearnGoal.Find(update.LearnGoal.ElementAt(index).LearnGoal_ID));
+            }
+
+            for (int index = 0; index < update.LearningTool.Count; index++)
+            {
+                module.LearningTool.Add(dbContext.LearningTool.Find(update.LearningTool.ElementAt(index).LearnTool_ID));
+            }
+
+            for (int index = 0; index < update.Theme.Count; index++)
+            {
+                module.Theme.Add(dbContext.Theme.Find(update.Theme.ElementAt(index).Theme_ID));
+            }
+
+            List<GradeType> listGrades = dbContext.GradeType.Where(a => a.Module_ID == module.Module_ID).ToList();
+
+            for (int index = 0; index < listGrades.Count; index++)
+            {
+                dbContext.GradeType.Remove(listGrades[index]);
+            }
+            
+            for (int index = 0; index < update.GradeType.Count; index++)
+            {
+                module.GradeType.Add(update.GradeType.ElementAt(index));
+            }
+
+            List<AssignmentCode> listAssignment = dbContext.AssignmentCode.Where(a => a.Module_ID == module.Module_ID).ToList();
+
+            for (int index = 0; index < listAssignment.Count; index++)
+            {
+                dbContext.AssignmentCode.Remove(listAssignment[index]);
+            }
+
+            for (int index = 0; index < update.AssignmentCode.Count; index++)
+            {
+                module.AssignmentCode.Add(update.AssignmentCode.ElementAt(index));
+            }
+
+            List<WeekSchedule> listWeekschedule = dbContext.WeekSchedule.Where(a => a.Module_ID == module.Module_ID).ToList();
+
+            for (int index = 0; index < listWeekschedule.Count; index++)
+            {
+                dbContext.WeekSchedule.Remove(listWeekschedule[index]);
+            }
+
+            for (int index = 0; index < update.WeekSchedule.Count; index++)
+            {
+                module.WeekSchedule.Add(update.WeekSchedule.ElementAt(index));
+            }
+
+
+
+
+
+
+
+              dbContext.SaveChanges();
             return module;
         }
 
@@ -80,88 +142,6 @@ namespace RepositoryModel.Repository
         {
             Module newModule = dbContext.Module.Where(c => c.PrevModule_ID == prevModule_ID).SingleOrDefault();
             return newModule;
-        }
-
-        public void LinkingsOfModule(Module module)
-        {
-            List<LearnLine> learnlines = new List<LearnLine>();
-
-            if (learnlines == null)
-            {
-                for (int index = 0; index < module.LearnLine.Count; index++)
-                {
-                    learnlines.Add(dbContext.LearnLine.Find(module.LearnLine.ElementAt(index).LearnLine_ID));
-                }
-
-                module.LearnLine = learnlines;
-            }
-            else
-            {
-                for (int index = 0; index < module.LearnLine.Count; index++)
-                {
-                    module.LearnLine.Remove(dbContext.LearnLine.Find(module.LearnLine.ElementAt(index).LearnLine_ID));
-                }
-            }
-
-            List<Theme> themes = new List<Theme>();
-
-            if (themes == null)
-            {
-                for (int index = 0; index < module.Theme.Count; index++)
-                {
-                    themes.Add(dbContext.Theme.Find(module.Theme.ElementAt(index).Theme_ID));
-                }
-
-                module.Theme = themes;
-            }
-            else
-            {
-                for (int index = 0; index < module.Theme.Count; index++)
-                {
-                    module.Theme.Remove(dbContext.Theme.Find(module.Theme.ElementAt(index).Theme_ID));
-                }
-            }
-
-            List<LearningTool> learningtools = new List<LearningTool>();
-
-            if (learningtools == null)
-            {
-
-                for (int index = 0; index < module.LearningTool.Count; index++)
-                {
-                    learningtools.Add(dbContext.LearningTool.Find(module.LearningTool.ElementAt(index).LearnTool_ID));
-                }
-
-                module.LearningTool = learningtools;
-            }
-            else
-            {
-                for (int index = 0; index < module.LearningTool.Count; index++)
-                {
-                    module.LearningTool.Remove(dbContext.LearningTool.Find(module.LearningTool.ElementAt(index).LearnTool_ID));
-                }
-            }
-
-            List<LearnGoal> learngoal = new List<LearnGoal>();
-
-            if (learngoal == null)
-            {
-
-                for (int index = 0; index < module.LearnGoal.Count; index++)
-                {
-                    learngoal.Add(dbContext.LearnGoal.Find(module.LearnGoal.ElementAt(index).LearnGoal_ID));
-                }
-
-                module.LearnGoal = learngoal;
-            }
-            else
-            {
-                for (int index = 0; index < module.LearnGoal.Count; index++)
-                {
-                    module.LearnGoal.Remove(dbContext.LearnGoal.Find(module.LearnGoal.ElementAt(index).LearnGoal_ID));
-                }
-            }
-
         }
 
         public void AddLinkingsModule(Module module)   {
@@ -206,32 +186,6 @@ namespace RepositoryModel.Repository
             module.LearnGoal = learngoal;
 
         }
-
-
-        public void UpdateLinkingsModule(Module module)
-        {
-            for (int index = 0; index < module.LearnLine.Count; index++)
-            {
-                module.LearnLine.Remove(dbContext.LearnLine.Find(module.LearnLine.ElementAt(index).LearnLine_ID));
-            }
-
-            for (int index = 0; index < module.Theme.Count; index++)
-            {
-                module.Theme.Remove(dbContext.Theme.Find(module.Theme.ElementAt(index).Theme_ID));
-            }
-
-            for (int index = 0; index < module.LearningTool.Count; index++)
-            {
-                module.LearningTool.Remove(dbContext.LearningTool.Find(module.LearningTool.ElementAt(index).LearnTool_ID));
-            }
-
-            for (int index = 0; index < module.LearnGoal.Count; index++)
-            {
-                module.LearnGoal.Remove(dbContext.LearnGoal.Find(module.LearnGoal.ElementAt(index).LearnGoal_ID));
-            }
-
-        }
-
 
         public void StudyBlockPhasingAndModules(int module_id, int study_id, int block_id, int phasing_id)
         {

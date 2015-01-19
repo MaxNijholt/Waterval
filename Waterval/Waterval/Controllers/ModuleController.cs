@@ -252,8 +252,6 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.AssignmentCode = GetAssignmentcode( module );
             @ViewBag.GetAccounts = accountRepository.GetAll();
 
-
-			try {
 				//Get a list of modules based on this learnline, workform, gradetype. 
 				@ViewBag.LearnLineList = GetLearnLines( module ).Where( m => m.isDeleted = false );
 				@ViewBag.ThemeList = GetThemes( module ).Where( m => m.isDeleted = false );
@@ -268,48 +266,45 @@ namespace MvcApplication1.Controllers {
                 @ViewBag.GetBlocks = GetBlock(module).Where(m => m.isDeleted = false);
                 @ViewBag.GetPhasings = GetPhasings(module).Where(m => m.isDeleted = false);
 
+
 				//if we update the model and somethign went wrong we send an error messge back
-				if ( moduleRepository.Update( module ) == null )
-					return View( module ).ViewBag.Error = "Er is iets fout gegaan.";
+                moduleRepository.Update(module);
+					return RedirectToAction( "Index" );
 
 
 				//We delete all of the levels from this competence. 
-				moduleRepository.CompentenceAndModulesDelete( module.Module_ID );
-				moduleRepository.WorkformAndModulesDelete( module.Module_ID );
-				moduleRepository.AssignmentcodeAndModulesDelete( module.Module_ID );
-				moduleRepository.WeekSchedulesAndModulesDelete( module.Module_ID );
-				moduleRepository.GradetypesAndModulesDelete( module.Module_ID );
-                moduleRepository.StudyBlockPhasingAndModulesDelete(module.Module_ID);
+                //moduleRepository.CompentenceAndModulesDelete( module.Module_ID );
+                //moduleRepository.WorkformAndModulesDelete( module.Module_ID );
+                //moduleRepository.AssignmentcodeAndModulesDelete( module.Module_ID );
+                //moduleRepository.WeekSchedulesAndModulesDelete( module.Module_ID );
+                //moduleRepository.GradetypesAndModulesDelete( module.Module_ID );
+                //moduleRepository.StudyBlockPhasingAndModulesDelete(module.Module_ID);
 
-                module.Account_ID = account_id;
+                //module.Account_ID = account_id;
 
-                moduleRepository.UpdateLinkingsModule(module);
-                moduleRepository.AddLinkingsModule(module);
-           
-				foreach ( var item in module.Level )
-					moduleRepository.CompentenceAndModules( id, item.Competence_ID, item.Level1 );
+                //moduleRepository.UpdateLinkingsModule(module);
+                //moduleRepository.AddLinkingsModule(module);
 
-				foreach ( var item in module.ModelWithWorkform )
-					moduleRepository.WorkformAndModules( id, item.Workform_ID, item.Duration, item.Frequency, item.Workload );
 
-				foreach ( var item in module.WeekSchedule )
-					moduleRepository.WeekSchedulesAndModules( id, item.Description, item.WeekNr );
+                    //foreach (var item in module.Level)
+                    //    moduleRepository.CompentenceAndModules(id, item.Competence_ID, item.Level1);
 
-				foreach ( var item in module.GradeType )
-					moduleRepository.GradetypesAndModules( id, item.GradeDescription );
+                    //foreach (var item in module.ModelWithWorkform)
+                    //    moduleRepository.WorkformAndModules(id, item.Workform_ID, item.Duration, item.Frequency, item.Workload);
 
-				foreach ( var item in module.AssignmentCode )
-					moduleRepository.AssignmentcodeAndModules( id, item.Description, item.EC );
+                    //foreach (var item in module.WeekSchedule)
+                    //    moduleRepository.WeekSchedulesAndModules(id, item.Description, item.WeekNr);
 
-				foreach ( var item in module.ModuleStudyPhasingBlock )
-					moduleRepository.StudyBlockPhasingAndModules( id, item.Study_ID, item.Block_ID, item.Phasing_ID );
+                    //foreach (var item in module.GradeType)
+                    //    moduleRepository.GradetypesAndModules(id, item.GradeDescription);
 
-				return RedirectToAction( "Index" );
-			}
+                    //foreach (var item in module.AssignmentCode)
+                    //    moduleRepository.AssignmentcodeAndModules(id, item.Description, item.EC);
 
-			catch {
-				return View( module );
-			}
+                    //foreach (var item in module.ModuleStudyPhasingBlock)
+                    //    moduleRepository.StudyBlockPhasingAndModules(id, item.Study_ID, item.Block_ID, item.Phasing_ID);
+
+                //return RedirectToAction( "Index" );
 
 		}
 
