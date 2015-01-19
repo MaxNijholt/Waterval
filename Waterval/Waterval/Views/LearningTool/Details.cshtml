@@ -63,6 +63,10 @@
         @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditLearningTool" ) ) {
             @Html.ActionLink( "Aanpassen", "Edit", new { id = Model.LearnTool_ID }, new { @class = "btn btn-warning" } )
         }
+        @if (Waterval.Controllers.OAuthController.IsUserInRole("DeleteLearningTool"))
+        {
+            @Html.ActionLink("Verwijderen", "Delete", new { id = Model.LearnTool_ID }, new { @class = "btn btn-danger" })
+        }
     @Html.ActionLink( "Terug naar Index", "Index" )
 </p>
 </div>

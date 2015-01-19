@@ -6,7 +6,7 @@
 @* TODO"Wat er daadwerkelijk komt te staan
      This is a test for data This partial view defines form fields that will appear when creating and editing entities*@
     <div class="form-group">
-        @Html.LabelFor(model => model.Title, new { @class = "col-sm-2 control-label" })
+        @Html.Label("Titel", new { @class = "col-sm-2 control-label" })
 
         <div class="col-sm-10">
             @Html.EditorFor(model => model.Title, new { @class = "form-control" })
