@@ -34,7 +34,7 @@ $(document).on('click', '#btn_addLearnLine', function () {
     var buttonDelete = '<td><input type="button" value="-" id="btn_deleteLearnLine" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
     //We add this row to the ModTable.
-    $('#LearnLineTable').append(learnline + hiddenfield + buttonDelete);
+    $('#LearnLineTable').append(learnline + buttonDelete);
 
     //We remove the row have choosen in TableMod;
     $(this).closest('tr').remove();
@@ -122,7 +122,7 @@ $(document).on('click', '#btn_addLearngoal', function () {
     var buttonDelete = '<td><input type="button" value="-" id="btn_deleteLearnGoal" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
     //We add this row to the ModTable.
-    $('#LearnGoalTable').append(learngoal + hiddenfield + buttonDelete);
+    $('#LearnGoalTable').append(learngoal + buttonDelete);
 
     //We remove the row have choosen in TableMod;
     $(this).closest('tr').remove();
@@ -210,7 +210,7 @@ $(document).on('click', '#btn_addLearningtool', function () {
     var buttonDelete = '<td><input type="button" value="-" id="btn_deleteLearnTool" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
     //We add this row to the ModTable.
-    $('#LearnToolTable').append(learntool + hiddenfield + buttonDelete);
+    $('#LearnToolTable').append(learntool + buttonDelete);
 
     //We remove the row have choosen in TableMod;
     $(this).closest('tr').remove();
@@ -298,7 +298,7 @@ $(document).on('click', '#btn_addTheme', function () {
     var buttonDeletes = '<td><input type="button" value="-" id="btn_deleteTheme" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
     //We add this row to the ModTable.
-    $('#ThemeTable').append(theme + hiddenfields + buttonDeletes);
+    $('#ThemeTable').append(theme + buttonDeletes);
 
     //We remove the row have choosen in TableMod;
     $(this).closest('tr').remove();
