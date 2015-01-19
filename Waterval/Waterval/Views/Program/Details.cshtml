@@ -11,7 +11,7 @@
         <table class="table table-striped table-bordered">
             <tr>
                 <td>
-                    @Html.DisplayNameFor( model => model.Cohort )
+                    @Html.LabelFor( model => model.Cohort )
                 </td>
                 <td>
                     @Html.DisplayFor( model => model.Cohort )
@@ -24,9 +24,6 @@
         @if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditProgram" ) ) {
             @Html.ActionLink( "Aanpassen", "Edit", null, new { @class = "btn btn-warning" } )
         }
-        @if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteProgram" ) ) {
-            <br><input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />
-        }|
         @Html.ActionLink( "Terug naar Index", "Index" )
     </p>
 </div>

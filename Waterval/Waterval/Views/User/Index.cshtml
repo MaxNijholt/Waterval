@@ -28,7 +28,9 @@
             @Html.DisplayFor(modelItem => item.isActive)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AccountRole.RoleName)
+            @Html.ActionLink(item.AccountRole.RoleName, "../AccountRole/Edit", new { id = item.AccountRole.Role_ID })
+
+
         </td>
     </tr>
 }
