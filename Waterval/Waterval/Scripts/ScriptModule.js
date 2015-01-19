@@ -111,13 +111,13 @@ $(document).on('click', '#btn_addLearngoal', function () {
 
     var index = $("#LearnGoalTable tr").length;
     //We create a tr that has an id and we combine a td next to it.
-    var learngoal = '<tr id="' + id + '"><td>' + tablevalue[0] + '</td>';
+    var learngoal = '<tr id="' + id + '"><td>' + tablevalue[0];
     //maak van class="form-control hidden"
     //In de entity module hebben we learnline zitten. 
     //We maken hier dus een learnline "aan" zodat ons model het herkent. Dus eig zeggen we hier gewoon Module.LearnLine[0].LearnLine_ID
     //Hierdoor herkent het model de learnline en kunne we deze meesturen. 
     //De de rest van de code moet je zelf even toeveogen en aanpassen naar wens. 
-    var hiddenfield = '<td><input type="number" id="LearnGoal[' + (index - 1) + '].LearnGoal_ID" name="LearnGoal[' + (index - 1) + '].LearnGoal_ID" class="form-control"  value=' + id + ' /></td>'
+    var hiddenfield = '<input type="number" id="LearnGoal[' + (index - 1) + '].LearnGoal_ID" name="LearnGoal[' + (index - 1) + '].LearnGoal_ID" class="form-control hidden"  value=' + id + ' /></td>'
 
     var buttonDelete = '<td><input type="button" value="-" id="btn_deleteLearnGoal" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
@@ -166,6 +166,20 @@ $(document).on('click', '#btn_deleteLearnGoal', function () {
 
         //Make an index 0 for adding the correct index to the Module attribute
         var index = 0;
+
+
+        $('#LearnGoalTable tr').each(function () {
+            if ($(this).attr('id') != null) {
+                $(this).find("input[type=number]").each(function () {
+                
+                        $(this).attr('name', 'LearnGoal[' + (index) + '].LearnGoal_ID')
+                        $(this).attr('id', 'LearnGoal[' + (index) + '].LearnGoal_ID')
+                  
+                    })
+         
+                index += 1;
+            }
+        });
 
     }
 });

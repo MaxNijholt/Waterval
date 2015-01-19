@@ -69,18 +69,21 @@
             <thead>
                 <tr>
                     <th width="85%">De student kan</th>
-                    <th width="10%">ID</th>
+       
                     <th>Verwijderen</th>
                 </tr>
             </thead>
 
             <tbody>
+                @{int index = 0;}
                 @foreach (var item in Model.LearnGoal)
                 {
                     if (item.isDeleted) { continue; }
                     <tr id="@item.LearnGoal_ID">
                         <td>
-                            @item.Description <input type="text" id="@item.LearnGoal_ID" name="Aap2" class="hidden" />
+                            @item.Description
+                      
+                            <input type="number" class="hidden" name="LearnGoal[@index].LearnGoal_ID" id="LearnGoal[@index].LearnGoal_ID" value="@item.LearnGoal_ID">
                         </td>
                         <td>
                             <input type="button" value="Verwijderen" id="btn_deleteLearnGoal" data-id="@item.LearnGoal_ID" class="btn btn-danger" />
@@ -555,7 +558,7 @@
                 </tr>
             </thead>
             <tbody>
-                @{int index = 0;}
+                @{index = 0;}
                 @foreach (var item in Model.Level)
                 {
                     if (item.Competence.isDeleted) { continue; }
