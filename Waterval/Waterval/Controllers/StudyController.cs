@@ -43,7 +43,6 @@ namespace Waterval.Controllers
         {
             try
             {
-                study.DeleteDate = DateTime.Now;
                 studyRepository.Create(study);
 
                 return RedirectToAction("Index");

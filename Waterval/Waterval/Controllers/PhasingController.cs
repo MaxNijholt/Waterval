@@ -18,7 +18,7 @@ namespace Waterval.Controllers
 		}
 		public ActionResult Index()
 		{
-			return View(phasingRepository.GetAll());
+			return View(phasingRepository.GetAll().Where(a => a.isDeleted != true));
 		}
 
 		[Authorize( Roles = "CreatePhasing" )]

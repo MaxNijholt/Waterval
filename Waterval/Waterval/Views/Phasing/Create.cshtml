@@ -3,9 +3,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Create", "Phasing", new {ReturnUrl = ViewBag.ReturnUrl },
-			FormMethod.Post, new { @class = "form-horizontal", @role = "rorm"}))
+@using (Html.BeginForm("Create", "Phasing", new { ReturnUrl = ViewBag.ReturnUrl },
+            FormMethod.Post, new { @class = "form-horizontal", @role = "rorm" }))
 {
+    <h2>Nieuwe Fase Aanmaken</h2>
+
 	@Html.ValidationSummary(true)
 	
 	<fieldset>
