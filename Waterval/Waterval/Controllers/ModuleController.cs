@@ -238,7 +238,7 @@ namespace MvcApplication1.Controllers {
 		public ActionResult Edit ( int id, Module module, int account_id ) {
 
 
-			@ViewBag.LearnLineList = GetLearnLines( module );
+	/*		@ViewBag.LearnLineList = GetLearnLines( module );
 			@ViewBag.ThemeList = GetThemes( module );
 			@ViewBag.LearnGoalList = GetLearnGoals( module );
 			@ViewBag.LearningToolList = GetLearningTools( module );
@@ -265,7 +265,7 @@ namespace MvcApplication1.Controllers {
 				@ViewBag.AssignmentCode = GetAssignmentcode( module ).Where( m => m.isDeleted = false );
                 @ViewBag.GetBlocks = GetBlock(module).Where(m => m.isDeleted = false);
                 @ViewBag.GetPhasings = GetPhasings(module).Where(m => m.isDeleted = false);
-
+            */
 
 				//if we update the model and somethign went wrong we send an error messge back
                 moduleRepository.Update(module);

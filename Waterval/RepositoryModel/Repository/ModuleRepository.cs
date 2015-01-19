@@ -55,22 +55,27 @@ namespace RepositoryModel.Repository
             module.Account_ID = update.Account_ID;
 
 
+
+            module.LearnGoal.Clear();
+            module.LearningTool.Clear();
            
+
+            /*
             for (int index = 0; index < update.LearnLine.Count; index++)
             {
                 module.LearnLine.Add(dbContext.LearnLine.Find(update.LearnLine.ElementAt(index).LearnLine_ID));
             }
-
+            */
             for (int index = 0; index < update.LearnGoal.Count; index++)
             {
                 module.LearnGoal.Add(dbContext.LearnGoal.Find(update.LearnGoal.ElementAt(index).LearnGoal_ID));
             }
-
+            
             for (int index = 0; index < update.LearningTool.Count; index++)
             {
                 module.LearningTool.Add(dbContext.LearningTool.Find(update.LearningTool.ElementAt(index).LearnTool_ID));
             }
-
+            /*
             for (int index = 0; index < update.Theme.Count; index++)
             {
                 module.Theme.Add(dbContext.Theme.Find(update.Theme.ElementAt(index).Theme_ID));
@@ -114,7 +119,7 @@ namespace RepositoryModel.Repository
 
 
 
-
+            */
 
 
 
