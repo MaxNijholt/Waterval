@@ -86,14 +86,14 @@ namespace Waterval.Controllers
 		public ActionResult Edit(int id)
 		{
 			var model = themeRepository.Get(id);
-            @ViewBag.ModuleList = GetModules(model);
+            @ViewBag.ModuleList = GetModulesThatAreEditedRight(model);
 			return View(model);
 		}
 
 		[HttpPost]
 		public ActionResult Edit(int id, Theme theme)
 		{
-            @ViewBag.ModuleList = GetModules(theme);
+            @ViewBag.ModuleList = GetModulesThatAreEditedRight(theme);
 			themeRepository.Update(theme);
 			return RedirectToAction("Index");
 		}
@@ -115,5 +115,26 @@ namespace Waterval.Controllers
             */
             return modules.Where(m => m.isDeleted == false).ToList();
         }
+
+        private List<Module> GetModulesThatAreEditedRight(Theme theme)
+        {
+            List<Module> temp = new List<Module>();
+            List<Module> modules = moduleRepository.GetAll();
+            foreach (Module m in theme.Module) {
+                foreach (Module a in modules)
+                {
+                    if (m.Module_ID == a.Module_ID)
+                    {
+                        temp.Add(a);
+                    }
+                }
+            }
+            foreach (Module d in temp)
+            {
+                modules.Remove(d);
+            }
+            return modules;
+        }
+
 	}
 }
