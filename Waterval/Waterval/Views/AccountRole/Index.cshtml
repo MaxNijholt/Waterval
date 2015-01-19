@@ -44,3 +44,22 @@
     @Html.PagedListPager( Model, page => Url.Action( "Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter } ) )
 
+@section Scripts {
+    <script>
+    $('input[type="button"]').click(function (e) {
+        var title = $(this).attr('data-name');
+        var id = $(this).attr('data-id');
+
+        if (confirm('Gegevens van ' + title + ' verwijderen?')) {
+            var url = "/AccountRole/Delete";
+
+            $.post(url, { Role_ID: id @*, Description: title, isDeleted: false, DeleteDate: 0*@ }, function (data) {
+                $("#msg").html(data);
+            });
+            $(this).closest('tr').remove()
+        }
+    })
+    </script>
+
+    <script src="~/Scripts/Filter.js"></script>
+}

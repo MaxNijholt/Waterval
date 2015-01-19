@@ -57,8 +57,7 @@ namespace MvcApplication1.Controllers
         [Authorize(Roles="DeleteAccountRole")]
         public ActionResult Delete(AccountRole accountRole)
         {
-
-            accountRoleRepository.Delete(accountRole);
+            accountRoleRepository.Delete(accountRole.Role_ID);
             return View();
         }
 
