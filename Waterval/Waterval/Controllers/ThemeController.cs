@@ -94,18 +94,8 @@ namespace Waterval.Controllers
 		public ActionResult Edit(int id, Theme theme)
 		{
             @ViewBag.ModuleList = GetModules(theme);
-			try
-			{
-				if(themeRepository.Update(theme) == null)
-				{
-					return View(theme).ViewBag.Error = "Er is iets fout gegaan.";
-				}
-				return RedirectToAction("Index");
-			}
-			catch
-			{
-				return View(theme);
-			}
+			themeRepository.Update(theme);
+			return RedirectToAction("Index");
 		}
 
 		[Authorize( Roles = "DeleteTheme" )]

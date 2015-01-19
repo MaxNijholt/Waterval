@@ -41,6 +41,12 @@ namespace RepositoryModel.Repository
             dbContext.SaveChanges();
         }
 
+        public LearnLine GetNewVersion(int prevLearnLine_ID)
+        {
+            LearnLine newComp = dbContext.LearnLine.Where(c => c.PrevLearnLine_ID == prevLearnLine_ID).SingleOrDefault();
+            return newComp;
+        }
+
         public DomainModel.Models.LearnLine Update(DomainModel.Models.LearnLine update)
         {
             LearnLine LearnLine = dbContext.LearnLine.SingleOrDefault(b => b.LearnLine_ID == update.LearnLine_ID);
