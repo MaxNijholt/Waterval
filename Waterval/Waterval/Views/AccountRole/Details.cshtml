@@ -21,7 +21,7 @@
 		</tr>
 	</table>
 
-    <p>De volgenende rechten horen bij deze rol:</p>
+    <p>De volgende rechten horen bij deze rol:</p>
     <table class="table table-bordered table-striped">
         <tbody>
             <tr>
@@ -37,7 +37,6 @@
     </table>
 
 
-	@if (Waterval.Controllers.OAuthController.IsUserInRole("EditAccountRole")) {@Html.ActionLink("Aanpassen", "Edit", new { id = Model.Role_ID }, new { @class = "btn btn-warning" })}
-	<br>@if (Waterval.Controllers.OAuthController.IsUserInRole("DeleteAccountRole")) {<input type="submit" class="btn btn-danger" name="Delete" value="Verwijderen" /><br />}|
+	@if (Waterval.Controllers.OAuthController.IsUserInRole("EditAccountRole")) {@Html.ActionLink("Aanpassen", "Edit", new { id = Model.Role_ID }, new { @class = "btn btn-warning" })} |
 	@Html.ActionLink("Terug naar Index", "Index")
 </div>
