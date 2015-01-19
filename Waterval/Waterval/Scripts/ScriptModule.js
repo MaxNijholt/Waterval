@@ -29,12 +29,12 @@ $(document).on('click', '#btn_addLearnLine', function () {
     //We maken hier dus een learnline "aan" zodat ons model het herkent. Dus eig zeggen we hier gewoon Module.LearnLine[0].LearnLine_ID
     //Hierdoor herkent het model de learnline en kunne we deze meesturen. 
     //De de rest van de code moet je zelf even toeveogen en aanpassen naar wens. 
-    var hiddenfield = '<td><input type="number" id="LearnLine[' + (index - 1) + '].Learnline_ID" name="LearnLine[' + (index - 1) + '].Learnline_ID" class="form-control" value=' + id + ' /></td>'
+    var hiddenfield = '<td><input type="number" id="LearnLine[' + (index - 1) + '].Learnline_ID" name="LearnLine[' + (index - 1) + '].Learnline_ID" class="form-control" disabled value=' + id + ' /></td>'
 
     var buttonDelete = '<td><input type="button" value="-" id="btn_deleteLearnLine" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
     //We add this row to the ModTable.
-    $('#LearnLineTable').append(learnline + buttonDelete);
+    $('#LearnLineTable').append(learnline + hiddenfield + buttonDelete);
 
     //We remove the row have choosen in TableMod;
     $(this).closest('tr').remove();
@@ -117,12 +117,12 @@ $(document).on('click', '#btn_addLearngoal', function () {
     //We maken hier dus een learnline "aan" zodat ons model het herkent. Dus eig zeggen we hier gewoon Module.LearnLine[0].LearnLine_ID
     //Hierdoor herkent het model de learnline en kunne we deze meesturen. 
     //De de rest van de code moet je zelf even toeveogen en aanpassen naar wens. 
-    var hiddenfield = '<td><input type="number" id="LearnGoal[' + (index - 1) + '].LearnGoal_ID" name="LearnGoal[' + (index - 1) + '].LearnGoal_ID" class="form-control" value=' + id + ' /></td>'
+    var hiddenfield = '<td><input type="number" id="LearnGoal[' + (index - 1) + '].LearnGoal_ID" name="LearnGoal[' + (index - 1) + '].LearnGoal_ID" class="form-control" disabled value=' + id + ' /></td>'
 
     var buttonDelete = '<td><input type="button" value="-" id="btn_deleteLearnGoal" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
     //We add this row to the ModTable.
-    $('#LearnGoalTable').append(learngoal + buttonDelete);
+    $('#LearnGoalTable').append(learngoal + hiddenfield + buttonDelete);
 
     //We remove the row have choosen in TableMod;
     $(this).closest('tr').remove();
@@ -205,12 +205,12 @@ $(document).on('click', '#btn_addLearningtool', function () {
     //We maken hier dus een learnline "aan" zodat ons model het herkent. Dus eig zeggen we hier gewoon Module.LearnLine[0].LearnLine_ID
     //Hierdoor herkent het model de learnline en kunne we deze meesturen. 
     //De de rest van de code moet je zelf even toeveogen en aanpassen naar wens. 
-    var hiddenfield = '<td><input type="number" id="LearningTool[' + (index - 1) + '].LearnTool_ID" name="LearningTool[' + (index - 1) + '].LearnTool_ID" class="form-control" value=' + id + ' /></td>'
+    var hiddenfield = '<td><input type="number" id="LearningTool[' + (index - 1) + '].LearnTool_ID" name="LearningTool[' + (index - 1) + '].LearnTool_ID" class="form-control" disabled value=' + id + ' /></td>'
 
     var buttonDelete = '<td><input type="button" value="-" id="btn_deleteLearnTool" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
     //We add this row to the ModTable.
-    $('#LearnToolTable').append(learntool + buttonDelete);
+    $('#LearnToolTable').append(learntool + hiddenfield + buttonDelete);
 
     //We remove the row have choosen in TableMod;
     $(this).closest('tr').remove();
@@ -293,12 +293,12 @@ $(document).on('click', '#btn_addTheme', function () {
     //We maken hier dus een learnline "aan" zodat ons model het herkent. Dus eig zeggen we hier gewoon Module.LearnLine[0].LearnLine_ID
     //Hierdoor herkent het model de learnline en kunne we deze meesturen. 
     //De de rest van de code moet je zelf even toeveogen en aanpassen naar wens. 
-    var hiddenfields = '<td><input type="number" id="Theme[' + (index - 1) + '].Theme_ID" name="Theme[' + (index - 1) + '].Theme_ID" class="form-control" value=' + id + ' /></td>'
+    var hiddenfields = '<td><input type="number" id="Theme[' + (index - 1) + '].Theme_ID" name="Theme[' + (index - 1) + '].Theme_ID" class="form-control" disabled value=' + id + ' /></td>'
 
     var buttonDeletes = '<td><input type="button" value="-" id="btn_deleteTheme" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
     //We add this row to the ModTable.
-    $('#ThemeTable').append(theme + buttonDeletes);
+    $('#ThemeTable').append(theme + hiddenfields + buttonDeletes);
 
     //We remove the row have choosen in TableMod;
     $(this).closest('tr').remove();
