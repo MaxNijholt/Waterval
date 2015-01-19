@@ -31,7 +31,7 @@
                     if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditCompetence" ) ) {
                         <th>Aanpassen</th>
                     }
-                    if ( Waterval.Controllers.OAuthController.IsUserInRole( "RemoveCompetence" ) ) {
+                    if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteCompetence" ) ) {
                         <th>Verwijderen</th>
                     }
                     if ( Waterval.Controllers.OAuthController.IsUserInRole( "toNewVersionCompetence" ) ) {
@@ -53,10 +53,10 @@
                     if ( Waterval.Controllers.OAuthController.IsUserInRole( "EditCompetence" ) ) {
                         <td>@Html.ActionLink( "Aanpassen", "Edit", new { id = item.Competence_ID }, new { @class = "btn btn-warning" } )</td>
                     }
-                    if ( Waterval.Controllers.OAuthController.IsUserInRole( "RemoveCompetence" ) ) {
+                    if ( Waterval.Controllers.OAuthController.IsUserInRole( "DeleteCompetence" ) ) {
                         <td><input type="button" value="Verwijderen" data-name="@item.Title" data-id="@item.Competence_ID" class="btn btn-danger"></td>
                     }
-                    if ( Waterval.Controllers.OAuthController.IsUserInRole( "toNewVersion" ) ) {
+                    if ( Waterval.Controllers.OAuthController.IsUserInRole( "toNewVersionCompetence" ) ) {
                         <td>@Html.ActionLink( "Nieuwe versie", "toNewVersion", new { id = item.Competence_ID }, new { @class = "btn btn-avans" } )</td>
                     }
                     <td>@Html.ActionLink( "Genereer PDF", "GeneratePDF", new { id = item.Competence_ID }, new { @class = "btn btn-avans" } )</td>}
