@@ -37,7 +37,7 @@
         {
             if (item.LawName == null) { continue; }
             <tr id="@item.Law_ID">
-
+                <input type="number" id="Module[@index].Law_ID" name="Module[@index].Law_ID" class="form-control hidden" value="@item.Law_ID" />
                 <td>@item.LawName</td>
                 <td>
                     <input type="button" value="-" id="btn_deleteMod" data-id="@item.Law_ID" class="btn btn-avans" />
