@@ -1,58 +1,72 @@
 ﻿@model DomainModel.Models.Program
 @using DomainModel.Models;
 
-<div class="form-group">
-	@Html.Label("Cohort", new { @class = "col-sm-2 control-label" })
 
-	<div class="col-sm-10">
-		@Html.TextBoxFor(model => model.Cohort, new { @class = "form-control", id = "cohort" })
-		@Html.ValidationMessageFor(model => model.Cohort)
-	</div>
+@* TODO"Wat er daadwerkelijk komt te staan
+    This is a test for data This partial view defines form fields that will appear when creating and editing entities*@
+<div class="form-group">
+    @Html.Label("Titel", new { @class = "col-sm-2 control-label" })
+
+    <div class="col-sm-10">
+        @Html.TextBoxFor(model => model.Cohort, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Cohort)
+
+    </div>
 </div>
 
 
+<br /><br />
+<table class="table table-bordered table-striped table-responsive" id="ModTable">
+    <thead>
+        <tr>
+            <th width="50%">Titel</th>
 
-<div class="form-group">
-	<div class="container">
-		<p>
-			@Html.Label("Modulen Toevoegen", new { @class = "control-label" })
-		</p>
-		<div id="ValidationMesMod" class="alert alert-danger hidden">
-			Minstens een Module verplicht
-		</div>
-		<br /><br />
-		<table class="table table-bordered table-striped table-responsive" id="ModTable">
-			<thead>
-				<tr>
-					<th width="20%">Vakcode</th>
-					<th width="50%">Omschrijving</th>
-					<th>Verwijderen</th>
-				</tr>
-			</thead>
-		</table>
-		<input type="button" value="Module Toevoegen" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseMod">
+            <th>Verwijderen</th>
+        </tr>
+    </thead>
 
-		<br />
-		<br />
-		<div id="collapseMod" class="panel-collapse collapse open">
+    <tbody>
+        @{int index = 0;}
+        @foreach (var item in Model.Study)
+        {
+            <tr id="@item.Study_ID">
 
-			<input type="text" class="form-control" placeholder="Module..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTable')" style:size="10" />
+                <td>@item.Title
+                <input type="number" class="hidden" id="Study[@index].Study_ID" name="Study[@index].Study_ID"/></td>
+                                <td>
+                    <input type="button" value="-" id="btn_deleteMod" data-id="@item.Study_ID" class="btn btn-avans" />
+                    @{index++; }
+            </tr>
+        }
+    </tbody>
+</table>
 
+<input type="button" value="Studierichting Toevoegen" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseMod">
 
-			<table class="table table-bordered table-striped" id="ModTable">
-				<thead>
-					<tr>
-						<th>Vakcode</th>
-						<th>Omschrijving</th>
-						<th>Toevoegen</th>
-					</tr>
+<br />
+<br />
+<div id="collapseMod" class="panel-collapse collapse open">
 
-				</thead>
-			</table>
-		</div>
-	</div>
+    <table class="table table-bordered table-striped" id="TableMod">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Toevoegen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Laat alle modules zien die nog niet zijn verwerkt -->
+            @foreach (Study item in @ViewBag.StudyList)
+            {
+                <tr id="@item.Study_ID">
+
+                    <td>@item.Title</td>
+                    <td><input type="button" value="+" id="btn_addMod" data-id="@item.Study_ID" class="btn btn-avans" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
 
-<hr />
 @Html.Partial("~/Views/Shared/_Alert.cshtml")

@@ -277,6 +277,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\ScriptModule.js" />
     <Content Include="Scripts\RoleScript.js" />
+    <Content Include="Scripts\ProgramScript.js" />
     <Content Include="Scripts\ThemeScript.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">

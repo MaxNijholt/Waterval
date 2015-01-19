@@ -38,7 +38,7 @@
             if (item.LawName == null) { continue; }
             <tr id="@item.Law_ID">
 
-                <td>@item.LawName</td>
+                <td>@item.LawName <input type="number" id="AccountLaw[@index].Law_ID" name="AccountLaw[@index].Law_ID" class="hidden" value="@item.Law_ID"></td>
                 <td>
                     <input type="button" value="-" id="btn_deleteMod" data-id="@item.Law_ID" class="btn btn-avans" />
                     @{index++; }
