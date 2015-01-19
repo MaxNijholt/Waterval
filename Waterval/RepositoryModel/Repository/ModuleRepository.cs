@@ -95,17 +95,17 @@ namespace RepositoryModel.Repository
             }
 
 
-            //List<AssignmentCode> listAssignment = dbContext.AssignmentCode.Where(a => a.Module_ID == module.Module_ID).ToList();
+            List<AssignmentCode> listAssignment = dbContext.AssignmentCode.Where(a => a.Module_ID == module.Module_ID).ToList();
 
-            //for (int index = 0; index < listAssignment.Count; index++)
-            //{
-            //    dbContext.AssignmentCode.Remove(listAssignment[index]);
-            //}
+            for (int index = 0; index < listAssignment.Count; index++)
+            {
+                dbContext.AssignmentCode.Remove(listAssignment[index]);
+            }
 
-            //for (int index = 0; index < update.AssignmentCode.Count; index++)
-            //{
-            //    module.AssignmentCode.Add(update.AssignmentCode.ElementAt(index));
-            //}
+            for (int index = 0; index < update.AssignmentCode.Count; index++)
+            {
+                module.AssignmentCode.Add(update.AssignmentCode.ElementAt(index));
+            }
             
             List<WeekSchedule> listWeekschedule = dbContext.WeekSchedule.Where(a => a.Module_ID == module.Module_ID).ToList();
 

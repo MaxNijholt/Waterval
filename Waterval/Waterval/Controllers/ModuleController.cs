@@ -281,7 +281,8 @@ namespace MvcApplication1.Controllers {
 
                 foreach (var item in module.ModuleStudyPhasingBlock)
                     moduleRepository.StudyBlockPhasingAndModules(id, item.Study_ID, item.Block_ID, item.Phasing_ID);
-
+                
+                moduleRepository.Update(module);
                 return RedirectToAction("Index");
 
             }
