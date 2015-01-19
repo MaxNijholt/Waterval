@@ -1,24 +1,17 @@
 ﻿@model PagedList.IPagedList<DomainModel.Models.Theme>
 @using PagedList.Mvc;
 @{
-<<<<<<< HEAD
-    Layout = "~/Views/Shared/_Layout.cshtml";
-=======
+
     ViewBag.Title = "Themas";
 	Layout = "~/Views/Shared/_Layout.cshtml";
->>>>>>> feature/TheSecondSpellcheckening
 }
 
 @Styles.Render( "~/Content/css" )
 
 <div class="container">
-<<<<<<< HEAD
     <h2>Thema Overzicht</h2>
     @using ( Html.BeginForm( "Index", "Theme", FormMethod.Get ) ) {
-=======
-	<h2>Themas</h2>
-	@using ( Html.BeginForm( "Index", "Theme", FormMethod.Get ) ) {
->>>>>>> feature/TheSecondSpellcheckening
+
         <div class="input-group input-group">
             @Html.TextBox( "SearchString", ViewBag.CurrentFilter as string, null, new { placeholder = "Zoeken in themas", @class = "form-control" } )
             <span class="input-group-btn">
