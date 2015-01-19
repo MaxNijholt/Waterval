@@ -64,7 +64,7 @@
 				if (confirm('Gegevens van ' + title + ' verwijderen?')) {
 					var url = "/Workform/Delete";
 
-					$.post(url, { Workform_ID: id, Description: title }, function (data) {
+					$.post(url, { Workform_ID: id, Description: title, isDeleted: false, DeleteDate: 0 }, function (data) {
 						$("#msg").html(data);
 					});
 					$(this).closest('tr').remove()
