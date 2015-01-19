@@ -8,7 +8,14 @@
 
 <div class="container">
     <h2>Fasering Overzicht</h2>
-    <input type="text" class="form-control" placeholder="filter thema's...">
+    <div class="input-group input-group">
+        <input class="form-control" type="text" placeholder="Zoeken in faseringen" id="searchTerm" onkeyup="doSearch('indexTable')" />
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+    </div>
 
     <table class="table table-bordered table-striped">
         <thead>
