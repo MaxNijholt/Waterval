@@ -76,7 +76,6 @@ namespace Waterval.Controllers
 		{
 			try
 			{
-				block.DeleteDate = DateTime.Now;
 				BlockRepository.Create(block);
 
 				return RedirectToAction("Index");
