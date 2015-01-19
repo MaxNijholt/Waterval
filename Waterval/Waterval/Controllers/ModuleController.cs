@@ -126,7 +126,7 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.AssignmentCode = GetAssignmentcode( module );
             @ViewBag.GetBlocks = GetBlock(module);
             @ViewBag.GetPhasings = GetPhasings(module);
-            @ViewBag.GetAccounts = accountRepository.GetAll();
+            @ViewBag.GetAccounts = accountRepository.GetAll().Where(a => a.isActive = false);
 
 
 			try {
@@ -144,7 +144,7 @@ namespace MvcApplication1.Controllers {
 
              
 				foreach ( var item in module.ModelWithWorkform )
-					moduleRepository.WorkformAndModules( id, item.Workform.Workform_ID, item.Duration, item.Frequency, item.Workload );
+					moduleRepository.WorkformAndModules( id, item.Workform_ID, item.Duration, item.Frequency, item.Workload );
 
 				foreach ( var item in module.GradeType )
 					moduleRepository.GradetypesAndModules( id, item.GradeDescription );
@@ -228,7 +228,7 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.AssignmentCode = GetAssignmentcode( module );
             @ViewBag.GetBlocks = GetBlock(module);
             @ViewBag.GetPhasings = GetPhasings(module);
-            @ViewBag.GetAccounts = accountRepository.GetAll();
+            @ViewBag.GetAccounts = accountRepository.GetAll().Where(a => a.isActive = false);
 
 			@ViewBag.NewID = newVersion( id );
 
@@ -251,7 +251,7 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.GradeTypes = GetGradeTypes( module );
 			@ViewBag.WeekSchedule = GetWeekschedule( module );
 			@ViewBag.AssignmentCode = GetAssignmentcode( module );
-            @ViewBag.GetAccounts = accountRepository.GetAll();
+            @ViewBag.GetAccounts = accountRepository.GetAll().Where(a => a.isActive = false);
 
 
 			try {
@@ -376,6 +376,7 @@ namespace MvcApplication1.Controllers {
 			@ViewBag.AssignmentCode = GetAssignmentcode( module );
             @ViewBag.GetBlocks = GetBlock(module);
             @ViewBag.GetPhasings = GetPhasings(module);
+            @ViewBag.GetAccounts = accountRepository.GetAll().Where(a => a.isActive = false);
 
 			try {
 				@ViewBag.NewID = newVersion( id );

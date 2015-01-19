@@ -313,11 +313,11 @@
                         @{string testa = "ModelWithWorkform" + itemw.Workform_ID;}
                         <td>
                             <input type="number" class="form-control" id="ModelWithWorkform[@indexa].Duration" name="ModelWithWorkform[@indexa].Duration" value="@itemw.Duration" />
-                            <input type="number" id="ModelWithWorkform[@indexa].Workform_ID" name="ModelWithWorkform[@indexa].Workform_ID" class="form-control hidden" value="@itemw.Workform_ID" />
+                            @*<input type="number" id="ModelWithWorkform[@indexa].Workform_ID" name="ModelWithWorkform[@indexa].Workform_ID" class="form-control hidden" value="@itemw.Workform_ID" />*@
                         </td>
                         <td>
                             <input type="text" class="form-control" id="ModelWithWorkform[@indexa].Frequency" name="ModelWithWorkform[@indexa].Frequency" value="@itemw.Frequency" />
-                            <input type="text" id="ModelWithWorkform[@indexa].Workform_ID" name="ModelWithWorkform[@indexa].Workform_ID" class="form-control hidden" value="@itemw.Workform_ID" />
+                            @*<input type="text" id="ModelWithWorkform[@indexa].Workform_ID" name="ModelWithWorkform[@indexa].Workform_ID" class="form-control hidden" value="@itemw.Workform_ID" />*@
                         </td>
                         <td>
                             <input type="number" class="form-control" id="ModelWithWorkform[@indexa].Workload" name="ModelWithWorkform[@indexa].Workload" value="@itemw.Workload" />
@@ -574,7 +574,7 @@
                 }
             </tbody>
         </table>
-        <input type="button" value="Competence Toevoegen" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseMod">
+        <input type="button" value="Competentie Toevoegen" name="btn_collapseGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseMod">
         <br />
         <br />
         <div id="collapseMod" class="panel-collapse collapse open">
