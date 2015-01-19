@@ -33,7 +33,7 @@ namespace RepositoryModel.Repository
         public DomainModel.Models.Module Create(DomainModel.Models.Module module)
         {
 
-            LinkingsOfModule(module);
+            AddLinkingsModule(module);
 
             dbContext.Module.Add(module);
             dbContext.SaveChanges();
@@ -53,7 +53,8 @@ namespace RepositoryModel.Repository
             module.Foreknowledge = update.Foreknowledge;
             module.Account_ID = update.Account_ID;
 
-            LinkingsOfModule(update);
+            UpdateLinkingsModule(module);
+            AddLinkingsModule(update);
 
             dbContext.SaveChanges();
             return module;
@@ -161,26 +162,6 @@ namespace RepositoryModel.Repository
                 }
             }
 
-            List<ModelWithWorkform> moduleWorkforms = new List<ModelWithWorkform>();
-
-            if (moduleWorkforms == null)
-            {
-                for (int index = 0; index < module.ModelWithWorkform.Count; index++)
-                {
-                    moduleWorkforms.Add(dbContext.ModelWithWorkform.Find(module.ModelWithWorkform.ElementAt(index).Workform_ID));
-                }
-
-                module.ModelWithWorkform = moduleWorkforms;
-            }
-            else
-            {
-                for (int index = 0; index < module.ModelWithWorkform.Count; index++)
-                {
-                    module.ModelWithWorkform.Remove(dbContext.ModelWithWorkform.Find(module.ModelWithWorkform.ElementAt(index).Workform_ID));
-                }
-            }
-
-
         }
 
         public void AddLinkingsModule(Module module)   {
@@ -224,15 +205,6 @@ namespace RepositoryModel.Repository
 
             module.LearnGoal = learngoal;
 
-
-            List<ModelWithWorkform> moduleWorkforms = new List<ModelWithWorkform>();
-
-            for (int index = 0; index < module.ModelWithWorkform.Count; index++)
-            {
-                moduleWorkforms.Add(dbContext.ModelWithWorkform.Find(module.ModelWithWorkform.ElementAt(index).Workform_ID));
-            }
-
-            module.ModelWithWorkform = moduleWorkforms;
         }
 
 
@@ -256,11 +228,6 @@ namespace RepositoryModel.Repository
             for (int index = 0; index < module.LearnGoal.Count; index++)
             {
                 module.LearnGoal.Remove(dbContext.LearnGoal.Find(module.LearnGoal.ElementAt(index).LearnGoal_ID));
-            }
-
-            for (int index = 0; index < module.ModelWithWorkform.Count; index++)
-            {
-                module.ModelWithWorkform.Remove(dbContext.ModelWithWorkform.Find(module.ModelWithWorkform.ElementAt(index).Workform_ID));
             }
 
         }
@@ -304,6 +271,29 @@ namespace RepositoryModel.Repository
         {
             var itemsToDelete = dbContext.Level.Where(x => x.Module_ID == module_id);
             dbContext.Level.RemoveRange(itemsToDelete);
+            dbContext.SaveChanges();
+        }
+
+        public void WorkformAndModulesVersion2(int module_id, int workform_id, int duration, string frequency, int workload)
+        {
+
+            if (dbContext.ModelWithWorkform.Any(l => l.Module_ID == module_id && l.Workform_ID == workform_id))
+                return;
+
+            ModelWithWorkform model = new ModelWithWorkform();
+            model.Workform_ID = workform_id;
+            model.Module_ID = module_id;
+            model.Duration = duration;
+            model.Frequency = frequency;
+            model.Workload = workload;
+            dbContext.ModelWithWorkform.Add(model);
+            dbContext.SaveChanges();
+        }
+
+        public void WorkformAndModulesDeleteVersion2(int module_id)
+        {
+            var itemsToDelete = dbContext.ModelWithWorkform.Where(x => x.Module_ID == module_id);
+            dbContext.ModelWithWorkform.RemoveRange(itemsToDelete);
             dbContext.SaveChanges();
         }
 

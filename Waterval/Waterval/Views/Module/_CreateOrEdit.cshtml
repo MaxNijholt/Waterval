@@ -32,10 +32,15 @@
 <div class="form-group">
     @Html.Label("Vakcoordinator", new { @class = "col-sm-2 control-label" })
     <div class="col-sm-10">
-        @Html.TextBoxFor(model => model.Account_ID, new { @class = "form-control", id = "courseCoordinator" })
-        @Html.ValidationMessageFor(model => model.Account_ID)
+        <select id="Account_ID" name="Account_ID" style="width:100%; height:35px; color:crimson; ">
+            @foreach (var item in @ViewBag.GetAccounts)
+            {
+                <option value="@item.Account_ID">@item.Username</option>
+            }
+        </select>
     </div>
 </div>
+
 <div class="form-group">
     @Html.Label("Voorkennis", new { @class = "col-sm-2 control-label" })
     <div class="col-sm-10">
@@ -68,22 +73,20 @@
                 </tr>
             </thead>
 
-            @* <tbody>
+            <tbody>
                 @foreach (var item in Model.LearnGoal)
                 {
                     if (item.isDeleted) { continue; }
                     <tr id="@item.LearnGoal_ID">
                         <td>
                             @item.Description <input type="text" id="@item.LearnGoal_ID" name="Aap2" class="hidden" />
-
                         </td>
-                       <td id="TitleLearnLine">@item.Title</td>
-                                    <td>
-                                        <input type="button" value="Verwijderen" id="btn_deleteLearnGoal" data-id="@item.LearnGoal_ID" class="btn btn-danger" />
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>*@
+                        <td>
+                            <input type="button" value="Verwijderen" id="btn_deleteLearnGoal" data-id="@item.LearnGoal_ID" class="btn btn-danger" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
 
         </table>
         <input type="button" value="Leerdoel Toevoegen" name="btn_collapseLearnGoal" class="btn btn-avans" data-toggle="collapse" data-target="#collapseLearnGoal">
@@ -98,7 +101,7 @@
                         <th>Toevoegen</th>
                     </tr>
                 </thead>
-                @* <tbody>
+                <tbody>
                     <!-- Laat alle modules zien die nog niet zijn verwerkt -->
                     @foreach (LearnGoal item in @ViewBag.LearnGoalList)
                     {
@@ -107,7 +110,8 @@
                             <td><input type="button" value="+" id="btn_addLearngoal" data-id="@item.LearnGoal_ID" class="btn btn-avans" /></td>
                         </tr>
                     }
-                                </tbody>*@
+
+                </tbody>
             </table>
         </div>
     </div>
@@ -144,6 +148,7 @@
                     </tr>
                 }
             </tbody>
+
         </table>
         <input type="button" value="Leermiddel Toevoegen" name="btn_collapseLearnTool" class="btn btn-avans" data-toggle="collapse" data-target="#collapseLearnTool">
         <br />
@@ -298,25 +303,25 @@
             </thead>
             <tbody>
                 @{int indexa = 0;}
-                @foreach (var item in Model.ModelWithWorkform)
+                @foreach (var itemw in Model.ModelWithWorkform)
                 {
-                    if (item.Workform.isDeleted) { continue; }
-                    <tr id="@item.Workform_ID">
+                    if (itemw.Workform.isDeleted) { continue; }
+                    <tr id="@itemw.Workform_ID">
                         <td>
-                            @item.Workform.Description <input type="text" id="@item.Workform_ID" class="hidden" />
+                            @itemw.Workform.Description <input type="text" id="@itemw.Workform_ID" class="hidden" />
                         </td>
-                        @{string testa = "ModelWithWorkform" + item.Workform_ID;}
+                        @{string testa = "ModelWithWorkform" + itemw.Workform_ID;}
                         <td>
-                            <input type="number" class="form-control" id="ModelWithWorkform[@indexa].Duration" name="ModelWithWorkform[@indexa].Duration" value="@item.Duration" />
-                            <input type="number" id="ModelWithWorkform[@indexa].Workform_ID" name="ModelWithWorkform[@indexa].Workform_ID" class="form-control hidden" value="@item.Workform_ID" />
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" id="ModelWithWorkform[@indexa].Frequency" name="ModelWithWorkform[@indexa].Frequency" value="@item.Frequency" />
-                            <input type="text" id="ModelWithWorkform[@indexa].Workform_ID" name="ModelWithWorkform[@indexa].Workform_ID" class="form-control hidden" value="@item.Workform_ID" />
+                            <input type="number" class="form-control" id="ModelWithWorkform[@indexa].Duration" name="ModelWithWorkform[@indexa].Duration" value="@itemw.Duration" />
+                            <input type="number" id="ModelWithWorkform[@indexa].Workform_ID" name="ModelWithWorkform[@indexa].Workform_ID" class="form-control hidden" value="@itemw.Workform_ID" />
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="ModelWithWorkform[@indexa].Workload" name="ModelWithWorkform[@indexa].Workload" value="@item.Workload" />
-                            <input type="number" id="ModelWithWorkform[@indexa].Workform_ID" name="ModelWithWorkform[@indexa].Workform_ID" class="form-control hidden" value="@item.Workform_ID" />
+                            <input type="text" class="form-control" id="ModelWithWorkform[@indexa].Frequency" name="ModelWithWorkform[@indexa].Frequency" value="@itemw.Frequency" />
+                            <input type="text" id="ModelWithWorkform[@indexa].Workform_ID" name="ModelWithWorkform[@indexa].Workform_ID" class="form-control hidden" value="@itemw.Workform_ID" />
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="ModelWithWorkform[@indexa].Workload" name="ModelWithWorkform[@indexa].Workload" value="@itemw.Workload" />
+                            <input type="number" id="ModelWithWorkform[@indexa].Workform_ID" name="ModelWithWorkform[@indexa].Workform_ID" class="form-control hidden" value="@itemw.Workform_ID" />
                         </td>
                         <td>
                             <input type="button" value="Verwijderen" id="btn_deleteModa" data-id="@item.Workform_ID" class="btn btn-danger" />
@@ -343,8 +348,87 @@
                     @foreach (Workform item in @ViewBag.WorkformList)
                     {
                         <tr id="@item.Workform_ID">
-                            <td id="Description">@item.Description</td>
+                            <td id="Descriptions">@item.Description</td>
                             <td><input type="button" value="+" id="btn_addModa" data-id="@item.Workform_ID" class="btn btn-avans" /></td>
+                        </tr>
+                    }             
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="form-group">
+    <div class="container">
+        <p>
+            @Html.Label("Werkvorm Versie 2 test Toevoegen", new { @class = "control-label" })
+        </p>
+        <div id="ValidationMesModwv" class="alert alert-danger hidden">
+            Minstens een werkvorm verplicht
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="ModTablewv">
+            <thead>
+                <tr>
+                    <th width="50%">Onderwerp</th>
+                    <th width="10%">Duur</th>
+                    <th width="10%">Frequentie</th>
+                    <th width="10%">Studiebelasting</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int indexwv = 0;}
+                @foreach (var itemwv in Model.ModelWithWorkform)
+                {
+                    if (itemwv.Workform.isDeleted) { continue; }
+                    <tr id="@itemwv.Workform_ID">
+                        <td>
+                            @itemwv.Workform.Description <input type="text" id="@itemwv.Workform_ID" class="hidden" />
+                        </td>
+                        @{string testwv = "ModelWithWorkform" + itemwv.Workform_ID;}
+                        <td>
+                            <input type="number" class="form-control" id="ModelWithWorkform[@indexwv].Duration" name="ModelWithWorkform[@indexwv].Duration" value="@itemwv.Duration" />
+                            <input type="number" id="ModelWithWorkform[@indexwv].Workform_ID" name="ModelWithWorkform[@indexwv].Workform_ID" class="form-control hidden" value="@itemwv.Workform_ID" />
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="ModelWithWorkform[@indexwv].Frequency" name="ModelWithWorkform[@indexwv].Frequency" value="@itemwv.Frequency" />
+                            <input type="number" id="ModelWithWorkform[@indexwv].Workform_ID" name="ModelWithWorkform[@indexwv].Workform_ID" class="form-control hidden" value="@itemwv.Workform_ID" />
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="ModelWithWorkform[@indexwv].Workload" name="ModelWithWorkform[@indexwv].Workload" value="@itemwv.Workload" />
+                            <input type="number" id="ModelWithWorkform[@indexwv].Workform_ID" name="ModelWithWorkform[@indexwv].Workform_ID" class="form-control hidden" value="@itemwv.Workform_ID" />
+                        </td>
+                        <td>
+                            <input type="button" value="Verwijderen" id="btn_deleteModwv" data-id="@itemwv.Workform_ID" class="btn btn-danger" />
+                            @{indexwv++; }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <input type="button" value="Werkvorm versie2 Toevoegen" name="btn_collapseGoalwv" class="btn btn-avans" data-toggle="collapse" data-target="#collapseModwv">
+        <br />
+        <br />
+        <div id="collapseMod" class="panel-collapse collapse open">
+            <input type="text" class="form-control" placeholder="Werkvorm..." name="TempValue" id="searchTerm" onkeyup="doSearch('ModTablewv')" style:size="10" />
+
+            <table class="table table-bordered table-striped" id="TableModwv">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Toevoegen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Laat alle modules zien die nog niet zijn verwerkt -->
+                    @foreach (Workform item in @ViewBag.WorkformVersion2)
+                    {
+                        <tr id="@item.Workform_ID">
+                            <td id="descriptionwv">@item.Description</td>
+                            <td><input type="button" value="+" id="btn_addModwv" data-id="@item.Workform_ID" class="btn btn-avans" /></td>
                         </tr>
                     }
                 </tbody>
@@ -352,6 +436,21 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <hr />
 
@@ -367,7 +466,7 @@
         <table class="table table-bordered table-striped table-responsive" id="ModTablet">
             <thead>
                 <tr>
-                    <th width="80">Omschrijving</th>
+                    <th width="80">Beoordeling</th>
                     <th width="15">EC</th>
                     <th width="5">Verwijderen</th>
                 </tr>
@@ -624,107 +723,107 @@
     </select>*@
 
 
-    <div class="form-group">
-        <div class="container">
-            <p>
-                @Html.Label("Study Toevoegen met blok en fasering", new { @class = "control-label" })
-            </p>
-            Er zijn 16 blokken beschikbaar per studierichting.
-            De volgende faseringen zijn beschikbaar op volgende Id's:
+<div class="form-group">
+    <div class="container">
+        <p>
+            @Html.Label("Study Toevoegen met blok en fasering", new { @class = "control-label" })
+        </p>
+        Er zijn 16 blokken beschikbaar per studierichting.
+        De volgende faseringen zijn beschikbaar op volgende Id's:
+        <br />
+        @foreach (Phasing item in @ViewBag.GetPhasings)
+        {
+            @(item.Phasing_ID + " - " + @item.Title)
             <br />
-            @foreach (Phasing item in @ViewBag.GetPhasings)
-            {
-                @(item.Phasing_ID + " - " + @item.Title)
-                <br />
 
-            }
-            <div id="ValidationMesStudy" class="alert alert-danger hidden">
-                Minstens een studierichting, blok en fasering verplicht.
-            </div>
-            <br /><br />
-            <table class="table table-bordered table-striped table-responsive" id="StudyTable">
+        }
+        <div id="ValidationMesStudy" class="alert alert-danger hidden">
+            Minstens een studierichting, blok en fasering verplicht.
+        </div>
+        <br /><br />
+        <table class="table table-bordered table-striped table-responsive" id="StudyTable">
+            <thead>
+                <tr>
+                    <th width="40%">Studierichting</th>
+                    <th width="10%">Blok</th>
+                    <th width="10%">Fasering</th>
+                    <th>Verwijderen</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ModuleStudyPhasingBlock)
+                {
+                    if (item.Study.isDeleted) { continue; }
+                    <tr id="@item.Study_ID">
+                        <td>
+                            @item.Study.Definition <input type="text" id="@item.Study_ID" class="hidden" />
+                        </td>
+                        @{string testStudy = "ModuleStudyPhasingBlock" + item.Study_ID;}
+                        <td>
+                            <input type="number" class="form-control" id="ModuleStudyPhasingBlock[@index].Block_ID" name="ModuleStudyPhasingBlock[@index].Block_ID" value="@item.Block_ID" min="1" max="16" />
+                            <input type="number" id="ModuleStudyPhasingBlock[@index].Study_ID" name="ModuleStudyPhasingBlock[@index].Study_ID" class="form-control hidden" value="@item.Study_ID" min="1" max="16" />
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="ModuleStudyPhasingBlock[@index].Phasing_ID" name="ModuleStudyPhasingBlock[@index].Phasing_ID" value="@item.Phasing_ID" />
+                            <input type="number" id="ModuleStudyPhasingBlock[@index].Study_ID" name="ModuleStudyPhasingBlock[@index].Study_ID" class="form-control hidden" value="@item.Study_ID" />
+                        </td>
+                        <td>
+                            <input type="button" value="Verwijderen" id="btn_deleteStudy" data-id="@item.Study_ID" class="btn btn-danger" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <input type="button" value="Studierichting Toevoegen" name="btn_collapseStudy" class="btn btn-avans" data-toggle="collapse" data-target="#collapseStudy">
+        <br />
+        <br />
+        <div id="collapseStudy" class="panel-collapse collapse open">
+            <input type="text" class="form-control" placeholder="Studierichting..." name="TempValue" id="searchTerm" onkeyup="doSearch('StudyTable')" style:size="10" />
+            <table class="table table-bordered table-striped" id="TableStudy">
                 <thead>
                     <tr>
-                        <th width="40%">Studierichting</th>
-                        <th width="10%">Blok</th>
-                        <th width="10%">Fasering</th>
-                        <th>Verwijderen</th>
+                        <th>Onderwerp</th>
+                        <th>Toevoegen</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.ModuleStudyPhasingBlock)
+                    <!-- Laat alle modules zien die nog niet zijn verwerkt -->
+                    @foreach (Study item in @ViewBag.StudyList)
                     {
-                        if (item.Study.isDeleted) { continue; }
                         <tr id="@item.Study_ID">
-                            <td>
-                                @item.Study.Definition <input type="text" id="@item.Study_ID" class="hidden" />
-                            </td>
-                            @{string testStudy = "ModuleStudyPhasingBlock" + item.Study_ID;}
-                            <td>
-                                    <input type="number" class="form-control" id="ModuleStudyPhasingBlock[@index].Block_ID" name="ModuleStudyPhasingBlock[@index].Block_ID" value="@item.Block_ID" min="1" max="16" />
-                                    <input type="number" id="ModuleStudyPhasingBlock[@index].Study_ID" name="ModuleStudyPhasingBlock[@index].Study_ID" class="form-control hidden" value="@item.Study_ID" min="1" max="16" />
-                                </td>
-                            <td>
-                                <input type="number" class="form-control" id="ModuleStudyPhasingBlock[@index].Phasing_ID" name="ModuleStudyPhasingBlock[@index].Phasing_ID" value="@item.Phasing_ID" />
-                                <input type="number" id="ModuleStudyPhasingBlock[@index].Study_ID" name="ModuleStudyPhasingBlock[@index].Study_ID" class="form-control hidden" value="@item.Study_ID" />
-                            </td>
-                            <td>
-                                <input type="button" value="Verwijderen" id="btn_deleteStudy" data-id="@item.Study_ID" class="btn btn-danger" />
-                            </td>
+                            <td id="Title">@item.Title</td>
+                            <td><input type="button" value="+" id="btn_addStudy" data-id="@item.Study_ID" class="btn btn-avans" /></td>
                         </tr>
                     }
                 </tbody>
             </table>
-            <input type="button" value="Studierichting Toevoegen" name="btn_collapseStudy" class="btn btn-avans" data-toggle="collapse" data-target="#collapseStudy">
-            <br />
-            <br />
-            <div id="collapseStudy" class="panel-collapse collapse open">
-                <input type="text" class="form-control" placeholder="Studierichting..." name="TempValue" id="searchTerm" onkeyup="doSearch('StudyTable')" style:size="10" />
-                <table class="table table-bordered table-striped" id="TableStudy">
-                    <thead>
-                        <tr>
-                            <th>Onderwerp</th>
-                            <th>Toevoegen</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Laat alle modules zien die nog niet zijn verwerkt -->
-                        @foreach (Study item in @ViewBag.StudyList)
-                        {
-                            <tr id="@item.Study_ID">
-                                <td id="Title">@item.Title</td>
-                                <td><input type="button" value="+" id="btn_addStudy" data-id="@item.Study_ID" class="btn btn-avans" /></td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
+</div>
 
 
 
 
 
-    <div class="container">
-        @if (Model.PrevModule_ID != null)
-        {
-            <div class="container">
-                @Html.ActionLink("Vorige versie", "Details", new { id = Model.PrevModule_ID }, new { @class = "btn btn-avans" })
-            </div>
-        }
-        @if (@ViewBag.NewID > 0)
-        {
-            <div class="container">
-                @Html.ActionLink("Nieuwere versie", "Details", new { id = @ViewBag.NewID }, new { @class = "btn btn-avans" })
-            </div>
-        }
-    </div>
+<div class="container">
+    @if (Model.PrevModule_ID != null)
+    {
+        <div class="container">
+            @Html.ActionLink("Vorige versie", "Details", new { id = Model.PrevModule_ID }, new { @class = "btn btn-avans" })
+        </div>
+    }
+    @if (@ViewBag.NewID > 0)
+    {
+        <div class="container">
+            @Html.ActionLink("Nieuwere versie", "Details", new { id = @ViewBag.NewID }, new { @class = "btn btn-avans" })
+        </div>
+    }
+</div>
 
 
 
-    <hr />
-    @Html.Partial("~/Views/Shared/_Alert.cshtml")
+<hr />
+@Html.Partial("~/Views/Shared/_Alert.cshtml")
 
 
 
