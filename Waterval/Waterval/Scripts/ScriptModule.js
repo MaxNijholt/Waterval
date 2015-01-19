@@ -23,13 +23,13 @@ $(document).on('click', '#btn_addLearnLine', function () {
 
     var index = $("#LearnLineTable tr").length;
     //We create a tr that has an id and we combine a td next to it.
-    var learnline = '<tr id="' + id + '"><td>' + tablevalue[0] + '</td>';
+    var learnline = '<tr id="' + id + '"><td>' + tablevalue[0];
     //maak van class="form-control hidden"
     //In de entity module hebben we learnline zitten. 
     //We maken hier dus een learnline "aan" zodat ons model het herkent. Dus eig zeggen we hier gewoon Module.LearnLine[0].LearnLine_ID
     //Hierdoor herkent het model de learnline en kunne we deze meesturen. 
     //De de rest van de code moet je zelf even toeveogen en aanpassen naar wens. 
-    var hiddenfield = '<td><input type="number" id="LearnLine[' + (index - 1) + '].Learnline_ID" name="LearnLine[' + (index - 1) + '].Learnline_ID" class="form-control" value=' + id + ' /></td>'
+    var hiddenfield = '<input type="number" id="LearnLine[' + (index - 1) + '].Learnline_ID" name="LearnLine[' + (index - 1) + '].Learnline_ID" class="form-control hidden" value=' + id + ' /></td>'
 
     var buttonDelete = '<td><input type="button" value="-" id="btn_deleteLearnLine" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
@@ -79,6 +79,18 @@ $(document).on('click', '#btn_deleteLearnLine', function () {
         //Make an index 0 for adding the correct index to the Module attribute
         var index = 0;
 
+        $('#LearnLineTable tr').each(function () {
+            if ($(this).attr('id') != null) {
+                $(this).find("input[type=number]").each(function () {
+
+                    $(this).attr('name', 'LearnLine[' + (index) + '].Learnline_ID')
+                    $(this).attr('id', 'LearnLine[' + (index) + '].Learnline_ID')
+
+                })
+
+                index += 1;
+            }
+        });
     }
 });
 //END LEARNLINE
@@ -213,13 +225,13 @@ $(document).on('click', '#btn_addLearningtool', function () {
 
     var index = $("#LearnToolTable tr").length;
     //We create a tr that has an id and we combine a td next to it.
-    var learntool = '<tr id="' + id + '"><td>' + tablevalue[0] + '</td>';
+    var learntool = '<tr id="' + id + '"><td>' + tablevalue[0];
     //maak van class="form-control hidden"
     //In de entity module hebben we learnline zitten. 
     //We maken hier dus een learnline "aan" zodat ons model het herkent. Dus eig zeggen we hier gewoon Module.LearnLine[0].LearnLine_ID
     //Hierdoor herkent het model de learnline en kunne we deze meesturen. 
     //De de rest van de code moet je zelf even toeveogen en aanpassen naar wens. 
-    var hiddenfield = '<td><input type="number" id="LearningTool[' + (index - 1) + '].LearnTool_ID" name="LearningTool[' + (index - 1) + '].LearnTool_ID" class="form-control" value=' + id + ' /></td>'
+    var hiddenfield = '<input type="number" id="LearningTool[' + (index - 1) + '].LearnTool_ID" name="LearningTool[' + (index - 1) + '].LearnTool_ID" class="form-control hidden" value=' + id + ' /></td>'
 
     var buttonDelete = '<td><input type="button" value="-" id="btn_deleteLearnTool" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
@@ -269,6 +281,20 @@ $(document).on('click', '#btn_deleteLearnTool', function () {
         //Make an index 0 for adding the correct index to the Module attribute
         var index = 0;
 
+
+        $('#LearnToolTable tr').each(function () {
+            if ($(this).attr('id') != null) {
+                $(this).find("input[type=number]").each(function () {
+
+                    $(this).attr('name', 'LearningTool[' + (index) + '].LearnTool_ID')
+                    $(this).attr('id', 'LearningTool[' + (index) + '].LearnTool_ID')
+
+                })
+
+                index += 1;
+            }
+        });
+
     }
 });
 //END LEARNTOOL
@@ -301,13 +327,13 @@ $(document).on('click', '#btn_addTheme', function () {
 
     var index = $("#ThemeTable tr").length;
     //We create a tr that has an id and we combine a td next to it.
-    var theme = '<tr id="' + id + '"><td>' + tablevalue[0] + '</td>';
+    var theme = '<tr id="' + id + '"><td>' + tablevalue[0];
     //maak van class="form-control hidden"
     //In de entity module hebben we learnline zitten. 
     //We maken hier dus een learnline "aan" zodat ons model het herkent. Dus eig zeggen we hier gewoon Module.LearnLine[0].LearnLine_ID
     //Hierdoor herkent het model de learnline en kunne we deze meesturen. 
     //De de rest van de code moet je zelf even toeveogen en aanpassen naar wens. 
-    var hiddenfields = '<td><input type="number" id="Theme[' + (index - 1) + '].Theme_ID" name="Theme[' + (index - 1) + '].Theme_ID" class="form-control"  value=' + id + ' /></td>'
+    var hiddenfields = '<input type="number" id="Theme[' + (index - 1) + '].Theme_ID" name="Theme[' + (index - 1) + '].Theme_ID" class="form-control hidden"  value=' + id + ' /></td>'
 
     var buttonDeletes = '<td><input type="button" value="-" id="btn_deleteTheme" data-id="' + id + '" class="btn btn-danger"/></td></tr>';
 
@@ -357,6 +383,18 @@ $(document).on('click', '#btn_deleteTheme', function () {
         //Make an index 0 for adding the correct index to the Module attribute
         var index = 0;
 
+        $('#ThemeTable tr').each(function () {
+            if ($(this).attr('id') != null) {
+                $(this).find("input[type=number]").each(function () {
+
+                    $(this).attr('name', 'Theme[' + (index) + '].Theme_ID')
+                    $(this).attr('id', 'Theme[' + (index) + '].Theme_ID')
+
+                })
+
+                index += 1;
+            }
+        });
     }
 });
 //END THEME

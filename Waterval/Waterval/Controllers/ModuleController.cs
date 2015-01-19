@@ -194,11 +194,11 @@ namespace MvcApplication1.Controllers {
 		}
 
 
-		public ActionResult Details ( int id ) {
+		public ActionResult Details ( int id,bool isPDF = false) {
 			Module module = moduleRepository.Get( id );
 
 			@ViewBag.NewID = newVersion( id );
-
+            @ViewBag.isPDF = isPDF;
 			return View( module );
 		}
 
@@ -237,6 +237,58 @@ namespace MvcApplication1.Controllers {
 		[HttpPost]
 		public ActionResult Edit ( int id, Module module, int account_id ) {
 
+            @ViewBag.LearnLineList = GetLearnLines(module);
+            @ViewBag.ThemeList = GetThemes(module);
+            @ViewBag.LearnGoalList = GetLearnGoals(module);
+            @ViewBag.LearningToolList = GetLearningTools(module);
+            @ViewBag.GetBlocks = GetBlock(module);
+            @ViewBag.GetPhasings = GetPhasings(module);
+            @ViewBag.CompetenceList = GetCompetence(module);
+            @ViewBag.StudyList = GetStudy(module);
+            @ViewBag.WorkformList = GetWorkForms(module);
+            @ViewBag.GradeTypes = GetGradeTypes(module);
+            @ViewBag.WeekSchedule = GetWeekschedule(module);
+            @ViewBag.AssignmentCode = GetAssignmentcode(module);
+            @ViewBag.GetAccounts = accountRepository.GetAll();
+
+            try
+            {
+                @ViewBag.NewID = newVersion(module.Module_ID);
+
+                @ViewBag.LearnLineList = GetLearnLines(module).Where(m => m.isDeleted = false);
+                @ViewBag.ThemeList = GetThemes(module).Where(m => m.isDeleted = false);
+                @ViewBag.LearningToolList = GetLearningTools(module).Where(m => m.isDeleted = false);
+                @ViewBag.LearnGoalList = GetLearnGoals(module).Where(m => m.isDeleted = false);
+                @ViewBag.CompetenceList = GetCompetence(module).Where(m => m.isDeleted = false);
+                @ViewBag.StudyList = GetStudy(module).Where(m => m.isDeleted = false);
+                @ViewBag.WorkformList = GetWorkForms(module).Where(m => m.isDeleted = false);
+                @ViewBag.GradeTypes = GetGradeTypes(module).Where(m => m.isDeleted = false);
+                @ViewBag.WeekSchedule = GetWeekschedule(module).Where(m => m.isDeleted = false);
+                @ViewBag.AssignmentCode = GetAssignmentcode(module).Where(m => m.isDeleted = false);
+                @ViewBag.GetBlocks = GetBlock(module).Where(m => m.isDeleted = false);
+                @ViewBag.GetPhasings = GetPhasings(module).Where(m => m.isDeleted = false);
+                @ViewBag.GetAccounts = accountRepository.GetAll();
+
+                moduleRepository.CompentenceAndModulesDelete(module.Module_ID);
+                moduleRepository.WorkformAndModulesDelete(module.Module_ID);
+                moduleRepository.StudyBlockPhasingAndModulesDelete(module.Module_ID);
+
+                foreach (var item in module.Level)
+                    moduleRepository.CompentenceAndModules(id, item.Competence_ID, item.Level1);
+
+                foreach (var item in module.ModelWithWorkform)
+                    moduleRepository.WorkformAndModules(id, item.Workform_ID, item.Duration, item.Frequency, item.Workload);
+
+                foreach (var item in module.ModuleStudyPhasingBlock)
+                    moduleRepository.StudyBlockPhasingAndModules(id, item.Study_ID, item.Block_ID, item.Phasing_ID);
+
+                return RedirectToAction("Index");
+
+            }
+            catch
+            {
+                return View(module);
+            }
 
 	/*		@ViewBag.LearnLineList = GetLearnLines( module );
 			@ViewBag.ThemeList = GetThemes( module );
@@ -268,8 +320,6 @@ namespace MvcApplication1.Controllers {
             */
 
 				//if we update the model and somethign went wrong we send an error messge back
-                moduleRepository.Update(module);
-					return RedirectToAction( "Index" );
 
 
 				//We delete all of the levels from this competence. 
@@ -556,7 +606,7 @@ namespace MvcApplication1.Controllers {
 
         public ActionResult GeneratePDF(int id)
         {
-            return new Rotativa.ActionAsPdf("Details", new { id = id });
+            return new Rotativa.ActionAsPdf("Details", new { id = id, isPDF= true });
         }
 
         public ActionResult GeneratePDFList()

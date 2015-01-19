@@ -86,7 +86,7 @@
                             <input type="number" class="hidden" name="LearnGoal[@index].LearnGoal_ID" id="LearnGoal[@index].LearnGoal_ID" value="@item.LearnGoal_ID">
                         </td>
                         <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteLearnGoal" data-id="@item.LearnGoal_ID" class="btn btn-danger" />
+                            <input type="button" value="-" id="btn_deleteLearnGoal" data-id="@item.LearnGoal_ID" class="btn btn-danger" />
                         </td>
                     </tr>
                 }
@@ -134,20 +134,21 @@
             <thead>
                 <tr>
                     <th width="70%">Leermiddel</th>
-                    <th width="10%">ID</th>
                     <th>Verwijderen</th>
                 </tr>
             </thead>
             <tbody>
+                @{index = 0;}
                 @foreach (var item in Model.LearningTool)
                 {
                     if (item.isDeleted) { continue; }
                     <tr id="@item.LearnTool_ID">
                         <td>
-                            @item.Description <input type="text" id="@item.LearnTool_ID" name="Aap3" class="hidden" />
+                            @item.Description 
+                            <input type="number" id="LearningTool[@index].LearnTool_ID" name="LearningTool[@index].LearnTool_ID" value="@item.LearnTool_ID" class="hidden" />
                         </td>
                         <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteLearnTool" data-id="@item.LearnTool_ID" class="btn btn-danger" />
+                            <input type="button" value="-" id="btn_deleteLearnTool" data-id="@item.LearnTool_ID" class="btn btn-danger" />
                         </td>
                     </tr>
                 }
@@ -218,7 +219,7 @@
                             <input type="text" id="WeekSchedule[@indexe2].Module_ID" name="WeekSchedule[@indexe2].Module_ID" class="form-control hidden" value="@item3.Module_ID" />
                         </td>
                         <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteModw" data-id="@item3.Module_ID" class="btn btn-danger" />
+                            <input type="button" value="-" id="btn_deleteModw" data-id="@item3.Module_ID" class="btn btn-danger" />
                             @{indexe2++; }
                     </tr>
                 }
@@ -271,7 +272,7 @@
                             <input type="text" id="GradeType[@indexe].Module_ID" name="GradeType[@indexe].Module_ID" class="form-control hidden" value="@item2.Module_ID" />
                         </td>
                         <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteModg" data-id="@item2.Module_ID" class="btn btn-danger" />
+                            <input type="button" value="-" id="btn_deleteModg" data-id="@item2.Module_ID" class="btn btn-danger" />
                             @{indexe++; }
                     </tr>
                 }
@@ -328,7 +329,7 @@
                             <input type="number" id="ModelWithWorkform[@indexa].Workform_ID" name="ModelWithWorkform[@indexa].Workform_ID" class="form-control hidden" value="@itemw.Workform_ID" />
                         </td>
                         <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteModa" data-id="@itemw.Workform_ID" class="btn btn-danger" />
+                            <input type="button" value="-" id="btn_deleteModa" data-id="@itemw.Workform_ID" class="btn btn-danger" />
                             @{indexa++; }
                     </tr>
                 }
@@ -401,7 +402,7 @@
                             <input type="number" id="AssignmentCode[@indexe5].Module_ID" name="AssignmentCode[@indexe5].Module_ID" class="form-control hidden" value="@itema.Module_ID" />
                         </td>
                         <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteModt" data-id="@itema.Module_ID" class="btn btn-danger" />
+                            <input type="button" value="-" id="btn_deleteModt" data-id="@itema.Module_ID" class="btn btn-danger" />
                             @{indexe5++; }
                     </tr>
                 }
@@ -429,22 +430,23 @@
         <table class="table table-bordered table-striped table-responsive" id="LearnLineTable">
             <thead>
                 <tr>
-                    <th width="40%">Onderwerp</th>
-                    <th width="10%">ID</th>
+                    <th width="70%">Onderwerp</th>
                     <th>Verwijderen</th>
                 </tr>
             </thead>
             <tbody>
+                @{index = 0;}
                 @foreach (var item in Model.LearnLine)
                 {
                     if (item.isDeleted) { continue; }
                     <tr id="@item.LearnLine_ID">
                         <td>
-                            @item.Title <input type="text" id="@item.LearnLine_ID" name="Aap" class="hidden" />
+                            @item.Title 
+                            <input type="number" class="hidden" name="LearnLine[@index].LearnLine_ID" id="LearnLine[@index].LearnLine_ID" value="@item.LearnLine_ID">
                         </td>
                         @*<td id="TitleLearnLine">@item.Title</td>*@
                         <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteLearnLine" data-id="@item.LearnLine_ID" class="btn btn-danger" />
+                            <input type="button" value="-" id="btn_deleteLearnLine" data-id="@item.LearnLine_ID" class="btn btn-danger" />
                         </td>
                     </tr>
                 }
@@ -491,21 +493,23 @@
         <table class="table table-bordered table-striped table-responsive" id="ThemeTable">
             <thead>
                 <tr>
-                    <th width="60%">Onderwerp</th>
-                    <th width="10%">ID</th>
+                    <th width="70%">Onderwerp</th>
                     <th>Verwijderen</th>
                 </tr>
             </thead>
             <tbody>
+                @{index = 0;}
                 @foreach (var item in Model.Theme)
                 {
                     if (item.isDeleted) { continue; }
                     <tr id="@item.Theme_ID">
                         <td>
-                            @item.Title <input type="text" id="@item.Theme_ID" class="hidden" />
+                            @item.Title 
+                            <input type="number" class="hidden" name="Theme[@index].Theme_ID" id="Theme[@index].Theme_ID" value="@item.Theme_ID">
+
                         </td>
                         <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteTheme" data-id="@item.Theme_ID" class="btn btn-danger" />
+                            <input type="button" value="-" id="btn_deleteTheme" data-id="@item.Theme_ID" class="btn btn-danger" />
                         </td>
                     </tr>
                 }
@@ -565,6 +569,7 @@
                     <tr id="@item.Competence_ID">
                         <td>
                             @item.Competence.Title <input type="text" id="@item.Competence_ID" class="hidden" />
+
                         </td>
                         @{string test = "Level" + item.Competence_ID;}
                         <td>
@@ -572,7 +577,7 @@
                             <input type="number" id="Level[@index].Competence_ID" name="Level[@index].Competence_ID" class="form-control hidden" value="@item.Competence_ID"  />
                         </td>
                         <td>
-                            <input type="button" value="Verwijderen" id="btn_deleteMod" data-id="@item.Competence_ID" class="btn btn-danger" />
+                            <input type="button" value="-" id="btn_deleteMod" data-id="@item.Competence_ID" class="btn btn-danger" />
                             @{index++; }
                     </tr>
                 }

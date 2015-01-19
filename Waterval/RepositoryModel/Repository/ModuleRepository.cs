@@ -58,14 +58,15 @@ namespace RepositoryModel.Repository
 
             module.LearnGoal.Clear();
             module.LearningTool.Clear();
-           
+            module.Theme.Clear();
+            module.LearnLine.Clear();
 
-            /*
+            
             for (int index = 0; index < update.LearnLine.Count; index++)
             {
                 module.LearnLine.Add(dbContext.LearnLine.Find(update.LearnLine.ElementAt(index).LearnLine_ID));
             }
-            */
+            
             for (int index = 0; index < update.LearnGoal.Count; index++)
             {
                 module.LearnGoal.Add(dbContext.LearnGoal.Find(update.LearnGoal.ElementAt(index).LearnGoal_ID));
@@ -75,7 +76,7 @@ namespace RepositoryModel.Repository
             {
                 module.LearningTool.Add(dbContext.LearningTool.Find(update.LearningTool.ElementAt(index).LearnTool_ID));
             }
-            /*
+            
             for (int index = 0; index < update.Theme.Count; index++)
             {
                 module.Theme.Add(dbContext.Theme.Find(update.Theme.ElementAt(index).Theme_ID));
@@ -93,18 +94,19 @@ namespace RepositoryModel.Repository
                 module.GradeType.Add(update.GradeType.ElementAt(index));
             }
 
-            List<AssignmentCode> listAssignment = dbContext.AssignmentCode.Where(a => a.Module_ID == module.Module_ID).ToList();
 
-            for (int index = 0; index < listAssignment.Count; index++)
-            {
-                dbContext.AssignmentCode.Remove(listAssignment[index]);
-            }
+            //List<AssignmentCode> listAssignment = dbContext.AssignmentCode.Where(a => a.Module_ID == module.Module_ID).ToList();
 
-            for (int index = 0; index < update.AssignmentCode.Count; index++)
-            {
-                module.AssignmentCode.Add(update.AssignmentCode.ElementAt(index));
-            }
+            //for (int index = 0; index < listAssignment.Count; index++)
+            //{
+            //    dbContext.AssignmentCode.Remove(listAssignment[index]);
+            //}
 
+            //for (int index = 0; index < update.AssignmentCode.Count; index++)
+            //{
+            //    module.AssignmentCode.Add(update.AssignmentCode.ElementAt(index));
+            //}
+            
             List<WeekSchedule> listWeekschedule = dbContext.WeekSchedule.Where(a => a.Module_ID == module.Module_ID).ToList();
 
             for (int index = 0; index < listWeekschedule.Count; index++)
@@ -119,11 +121,8 @@ namespace RepositoryModel.Repository
 
 
 
-            */
 
-
-
-              dbContext.SaveChanges();
+            dbContext.SaveChanges();
             return module;
         }
 
