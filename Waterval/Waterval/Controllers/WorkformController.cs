@@ -79,7 +79,7 @@ namespace Waterval.Controllers
 			@ViewBag.NewID = newVersion(id);
 			return View(workformRepository.Get(id));
 		}
-		[Authorize(Users = "DeleteWorkform")]
+		[Authorize(Roles = "DeleteWorkform")]
 		public ActionResult Delete(Workform model)
 		{
 			workformRepository.Delete(model.Workform_ID);
