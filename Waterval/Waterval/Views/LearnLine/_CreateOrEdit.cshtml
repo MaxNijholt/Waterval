@@ -20,22 +20,6 @@
     </div>
 </div>
 
-<div class="container">
-    @if (Model.PrevLearnLine_ID != null)
-    {
-        <div class="container">
-            @Html.ActionLink("Vorige versie", "Details", new { id = Model.PrevLearnLine_ID }, new { @class = "btn btn-avans" })
-        </div>
-    }
-
-    @if (@ViewBag.NewID > 0)
-    {
-        <div class="container">
-            @Html.ActionLink("Nieuwere versie", "Details", new { id = @ViewBag.NewID }, new { @class = "btn btn-avans" })
-        </div>
-    }
-</div>
-
 
 
 <hr />
